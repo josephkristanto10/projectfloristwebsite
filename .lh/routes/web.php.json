@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 23,
+            "activePatchIndex": 24,
             "patches": [
                 {
                     "date": 1718595212827,
@@ -100,6 +100,10 @@
                 {
                     "date": 1718819190432,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n |\n */\n \n Route::resource('/home', HhomeController::class);\n-Route::get('/variants/');\n+Route::get('/variants_detail', [HhomeController::class, \"detail_variant\"]);\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1718822501159,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n | contains the \"web\" middleware group. Now create something great!\n |\n */\n \n-Route::resource('/home', HhomeController::class);\n+Route::resource('/', HhomeController::class);\n Route::get('/variants_detail', [HhomeController::class, \"detail_variant\"]);\n Route::get('/product', function () {\n     return view('product');\n });\n"
                 }
             ],
             "date": 1718595212827,

@@ -14,7 +14,7 @@ use App\Http\Controllers\HhomeController;
 |
 */
 
-Route::resource('/home', HhomeController::class);
+Route::resource('/', HhomeController::class);
 Route::get('/variants_detail', [HhomeController::class, "detail_variant"]);
 Route::get('/product', function () {
     return view('product');
