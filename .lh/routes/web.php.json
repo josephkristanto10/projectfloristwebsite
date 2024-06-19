@@ -1,0 +1,42 @@
+{
+    "sourceFile": "routes/web.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1718595212827,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1718714159963,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,5 +14,8 @@\n */\n \n Route::get('/', function () {\n     return view('index');\n+});\n+Route::get('/product', function () {\n+    return view('index');\n });\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718714176630,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,6 +16,6 @@\n Route::get('/', function () {\n     return view('index');\n });\n Route::get('/product', function () {\n-    return view('index');\n+    return view('product');\n });\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718714832267,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,5 +17,8 @@\n     return view('index');\n });\n Route::get('/product', function () {\n     return view('product');\n+});\n+Route::get('/howtoorder', function () {\n+    return view('howtoorder');\n });\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718716918228,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,5 +20,8 @@\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n     return view('howtoorder');\n+});\n+Route::get('/contact', function () {\n+    return view('contact');\n });\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718781516867,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,5 +23,8 @@\n     return view('howtoorder');\n });\n Route::get('/contact', function () {\n     return view('contact');\n+});\n+Route::get('/login', function () {\n+    return view('login');\n });\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718781558056,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,7 +24,7 @@\n });\n Route::get('/contact', function () {\n     return view('contact');\n });\n-Route::get('/login', function () {\n+Route::get('/masuk', function () {\n     return view('login');\n });\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1718595212827,
+            "name": "Commit-0",
+            "content": "<?php\n\nuse Illuminate\\Support\\Facades\\Route;\n\n/*\n|--------------------------------------------------------------------------\n| Web Routes\n|--------------------------------------------------------------------------\n|\n| Here is where you can register web routes for your application. These\n| routes are loaded by the RouteServiceProvider within a group which\n| contains the \"web\" middleware group. Now create something great!\n|\n*/\n\nRoute::get('/', function () {\n    return view('index');\n});"
+        }
+    ]
+}
