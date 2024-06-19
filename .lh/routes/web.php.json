@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 6,
+            "activePatchIndex": 23,
             "patches": [
                 {
                     "date": 1718595212827,
@@ -32,6 +32,74 @@
                 {
                     "date": 1718781558056,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,7 +24,7 @@\n });\n Route::get('/contact', function () {\n     return view('contact');\n });\n-Route::get('/login', function () {\n+Route::get('/masuk', function () {\n     return view('login');\n });\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718813538125,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,9 @@\n \n Route::get('/', function () {\n     return view('index');\n });\n+Route::resource('users', 'UsersController');\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1718813544174,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \n Route::get('/', function () {\n     return view('index');\n });\n-Route::resource('users', 'UsersController');\n+Route::resource('home', 'HomeController');\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1718813552232,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,12 +12,12 @@\n | contains the \"web\" middleware group. Now create something great!\n |\n */\n \n-Route::get('/', function () {\n-    return view('index');\n-});\n-Route::resource('home', 'HomeController');\n+// Route::get('/', function () {\n+//     return view('index');\n+// });\n+Route::resource('/', 'HomeController');\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1718813688291,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \n // Route::get('/', function () {\n //     return view('index');\n // });\n-Route::resource('/', 'HomeController');\n+Route::resource('/home', 'HhomeController');\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1718813830244,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \n // Route::get('/', function () {\n //     return view('index');\n // });\n-Route::resource('/home', 'HhomeController');\n+Route::get('/', 'HhomeController');\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1718813842329,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \n // Route::get('/', function () {\n //     return view('index');\n // });\n-Route::get('/', 'HhomeController');\n+Route::resource('home', 'HhomeController');\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1718813852208,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \n // Route::get('/', function () {\n //     return view('index');\n // });\n-Route::resource('home', 'HhomeController');\n+Route::resource('home', 'HhomeControllser');\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1718813960671,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \n // Route::get('/', function () {\n //     return view('index');\n // });\n-Route::resource('home', 'HhomeControllser');\n+Route::get('/', 'HhomeController');\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1718814015241,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n <?php\n \n use Illuminate\\Support\\Facades\\Route;\n+use App\\Http\\Controllers\\HhomeController;\n \n /*\n |--------------------------------------------------------------------------\n | Web Routes\n"
+                },
+                {
+                    "date": 1718814023514,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n \n // Route::get('/', function () {\n //     return view('index');\n // });\n-Route::get('/', 'HhomeController');\n+Route::get('/', HhomeController::class);\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1718814122796,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,10 @@\n \n // Route::get('/', function () {\n //     return view('index');\n // });\n-Route::get('/', HhomeController::class);\n+// Route::get('/', HhomeController::class);\n+Route::resource('property', 'HhomeController::class');\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1718814128154,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n // Route::get('/', function () {\n //     return view('index');\n // });\n // Route::get('/', HhomeController::class);\n-Route::resource('property', 'HhomeController::class');\n+Route::resource('/home', 'HhomeController::class');\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1718814144699,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n // Route::get('/', function () {\n //     return view('index');\n // });\n // Route::get('/', HhomeController::class);\n-Route::resource('/home', 'HhomeController::class');\n+Route::resource('/home', HhomeController::class);\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1718814171665,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,12 +13,8 @@\n | contains the \"web\" middleware group. Now create something great!\n |\n */\n \n-// Route::get('/', function () {\n-//     return view('index');\n-// });\n-// Route::get('/', HhomeController::class);\n Route::resource('/home', HhomeController::class);\n Route::get('/product', function () {\n     return view('product');\n });\n"
+                },
+                {
+                    "date": 1718819051643,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,9 @@\n |\n */\n \n Route::resource('/home', HhomeController::class);\n+\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1718819155550,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n |\n */\n \n Route::resource('/home', HhomeController::class);\n-\n+Route::get('/variants/');\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1718819190432,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n |\n */\n \n Route::resource('/home', HhomeController::class);\n-Route::get('/variants/');\n+Route::get('/variants_detail', [HhomeController::class, \"detail_variant\"]);\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
                 }
             ],
             "date": 1718595212827,

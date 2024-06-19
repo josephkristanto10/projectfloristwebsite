@@ -472,227 +472,29 @@ html {
       <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; " id = "judul_best_seller">Best Seller Product  <img src = "{{ asset('/images/bunga.png')}}" style = "margin-top:-15px;width:75px;height:75px;"></h1>
       <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #714423;">Produk unggulan di store <b>Supplier Florist Surabaya</b> </h5>
       <div class="row">
+        @foreach($myproduct as $mp)
         <div class = "col-md-4">
           <div class="product-card">
             <div class="badge">Hot</div>
             <div class="product-tumb">
-              <img src="{{asset('images/product/product_1.jpeg')}}" alt="">
+              <img src="{{asset('images/product/'.$mp->images)}}" alt="">
             </div>
             <div class="product-details">
-              <span class="product-catagory">Women,bag</span>
-              <h4><a href="">KAWAT BULU MERCY PASTEL PIPE</a></h4>
-              <p>KATALOG INI UNTUK HARGA PER 100 BIJI
-                KAWAT LENTUR BISA DIBENTUK BENTUK SESUAI KEINGINAN
-                Warna tidak bisa campur</p>
+              <span class="product-catagory"></span>
+              <h4><a href="" id = "namaproduk_{{$mp->id}}">{{$mp->names}}</a></h4>
+              <p>{{$mp->descriptions}}</p>
               <div class="product-bottom-details">
                 <div class="product-price" style = "color:#714423"><small></small>18k</div>
-                <div class="product-links">
-                  <a href="" style = "color:#714423"><i class="fa fa-shopping-cart" ></i> Add to cart</a>
+                <div class="product-links"> 
+                  <a href="" style = "color:#714423" data-toggle="modal" data-target="#exampleModal" onclick = "showdetail({{$mp->id}})"><i class="fa fa-shopping-cart" ></i> Add to cart</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class = "col-md-4">
-          <div class="product-card">
-            <div class="badge">Hot</div>
-            <div class="product-tumb">
-              <img src="{{asset('images/product/product_2.jpeg')}}" alt="">
-            </div>
-            <div class="product-details">
-              <span class="product-catagory">Women,bag</span>
-              <h4><a href="">KERTAS BUNGA CELLOPHANE FRAME GOLD/WRAPPING</a></h4>
-              <p>PEMBELIAN DIBAWAH 20 LEMBAR DAN TIDAK MEMBELI CORONG KERDUS MAKA KERTAS AKAN DIKURANGI 1 LEMBAR UTK MENEBUS CORONG
-                GUNA CORONG KARDUS SUPAYA PENGIRIMAN LEBIH AMAN</p>
-              <div class="product-bottom-details">
-                <div class="product-price" style = "color:#714423"><small></small>18k</div>
-                <div class="product-links">
-                  <a href="" style = "color:#714423"><i class="fa fa-shopping-cart" ></i> Add to cart</a>
-                </div>
-              </div>
-            </div>
-          </div>
+        @endforeach
         </div>
-        <div class = "col-md-4">
-          <div class="product-card">
-            <div class="badge">Hot</div>
-            <div class="product-tumb">
-              <img src="{{asset('images/product/product_3.jpeg')}}" alt="">
-            </div>
-            <div class="product-details">
-              <span class="product-catagory">Women,bag</span>
-              <h4><a href="">KERTAS BUNGA BICOLOR/WRAPPING PAPER </a></h4>
-              <p>SIZE: 58x58cm
-                BAHAN : PLASTIK, TAHAN AIR
-                KETEBALAN : TIPIS
-                HARGA PER 5 LEMBAR DALAM 1 WARNA YG SAMA </p>
-              <div class="product-bottom-details">
-                <div class="product-price" style = "color:#714423"><small></small>18k</div>
-                <div class="product-links">
-                  {{-- <a href=""><i class="fa fa-heart"></i></a> --}}
-                  <a href="" style = "color:#714423"><i class="fa fa-shopping-cart" ></i> Add to cart</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-   
-        {{-- <div class="col-md-6 col-xl-6">
-          <div id="container">  
-  
-            <!-- Start  Product details -->
-              <div class="product-details">
-                
-                <!--  Product Name -->
-                <h1>KAWAT BULU MERCY PASTEL PIPE</h1>
-              <!--    <span class="hint new">New</span> -->
-              <!--    <span class="hint free-shipping">Free Shipping</span> -->
-              <!--    the Product rating -->
-              
-                <span class="hint-star star" style = "margin-top:10px;margin-bottom:10px;">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                  <i class="fa fa-star-o" aria-hidden="true"></i>
-                </span>
-              
-              
-            <!-- The most important information about the product -->
-                <p class="information" style = "font-size:10px;">KATALOG INI UNTUK HARGA PER 100 BIJI
-                  KAWAT LENTUR BISA DIBENTUK BENTUK SESUAI KEINGINAN
-                  Warna tidak bisa campur</p>
-            
-                
-                
-            <!--    Control -->
-            <div class="control">
-              
-            <!-- Start Button buying -->
-              <button class="btn" style = "font-size:12px;">
-            <!--    the Price -->
-              <span class="price">18k</span>
-            <!--    shopping cart icon-->
-              <span class="shopping-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-            <!--    Buy Now / ADD to Cart-->
-              <span class="buy">Buy Now</span>
-            </button>
-              <!-- End Button buying -->
-              
-            </div>
-                  
-            </div>
-              
-            <!--  End Product details   -->
-              
-              
-              
-            <!--  Start product image & Information -->
-              
-            <div class="product-image">
-              
-              <img src="{{asset('images/product/product_1.jpeg')}}" alt="Omar Dsoky">
-              
-            <!--  product Information-->
-            <div class="info">
-              <h2>Detail Produk</h2>
-              <ul>
-                <li><strong>1 Ikat: </strong>100 biji</li>
-                <li><strong>Diameter: </strong>0,6 cm</li>
-                <li><strong>Tinggi: </strong>30cm</li>
-                <li><strong>Harga: </strong>18k</li>
-              
-              </ul>
-            </div>
-            </div>
-            <!--  End product image  -->
-            
-            
-            </div>
-          
-      
-        
-        </div> --}}
-        {{-- <div class="col-md-6 col-xl-6">
-          <div id="container">  
-  
-            <!-- Start  Product details -->
-              <div class="product-details">
-                
-                <!--  Product Name -->
-              <h1 style = "font-size:25px;">KERTAS BUNGA CELLOPHANE FRAME GOLD/WRAPPING </h1>
-            <!--    <span class="hint new">New</span> -->
-            <!--    <span class="hint free-shipping">Free Shipping</span> -->
-            <!--    the Product rating -->
-              <span class="hint-star star">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                <i class="fa fa-star-o" aria-hidden="true"></i>
-              </span>
-                
-              
-            <!-- The most important information about the product -->
-                <p class="information" style = "font-size:10px;" >"PEMBELIAN DIBAWAH 20 LEMBAR DAN TIDAK MEMBELI CORONG KERDUS MAKA KERTAS AKAN DIKURANGI 1 LEMBAR UTK MENEBUS CORONG
-                  GUNA CORONG KARDUS SUPAYA PENGIRIMAN LEBIH AMAN"</p>
-            
-                
-                
-            <!--    Control -->
-            <div class="control">
-              
-            <!-- Start Button buying -->
-              <button class="btn" style = "font-size:12px;">
-            <!--    the Price -->
-              <span class="price">14.5k</span>
-            <!--    shopping cart icon-->
-              <span class="shopping-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
-            <!--    Buy Now / ADD to Cart-->
-              <span class="buy">Buy Now</span>
-            </button>
-              <!-- End Button buying -->
-              
-            </div>
-                  
-            </div>
-              
-            <!--  End Product details   -->
-              
-              
-              
-            <!--  Start product image & Information -->
-              
-            <div class="product-image">
-              
-              <img src="{{asset('images/product/product_2.jpeg')}}" alt="Omar Dsoky">
-              
-            <!--  product Information-->
-            <div class="info">
-              <h2>Detail Produk</h2>
-              <ul>
-                <li><strong>Bonquet Bunga: </strong>Full Rakit</li>
-                <li><strong>Diame: </strong>40 cm</li>
-                <li><strong>Tinggi: </strong>30cm</li>
-                <li><strong>Harga: </strong>49k</li>
-                <li><strong>Estimasi Pengerjaan : </strong>2 - 3</li>
-              
-              </ul>
-            </div>
-            </div>
-            <!--  End product image  -->
-            
-            
-            </div>
-          
-      
-        
-        </div> --}}
-        </div>
-      
-        <div style = "margin:auto;width:100%;text-align:center;"><button class = "btn btn-primary" style = "background-color:#714423 !important;padding:10px;margin:auto; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">Lihat Semua Produk <i class="fa fa-chevron-right" aria-hidden="true"></i></button></div>
-      </div>
+       </div>
   </section>
   <!-- end about section -->
 
@@ -720,127 +522,7 @@ html {
     </div>
   </section>
 
-  <!-- end why section -->
 
-  <!-- gallery section -->
-  {{-- <section class="gallery_section layout_padding">
-    <div class="section_number">
-      03
-    </div>
-    <div class="heading_container justify-content-center">
-      <h2>
-        Our Gallery
-      </h2>
-    </div>
-    <div class="container">
-      <div class="img_container">
-        <div class="box-1">
-          <div class="box-1-container">
-            <div class="b-1">
-              <div class="img-box">
-                <img src="images/g-1.jpg" alt="">
-              </div>
-              <div class="img-box">
-                <img src="images/g-4.jpg" alt="">
-              </div>
-            </div>
-            <div class="b-2">
-              <div class="img-box">
-                <img src="images/g-2.jpg" alt="">
-              </div>
-              <div class="img-box">
-                <img src="images/g-5.jpg" alt="">
-              </div>
-            </div>
-          </div>
-          <div class="b-3">
-            <div class="img-box">
-              <img src="images/g-7.jpg" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="box-2">
-          <div class="img-box">
-            <img src="images/g-3.jpg" alt="">
-          </div>
-          <div class="img-box">
-            <img src="images/g-6.jpg" alt="">
-          </div>
-          <div class="img-box flex-grow-1">
-            <img src="images/g-8.jpg" alt="">
-          </div>
-        </div>
-      </div>
-  </section> --}}
-  <!-- end gallery section -->
-
-  <!-- client section -->
-
-  {{-- <section class="client_section layout_padding">
-    <div class="container">
-      <div class="heading_container justify-content-center">
-        <h2>
-          What Our Customers Say
-        </h2>
-        <div class="section_number">
-          04
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="client_box">
-            <div class="detail_box">
-              <div class="img_box">
-                <img src="images/client-1.png">
-              </div>
-              <h5>
-                nomil du
-              </h5>
-              <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-                classical Latin literature from 45 BC, making it over </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="client_box">
-            <div class="detail_box">
-              <div class="img_box">
-                <img src="images/client-2.png">
-              </div>
-              <h5>
-                zabih jo
-              </h5>
-              <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-                classical Latin literature from 45 BC, making it over </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> --}}
-
-
-
-  <!-- end client section -->
-
-  <!-- arrange section -->
-
-  {{-- <section class="arrange_section">
-    <div class="container">
-      <div class="detail_box">
-        <h2>
-          Our Wonderful Arrangements
-        </h2>
-        <p>
-          Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
-          literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
-          College in Virginia, looked up one of the more obscure Latin words
-        </p>
-      </div>
-    </div>
-  </section> --}}
 
 
 
@@ -1028,6 +710,64 @@ html {
   </footer>
   <!-- footer section -->
 
+  {{-- Modal Varian --}}
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="judulproduk" >Judul Produk</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id = "data_variant" >
+              {{-- <div class = "form-control" style = "height:100%;">
+                <span id= "variant_name"><h4>Navy</h4>     <span id= "variant_price">Rp49.000</span>           <input type = "number" class = "form-control" style = "width:100px;float:right;"></span>
+                <br>
+              
+   
+              </div> --}}
+
+              {{-- <div class = "row">
+                <div class="col-lg-11 mx-auto">
+
+                  <!-- List group-->
+                  <ul class="list-group shadow">
+            
+                    <!-- list group item-->
+                    <li class="list-group-item">
+                      <!-- Custom content-->
+                      <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                        <div class="media-body order-2 order-lg-1">
+                          <h5 class="mt-0 font-weight-bold mb-2">Awesome product</h5>
+                          <p class="font-italic text-muted mb-0 small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit fuga autem maiores necessitatibus.</p>
+                          <div class="d-flex align-items-center justify-content-between mt-1">
+                            <h6 class="font-weight-bold my-2">$120.00</h6>
+                            <ul class="list-inline small">
+                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                              <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
+                            </ul>
+                          </div>
+                        </div><img src="https://bootstrapious.com/i/snippets/sn-cards/shoes-1_gthops.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                      </div>
+                      <!-- End -->
+                    </li>
+                    <!-- End --> 
+                </div>
+              </div> --}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="{{ asset('js/bootstrap.js')}}"></script>
   <script type="text/javascript" src="{{ asset('js/custom.js')}}"></script>
@@ -1041,7 +781,33 @@ html {
 </html>
 <script>
 
+function showdetail(id_product){
+  var value = $("#namaproduk_"+id_product).text();
+  $("#judulproduk").text(+"Variant " + value);
+  getDetailVariant(id_product);
+}
+function getDetailVariant(id_product_for_variant){
+  $.ajax({
+    type: "get",
+    url: "{{ url('/variants_detail') }}",
+    data: {
+      "id_products" : id_product_for_variant
+    },
+    dataType: "json",
+    success: function (response) {
+      $("#data_variant").html("");
+      var stringelement = "";
+      if(response.variant.length >0){
+        for(var i = 0 ; i < response.variant.length; i++){
+          stringelement += '<div class = "row"><div class="col-lg-11 mx-auto"><ul class="list-group shadow"><li class="list-group-item"> <div class="media align-items-lg-center flex-column flex-lg-row p-3"> <div class="media-body order-2 order-lg-1">                          <h5 class="mt-0 font-weight-bold mb-2">'+response.variant[i].name+'</h5><p class="font-italic text-muted mb-0 small">'+response.variant[i].descriptions+'.</p>                          <div class="d-flex align-items-center justify-content-between mt-1">                            <h6 class="font-weight-bold my-2"><input type = "number" style = "width:50px;" value = "0" min = "0"> Rp'+(response.variant[i].prices-((response.variant[i].prices*response.variant[i].discounts)/100))+'</h6>                            <ul class="list-inline small">                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>                              <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>                            </ul>                          </div>                        </div><img src="https://bootstrapious.com/i/snippets/sn-cards/shoes-1_gthops.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">                      </div>                    </li> </div> </div>';
 
-     
-
+        }
+        $("#data_variant").append(stringelement);
+       }
+      else{
+       $("#data_variant").html("<h2>Tidak ada variant</h2>");
+      }
+    }
+  });
+}
 </script>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HhomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::resource('/home', HhomeController::class);
+Route::get('/variants_detail', [HhomeController::class, "detail_variant"]);
 Route::get('/product', function () {
     return view('product');
 });

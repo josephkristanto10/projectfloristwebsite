@@ -1,0 +1,70 @@
+{
+    "sourceFile": "app/Http/Controllers/HhomeController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 13,
+            "patches": [
+                {
+                    "date": 1718813462400,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1718813470428,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n      */\n     public function index()\n     {\n         $myproduct = Product::all();\n-        return view('index', compact());\n+        return view('index', compact('myproduct'));\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718813658855,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n use Illuminate\\Http\\Request;\n use App\\Models\\Product;\n \n-class HhomeController extends Controller\n+class HomeController extends Controller\n {\n     /**\n      * Display a listing of the resource.\n      *\n"
+                },
+                {
+                    "date": 1718813682083,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n use Illuminate\\Http\\Request;\n use App\\Models\\Product;\n \n-class HomeController extends Controller\n+class HhomeController extends Controller\n {\n     /**\n      * Display a listing of the resource.\n      *\n"
+                },
+                {
+                    "date": 1718814513919,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n      * @return \\Illuminate\\Http\\Response\n      */\n     public function index()\n     {\n-        $myproduct = Product::all();\n+        $myproduct = Product::latest()->paginate(10);\n         return view('index', compact('myproduct'));\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1718814541839,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n      * @return \\Illuminate\\Http\\Response\n      */\n     public function index()\n     {\n-        $myproduct = Product::latest()->paginate(10);\n+        $myproduct = Product::latest('id')->paginate(10);\n         return view('index', compact('myproduct'));\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1718819070462,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,11 @@\n     {\n         $myproduct = Product::latest('id')->paginate(10);\n         return view('index', compact('myproduct'));\n     }\n+    public function detail_variant(){\n+        \n+    }\n \n     /**\n      * Show the form for creating a new resource.\n      *\n"
+                },
+                {
+                    "date": 1718819082180,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n     {\n         $myproduct = Product::latest('id')->paginate(10);\n         return view('index', compact('myproduct'));\n     }\n-    public function detail_variant(){\n+    public function detail_variant(Request $request){\n         \n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1718819105442,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n         $myproduct = Product::latest('id')->paginate(10);\n         return view('index', compact('myproduct'));\n     }\n     public function detail_variant(Request $request){\n-        \n+        $id_product = $request->id;\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718819448085,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,10 @@\n         $myproduct = Product::latest('id')->paginate(10);\n         return view('index', compact('myproduct'));\n     }\n     public function detail_variant(Request $request){\n-        $id_product = $request->id;\n+        $id_product = $request->id_products;\n+        id_product_for_variant\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718819460366,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n         return view('index', compact('myproduct'));\n     }\n     public function detail_variant(Request $request){\n         $id_product = $request->id_products;\n-        id_product_for_variant\n+        return response()->json(['name' => 'Abigail', 'state' => 'CA']);\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718819546074,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n namespace App\\Http\\Controllers;\n \n use Illuminate\\Http\\Request;\n use App\\Models\\Product;\n+use App\\Models\\ProductVariant;\n \n class HhomeController extends Controller\n {\n     /**\n@@ -18,9 +19,10 @@\n         return view('index', compact('myproduct'));\n     }\n     public function detail_variant(Request $request){\n         $id_product = $request->id_products;\n-        return response()->json(['name' => 'Abigail', 'state' => 'CA']);\n+        $variants = ProductVariant::where('id_product','=',$id_product)->get(\"*\");\n+        return response()->json(['variant' => '', 'state' => 'CA']);\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718819554306,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n     }\n     public function detail_variant(Request $request){\n         $id_product = $request->id_products;\n         $variants = ProductVariant::where('id_product','=',$id_product)->get(\"*\");\n-        return response()->json(['variant' => '', 'state' => 'CA']);\n+        return response()->json(['variant' => $variants]);\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718819673631,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n         return view('index', compact('myproduct'));\n     }\n     public function detail_variant(Request $request){\n         $id_product = $request->id_products;\n-        $variants = ProductVariant::where('id_product','=',$id_product)->get(\"*\");\n+        $variants = ProductVariant::where('id_product','=',$id_product)->where('variant_status','=','1')->get(\"*\");\n         return response()->json(['variant' => $variants]);\n     }\n \n     /**\n"
+                }
+            ],
+            "date": 1718813462400,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers;\n\nuse Illuminate\\Http\\Request;\nuse App\\Models\\Product;\n\nclass HhomeController extends Controller\n{\n    /**\n     * Display a listing of the resource.\n     *\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function index()\n    {\n        $myproduct = Product::all();\n        return view('index', compact());\n    }\n\n    /**\n     * Show the form for creating a new resource.\n     *\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function create()\n    {\n        //\n    }\n\n    /**\n     * Store a newly created resource in storage.\n     *\n     * @param  \\Illuminate\\Http\\Request  $request\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function store(Request $request)\n    {\n        //\n    }\n\n    /**\n     * Display the specified resource.\n     *\n     * @param  int  $id\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function show($id)\n    {\n        //\n    }\n\n    /**\n     * Show the form for editing the specified resource.\n     *\n     * @param  int  $id\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function edit($id)\n    {\n        //\n    }\n\n    /**\n     * Update the specified resource in storage.\n     *\n     * @param  \\Illuminate\\Http\\Request  $request\n     * @param  int  $id\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function update(Request $request, $id)\n    {\n        //\n    }\n\n    /**\n     * Remove the specified resource from storage.\n     *\n     * @param  int  $id\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function destroy($id)\n    {\n        //\n    }\n}"
+        }
+    ]
+}
