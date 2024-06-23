@@ -1,0 +1,254 @@
+{
+    "sourceFile": "app/Http/Controllers/LoginController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 59,
+            "patches": [
+                {
+                    "date": 1718878070609,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1718878081526,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n      * @return \\Illuminate\\Http\\Response\n      */\n     public function index()\n     {\n-        \n+        return view('login');\n         $2y$10$EEkCDyT9D/HIpVJyoLNzWuyObfzocKzrlHoGVt5bDJgkaRdZWc34y\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1718878088022,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n      */\n     public function index()\n     {\n         return view('login');\n-        $2y$10$EEkCDyT9D/HIpVJyoLNzWuyObfzocKzrlHoGVt5bDJgkaRdZWc34y\n+   \n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718878293718,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,11 @@\n     {\n         return view('login');\n    \n     }\n+    public function checklogin(){\n+        \n+    }\n \n     /**\n      * Show the form for creating a new resource.\n      *\n"
+                },
+                {
+                    "date": 1718878305966,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n namespace App\\Http\\Controllers;\n \n use Illuminate\\Http\\Request;\n+use App\\Models\\Visitor;\n \n class LoginController extends Controller\n {\n     /**\n"
+                },
+                {
+                    "date": 1718878345346,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,89 @@\n+<?php\n+\n+namespace App\\Http\\Controllers;\n+\n+use Illuminate\\Http\\Request;\n+use App\\Models\\Visitor;\n+\n+class LoginController extends Controller\n+{\n+    /**\n+     * Display a listing of the resource.\n+     *\n+     * @return \\Illuminate\\Http\\Response\n+     */\n+    public function index()\n+    {\n+        return view('login');\n+   \n+    }\n+    public function checklogin(){\n+        $myvisitor = Visitor::where(\"email\");\n+    }\n+\n+    /**\n+     * Show the form for creating a new resource.\n+     *\n+     * @return \\Illuminate\\Http\\Response\n+     */\n+    public function create()\n+    {\n+        //\n+    }\n+\n+    /**\n+     * Store a newly created resource in storage.\n+     *\n+     * @param  \\Illuminate\\Http\\Request  $request\n+     * @return \\Illuminate\\Http\\Response\n+     */\n+    public function store(Request $request)\n+    {\n+        //\n+    }\n+\n+    /**\n+     * Display the specified resource.\n+     *\n+     * @param  int  $id\n+     * @return \\Illuminate\\Http\\Response\n+     */\n+    public function show($id)\n+    {\n+        //\n+    }\n+\n+    /**\n+     * Show the form for editing the specified resource.\n+     *\n+     * @param  int  $id\n+     * @return \\Illuminate\\Http\\Response\n+     */\n+    public function edit($id)\n+    {\n+        //\n+    }\n+\n+    /**\n+     * Update the specified resource in storage.\n+     *\n+     * @param  \\Illuminate\\Http\\Request  $request\n+     * @param  int  $id\n+     * @return \\Illuminate\\Http\\Response\n+     */\n+    public function update(Request $request, $id)\n+    {\n+        //\n+    }\n+\n+    /**\n+     * Remove the specified resource from storage.\n+     *\n+     * @param  int  $id\n+     * @return \\Illuminate\\Http\\Response\n+     */\n+    public function destroy($id)\n+    {\n+        //\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718878380802,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,10 +16,12 @@\n     {\n         return view('login');\n    \n     }\n-    public function checklogin(){\n-        $myvisitor = Visitor::where(\"email\");\n+    public function checklogin(Request $request){\n+        $myemail = $request->myemail;\n+        $mypwd = $request->mypwd;\n+        $myvisitor = Visitor::where(\"email\",\"\");\n     }\n \n     /**\n      * Show the form for creating a new resource.\n@@ -85,94 +87,5 @@\n     public function destroy($id)\n     {\n         //\n     }\n-}\n-<?php\n-\n-namespace App\\Http\\Controllers;\n-\n-use Illuminate\\Http\\Request;\n-use App\\Models\\Visitor;\n-\n-class LoginController extends Controller\n-{\n-    /**\n-     * Display a listing of the resource.\n-     *\n-     * @return \\Illuminate\\Http\\Response\n-     */\n-    public function index()\n-    {\n-        return view('login');\n-   \n-    }\n-    public function checklogin(){\n-        \n-    }\n-\n-    /**\n-     * Show the form for creating a new resource.\n-     *\n-     * @return \\Illuminate\\Http\\Response\n-     */\n-    public function create()\n-    {\n-        //\n-    }\n-\n-    /**\n-     * Store a newly created resource in storage.\n-     *\n-     * @param  \\Illuminate\\Http\\Request  $request\n-     * @return \\Illuminate\\Http\\Response\n-     */\n-    public function store(Request $request)\n-    {\n-        //\n-    }\n-\n-    /**\n-     * Display the specified resource.\n-     *\n-     * @param  int  $id\n-     * @return \\Illuminate\\Http\\Response\n-     */\n-    public function show($id)\n-    {\n-        //\n-    }\n-\n-    /**\n-     * Show the form for editing the specified resource.\n-     *\n-     * @param  int  $id\n-     * @return \\Illuminate\\Http\\Response\n-     */\n-    public function edit($id)\n-    {\n-        //\n-    }\n-\n-    /**\n-     * Update the specified resource in storage.\n-     *\n-     * @param  \\Illuminate\\Http\\Request  $request\n-     * @param  int  $id\n-     * @return \\Illuminate\\Http\\Response\n-     */\n-    public function update(Request $request, $id)\n-    {\n-        //\n-    }\n-\n-    /**\n-     * Remove the specified resource from storage.\n-     *\n-     * @param  int  $id\n-     * @return \\Illuminate\\Http\\Response\n-     */\n-    public function destroy($id)\n-    {\n-        //\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718878400848,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n     }\n     public function checklogin(Request $request){\n         $myemail = $request->myemail;\n         $mypwd = $request->mypwd;\n+        $myhashpassword = bcrypt(\"passworduser\");\n         $myvisitor = Visitor::where(\"email\",\"\");\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1718878406327,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n     }\n     public function checklogin(Request $request){\n         $myemail = $request->myemail;\n         $mypwd = $request->mypwd;\n-        $myhashpassword = bcrypt(\"passworduser\");\n+        $myhashpassword = bcrypt(\"mypwd\");\n         $myvisitor = Visitor::where(\"email\",\"\");\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1718878420707,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n     public function checklogin(Request $request){\n         $myemail = $request->myemail;\n         $mypwd = $request->mypwd;\n         $myhashpassword = bcrypt(\"mypwd\");\n-        $myvisitor = Visitor::where(\"email\",\"\");\n+        $myvisitor = Visitor::where(\"email\",\"=\",$myemail);\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718878427957,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,92 @@\n+<?php\n+\n+namespace App\\Http\\Controllers;\n+\n+use Illuminate\\Http\\Request;\n+use App\\Models\\Visitor;\n+\n+class LoginController extends Controller\n+{\n+    /**\n+     * Display a listing of the resource.\n+     *\n+     * @return \\Illuminate\\Http\\Response\n+     */\n+    public function index()\n+    {\n+        return view('login');\n+   \n+    }\n+    public function checklogin(Request $request){\n+        $myemail = $request->myemail;\n+        $mypwd = $request->mypwd;\n+        $myhashpassword = bcrypt(\"mypwd\");\n+        $myvisitor = Visitor::where(\"email\",\"=\",$myemail)->get();\n+    }\n+\n+    /**\n+     * Show the form for creating a new resource.\n+     *\n+     * @return \\Illuminate\\Http\\Response\n+     */\n+    public function create()\n+    {\n+        //\n+    }\n+\n+    /**\n+     * Store a newly created resource in storage.\n+     *\n+     * @param  \\Illuminate\\Http\\Request  $request\n+     * @return \\Illuminate\\Http\\Response\n+     */\n+    public function store(Request $request)\n+    {\n+        //\n+    }\n+\n+    /**\n+     * Display the specified resource.\n+     *\n+     * @param  int  $id\n+     * @return \\Illuminate\\Http\\Response\n+     */\n+    public function show($id)\n+    {\n+        //\n+    }\n+\n+    /**\n+     * Show the form for editing the specified resource.\n+     *\n+     * @param  int  $id\n+     * @return \\Illuminate\\Http\\Response\n+     */\n+    public function edit($id)\n+    {\n+        //\n+    }\n+\n+    /**\n+     * Update the specified resource in storage.\n+     *\n+     * @param  \\Illuminate\\Http\\Request  $request\n+     * @param  int  $id\n+     * @return \\Illuminate\\Http\\Response\n+     */\n+    public function update(Request $request, $id)\n+    {\n+        //\n+    }\n+\n+    /**\n+     * Remove the specified resource from storage.\n+     *\n+     * @param  int  $id\n+     * @return \\Illuminate\\Http\\Response\n+     */\n+    public function destroy($id)\n+    {\n+        //\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718878439356,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -88,97 +88,5 @@\n     public function destroy($id)\n     {\n         //\n     }\n-}\n-<?php\n-\n-namespace App\\Http\\Controllers;\n-\n-use Illuminate\\Http\\Request;\n-use App\\Models\\Visitor;\n-\n-class LoginController extends Controller\n-{\n-    /**\n-     * Display a listing of the resource.\n-     *\n-     * @return \\Illuminate\\Http\\Response\n-     */\n-    public function index()\n-    {\n-        return view('login');\n-   \n-    }\n-    public function checklogin(Request $request){\n-        $myemail = $request->myemail;\n-        $mypwd = $request->mypwd;\n-        $myhashpassword = bcrypt(\"mypwd\");\n-        $myvisitor = Visitor::where(\"email\",\"=\",$myemail);\n-    }\n-\n-    /**\n-     * Show the form for creating a new resource.\n-     *\n-     * @return \\Illuminate\\Http\\Response\n-     */\n-    public function create()\n-    {\n-        //\n-    }\n-\n-    /**\n-     * Store a newly created resource in storage.\n-     *\n-     * @param  \\Illuminate\\Http\\Request  $request\n-     * @return \\Illuminate\\Http\\Response\n-     */\n-    public function store(Request $request)\n-    {\n-        //\n-    }\n-\n-    /**\n-     * Display the specified resource.\n-     *\n-     * @param  int  $id\n-     * @return \\Illuminate\\Http\\Response\n-     */\n-    public function show($id)\n-    {\n-        //\n-    }\n-\n-    /**\n-     * Show the form for editing the specified resource.\n-     *\n-     * @param  int  $id\n-     * @return \\Illuminate\\Http\\Response\n-     */\n-    public function edit($id)\n-    {\n-        //\n-    }\n-\n-    /**\n-     * Update the specified resource in storage.\n-     *\n-     * @param  \\Illuminate\\Http\\Request  $request\n-     * @param  int  $id\n-     * @return \\Illuminate\\Http\\Response\n-     */\n-    public function update(Request $request, $id)\n-    {\n-        //\n-    }\n-\n-    /**\n-     * Remove the specified resource from storage.\n-     *\n-     * @param  int  $id\n-     * @return \\Illuminate\\Http\\Response\n-     */\n-    public function destroy($id)\n-    {\n-        //\n-    }\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718878499806,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,14 @@\n         $myemail = $request->myemail;\n         $mypwd = $request->mypwd;\n         $myhashpassword = bcrypt(\"mypwd\");\n         $myvisitor = Visitor::where(\"email\",\"=\",$myemail)->get();\n+        if(count($myvisitor) > 0){\n+\n+        }\n+        else{\n+            return \"tidak ada data\";\n+        }\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718878563933,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,11 @@\n         $mypwd = $request->mypwd;\n         $myhashpassword = bcrypt(\"mypwd\");\n         $myvisitor = Visitor::where(\"email\",\"=\",$myemail)->get();\n         if(count($myvisitor) > 0){\n-\n+            if(Hash::check('plain-text', $hashedPassword)) {\n+                return true;\n+            }\n         }\n         else{\n             return \"tidak ada data\";\n         }\n"
+                },
+                {
+                    "date": 1718878576003,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n         $mypwd = $request->mypwd;\n         $myhashpassword = bcrypt(\"mypwd\");\n         $myvisitor = Visitor::where(\"email\",\"=\",$myemail)->get();\n         if(count($myvisitor) > 0){\n-            if(Hash::check('plain-text', $hashedPassword)) {\n+            if(Hash::check($mypwd, $hashedPassword)) {\n                 return true;\n             }\n         }\n         else{\n"
+                },
+                {
+                    "date": 1718878599575,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n         $mypwd = $request->mypwd;\n         $myhashpassword = bcrypt(\"mypwd\");\n         $myvisitor = Visitor::where(\"email\",\"=\",$myemail)->get();\n         if(count($myvisitor) > 0){\n-            if(Hash::check($mypwd, $hashedPassword)) {\n+            if(Hash::check($mypwd, $myvisitor[0]->password)) {\n                 return true;\n             }\n         }\n         else{\n"
+                },
+                {
+                    "date": 1718878617134,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,10 +23,13 @@\n         $myhashpassword = bcrypt(\"mypwd\");\n         $myvisitor = Visitor::where(\"email\",\"=\",$myemail)->get();\n         if(count($myvisitor) > 0){\n             if(Hash::check($mypwd, $myvisitor[0]->password)) {\n-                return true;\n+                return \"cocok\";\n             }\n+            else{\n+                return \"tidak cocok\";\n+            }\n         }\n         else{\n             return \"tidak ada data\";\n         }\n"
+                },
+                {
+                    "date": 1718878707355,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n     public function checklogin(Request $request){\n         $myemail = $request->myemail;\n         $mypwd = $request->mypwd;\n         $myhashpassword = bcrypt(\"mypwd\");\n-        $myvisitor = Visitor::where(\"email\",\"=\",$myemail)->get();\n+        $myvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if(count($myvisitor) > 0){\n             if(Hash::check($mypwd, $myvisitor[0]->password)) {\n                 return \"cocok\";\n             }\n"
+                },
+                {
+                    "date": 1718879626653,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n         $myemail = $request->myemail;\n         $mypwd = $request->mypwd;\n         $myhashpassword = bcrypt(\"mypwd\");\n         $myvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n-        if(count($myvisitor) > 0){\n+        if($myvisitor->count() > 0){\n             if(Hash::check($mypwd, $myvisitor[0]->password)) {\n                 return \"cocok\";\n             }\n             else{\n"
+                },
+                {
+                    "date": 1718879742254,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n namespace App\\Http\\Controllers;\n \n use Illuminate\\Http\\Request;\n use App\\Models\\Visitor;\n+use Hash;\n \n class LoginController extends Controller\n {\n     /**\n"
+                },
+                {
+                    "date": 1718879835650,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,9 @@\n         $myhashpassword = bcrypt(\"mypwd\");\n         $myvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if($myvisitor->count() > 0){\n             if(Hash::check($mypwd, $myvisitor[0]->password)) {\n+                Session::push('user',$request->array_of_products[$i]);\n                 return \"cocok\";\n             }\n             else{\n                 return \"tidak cocok\";\n"
+                },
+                {
+                    "date": 1718879853902,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n         $myhashpassword = bcrypt(\"mypwd\");\n         $myvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if($myvisitor->count() > 0){\n             if(Hash::check($mypwd, $myvisitor[0]->password)) {\n-                Session::push('user',$request->array_of_products[$i]);\n+                Session::push('user',$myvisitor[0]->username);\n                 return \"cocok\";\n             }\n             else{\n                 return \"tidak cocok\";\n"
+                },
+                {
+                    "date": 1718879875447,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,9 @@\n         $myhashpassword = bcrypt(\"mypwd\");\n         $myvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if($myvisitor->count() > 0){\n             if(Hash::check($mypwd, $myvisitor[0]->password)) {\n+                Session::push('id_user',$myvisitor[0]->id);\n                 Session::push('user',$myvisitor[0]->username);\n                 return \"cocok\";\n             }\n             else{\n"
+                },
+                {
+                    "date": 1718880137303,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n \n use Illuminate\\Http\\Request;\n use App\\Models\\Visitor;\n use Hash;\n+use Session;\n \n class LoginController extends Controller\n {\n     /**\n"
+                },
+                {
+                    "date": 1718886743351,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,8 +37,11 @@\n         else{\n             return \"tidak ada data\";\n         }\n     }\n+    public function logout(){\n+        \n+    }\n \n     /**\n      * Show the form for creating a new resource.\n      *\n"
+                },
+                {
+                    "date": 1718886777380,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n             return \"tidak ada data\";\n         }\n     }\n     public function logout(){\n-        \n+        session()->forget('some_data');\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718886795508,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n             return \"tidak ada data\";\n         }\n     }\n     public function logout(){\n-        session()->forget('some_data');\n+        session()->forget('user');\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718886806876,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,8 +39,9 @@\n         }\n     }\n     public function logout(){\n         session()->forget('user');\n+        session()->forget('id_user');\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718886876424,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,8 +40,9 @@\n     }\n     public function logout(){\n         session()->forget('user');\n         session()->forget('id_user');\n+        Session::flush('');\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718886974430,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,11 +38,10 @@\n             return \"tidak ada data\";\n         }\n     }\n     public function logout(){\n-        session()->forget('user');\n-        session()->forget('id_user');\n-        Session::flush('');\n+        Session::forget(\"user\");\n+        Session::forget(\"id_user\");\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718887013415,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,8 +40,9 @@\n     }\n     public function logout(){\n         Session::forget(\"user\");\n         Session::forget(\"id_user\");\n+        return redirect(\"/\");\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718887645539,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n     }\n     public function logout(){\n         Session::forget(\"user\");\n         Session::forget(\"id_user\");\n-        return redirect(\"/\");\n+        return redirect(\"/\")->with();\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718887681143,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n     }\n     public function logout(){\n         Session::forget(\"user\");\n         Session::forget(\"id_user\");\n-        return redirect(\"/\")->with();\n+        return redirect(\"/\");\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718887723439,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n     }\n     public function logout(){\n         Session::forget(\"user\");\n         Session::forget(\"id_user\");\n-        return redirect(\"/\");\n+       return \"ok\"\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1719117399682,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,10 +40,13 @@\n     }\n     public function logout(){\n         Session::forget(\"user\");\n         Session::forget(\"id_user\");\n-       return \"ok\"\n+       return \"ok\";\n     }\n+    public function register(){\n+        \n+    }\n \n     /**\n      * Show the form for creating a new resource.\n      *\n"
+                },
+                {
+                    "date": 1719117409303,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n         Session::forget(\"user\");\n         Session::forget(\"id_user\");\n        return \"ok\";\n     }\n-    public function register(){\n+    public function register(Request $request){\n         \n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1719117464056,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,12 @@\n         Session::forget(\"id_user\");\n        return \"ok\";\n     }\n     public function register(Request $request){\n-        \n+        $myemail = $request->myemail;\n+        $mypwd = $request->mypwd;\n+        $myaddress = $request->myaddress;\n+        $myname = $request->myname;\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1719117470161,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,8 +47,9 @@\n         $myemail = $request->myemail;\n         $mypwd = $request->mypwd;\n         $myaddress = $request->myaddress;\n         $myname = $request->myname;\n+        \n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1719117978730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,10 +43,16 @@\n         Session::forget(\"id_user\");\n        return \"ok\";\n     }\n     public function register(Request $request){\n+        mynama\n+myalamat\n+mywa\n+myemail\n+mypwd\n         $myemail = $request->myemail;\n         $mypwd = $request->mypwd;\n+        $mwa = $request->mywa;\n         $myaddress = $request->myaddress;\n         $myname = $request->myname;\n         \n     }\n"
+                },
+                {
+                    "date": 1719117984165,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,16 +44,16 @@\n        return \"ok\";\n     }\n     public function register(Request $request){\n         mynama\n-myalamat\n+\n mywa\n myemail\n mypwd\n         $myemail = $request->myemail;\n         $mypwd = $request->mypwd;\n         $mwa = $request->mywa;\n-        $myaddress = $request->myaddress;\n+        $myaddress = $request->myalamat;\n         $myname = $request->myname;\n         \n     }\n \n"
+                },
+                {
+                    "date": 1719117998361,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,18 +43,13 @@\n         Session::forget(\"id_user\");\n        return \"ok\";\n     }\n     public function register(Request $request){\n-        mynama\n-\n-mywa\n-myemail\n-mypwd\n         $myemail = $request->myemail;\n         $mypwd = $request->mypwd;\n         $mwa = $request->mywa;\n         $myaddress = $request->myalamat;\n-        $myname = $request->myname;\n+        $myname = $request->mynama;\n         \n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1719118021767,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,8 +49,12 @@\n         $mwa = $request->mywa;\n         $myaddress = $request->myalamat;\n         $myname = $request->mynama;\n         \n+        $myvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n+        if($myvisitor->count() > 0){{\n+            \n+        }\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1719118037605,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,10 +49,10 @@\n         $mwa = $request->mywa;\n         $myaddress = $request->myalamat;\n         $myname = $request->mynama;\n         \n-        $myvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n-        if($myvisitor->count() > 0){{\n+        $calonvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n+        if($myvisitor->count() > 0){\n             \n         }\n     }\n \n"
+                },
+                {
+                    "date": 1719118057791,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,11 +48,12 @@\n         $mypwd = $request->mypwd;\n         $mwa = $request->mywa;\n         $myaddress = $request->myalamat;\n         $myname = $request->mynama;\n+        $status_register = \"terpakai\";\n         \n         $calonvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n-        if($myvisitor->count() > 0){\n+        if($calonvisitor->count() > 0){\n             \n         }\n     }\n \n"
+                },
+                {
+                    "date": 1719118064040,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,8 +52,9 @@\n         $status_register = \"terpakai\";\n         \n         $calonvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if($calonvisitor->count() > 0){\n+            $status_register = \"ok\";\n             \n         }\n     }\n \n"
+                },
+                {
+                    "date": 1719118463018,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,10 +53,10 @@\n         \n         $calonvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if($calonvisitor->count() > 0){\n             $status_register = \"ok\";\n-            \n         }\n+        ret\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1719118468328,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n         $calonvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if($calonvisitor->count() > 0){\n             $status_register = \"ok\";\n         }\n-        ret\n+        return response()->json(['status_register' => Session::all()]);\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1719118474079,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n         $calonvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if($calonvisitor->count() > 0){\n             $status_register = \"ok\";\n         }\n-        return response()->json(['status_register' => Session::all()]);\n+        return response()->json(['status_register' => $status_register]);\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1719118659241,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,8 +49,12 @@\n         $mwa = $request->mywa;\n         $myaddress = $request->myalamat;\n         $myname = $request->mynama;\n         $status_register = \"terpakai\";\n+\n+        if($myemail == \"\" || $mypwd == \"\"|| $mwa == \"\"|| $myaddress == \"\"|| $myname == \"\"){\n+            \n+        }\n         \n         $calonvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if($calonvisitor->count() > 0){\n             $status_register = \"ok\";\n"
+                },
+                {
+                    "date": 1719118957297,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,9 @@\n         $myname = $request->mynama;\n         $status_register = \"terpakai\";\n \n         if($myemail == \"\" || $mypwd == \"\"|| $mwa == \"\"|| $myaddress == \"\"|| $myname == \"\"){\n-            \n+            $status_register = \"datakosong\";\n         }\n         \n         $calonvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if($calonvisitor->count() > 0){\n"
+                },
+                {
+                    "date": 1719118969603,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n             $status_register = \"datakosong\";\n         }\n         \n         $calonvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n-        if($calonvisitor->count() > 0){\n+        if($calonvisitor->count() < 0){\n             $status_register = \"ok\";\n         }\n         return response()->json(['status_register' => $status_register]);\n     }\n"
+                },
+                {
+                    "date": 1719118977223,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -55,9 +55,9 @@\n             $status_register = \"datakosong\";\n         }\n         \n         $calonvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n-        if($calonvisitor->count() < 0){\n+        if($calonvisitor->count() == 0){\n             $status_register = \"ok\";\n         }\n         return response()->json(['status_register' => $status_register]);\n     }\n"
+                },
+                {
+                    "date": 1719119135755,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,16 +50,18 @@\n         $myaddress = $request->myalamat;\n         $myname = $request->mynama;\n         $status_register = \"terpakai\";\n \n-        if($myemail == \"\" || $mypwd == \"\"|| $mwa == \"\"|| $myaddress == \"\"|| $myname == \"\"){\n-            $status_register = \"datakosong\";\n-        }\n+       \n+      \n         \n         $calonvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if($calonvisitor->count() == 0){\n             $status_register = \"ok\";\n         }\n+        if($myemail == \"\" || $mypwd == \"\"|| $mwa == \"\"|| $myaddress == \"\"|| $myname == \"\"){\n+            $status_register = \"datakosong\";\n+        }\n         return response()->json(['status_register' => $status_register]);\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1719120450925,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -60,8 +60,9 @@\n         }\n         if($myemail == \"\" || $mypwd == \"\"|| $mwa == \"\"|| $myaddress == \"\"|| $myname == \"\"){\n             $status_register = \"datakosong\";\n         }\n+        \n         return response()->json(['status_register' => $status_register]);\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1719120533381,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,8 +56,9 @@\n         \n         $calonvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if($calonvisitor->count() == 0){\n             $status_register = \"ok\";\n+            $encrypted_password = bcrypt($mypwd);\n         }\n         if($myemail == \"\" || $mypwd == \"\"|| $mwa == \"\"|| $myaddress == \"\"|| $myname == \"\"){\n             $status_register = \"datakosong\";\n         }\n"
+                },
+                {
+                    "date": 1719120543541,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,8 +57,11 @@\n         $calonvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if($calonvisitor->count() == 0){\n             $status_register = \"ok\";\n             $encrypted_password = bcrypt($mypwd);\n+            Visitor::insert({\n+                \n+            })\n         }\n         if($myemail == \"\" || $mypwd == \"\"|| $mwa == \"\"|| $myaddress == \"\"|| $myname == \"\"){\n             $status_register = \"datakosong\";\n         }\n"
+                },
+                {
+                    "date": 1719120600659,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,11 +57,9 @@\n         $calonvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if($calonvisitor->count() == 0){\n             $status_register = \"ok\";\n             $encrypted_password = bcrypt($mypwd);\n-            Visitor::insert({\n-                \n-            })\n+            Visitor::insert([\"\"]);\n         }\n         if($myemail == \"\" || $mypwd == \"\"|| $mwa == \"\"|| $myaddress == \"\"|| $myname == \"\"){\n             $status_register = \"datakosong\";\n         }\n"
+                },
+                {
+                    "date": 1719120701190,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,9 +57,10 @@\n         $calonvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if($calonvisitor->count() == 0){\n             $status_register = \"ok\";\n             $encrypted_password = bcrypt($mypwd);\n-            Visitor::insert([\"\"]);\n+            Visitor::insert([\"nama\" => $myname, \"username\" => $myemail, \"password\" => $encrypted_password, \"address\" => $myaddress]);\n+\n         }\n         if($myemail == \"\" || $mypwd == \"\"|| $mwa == \"\"|| $myaddress == \"\"|| $myname == \"\"){\n             $status_register = \"datakosong\";\n         }\n"
+                },
+                {
+                    "date": 1719120811608,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,9 +57,9 @@\n         $calonvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if($calonvisitor->count() == 0){\n             $status_register = \"ok\";\n             $encrypted_password = bcrypt($mypwd);\n-            Visitor::insert([\"nama\" => $myname, \"username\" => $myemail, \"password\" => $encrypted_password, \"address\" => $myaddress]);\n+            Visitor::insert([\"nama\" => $myname, \"username\" => $myemail, \"password\" => $encrypted_password, \"address\" => $myaddress, \"whatsapp_number\" => $mwa]);\n \n         }\n         if($myemail == \"\" || $mypwd == \"\"|| $mwa == \"\"|| $myaddress == \"\"|| $myname == \"\"){\n             $status_register = \"datakosong\";\n"
+                },
+                {
+                    "date": 1719120859104,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,9 +58,8 @@\n         if($calonvisitor->count() == 0){\n             $status_register = \"ok\";\n             $encrypted_password = bcrypt($mypwd);\n             Visitor::insert([\"nama\" => $myname, \"username\" => $myemail, \"password\" => $encrypted_password, \"address\" => $myaddress, \"whatsapp_number\" => $mwa]);\n-\n         }\n         if($myemail == \"\" || $mypwd == \"\"|| $mwa == \"\"|| $myaddress == \"\"|| $myname == \"\"){\n             $status_register = \"datakosong\";\n         }\n"
+                }
+            ],
+            "date": 1718878070609,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers;\n\nuse Illuminate\\Http\\Request;\n\nclass LoginController extends Controller\n{\n    /**\n     * Display a listing of the resource.\n     *\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function index()\n    {\n        \n        $2y$10$EEkCDyT9D/HIpVJyoLNzWuyObfzocKzrlHoGVt5bDJgkaRdZWc34y\n    }\n\n    /**\n     * Show the form for creating a new resource.\n     *\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function create()\n    {\n        //\n    }\n\n    /**\n     * Store a newly created resource in storage.\n     *\n     * @param  \\Illuminate\\Http\\Request  $request\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function store(Request $request)\n    {\n        //\n    }\n\n    /**\n     * Display the specified resource.\n     *\n     * @param  int  $id\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function show($id)\n    {\n        //\n    }\n\n    /**\n     * Show the form for editing the specified resource.\n     *\n     * @param  int  $id\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function edit($id)\n    {\n        //\n    }\n\n    /**\n     * Update the specified resource in storage.\n     *\n     * @param  \\Illuminate\\Http\\Request  $request\n     * @param  int  $id\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function update(Request $request, $id)\n    {\n        //\n    }\n\n    /**\n     * Remove the specified resource from storage.\n     *\n     * @param  int  $id\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function destroy($id)\n    {\n        //\n    }\n}"
+        }
+    ]
+}

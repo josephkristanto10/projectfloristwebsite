@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $nama
  * @property string $username
  * @property string $password
+ * @property string $address
+ * @property string $whatsapp_number
  *
  * @package App\Models
  */
@@ -30,6 +32,8 @@ class Visitor extends Model
 	protected $fillable = [
 		'nama',
 		'username',
-		'password'
+		'password',
+		'address',
+		'whatsapp_number'
 	];
 }

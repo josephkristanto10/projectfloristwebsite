@@ -354,7 +354,9 @@ html {
 
 
 
-
+#kotaklogin a{
+  cursor: pointer;
+}
   </style>
     <link href="{{ asset('css/style.css')}}" rel="stylesheet" />
     <!-- responsive style -->
@@ -384,7 +386,7 @@ html {
                   <a class="nav-link" href="{{url('/')}}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{{url('/product')}}"> Product</a>
+                  <a class="nav-link" href="{{url('/')}}#kotakproduk"> Product</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{{url('/howtoorder')}}"> How to Order </a>
@@ -396,10 +398,20 @@ html {
             </b>
             </div>
             <div class="quote_btn-container ">
-              <a href="">
+              <span id = "kotaklogin">
+              @if (Session::has('user'))
+              {{-- do something with session key --}}
+              <a onclick = "logout()">
+                Log out
+              </a>
+              @else
+              {{-- session key dosen't exist  --}}
+              <a href="{{url('/masuk')}}">
                 Log in
               </a>
-              <a href="">
+              @endif
+            </span>
+            <a href="{{url('/cart')}}">
                 <img src="images/cart.png" alt="">
               </a>
               <form class="form-inline">
@@ -470,7 +482,7 @@ html {
     </div>
     <div class="container" id = "kotakproduk">
       <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; " id = "judul_best_seller">Best Seller Product  <img src = "{{ asset('/images/bunga.png')}}" style = "margin-top:-15px;width:75px;height:75px;"></h1>
-      <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #714423;">Produk unggulan di store <b>Supplier Florist Surabaya</b> </h5>
+      <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #714423;">Produk unggulan di store <b>Supplier Florist Surabaya</b>  </h5>
       <div class="row">
         @foreach($myproduct as $mp)
         <div class = "col-md-4">
@@ -486,7 +498,12 @@ html {
               <div class="product-bottom-details">
                 <div class="product-price" style = "color:#714423"><small></small>18k</div>
                 <div class="product-links"> 
+                  @if($mp->has_variants == 1)
                   <a href="" style = "color:#714423" data-toggle="modal" data-target="#exampleModal" onclick = "showdetail({{$mp->id}})"><i class="fa fa-shopping-cart" ></i> Add to cart</a>
+                  @else
+                  <a  style = "color:#714423"  onclick = "orderwithoutvariant({{$mp->id}})" ><i class="fa fa-shopping-cart" ></i> Add to cart</a>
+
+                  @endif
                 </div>
               </div>
             </div>
@@ -722,47 +739,11 @@ html {
         </div>
         <div class="modal-body">
           <div id = "data_variant" >
-              {{-- <div class = "form-control" style = "height:100%;">
-                <span id= "variant_name"><h4>Navy</h4>     <span id= "variant_price">Rp49.000</span>           <input type = "number" class = "form-control" style = "width:100px;float:right;"></span>
-                <br>
-              
-   
-              </div> --}}
-
-              {{-- <div class = "row">
-                <div class="col-lg-11 mx-auto">
-
-                  <!-- List group-->
-                  <ul class="list-group shadow">
             
-                    <!-- list group item-->
-                    <li class="list-group-item">
-                      <!-- Custom content-->
-                      <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                        <div class="media-body order-2 order-lg-1">
-                          <h5 class="mt-0 font-weight-bold mb-2">Awesome product</h5>
-                          <p class="font-italic text-muted mb-0 small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit fuga autem maiores necessitatibus.</p>
-                          <div class="d-flex align-items-center justify-content-between mt-1">
-                            <h6 class="font-weight-bold my-2">$120.00</h6>
-                            <ul class="list-inline small">
-                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                              <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
-                            </ul>
-                          </div>
-                        </div><img src="https://bootstrapious.com/i/snippets/sn-cards/shoes-1_gthops.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
-                      </div>
-                      <!-- End -->
-                    </li>
-                    <!-- End --> 
-                </div>
-              </div> --}}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" onclick = "inputtocart()" >Save changes</button>
         </div>
       </div>
     </div>
@@ -776,14 +757,115 @@ html {
   </script>
   <!-- End Google Map -->
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 </html>
+
+
 <script>
+
+var arrayofproduct = [];
+var arrayofvariant = [];
+var globalproduct = "0";
+function orderwithoutvariant(idproduct){
+ 
+      Swal.fire({
+      title: "<strong>Konfirmasi</strong>",
+      icon: "info",
+      html: `
+        Apakah anda yakin untuk menambahkan barang ini ke keranjang?
+      `,
+      showCloseButton: true,
+      showCancelButton: true,
+      allowOutsideClick:false,
+      focusConfirm: false,
+      confirmButtonText: `
+        <i class="fa fa-thumbs-up"></i> Tambah
+      `,
+      confirmButtonAriaLabel: "Tambah",
+    }).then((result) => {
+                       arrayofproduct.push(idproduct+"_1");
+                       $.ajax({
+                        type: "post",
+                        url: "{{ url('/addtocart') }}",
+                        data: {
+                          "_token": "{{ csrf_token() }}",
+                          "array_of_products" : arrayofproduct
+                        },
+                        dataType: "json",
+                        success: function (response) {
+                   
+                          arrayofproduct = [];
+                          Swal.fire({
+                            title: 'Success!',
+                            text: 'Produk telah ditambahkan di keranjang',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                          })
+
+                        }
+                      });
+
+
+
+
+
+      });
+
+      
+}
+function triggerupdateqty(mynumber){
+  var nilaiqty =  $("#variant_number_"+mynumber).val();
+}
+
+function inputtocart(){
+  arrayofproduct = [];
+  $( ".modal input[type=number]" ).each(function( index ) {
+    if($(this).val() >0){
+      var id_input_number = $(this).attr("id").split("_");
+      var id_variants = id_input_number[2];
+      arrayofvariant.push(id_variants+"_"+$(this).val());
+    }
+  });
+  inserttocart();
+}
+function inserttocart(){
+  $.ajax({
+    type: "post",
+    url: "{{ url('/addtocart') }}",
+    data: {
+      "_token": "{{ csrf_token() }}",
+      "array_of_products" : arrayofproduct,
+      "array_of_variants" : arrayofvariant
+    },
+    dataType: "json",
+    success: function (response) {
+      // console.log(response);
+      $(".modal input[type=number]").val(0);
+      arrayofproduct = [];
+      arrayofvariant = [];
+      Swal.fire({
+        title: 'Success!',
+        text: 'Produk telah ditambahkan di keranjang',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      })
+      globalproduct = "0";
+      $('.modal').modal('toggle');
+    }
+  });
+}
+
+// $(".modal :input").bind('keyup mouseup', function () {
+//     alert("changed");            
+// });
 
 function showdetail(id_product){
   var value = $("#namaproduk_"+id_product).text();
-  $("#judulproduk").text(+"Variant " + value);
+  $("#judulproduk").text("Variant " + value);
+  globalproduct = id_product;
   getDetailVariant(id_product);
 }
 function getDetailVariant(id_product_for_variant){
@@ -799,8 +881,7 @@ function getDetailVariant(id_product_for_variant){
       var stringelement = "";
       if(response.variant.length >0){
         for(var i = 0 ; i < response.variant.length; i++){
-          stringelement += '<div class = "row"><div class="col-lg-11 mx-auto"><ul class="list-group shadow"><li class="list-group-item"> <div class="media align-items-lg-center flex-column flex-lg-row p-3"> <div class="media-body order-2 order-lg-1">                          <h5 class="mt-0 font-weight-bold mb-2">'+response.variant[i].name+'</h5><p class="font-italic text-muted mb-0 small">'+response.variant[i].descriptions+'.</p>                          <div class="d-flex align-items-center justify-content-between mt-1">                            <h6 class="font-weight-bold my-2"><input type = "number" style = "width:50px;" value = "0" min = "0"> Rp'+(response.variant[i].prices-((response.variant[i].prices*response.variant[i].discounts)/100))+'</h6>                            <ul class="list-inline small">                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>                              <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>                            </ul>                          </div>                        </div><img src="https://bootstrapious.com/i/snippets/sn-cards/shoes-1_gthops.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">                      </div>                    </li> </div> </div>';
-
+          stringelement += '<div class = "row"><div class="col-lg-11 mx-auto"><ul class="list-group shadow"><li class="list-group-item"> <div class="media align-items-lg-center flex-column flex-lg-row p-3"> <div class="media-body order-2 order-lg-1">                          <h5 class="mt-0 font-weight-bold mb-2">'+response.variant[i].name+'</h5><p class="font-italic text-muted mb-0 small">'+response.variant[i].descriptions+'.</p>                          <div class="d-flex align-items-center justify-content-between mt-1">                            <h6 class="font-weight-bold my-2"><input id = "variant_number_'+response.variant[i].id+'" type = "number" onkeyup = "triggerupdateqty('+response.variant[i].id+')" onchange = "triggerupdateqty('+response.variant[i].id+')"  style = "width:50px;" value = "0" min = "0"> Rp'+(response.variant[i].prices-((response.variant[i].prices*response.variant[i].discounts)/100))+' / pcs</h6>                            <ul class="list-inline small">                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>                              <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>                            </ul>                          </div>                        </div><img src="https://bootstrapious.com/i/snippets/sn-cards/shoes-1_gthops.jpg" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">                      </div>                    </li> </div> </div>';
         }
         $("#data_variant").append(stringelement);
        }
@@ -810,4 +891,40 @@ function getDetailVariant(id_product_for_variant){
     }
   });
 }
+function logout(){
+  $.ajax({
+    type: "get",
+    url: "{{ url('/keluar') }}",
+    data: {
+      "keluar": "ok",
+    },
+    dataType: "html",
+    success: function (response) {
+      // console.log(response);
+        Swal.fire({
+        title: "<strong>Log Out</strong>",
+        icon: "success",
+        html: `
+          Anda telah logout, Silahkan login kembali.
+        `,
+        showCloseButton: false,
+        showCancelButton: false,
+        allowOutsideClick:false,
+        focusConfirm: false,
+        confirmButtonText: `
+          <i class="fa fa-thumbs-up"></i> Ok
+        `,
+        confirmButtonAriaLabel: "Ok",
+      }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            var urllogin = "<a href={{url('/masuk')}}>Log in</a>";
+            $("#kotaklogin").html(urllogin);
+          } 
+        });
+    }
+  });
+}
+
+
 </script>

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 13,
+            "activePatchIndex": 41,
             "patches": [
                 {
                     "date": 1718813462400,
@@ -60,6 +60,118 @@
                 {
                     "date": 1718819673631,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n         return view('index', compact('myproduct'));\n     }\n     public function detail_variant(Request $request){\n         $id_product = $request->id_products;\n-        $variants = ProductVariant::where('id_product','=',$id_product)->get(\"*\");\n+        $variants = ProductVariant::where('id_product','=',$id_product)->where('variant_status','=','1')->get(\"*\");\n         return response()->json(['variant' => $variants]);\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1718856680364,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,12 @@\n         $id_product = $request->id_products;\n         $variants = ProductVariant::where('id_product','=',$id_product)->where('variant_status','=','1')->get(\"*\");\n         return response()->json(['variant' => $variants]);\n     }\n+    public function addtocart(Request $request){\n \n+    }\n+\n     /**\n      * Show the form for creating a new resource.\n      *\n      * @return \\Illuminate\\Http\\Response\n"
+                },
+                {
+                    "date": 1718856689504,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n         $variants = ProductVariant::where('id_product','=',$id_product)->where('variant_status','=','1')->get(\"*\");\n         return response()->json(['variant' => $variants]);\n     }\n     public function addtocart(Request $request){\n-\n+        return response()->json(['variant' => $variants]);\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718856696081,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n         $variants = ProductVariant::where('id_product','=',$id_product)->where('variant_status','=','1')->get(\"*\");\n         return response()->json(['variant' => $variants]);\n     }\n     public function addtocart(Request $request){\n-        return response()->json(['variant' => $variants]);\n+        return response()->json(['output' => $request]);\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718856853910,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n         $variants = ProductVariant::where('id_product','=',$id_product)->where('variant_status','=','1')->get(\"*\");\n         return response()->json(['variant' => $variants]);\n     }\n     public function addtocart(Request $request){\n-        return response()->json(['output' => $request]);\n+        return response()->json(['output' => $request->array_of_products]);\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718859205126,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n \n use Illuminate\\Http\\Request;\n use App\\Models\\Product;\n use App\\Models\\ProductVariant;\n+use Session;\n \n class HhomeController extends Controller\n {\n     /**\n@@ -14,8 +15,9 @@\n      * @return \\Illuminate\\Http\\Response\n      */\n     public function index()\n     {\n+        \n         $myproduct = Product::latest('id')->paginate(10);\n         return view('index', compact('myproduct'));\n     }\n     public function detail_variant(Request $request){\n"
+                },
+                {
+                    "date": 1718859271626,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,8 +25,9 @@\n         $variants = ProductVariant::where('id_product','=',$id_product)->where('variant_status','=','1')->get(\"*\");\n         return response()->json(['variant' => $variants]);\n     }\n     public function addtocart(Request $request){\n+        Session::put('variableSetOnPageA',$variableSetOnPageA);\n         return response()->json(['output' => $request->array_of_products]);\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1718859282008,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n         $variants = ProductVariant::where('id_product','=',$id_product)->where('variant_status','=','1')->get(\"*\");\n         return response()->json(['variant' => $variants]);\n     }\n     public function addtocart(Request $request){\n-        Session::put('variableSetOnPageA',$variableSetOnPageA);\n+        Session::put('',$variableSetOnPageA);\n         return response()->json(['output' => $request->array_of_products]);\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1718859374437,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n         $variants = ProductVariant::where('id_product','=',$id_product)->where('variant_status','=','1')->get(\"*\");\n         return response()->json(['variant' => $variants]);\n     }\n     public function addtocart(Request $request){\n-        Session::put('',$variableSetOnPageA);\n+        Session::push('product',$variableSetOnPageA);\n         return response()->json(['output' => $request->array_of_products]);\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1718859393719,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n         return response()->json(['variant' => $variants]);\n     }\n     public function addtocart(Request $request){\n         Session::push('product',$variableSetOnPageA);\n-        return response()->json(['output' => $request->array_of_products]);\n+        // return response()->json(['output' => $request->array_of_products]);\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718859703370,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,12 @@\n         $variants = ProductVariant::where('id_product','=',$id_product)->where('variant_status','=','1')->get(\"*\");\n         return response()->json(['variant' => $variants]);\n     }\n     public function addtocart(Request $request){\n-        Session::push('product',$variableSetOnPageA);\n+        if(count($request->array_of_products)>0){\n+            \n+        }\n+        Session::push('product',$);\n         // return response()->json(['output' => $request->array_of_products]);\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1718859719738,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,11 +26,11 @@\n         return response()->json(['variant' => $variants]);\n     }\n     public function addtocart(Request $request){\n         if(count($request->array_of_products)>0){\n-            \n+            Session::push('product',$);\n         }\n-        Session::push('product',$);\n+       \n         // return response()->json(['output' => $request->array_of_products]);\n     }\n \n     /**\n"
+                },
+                {
+                    "date": 1718859736453,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,8 +26,9 @@\n         return response()->json(['variant' => $variants]);\n     }\n     public function addtocart(Request $request){\n         if(count($request->array_of_products)>0){\n+            for($i = 0 ; $i< $request->array_of_products)\n             Session::push('product',$);\n         }\n        \n         // return response()->json(['output' => $request->array_of_products]);\n"
+                },
+                {
+                    "date": 1718859746025,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,11 @@\n         return response()->json(['variant' => $variants]);\n     }\n     public function addtocart(Request $request){\n         if(count($request->array_of_products)>0){\n-            for($i = 0 ; $i< $request->array_of_products)\n+            for($i = 0 ; $i< count($request->array_of_products); $i++){\n+                \n+            }\n             Session::push('product',$);\n         }\n        \n         // return response()->json(['output' => $request->array_of_products]);\n"
+                },
+                {
+                    "date": 1718859829934,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,11 +27,11 @@\n     }\n     public function addtocart(Request $request){\n         if(count($request->array_of_products)>0){\n             for($i = 0 ; $i< count($request->array_of_products); $i++){\n-                \n+                Session::push('product',$request->array_of_products[i]);\n             }\n-            Session::push('product',$);\n+         \n         }\n        \n         // return response()->json(['output' => $request->array_of_products]);\n     }\n"
+                },
+                {
+                    "date": 1718859880980,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n             }\n          \n         }\n        \n-        // return response()->json(['output' => $request->array_of_products]);\n+        return response()->json(['output' => Session::all()]);\n     }\n \n     /**\n      * Show the form for creating a new resource.\n"
+                },
+                {
+                    "date": 1718859993625,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n     }\n     public function addtocart(Request $request){\n         if(count($request->array_of_products)>0){\n             for($i = 0 ; $i< count($request->array_of_products); $i++){\n-                Session::push('product',$request->array_of_products[i]);\n+                Session::push('product',$request->array_of_products[$$]);\n             }\n          \n         }\n        \n"
+                },
+                {
+                    "date": 1718877860091,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n      * @return \\Illuminate\\Http\\Response\n      */\n     public function index()\n     {\n-        \n+        $mypassword = bcrypt(\"passworduser\");\n         $myproduct = Product::latest('id')->paginate(10);\n         return view('index', compact('myproduct'));\n     }\n     public function detail_variant(Request $request){\n@@ -27,9 +27,9 @@\n     }\n     public function addtocart(Request $request){\n         if(count($request->array_of_products)>0){\n             for($i = 0 ; $i< count($request->array_of_products); $i++){\n-                Session::push('product',$request->array_of_products[$$]);\n+                Session::push('product',$request->array_of_products[$i]);\n             }\n          \n         }\n        \n"
+                },
+                {
+                    "date": 1718877873589,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n     public function index()\n     {\n         $mypassword = bcrypt(\"passworduser\");\n         $myproduct = Product::latest('id')->paginate(10);\n-        return view('index', compact('myproduct'));\n+        return view('index', compact('myproduct','mypassword'));\n     }\n     public function detail_variant(Request $request){\n         $id_product = $request->id_products;\n         $variants = ProductVariant::where('id_product','=',$id_product)->where('variant_status','=','1')->get(\"*\");\n"
+                },
+                {
+                    "date": 1718877992772,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,12 @@\n         }\n        \n         return response()->json(['output' => Session::all()]);\n     }\n+    public function logincheck(){\n \n+    }\n+\n     /**\n      * Show the form for creating a new resource.\n      *\n      * @return \\Illuminate\\Http\\Response\n"
+                },
+                {
+                    "date": 1718878008834,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,12 +34,9 @@\n         }\n        \n         return response()->json(['output' => Session::all()]);\n     }\n-    public function logincheck(){\n-\n-    }\n-\n+ \n     /**\n      * Show the form for creating a new resource.\n      *\n      * @return \\Illuminate\\Http\\Response\n"
+                },
+                {
+                    "date": 1718878391734,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n      * @return \\Illuminate\\Http\\Response\n      */\n     public function index()\n     {\n-        $mypassword = bcrypt(\"passworduser\");\n+      \n         $myproduct = Product::latest('id')->paginate(10);\n         return view('index', compact('myproduct','mypassword'));\n     }\n     public function detail_variant(Request $request){\n"
+                },
+                {
+                    "date": 1718886406962,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n     public function index()\n     {\n       \n         $myproduct = Product::latest('id')->paginate(10);\n-        return view('index', compact('myproduct','mypassword'));\n+        return view('index', compact('myproduct'));\n     }\n     public function detail_variant(Request $request){\n         $id_product = $request->id_products;\n         $variants = ProductVariant::where('id_product','=',$id_product)->where('variant_status','=','1')->get(\"*\");\n"
+                },
+                {
+                    "date": 1719137724527,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,13 @@\n                 Session::push('product',$request->array_of_products[$i]);\n             }\n          \n         }\n+        if(count($request->array_of_variants)>0){\n+            for($j = 0 ; $j< count($request->array_of_variants); $j++){\n+                Session::push('variantproduct',$request->array_of_products[$i]);\n+            }\n+        }\n        \n         return response()->json(['output' => Session::all()]);\n     }\n  \n"
+                },
+                {
+                    "date": 1719137753005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,9 +33,9 @@\n          \n         }\n         if(count($request->array_of_variants)>0){\n             for($j = 0 ; $j< count($request->array_of_variants); $j++){\n-                Session::push('variantproduct',$request->array_of_products[$i]);\n+                Session::push('variantproduct',$request->array_of_variants[$j]);\n             }\n         }\n        \n         return response()->json(['output' => Session::all()]);\n"
+                },
+                {
+                    "date": 1719137781967,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n      * @return \\Illuminate\\Http\\Response\n      */\n     public function index()\n     {\n-      \n+       Session::forget('product');\n         $myproduct = Product::latest('id')->paginate(10);\n         return view('index', compact('myproduct'));\n     }\n     public function detail_variant(Request $request){\n"
+                },
+                {
+                    "date": 1719137792035,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,10 @@\n      */\n     public function index()\n     {\n        Session::forget('product');\n+       Session::forget('variantproduct');\n+       \n         $myproduct = Product::latest('id')->paginate(10);\n         return view('index', compact('myproduct'));\n     }\n     public function detail_variant(Request $request){\n"
+                },
+                {
+                    "date": 1719137797789,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,10 +15,9 @@\n      * @return \\Illuminate\\Http\\Response\n      */\n     public function index()\n     {\n-       Session::forget('product');\n-       Session::forget('variantproduct');\n+   \n        \n         $myproduct = Product::latest('id')->paginate(10);\n         return view('index', compact('myproduct'));\n     }\n"
+                },
+                {
+                    "date": 1719137867700,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,15 +26,15 @@\n         $variants = ProductVariant::where('id_product','=',$id_product)->where('variant_status','=','1')->get(\"*\");\n         return response()->json(['variant' => $variants]);\n     }\n     public function addtocart(Request $request){\n-        if(count($request->array_of_products)>0){\n+        if(isset($request->array_of_products)){\n             for($i = 0 ; $i< count($request->array_of_products); $i++){\n                 Session::push('product',$request->array_of_products[$i]);\n             }\n          \n         }\n-        if(count($request->array_of_variants)>0){\n+        if(isset($request->array_of_variants)){\n             for($j = 0 ; $j< count($request->array_of_variants); $j++){\n                 Session::push('variantproduct',$request->array_of_variants[$j]);\n             }\n         }\n"
                 }
             ],
             "date": 1718813462400,

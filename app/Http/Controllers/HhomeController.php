@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductVariant;
+use Session;
 
 class HhomeController extends Controller
 {
@@ -15,6 +16,8 @@ class HhomeController extends Controller
      */
     public function index()
     {
+   
+       
         $myproduct = Product::latest('id')->paginate(10);
         return view('index', compact('myproduct'));
     }
@@ -23,7 +26,22 @@ class HhomeController extends Controller
         $variants = ProductVariant::where('id_product','=',$id_product)->where('variant_status','=','1')->get("*");
         return response()->json(['variant' => $variants]);
     }
-
+    public function addtocart(Request $request){
+        if(isset($request->array_of_products)){
+            for($i = 0 ; $i< count($request->array_of_products); $i++){
+                Session::push('product',$request->array_of_products[$i]);
+            }
+         
+        }
+        if(isset($request->array_of_variants)){
+            for($j = 0 ; $j< count($request->array_of_variants); $j++){
+                Session::push('variantproduct',$request->array_of_variants[$j]);
+            }
+        }
+       
+        return response()->json(['output' => Session::all()]);
+    }
+ 
     /**
      * Show the form for creating a new resource.
      *

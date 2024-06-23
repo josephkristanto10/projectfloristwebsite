@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 24,
+            "activePatchIndex": 41,
             "patches": [
                 {
                     "date": 1718595212827,
@@ -104,6 +104,74 @@
                 {
                     "date": 1718822501159,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n | contains the \"web\" middleware group. Now create something great!\n |\n */\n \n-Route::resource('/home', HhomeController::class);\n+Route::resource('/', HhomeController::class);\n Route::get('/variants_detail', [HhomeController::class, \"detail_variant\"]);\n Route::get('/product', function () {\n     return view('product');\n });\n"
+                },
+                {
+                    "date": 1718856664925,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,9 @@\n */\n \n Route::resource('/', HhomeController::class);\n Route::get('/variants_detail', [HhomeController::class, \"detail_variant\"]);\n+Route::get('/addtocart', [HhomeController::class, \"add_to_cart\"]);\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1718856739802,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n */\n \n Route::resource('/', HhomeController::class);\n Route::get('/variants_detail', [HhomeController::class, \"detail_variant\"]);\n-Route::get('/addtocart', [HhomeController::class, \"add_to_cart\"]);\n+Route::post('/addtocart', [HhomeController::class, \"add_to_cart\"]);\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1718856818954,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,31 @@\n+<?php\n+\n+use Illuminate\\Support\\Facades\\Route;\n+use App\\Http\\Controllers\\HhomeController;\n+\n+/*\n+|--------------------------------------------------------------------------\n+| Web Routes\n+|--------------------------------------------------------------------------\n+|\n+| Here is where you can register web routes for your application. These\n+| routes are loaded by the RouteServiceProvider within a group which\n+| contains the \"web\" middleware group. Now create something great!\n+|\n+*/\n+\n+Route::resource('/', HhomeController::class);\n+Route::get('/variants_detail', [HhomeController::class, \"detail_variant\"]);\n+Route::post('/addtocart', [HhomeController::class, \"addtocart\"]);\n+Route::get('/product', function () {\n+    return view('product');\n+});\n+Route::get('/howtoorder', function () {\n+    return view('howtoorder');\n+});\n+Route::get('/contact', function () {\n+    return view('contact');\n+});\n+Route::get('/masuk', function () {\n+    return view('login');\n+});\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718878064645,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n <?php\n \n use Illuminate\\Support\\Facades\\Route;\n use App\\Http\\Controllers\\HhomeController;\n+use App\\Http\\Controllers\\LoginController;\n \n /*\n |--------------------------------------------------------------------------\n | Web Routes\n@@ -16,8 +17,9 @@\n \n Route::resource('/', HhomeController::class);\n Route::get('/variants_detail', [HhomeController::class, \"detail_variant\"]);\n Route::post('/addtocart', [HhomeController::class, \"addtocart\"]);\n+Route::resource('/masuk', LoginController::class);\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n@@ -27,36 +29,5 @@\n     return view('contact');\n });\n Route::get('/masuk', function () {\n     return view('login');\n-});\n-<?php\n-\n-use Illuminate\\Support\\Facades\\Route;\n-use App\\Http\\Controllers\\HhomeController;\n-\n-/*\n-|--------------------------------------------------------------------------\n-| Web Routes\n-|--------------------------------------------------------------------------\n-|\n-| Here is where you can register web routes for your application. These\n-| routes are loaded by the RouteServiceProvider within a group which\n-| contains the \"web\" middleware group. Now create something great!\n-|\n-*/\n-\n-Route::resource('/', HhomeController::class);\n-Route::get('/variants_detail', [HhomeController::class, \"detail_variant\"]);\n-Route::post('/addtocart', [HhomeController::class, \"add_to_cart\"]);\n-Route::get('/product', function () {\n-    return view('product');\n-});\n-Route::get('/howtoorder', function () {\n-    return view('howtoorder');\n-});\n-Route::get('/contact', function () {\n-    return view('contact');\n-});\n-Route::get('/masuk', function () {\n-    return view('login');\n });\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718878282691,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,16 +18,15 @@\n Route::resource('/', HhomeController::class);\n Route::get('/variants_detail', [HhomeController::class, \"detail_variant\"]);\n Route::post('/addtocart', [HhomeController::class, \"addtocart\"]);\n Route::resource('/masuk', LoginController::class);\n+Route::resource('/logincheck', [LoginController::class,\"checklogin\"]);\n+\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n     return view('howtoorder');\n });\n Route::get('/contact', function () {\n     return view('contact');\n-});\n-Route::get('/masuk', function () {\n-    return view('login');\n });\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1718878641845,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n Route::resource('/', HhomeController::class);\n Route::get('/variants_detail', [HhomeController::class, \"detail_variant\"]);\n Route::post('/addtocart', [HhomeController::class, \"addtocart\"]);\n Route::resource('/masuk', LoginController::class);\n-Route::resource('/logincheck', [LoginController::class,\"checklogin\"]);\n+Route::post('/logincheck', [LoginController::class,\"checklogin\"]);\n \n Route::get('/product', function () {\n     return view('product');\n });\n"
+                },
+                {
+                    "date": 1718886711344,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n Route::get('/variants_detail', [HhomeController::class, \"detail_variant\"]);\n Route::post('/addtocart', [HhomeController::class, \"addtocart\"]);\n Route::resource('/masuk', LoginController::class);\n Route::post('/logincheck', [LoginController::class,\"checklogin\"]);\n+Route::post('/keluar', [LoginController::class,\"checklogin\"]);\n \n Route::get('/product', function () {\n     return view('product');\n });\n"
+                },
+                {
+                    "date": 1718886724997,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n Route::get('/variants_detail', [HhomeController::class, \"detail_variant\"]);\n Route::post('/addtocart', [HhomeController::class, \"addtocart\"]);\n Route::resource('/masuk', LoginController::class);\n Route::post('/logincheck', [LoginController::class,\"checklogin\"]);\n-Route::post('/keluar', [LoginController::class,\"checklogin\"]);\n+Route::post('/keluar', [LoginController::class,\"logout\"]);\n \n Route::get('/product', function () {\n     return view('product');\n });\n"
+                },
+                {
+                    "date": 1718886941545,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n Route::get('/variants_detail', [HhomeController::class, \"detail_variant\"]);\n Route::post('/addtocart', [HhomeController::class, \"addtocart\"]);\n Route::resource('/masuk', LoginController::class);\n Route::post('/logincheck', [LoginController::class,\"checklogin\"]);\n-Route::post('/keluar', [LoginController::class,\"logout\"]);\n+Route::get('/keluar', [LoginController::class,\"logout\"]);\n \n Route::get('/product', function () {\n     return view('product');\n });\n"
+                },
+                {
+                    "date": 1719118435198,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n Route::get('/variants_detail', [HhomeController::class, \"detail_variant\"]);\n Route::post('/addtocart', [HhomeController::class, \"addtocart\"]);\n Route::resource('/masuk', LoginController::class);\n Route::post('/logincheck', [LoginController::class,\"checklogin\"]);\n+Route::post('/register', [LoginController::class,\"checklogin\"]);\n Route::get('/keluar', [LoginController::class,\"logout\"]);\n \n Route::get('/product', function () {\n     return view('product');\n"
+                },
+                {
+                    "date": 1719133179401,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,11 +19,13 @@\n Route::get('/variants_detail', [HhomeController::class, \"detail_variant\"]);\n Route::post('/addtocart', [HhomeController::class, \"addtocart\"]);\n Route::resource('/masuk', LoginController::class);\n Route::post('/logincheck', [LoginController::class,\"checklogin\"]);\n-Route::post('/register', [LoginController::class,\"checklogin\"]);\n+Route::post('/register', [LoginController::class,\"register\"]);\n Route::get('/keluar', [LoginController::class,\"logout\"]);\n-\n+Route::get('/cart', function () {\n+    return view('cart');\n+});\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1719133219295,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,11 +21,9 @@\n Route::resource('/masuk', LoginController::class);\n Route::post('/logincheck', [LoginController::class,\"checklogin\"]);\n Route::post('/register', [LoginController::class,\"register\"]);\n Route::get('/keluar', [LoginController::class,\"logout\"]);\n-Route::get('/cart', function () {\n-    return view('cart');\n-});\n+Route::get('/cart', [LoginController::class,\"logout\"]);\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1719133227256,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n Route::resource('/masuk', LoginController::class);\n Route::post('/logincheck', [LoginController::class,\"checklogin\"]);\n Route::post('/register', [LoginController::class,\"register\"]);\n Route::get('/keluar', [LoginController::class,\"logout\"]);\n-Route::get('/cart', [LoginController::class,\"logout\"]);\n+Route::get('/cart', [CartController::class,\"listcart\"]);\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1719133232407,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n Route::resource('/masuk', LoginController::class);\n Route::post('/logincheck', [LoginController::class,\"checklogin\"]);\n Route::post('/register', [LoginController::class,\"register\"]);\n Route::get('/keluar', [LoginController::class,\"logout\"]);\n-Route::get('/cart', [CartController::class,\"listcart\"]);\n+Route::get('/listcart', [CartController::class,\"listcart\"]);\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1719133507510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,10 @@\n Route::resource('/masuk', LoginController::class);\n Route::post('/logincheck', [LoginController::class,\"checklogin\"]);\n Route::post('/register', [LoginController::class,\"register\"]);\n Route::get('/keluar', [LoginController::class,\"logout\"]);\n-Route::get('/listcart', [CartController::class,\"listcart\"]);\n+Route::resource('/cart', HhomeController::class);\n+// Route::get('/listcart', [CartController::class,\"listcart\"]);\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1719133526461,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n use Illuminate\\Support\\Facades\\Route;\n use App\\Http\\Controllers\\HhomeController;\n use App\\Http\\Controllers\\LoginController;\n+use App\\Http\\Controllers\\CartController;\n \n /*\n |--------------------------------------------------------------------------\n | Web Routes\n"
+                },
+                {
+                    "date": 1719133533112,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n Route::resource('/masuk', LoginController::class);\n Route::post('/logincheck', [LoginController::class,\"checklogin\"]);\n Route::post('/register', [LoginController::class,\"register\"]);\n Route::get('/keluar', [LoginController::class,\"logout\"]);\n-Route::resource('/cart', HhomeController::class);\n+Route::resource('/cart', CartController::class);\n // Route::get('/listcart', [CartController::class,\"listcart\"]);\n Route::get('/product', function () {\n     return view('product');\n });\n"
                 }
             ],
             "date": 1718595212827,

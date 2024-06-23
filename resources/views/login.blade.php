@@ -11,66 +11,358 @@
 	
 	<link rel="stylesheet" href="{{asset('login/login_v17/css/style.css')}}">
   <style>
-      
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+* {
+  box-sizing: border-box;
+}
+
+.containers h1 {
+  font-weight: bold;
+  margin: 0;
+}
+
+.containers h2 {
+  text-align: center;
+}
+
+.containers p {
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  margin: 20px 0 30px;
+}
+
+.containers span {
+  font-size: 12px;
+}
+
+.containers a {
+  color: #333 !important;
+  font-size: 14px;
+  text-decoration: none;
+  margin: 15px 0;
+}
+
+.containers button {
+  border-radius: 20px;
+  border: 1px solid #303030;
+  background-color: #303030;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 200ms ease-in;
+}
+
+.containers button:active {
+  transform: scale(0.95);
+}
+
+.containers button:focus {
+  outline: none;
+}
+
+.containers button.ghost {
+  background-color: transparent;
+  border-color: #ffffff;
+  transition: all 200ms ease-in;
+}
+.containers button.ghost:hover {
+  background-color: #ffffff;
+  border-color: #ffffff;
+  color: #303030;
+}
+.button-sign-in:hover {
+  background-color: #f6b14b;
+  border-color: #f6b14b;
+}
+.containers form {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 50px;
+  height: 100%;
+  text-align: center;
+}
+
+.containers input {
+  background-color: #f6f6f6;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
+}
+.containers select {
+  background-color: #f6f6f6;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
+}
+
+.containers {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+    0 10px 10px rgba(0, 0, 0, 0.22);
+  position: relative;
+  overflow: hidden;
+  height: 83vh;
+  width: 75%;
+  max-width: 100%;
+  min-height: 480px;
+}
+
+.containers .form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+}
+
+.containers .sign-in-container {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+.containers.right-panel-active
+  .sign-in-container {
+  transform: translateX(100%);
+}
+
+.containers .sign-up-container {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.containers.right-panel-active
+  .sign-up-container {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: show 0.6s;
+}
+
+@keyframes show {
+  0%,
+  49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+  50%,
+  100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}
+
+.containers .overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+}
+
+.containers.right-panel-active
+  .overlay-container {
+  transform: translateX(-100%);
+}
+
+.overlay {
+  background: #d68b2d;
+  background: -webkit-linear-gradient(
+    to right,
+    #d68b2d,
+    #d68b2d
+  );
+  background: linear-gradient(
+    to right,
+    #d68b2d,
+    #d68b2d
+  );
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 0;
+  color: #ffffff;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+
+.containers.right-panel-active .overlay {
+  transform: translateX(50%);
+}
+
+.containers .overlay-panel {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  text-align: center;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+
+.overlay-left {
+  transform: translateX(-20%);
+}
+
+.containers.right-panel-active .overlay-left {
+  transform: translateX(0);
+}
+
+.overlay-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+.containers.right-panel-active .overlay-right {
+  transform: translateX(20%);
+}
+
+.containers .social-container {
+  margin: 20px 0;
+}
+
+.containers .social-container a {
+  border: 1px solid #dddddd;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  height: 40px;
+  width: 40px;
+}
+
+/* body {
+  background-image: url("https://griyamu.com/assets/image/properti_page/login_page_bg.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+} */
+
+.or {
+  display: flex;
+  flex-direction: row;
+}
+
+.or:before,
+.or:after {
+  content: "";
+  flex: 1 1;
+  border-bottom: 1px solid;
+  opacity: 50%;
+  margin: auto;
+}
+
+.or:before {
+  margin-right: 10px;
+}
+
+.or:after {
+  margin-left: 10px;
+}
+
+#register_mobile3
+  .btn-check:active
+  + .btn-outline-warning,
+.btn-check:checked + .btn-outline-warning,
+.btn-outline-warning.active,
+.btn-outline-warning.dropdown-toggle.show,
+.btn-outline-warning:active {
+  background-color: #ffc107 !important;
+}
+
+.btn-outline-warning {
+  color: #ffc107;
+  background-color: transparent !important;
+  background-image: none;
+  border: 2px solid #ffc107 !important;
+}
+
+.btn-outline-warning:hover {
+  color: #ffc107;
+  background-color: transparent !important;
+  background-image: none;
+}
+
   </style>
+
+
 	</head>
 	<body style="background-image:url('{{asset('images/login/background-login.jpg')}}'); background-size:contain;">
-	<section class="ftco-section" style = "padding-top:50px;">
-		<div class="container">
-	
-			<div class="row justify-content-center">
-				<div class="col-md-12 col-lg-10">
-					<div class="wrap d-md-flex" >
-						<div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last" style = "background-color:#F2D2BD !important;background:#714423 !important;" >
-							<div class="text w-100">
-								<h2>Selamat Datang</h2>
-								<p>Belum punya akun?</p>
-								<a href="#" class="btn btn-white btn-outline-white">Daftar</a>
-                <a href="{{url('/')}}" class="btn btn-white btn-outline-white">Kembali Ke halaman utama</a>
-							</div>
-			      </div>
-						<div class="login-wrap p-4 p-lg-5">
-			      	<div class="d-flex">
-			      		<div class="w-100">
-			      			<h3 class="mb-4">Masuk</h3>
-			      		</div>
-								<div class="w-100">
-									{{-- <p class="social-media d-flex justify-content-end">
-										<a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
-										<a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
-									</p> --}}
-								</div>
-			      	</div>
-							<form action="#" class="signin-form">
-			      		<div class="form-group mb-3">
-			      			<label class="label" for="name">Username</label>
-			      			<input type="text" class="form-control" placeholder="Username" required>
-			      		</div>
-		            <div class="form-group mb-3">
-		            	<label class="label" for="password">Password</label>
-		              <input type="password" class="form-control" placeholder="Password" required>
-		            </div>
-		            <div class="form-group">
-		            	<button type="submit" class="form-control btn btn-primary submit px-3" style = "background:#714423">Masuk </button>
-		            </div>
-		            <div class="form-group d-md-flex">
-		            	<div class="w-50 text-left">
-			            	{{-- <label class="checkbox-wrap checkbox-primary mb-0">Remember Me
-									  <input type="checkbox" checked> --}}
-									  <span class="checkmark"></span>
-										</label>
-									</div>
-									{{-- <div class="w-50 text-md-right">
-										<a href="#">Forgot Password</a>
-									</div> --}}
-		            </div>
-		          </form>
-		        </div>
-		      </div>
+
+		<div class="outer-container mt-2 mb-5 desktop " style="width:100%;padding:10px;">
+			<div class="containers right-panel-active" id="containers" style="margin:auto;margin-top:50px;">
+				<div class="form-container sign-up-container">
+					<form class="form_register" method="POST" enctype="multipart/form-data" style="align-items:baseline;text-align:left;">
+						<h1 class="title-creat-account">Create Account</h1>
+						<span class="title-creat-account2">or use your email for registration</span><br>
+						<!-- register 1 -->
+						<div id="register1" style="display:block;">
+					
+							<input style="font-size:12px;"  type="text" placeholder="Name" name="nama" id = "input_register_nama" required>
+              <input style="font-size:12px;"  type="text" placeholder="Alamat" name="nama" id = "input_register_alamat" required>
+              <input style="font-size:12px;"  type="text" placeholder="WA : contoh (083854942164)"  id = "input_register_Wa" required>
+							<input style="font-size:12px;"  type="email" placeholder="Email : contoh (bambangsupriyatno@gmail.com)"  id = "input_register_email" required>
+							<input style="font-size:12px;"  type="password" placeholder="Password"  id = "input_register_pass" required><br><br>
+							<button class="button-sign-in" type = "button" onclick = "register()">Daftar </button>
+						</div>
+					
+					
+					</form>
+				</div>
+		
+				<div class="form-container sign-in-container">
+					<form class="form_login" enctype="multipart/form-data" style="align-items:baseline;" action = "">
+						<h1 style="margin-bottom:10px;">Sign in <i style="font-size:35px;" class="fas fa-door-open"></i></h1><br>
+						<input style="font-size:12px;" type="email" placeholder="Email" name="email" required="" id = "emaillogin">
+						<input style="font-size:12px;" class="password_login" type="password" placeholder="Password" name="password" id = "pwd" required="">
+						{{-- <span style="cursor: pointer;" class="show_password_login"><i class="fas fa-eye"></i>&nbsp; Show Password</span><br> --}}
+		
+						<button id="loginbutton" class="button-sign-in" style="margin-top:10px;" type = "button" >Sign In</button>
+					</form>
+				</div>
+		
+				<div class="overlay-container">
+					<div class="overlay">
+						<div class="overlay-panel overlay-left">
+							<h1>Supplier Florist Surabaya</h1><br>
+							<p> <span style="font-weight:300;">Silahkan daftar agar bisa checkout di supplier florist surabaya</span></p>
+							<button class="ghost" id="signIn" type = "button" >Masuk</button>
+						</div>
+						<div class="overlay-panel overlay-right">
+							<h1>Supplier Florist Surabaya</h1><br>
+							<p style="font-weight:200;"> Silahkan login agar bisa checkout di supplier florist surabaya</p>
+							<button class="ghost" id="signUp">Daftar Disini</button><br><br>
+							<a href = "{{url('/')}}"><button class="ghost" id="signUp">Kembali Ke Halaman Utama</button></a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</section>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 	<script src="{{asset('login/login_v17/js/jquery.min.js')}}"></script>
   <script src="{{asset('login/login_v17/js/popper.js')}}"></script>
@@ -79,4 +371,134 @@
 
 	</body>
 </html>
+<script>
+	const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const container = document.getElementById('containers');
+
+    signUpButton.addEventListener('click', () => {
+        container.classList.add("right-panel-active");
+    });
+
+    signInButton.addEventListener('click', () => {
+        container.classList.remove("right-panel-active");
+    });
+	function register(){
+    var register_nama = $("#input_register_nama").val();
+    var register_alamat = $("#input_register_alamat").val();
+    var register_wa = $("#input_register_Wa").val();
+    var register_email = $("#input_register_email").val();
+    var register_pass = $("#input_register_pass").val();
+
+      $.ajax({
+            type: "post",
+            url: "{{ url('/register') }}",
+            data: {
+            "_token": "{{ csrf_token() }}",
+            "mynama" : register_nama,
+            "myalamat" : register_alamat,
+            "mywa" : register_wa,
+            "myemail" : register_email,
+            "mypwd" : register_pass
+            },
+            dataType: "json",
+            success: function (response) {
+              if(response.status_register == "ok"){
+                Swal.fire({
+                  title: 'Success!',
+                  text: 'Selamat, akun anda berhasil terbuat. ',
+                  icon: 'success',
+                  allowOutsideClick:false,
+                  confirmButtonText: 'OK'
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                   
+                    $(".form_register input" ).val("");
+                    $(".form_register").trigger("reset");
+                    signInButton.click();
+                  });
+              }
+              else if(response.status_register == "terpakai"){
+                Swal.fire({
+                  title: 'Daftar Gagal!',
+                  text: 'E-mail sudah pernah dipakai',
+                  icon: 'error',
+                  confirmButtonText: 'OK'
+                })
+              }
+              else if(response.status_register == "datakosong"){
+                Swal.fire({
+                  title: 'Data Kosong!',
+                  text: 'ada data yang belum diisi',
+                  icon: 'error',
+                  confirmButtonText: 'OK'
+                })
+              }
+              else{
+                Swal.fire({
+                  title: 'Error!',
+                  text: 'Hubungi Developer',
+                  icon: 'error',
+                  confirmButtonText: 'OK'
+                })
+              }
+             
+            }
+          });
+  }
+	$("#loginbutton").on("click", function(event){
+		// alert("test");
+   
+     event.preventDefault()
+		var myemail = $("#emaillogin").val();
+		var mypwd = $("#pwd").val();
+		$.ajax({
+			type: "post",
+			url: "{{ url('/logincheck') }}",
+			data: {
+			"_token": "{{ csrf_token() }}",
+			"myemail" : myemail,
+			"mypwd" : mypwd
+			},
+			dataType: "html",
+			success: function (response) {
+				if(response == "cocok"){
+					Swal.fire({
+						title: 'Success!',
+						text: 'Selamat datang kembali',
+						icon: 'success',
+            allowOutsideClick:false,
+						confirmButtonText: 'OK'
+					}).then((result) => {
+              /* Read more about isConfirmed, isDenied below */
+              if (result.isConfirmed) {
+                location.href = "{{url('/')}}";
+              } 
+            });
+				}
+				else if(response == "tidak cocok"){
+					Swal.fire({
+						title: 'Salah Password!',
+						text: 'Kombinasi passwordmu salah',
+						icon: 'error',
+						confirmButtonText: 'OK'
+					})
+					
+				}
+				else{
+					Swal.fire({
+						title: 'Tidak Ditemukan!',
+						text: 'Akunmu tidak ditemukan',
+						icon: 'error',
+						confirmButtonText: 'OK'
+					})
+					
+				}
+			}
+		});
+      return true;
+    });
+	
+	// container.classList.add("right-panel-active");
+</script>
 

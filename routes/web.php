@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HhomeController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,13 @@ use App\Http\Controllers\HhomeController;
 
 Route::resource('/', HhomeController::class);
 Route::get('/variants_detail', [HhomeController::class, "detail_variant"]);
+Route::post('/addtocart', [HhomeController::class, "addtocart"]);
+Route::resource('/masuk', LoginController::class);
+Route::post('/logincheck', [LoginController::class,"checklogin"]);
+Route::post('/register', [LoginController::class,"register"]);
+Route::get('/keluar', [LoginController::class,"logout"]);
+Route::resource('/cart', CartController::class);
+// Route::get('/listcart', [CartController::class,"listcart"]);
 Route::get('/product', function () {
     return view('product');
 });
@@ -24,7 +33,4 @@ Route::get('/howtoorder', function () {
 });
 Route::get('/contact', function () {
     return view('contact');
-});
-Route::get('/masuk', function () {
-    return view('login');
 });

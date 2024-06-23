@@ -80,146 +80,146 @@
   text-decoration : underline #714423 2px;
 }
 
-
-.main {
-  max-width: 1200px;
-  margin: 0 auto;
+.title{
+    margin-bottom: 5vh;
+}
+.card{
+    margin: auto;
+    max-width: 950px;
+    width: 90%;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 1rem;
+    border: transparent;
+}
+@media(max-width:767px){
+    .card{
+        margin: 3vh auto;
+    }
+}
+.cart{
+    background-color: #fff;
+    padding: 4vh 5vh;
+    border-bottom-left-radius: 1rem;
+    border-top-left-radius: 1rem;
+}
+@media(max-width:767px){
+    .cart{
+        padding: 4vh;
+        border-bottom-left-radius: unset;
+        border-top-right-radius: 1rem;
+    }
+}
+.summary{
+    background-color: #f1f1f1;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    padding: 4vh;
+    color: rgb(65, 65, 65);
+}
+@media(max-width:767px){
+    .summary{
+    border-top-right-radius: unset;
+    border-bottom-left-radius: 1rem;
+    }
+}
+.summary .col-2{
+    padding: 0;
+}
+.summary .col-10
+{
+    padding: 0;
+}.row{
+    margin: 0;
+}
+.title b{
+    font-size: 1.5rem;
+}
+.main{
+    margin: 0;
+    padding: 2vh 0;
+    width: 100%;
+}
+.col-2, .col{
+    padding: 0 1vh;
+}
+a{
+    padding: 0 1vh;
+}
+.close{
+    margin-left: auto;
+    font-size: 0.7rem;
+}
+img{
+    width: 3.5rem;
+}
+.back-to-shop{
+    margin-top: 4.5rem;
+}
+h5{
+    margin-top: 4vh;
+}
+hr{
+    margin-top: 1.25rem;
+}
+form{
+    padding: 2vh 0;
+}
+select{
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    padding: 1.5vh 1vh;
+    margin-bottom: 4vh;
+    outline: none;
+    width: 100%;
+    background-color: rgb(247, 247, 247);
+}
+input{
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    padding: 1vh;
+    margin-bottom: 4vh;
+    outline: none;
+    width: 100%;
+    background-color: rgb(247, 247, 247);
+}
+input:focus::-webkit-input-placeholder
+{
+      color:transparent;
+}
+.card .btn{
+    background-color: #000;
+    border-color: #000;
+    color: white;
+    width: 100%;
+    font-size: 0.7rem;
+    margin-top: 4vh;
+    padding: 1vh;
+    border-radius: 0;
+}
+.card .btn:focus{
+    box-shadow: none;
+    outline: none;
+    box-shadow: none;
+    color: white;
+    -webkit-box-shadow: none;
+    -webkit-user-select: none;
+    transition: none; 
+}
+.card .btn:hover{
+    color: white;
+}
+a{
+    color: black; 
+}
+a:hover{
+    color: black;
+    text-decoration: none;
+}
+ #code{
+    background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253) , rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
+    background-repeat: no-repeat;
+    background-position-x: 95%;
+    background-position-y: center;
 }
 
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.cards_item {
-  display: flex;
-  padding: 1rem;
-}
-
-.card_image {
-  position: relative;
-  max-height: 250px;
-}
-
-.card_image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.card_price {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 45px;
-  height: 45px;
-  border-radius: 0.25rem;
-  background-color: #c89b3f;
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.card_price span {
-  font-size: 12px;
-  margin-top: -2px;
-}
-
-.note {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  padding: 4px 8px;
-  border-radius: 0.25rem;
-  background-color: #c89b3f;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-@media (min-width: 40rem) {
-  .cards_item {
-    width: 50%;
-  }
-}
-
-@media (min-width: 56rem) {
-  .cards_item {
-    width: 33.3333%;
-  }
-}
-
-.card {
-  background-color: white;
-  border-radius: 0.25rem;
-  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.card_content {
-  position: relative;
-  padding: 16px 12px 32px 24px;
-  margin: 16px 8px 8px 0;
-  max-height: 290px;
-  /* overflow-y: scroll; */
-}
-
-.card_content::-webkit-scrollbar {
-  width: 8px;
-}
-
-.card_content::-webkit-scrollbar-track {
-  box-shadow: 0;
-  border-radius: 0;
-}
-
-.card_content::-webkit-scrollbar-thumb {
-  background: #c89b3f;
-  border-radius: 15px;
-}
-
-.card_title {
-  position: relative;
-  margin: 0 0 24px;
-  padding-bottom: 10px;
-  text-align: center;
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.card_title::after {
-  position: absolute;
-  display: block;
-  width: 50px;
-  height: 2px;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #c89b3f;
-  content: "";
-}
-
-hr {
-  margin: 24px auto;
-  width: 50px;
-  border-top: 2px solid #c89b3f;
-}
-
-.card_text p {
-  margin: 0 0 24px;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.card_text p:last-child {
-  margin: 0;
-}
 #kotaklogin a{
   cursor: pointer;
 }
@@ -295,65 +295,134 @@ hr {
       01
     </div> --}}
     <div class="container" id = "kotakproduk">
-      <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; " id = "judul_best_seller">How to Order?  </h1>
-      <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #714423;">Cara untuk Pesan di <b>Supplier Florist Surabaya</b> Lewat Website </h5>
+      <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; " id = "judul_best_seller">Supplier Florist Surabaya  </h1>
+      <br>
+      {{-- <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #714423;">semua pesananmu akan berada disini </h5> --}}
       <div class="row">
-        <div class="main">
-          <ul class="cards">
-            <li class="cards_item">
-              <div class="card">
-                <div class="card_image">
-                  <img src="{{ asset('images/ho_1.jpg')}}" alt="mixed vegetable salad in a mason jar." />
-       
-                </div>
-                <div class="card_content">
-                  <h2 class="card_title">Pilih Model Bunga</h2>
-                  <div class="card_text">
-                    <p>Kamu bisa memilih dahulu produk bunga yang kamu ingingkan lalu tekan buy now / add to cart.
-                    </p>
-                    {{-- <hr /> --}}
-
+        <div class="card">
+          <div class="row">
+              <div class="col-md-12 cart">
+                  <div class="title">
+                      <div class="row" >
+                          <div class="col"><h4><b>Daftar Keranjang</b></h4></div>
+                          <div class="col align-self-center text-right text-muted">3 items</div>
+                      </div>
+                  </div>    
+                  <div class="row border-top border-bottom">
+                      <div class="row main align-items-center">
+                          <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
+                          <div class="col">
+                              <div class="row text-muted">Shirt</div>
+                              <div class="row">Cotton T-shirt</div>
+                          </div>
+                          <div class="col">
+                              <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                          </div>
+                          <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                      </div>
                   </div>
-                </div>
-              </div>
-            </li>
-        
-            <li class="cards_item">
-              <div class="card">
-                <div class="card_image">
-                  <img src="{{ asset('images/ho_2.jpg')}}" alt="a Reuben sandwich on wax paper." />
-            
-                </div>
-                <div class="card_content">
-                  <h2 class="card_title">Checkout Cart</h2>
-                  <div class="card_text">
-                    <p>Setelah memilih bunga, kamu bisa menuju ke halaman cart atau klik logo keranjang diatas.
-                    </p>
-                  
+                  <div class="row">
+                      <div class="row main align-items-center">
+                          <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg"></div>
+                          <div class="col">
+                              <div class="row text-muted">Shirt</div>
+                              <div class="row">Cotton T-shirt</div>
+                          </div>
+                          <div class="col">
+                              <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                          </div>
+                          <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                      </div>
                   </div>
-                </div>
-              </div>
-            </li>
-        
-            <li class="cards_item">
-              <div class="card">
-                <div class="card_image">
-                  <span class="note">Penting</span>
-                  <img src="{{ asset('images/ho_3.jpg')}}" alt="A side view of a plate of figs and berries." />
-         
-                </div>
-                <div class="card_content">
-                  <h2 class="card_title">Isi Data lalu Simpan Order ID</h2>
-                  <div class="card_text">
-                    <p>Setelah mengisi data, simpan order ID yang tertera setelah checkout. lalu berikan order ID tersebut kepada admin kami. Untuk nomor admin kami bisa <b>klik disini</b>
-                    </p>
-                   
+                  <div class="row border-top border-bottom">
+                      <div class="row main align-items-center">
+                          <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
+                          <div class="col">
+                              <div class="row text-muted">Shirt</div>
+                              <div class="row">Cotton T-shirt</div>
+                          </div>
+                          <div class="col">
+                              <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                          </div>
+                          <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                      </div>
                   </div>
+                  <div class="row border-top border-bottom">
+                    <div class="row main align-items-center">
+                        <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
+                        <div class="col">
+                            <div class="row text-muted">Shirt</div>
+                            <div class="row">Cotton T-shirt</div>
+                        </div>
+                        <div class="col">
+                            <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                        </div>
+                        <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                    </div>
                 </div>
+                <div class="row border-top border-bottom">
+                  <div class="row main align-items-center">
+                      <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
+                      <div class="col">
+                          <div class="row text-muted">Shirt</div>
+                          <div class="row">Cotton T-shirt</div>
+                      </div>
+                      <div class="col">
+                          <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                      </div>
+                      <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                  </div>
               </div>
-            </li>
-          </ul>
-        </div>
+              <div class="row border-top border-bottom">
+                <div class="row main align-items-center">
+                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
+                    <div class="col">
+                        <div class="row text-muted">Shirt</div>
+                        <div class="row">Cotton T-shirt</div>
+                    </div>
+                    <div class="col">
+                        <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                    </div>
+                    <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                </div>
+            </div>
+            <div class="row border-top border-bottom">
+              <div class="row main align-items-center">
+                  <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
+                  <div class="col">
+                      <div class="row text-muted">Shirt</div>
+                      <div class="row">Cotton T-shirt</div>
+                  </div>
+                  <div class="col">
+                      <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                  </div>
+                  <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+              </div>
+          </div>
+                  <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+              </div>
+              {{-- <div class="col-md-4 summary">
+                  <div><h5><b>Summary</b></h5></div>
+                  <hr>
+                  <div class="row">
+                      <div class="col" style="padding-left:0;">ITEMS 3</div>
+                      <div class="col text-right">&euro; 132.00</div>
+                  </div>
+                  <form>
+                      <p>SHIPPING</p>
+                      <select><option class="text-muted">Standard-Delivery- &euro;5.00</option></select>
+                      <p>GIVE CODE</p>
+                      <input id="code" placeholder="Enter your code">
+                  </form>
+                  <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                      <div class="col">TOTAL PRICE</div>
+                      <div class="col text-right">&euro; 137.00</div>
+                  </div>
+                  <button class="btn">CHECKOUT</button>
+              </div> --}}
+          </div>
+          
+      </div>
       {{-- <div class="credits">
           <a target="_blank" href="https://www.freepik.com/premium-vector/vector-infographic-design-template-with-icons-8-options-steps_10571883.htm">inspired by</a>
       </div> --}}
@@ -388,6 +457,16 @@ hr {
       </div>
     </div>
   </section>
+
+  <div id = "checkoutbar"style = "height:100px;position:fixed;bottom:0;width:100%;background-color:#ffffff;z-index:10000; box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+    <div class="info_logo" style = "float:left;position:relative; top:20px;left:20px;font-family: 'Baloo Chettan', cursive;">
+      <h5 style = "font-size:18px;position:relative;left:60px;color:#512E1B" >
+        Harga Terjangkau - Berkualitas Tinggi
+      </h5>
+    </div>
+      <div style = "float:right;position: relative;right:30px;top:40px;background-color:#512E1B;border-radius:5px;height:30px;width:200px;color:white;text-align:center;font-weight:bold;padding-top:3px;font-size:15px;">Checkout <i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+      <div style = " float:right;position: relative;right:50px;top:30px;"><span style = "font-size:18px;">Total 4 Items :</span> <span style = "font-size:30px;margin-left:20px;">Rp750.000</span></div>
+  </div>
 
   <!-- end why section -->
 
@@ -705,7 +784,6 @@ hr {
   </script>
   <!-- End Google Map -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </body>
 
 </html>

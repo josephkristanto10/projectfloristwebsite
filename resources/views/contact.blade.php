@@ -221,6 +221,10 @@ hr {
   margin: 0;
 }
 
+#kotaklogin a{
+  cursor: pointer;
+}
+
 
   </style>
     <link href="{{ asset('css/style.css')}}" rel="stylesheet" />
@@ -262,10 +266,20 @@ hr {
           </b>
           </div>
           <div class="quote_btn-container ">
-            <a href="">
-              Log in
-            </a>
-            <a href="">
+            <span id = "kotaklogin">
+              @if (Session::has('user'))
+              {{-- do something with session key --}}
+              <a onclick = "logout()">
+                Log out
+              </a>
+              @else
+              {{-- session key dosen't exist  --}}
+              <a href="{{url('/masuk')}}">
+                Log in
+              </a>
+              @endif
+            </span>
+            <a href="{{url('/cart')}}">
               <img src="images/cart.png" alt="">
             </a>
             <form class="form-inline">
@@ -697,13 +711,46 @@ hr {
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
   </script>
   <!-- End Google Map -->
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
 <script>
 
-
+function logout(){
+  $.ajax({
+    type: "get",
+    url: "{{ url('/keluar') }}",
+    data: {
+      "keluar": "ok",
+    },
+    dataType: "html",
+    success: function (response) {
+      // console.log(response);
+        Swal.fire({
+        title: "<strong>Log Out</strong>",
+        icon: "success",
+        html: `
+          Anda telah logout, Silahkan login kembali.
+        `,
+        showCloseButton: false,
+        showCancelButton: false,
+        allowOutsideClick:false,
+        focusConfirm: false,
+        confirmButtonText: `
+          <i class="fa fa-thumbs-up"></i> Ok
+        `,
+        confirmButtonAriaLabel: "Ok",
+      }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            var urllogin = "<a href={{url('/masuk')}}>Log in</a>";
+            $("#kotaklogin").html(urllogin);
+          } 
+        });
+    }
+  });
+}
      
 
 </script>

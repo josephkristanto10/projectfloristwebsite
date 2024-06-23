@@ -1,0 +1,198 @@
+{
+    "sourceFile": "app/Http/Controllers/CartController.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 45,
+            "patches": [
+                {
+                    "date": 1719133258940,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1719133273137,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,11 @@\n     public function index()\n     {\n         //\n     }\n-   \n+    public function listcart(){\n+        \n+    }\n     /**\n      * Show the form for creating a new resource.\n      *\n      * @return \\Illuminate\\Http\\Response\n"
+                },
+                {
+                    "date": 1719133335676,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n namespace App\\Http\\Controllers;\n \n use Illuminate\\Http\\Request;\n+use Session;\n \n class CartController extends Controller\n {\n     /**\n@@ -15,9 +16,9 @@\n     {\n         //\n     }\n     public function listcart(){\n-        \n+        Session()\n     }\n     /**\n      * Show the form for creating a new resource.\n      *\n"
+                },
+                {
+                    "date": 1719133348865,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n     {\n         //\n     }\n     public function listcart(){\n-        Session()\n+        return Session::all();\n     }\n     /**\n      * Show the form for creating a new resource.\n      *\n"
+                },
+                {
+                    "date": 1719133380122,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,12 +13,13 @@\n      * @return \\Illuminate\\Http\\Response\n      */\n     public function index()\n     {\n-        //\n+        $mycart = Session::all()\n+        return $mycart;\n     }\n     public function listcart(){\n-        return Session::all();\n+        \n     }\n     /**\n      * Show the form for creating a new resource.\n      *\n"
+                },
+                {
+                    "date": 1719133399498,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,10 +13,10 @@\n      * @return \\Illuminate\\Http\\Response\n      */\n     public function index()\n     {\n-        $mycart = Session::all()\n-        return $mycart;\n+        $mycart = Session::all();\n+        return view() $mycart;\n     }\n     public function listcart(){\n         \n     }\n"
+                },
+                {
+                    "date": 1719133419320,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n      */\n     public function index()\n     {\n         $mycart = Session::all();\n-        return view() $mycart;\n+        return view(\"cart\",compact('mycart'));\n     }\n     public function listcart(){\n         \n     }\n"
+                },
+                {
+                    "date": 1719133569766,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,8 +13,9 @@\n      * @return \\Illuminate\\Http\\Response\n      */\n     public function index()\n     {\n+        $mycart = \"\";\n         $mycart = Session::all();\n         return view(\"cart\",compact('mycart'));\n     }\n     public function listcart(){\n"
+                },
+                {
+                    "date": 1719133608339,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,11 @@\n      */\n     public function index()\n     {\n         $mycart = \"\";\n+        if(Session::get('product')){\n+            \n+        }\n         $mycart = Session::all();\n         return view(\"cart\",compact('mycart'));\n     }\n     public function listcart(){\n"
+                },
+                {
+                    "date": 1719133619507,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,13 +13,13 @@\n      * @return \\Illuminate\\Http\\Response\n      */\n     public function index()\n     {\n-        $mycart = \"\";\n+        $mycart = \"tidak ada\";\n         if(Session::get('product')){\n-            \n+            $mycart = Session::all();\n         }\n-        $mycart = Session::all();\n+       \n         return view(\"cart\",compact('mycart'));\n     }\n     public function listcart(){\n         \n"
+                },
+                {
+                    "date": 1719133664105,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     public function index()\n     {\n         $mycart = \"tidak ada\";\n         if(Session::get('product')){\n-            $mycart = Session::all();\n+            $mycart[] = Session::all();\n         }\n        \n         return view(\"cart\",compact('mycart'));\n     }\n"
+                },
+                {
+                    "date": 1719133674739,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     public function index()\n     {\n         $mycart = \"tidak ada\";\n         if(Session::get('product')){\n-            $mycart[] = Session::all();\n+            $mycart = Session::all();\n         }\n        \n         return view(\"cart\",compact('mycart'));\n     }\n"
+                },
+                {
+                    "date": 1719133789323,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     public function index()\n     {\n         $mycart = \"tidak ada\";\n         if(Session::get('product')){\n-            $mycart = Session::all();\n+            $mycart[] = Session::all();\n         }\n        \n         return view(\"cart\",compact('mycart'));\n     }\n"
+                },
+                {
+                    "date": 1719133797042,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n      * @return \\Illuminate\\Http\\Response\n      */\n     public function index()\n     {\n-        $mycart = \"tidak ada\";\n+        $mycart = [];\n         if(Session::get('product')){\n             $mycart[] = Session::all();\n         }\n        \n"
+                },
+                {
+                    "date": 1719133964285,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     public function index()\n     {\n         $mycart = [];\n         if(Session::get('product')){\n-            $mycart[] = Session::all();\n+            $mycart[] = Session::get('product');\n         }\n        \n         return view(\"cart\",compact('mycart'));\n     }\n"
+                },
+                {
+                    "date": 1719134537966,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n         $mycart = [];\n         if(Session::get('product')){\n             $mycart[] = Session::get('product');\n         }\n-       \n+       $mycarts = json_decode($mycart);\n         return view(\"cart\",compact('mycart'));\n     }\n     public function listcart(){\n         \n"
+                },
+                {
+                    "date": 1719134647357,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n         $mycart = [];\n         if(Session::get('product')){\n             $mycart[] = Session::get('product');\n         }\n-       $mycarts = json_decode($mycart);\n+       \n         return view(\"cart\",compact('mycart'));\n     }\n     public function listcart(){\n         \n"
+                },
+                {
+                    "date": 1719134685889,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n     public function index()\n     {\n         $mycart = [];\n         if(Session::get('product')){\n-            $mycart[] = Session::get('product');\n+            $mycart = Session::get('product');\n         }\n        \n         return view(\"cart\",compact('mycart'));\n     }\n"
+                },
+                {
+                    "date": 1719139242956,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,12 @@\n         $mycart = [];\n         if(Session::get('product')){\n             $mycart = Session::get('product');\n         }\n+        $mycart_variant = [];\n+        if(Session::get('variantproduct')){\n+            $mycart = Session::get('variantproduct');\n+        }\n        \n         return view(\"cart\",compact('mycart'));\n     }\n     public function listcart(){\n"
+                },
+                {
+                    "date": 1719139470094,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n         if(Session::get('variantproduct')){\n             $mycart = Session::get('variantproduct');\n         }\n        \n-        return view(\"cart\",compact('mycart'));\n+        return view(\"cart\",compact('mycart','mycart_variant'));\n     }\n     public function listcart(){\n         \n     }\n"
+                },
+                {
+                    "date": 1719139484326,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n             $mycart = Session::get('product');\n         }\n         $mycart_variant = [];\n         if(Session::get('variantproduct')){\n-            $mycart = Session::get('variantproduct');\n+            $mycart_variant = Session::get('variantproduct');\n         }\n        \n         return view(\"cart\",compact('mycart','mycart_variant'));\n     }\n"
+                },
+                {
+                    "date": 1719148909916,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,8 @@\n         $mycart_variant = [];\n         if(Session::get('variantproduct')){\n             $mycart_variant = Session::get('variantproduct');\n         }\n-       \n         return view(\"cart\",compact('mycart','mycart_variant'));\n     }\n     public function listcart(){\n         \n"
+                },
+                {
+                    "date": 1719149684944,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,16 +13,18 @@\n      * @return \\Illuminate\\Http\\Response\n      */\n     public function index()\n     {\n+        $mycart_list = [];\n         $mycart = [];\n         if(Session::get('product')){\n             $mycart = Session::get('product');\n         }\n         $mycart_variant = [];\n         if(Session::get('variantproduct')){\n             $mycart_variant = Session::get('variantproduct');\n         }\n+\n         return view(\"cart\",compact('mycart','mycart_variant'));\n     }\n     public function listcart(){\n         \n"
+                },
+                {
+                    "date": 1719150608255,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,14 +17,22 @@\n         $mycart_list = [];\n         $mycart = [];\n         if(Session::get('product')){\n             $mycart = Session::get('product');\n+            for($i = 0 ; $i < count($mycart); $i++ ){\n+                    $list_myitem = explode(\"_\");\n+                    $id_item = $list_myitem[0];\n+\n+            }\n         }\n         $mycart_variant = [];\n         if(Session::get('variantproduct')){\n             $mycart_variant = Session::get('variantproduct');\n+            for($i = 0 ; $i < count($mycart_variant); $i++ ){\n+                \n+            }\n         }\n-\n+        \n         return view(\"cart\",compact('mycart','mycart_variant'));\n     }\n     public function listcart(){\n         \n"
+                },
+                {
+                    "date": 1719150787720,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,10 @@\n namespace App\\Http\\Controllers;\n \n use Illuminate\\Http\\Request;\n use Session;\n+use App\\Models\\Product;\n+use App\\Models\\ProductVariant;\n \n class CartController extends Controller\n {\n     /**\n"
+                },
+                {
+                    "date": 1719150848261,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n             $mycart = Session::get('product');\n             for($i = 0 ; $i < count($mycart); $i++ ){\n                     $list_myitem = explode(\"_\");\n                     $id_item = $list_myitem[0];\n-\n+                    $search_produk = Product::where(\"id\" , \"=\", $id_item)->get();\n             }\n         }\n         $mycart_variant = [];\n         if(Session::get('variantproduct')){\n"
+                },
+                {
+                    "date": 1719150921157,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,10 @@\n             for($i = 0 ; $i < count($mycart); $i++ ){\n                     $list_myitem = explode(\"_\");\n                     $id_item = $list_myitem[0];\n                     $search_produk = Product::where(\"id\" , \"=\", $id_item)->get();\n+                    $name_produk = $search_produk[0]['names'];\n+                    $description_produk = $search_produk[0]['descriptions'];\n             }\n         }\n         $mycart_variant = [];\n         if(Session::get('variantproduct')){\n"
+                },
+                {
+                    "date": 1719150940130,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,8 +25,9 @@\n                     $id_item = $list_myitem[0];\n                     $search_produk = Product::where(\"id\" , \"=\", $id_item)->get();\n                     $name_produk = $search_produk[0]['names'];\n                     $description_produk = $search_produk[0]['descriptions'];\n+                    $prices_produk = $search_produk[0]['prices'];\n             }\n         }\n         $mycart_variant = [];\n         if(Session::get('variantproduct')){\n"
+                },
+                {
+                    "date": 1719150962425,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,8 +26,9 @@\n                     $search_produk = Product::where(\"id\" , \"=\", $id_item)->get();\n                     $name_produk = $search_produk[0]['names'];\n                     $description_produk = $search_produk[0]['descriptions'];\n                     $prices_produk = $search_produk[0]['prices'];\n+                    $discount_produk = $search_produk[0]['prices'];\n             }\n         }\n         $mycart_variant = [];\n         if(Session::get('variantproduct')){\n"
+                },
+                {
+                    "date": 1719151301732,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,14 @@\n                     $search_produk = Product::where(\"id\" , \"=\", $id_item)->get();\n                     $name_produk = $search_produk[0]['names'];\n                     $description_produk = $search_produk[0]['descriptions'];\n                     $prices_produk = $search_produk[0]['prices'];\n-                    $discount_produk = $search_produk[0]['prices'];\n+                    $discount_produk = $search_produk[0]['discounts'];\n+                    $images_produk = $search_produk[0]['images'];\n+                    $mycart_list[] = [\n+                        \"name\" =>$name_produk,\n+                        \"deskripsi\" => $description_produk\n+                    ];\n             }\n         }\n         $mycart_variant = [];\n         if(Session::get('variantproduct')){\n"
+                },
+                {
+                    "date": 1719151337856,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n                 \n             }\n         }\n         \n-        return view(\"cart\",compact('mycart','mycart_variant'));\n+        return view(\"cart\",compact('mycart','mycart_variant', \"mycart_list\"));\n     }\n     public function listcart(){\n         \n     }\n"
+                },
+                {
+                    "date": 1719151386794,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n         $mycart = [];\n         if(Session::get('product')){\n             $mycart = Session::get('product');\n             for($i = 0 ; $i < count($mycart); $i++ ){\n-                    $list_myitem = explode(\"_\");\n+                    $list_myitem = explode(\"_\",$mycart[$i]);\n                     $id_item = $list_myitem[0];\n                     $search_produk = Product::where(\"id\" , \"=\", $id_item)->get();\n                     $name_produk = $search_produk[0]['names'];\n                     $description_produk = $search_produk[0]['descriptions'];\n"
+                },
+                {
+                    "date": 1719151499886,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,12 @@\n                     $discount_produk = $search_produk[0]['discounts'];\n                     $images_produk = $search_produk[0]['images'];\n                     $mycart_list[] = [\n                         \"name\" =>$name_produk,\n-                        \"deskripsi\" => $description_produk\n+                        \"description\" => $description_produk,\n+                        \"price\" => $prices_produk,\n+                        \"discount\" => $discount_produk,\n+                        \"image\" => $images_produk\n                     ];\n             }\n         }\n         $mycart_variant = [];\n"
+                },
+                {
+                    "date": 1719151786966,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,9 @@\n                     $images_produk = $search_produk[0]['images'];\n                     $mycart_list[] = [\n                         \"name\" =>$name_produk,\n                         \"description\" => $description_produk,\n+                        \"variant\" => \"-\",\n                         \"price\" => $prices_produk,\n                         \"discount\" => $discount_produk,\n                         \"image\" => $images_produk\n                     ];\n"
+                },
+                {
+                    "date": 1719151924906,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,11 @@\n         $mycart_variant = [];\n         if(Session::get('variantproduct')){\n             $mycart_variant = Session::get('variantproduct');\n             for($i = 0 ; $i < count($mycart_variant); $i++ ){\n-                \n+                $list_myitem = explode(\"_\",$mycart[$i]);\n+                $id_item = $list_myitem[0];\n+                $search_produk = ProductVariant::join(\"product_variant\",\"product_variant.id\" , \"=\", \"product.id\")->get();\n             }\n         }\n         \n         return view(\"cart\",compact('mycart','mycart_variant', \"mycart_list\"));\n"
+                },
+                {
+                    "date": 1719152016652,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n             $mycart_variant = Session::get('variantproduct');\n             for($i = 0 ; $i < count($mycart_variant); $i++ ){\n                 $list_myitem = explode(\"_\",$mycart[$i]);\n                 $id_item = $list_myitem[0];\n-                $search_produk = ProductVariant::join(\"product_variant\",\"product_variant.id\" , \"=\", \"product.id\")->get();\n+                $search_produk = ProductVariant::join(\"product_variant\",\"product_variant.id_product\" , \"=\", \"product.id\")->where(\"\")->get();\n             }\n         }\n         \n         return view(\"cart\",compact('mycart','mycart_variant', \"mycart_list\"));\n"
+                },
+                {
+                    "date": 1719152056259,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n             $mycart_variant = Session::get('variantproduct');\n             for($i = 0 ; $i < count($mycart_variant); $i++ ){\n                 $list_myitem = explode(\"_\",$mycart[$i]);\n                 $id_item = $list_myitem[0];\n-                $search_produk = ProductVariant::join(\"product_variant\",\"product_variant.id_product\" , \"=\", \"product.id\")->where(\"\")->get();\n+                $search_produk = ProductVariant::join(\"product_variant\",\"product_variant.id_product\" , \"=\", \"product.id\")->where(\"product_variant.id\", \"=\",$id_item)->get();\n             }\n         }\n         \n         return view(\"cart\",compact('mycart','mycart_variant', \"mycart_list\"));\n"
+                },
+                {
+                    "date": 1719152134463,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n             $mycart_variant = Session::get('variantproduct');\n             for($i = 0 ; $i < count($mycart_variant); $i++ ){\n                 $list_myitem = explode(\"_\",$mycart[$i]);\n                 $id_item = $list_myitem[0];\n-                $search_produk = ProductVariant::join(\"product_variant\",\"product_variant.id_product\" , \"=\", \"product.id\")->where(\"product_variant.id\", \"=\",$id_item)->get();\n+                $search_produk = ProductVariant::join(\"product_variant\",\"product_variant.id_product\" , \"=\", \"product.id\")->where(\"product_variant.id\", \"=\",$id_item)->select(\"product.names\", \"product_variant.names as\")->get();\n             }\n         }\n         \n         return view(\"cart\",compact('mycart','mycart_variant', \"mycart_list\"));\n"
+                },
+                {
+                    "date": 1719152286437,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n             $mycart_variant = Session::get('variantproduct');\n             for($i = 0 ; $i < count($mycart_variant); $i++ ){\n                 $list_myitem = explode(\"_\",$mycart[$i]);\n                 $id_item = $list_myitem[0];\n-                $search_produk = ProductVariant::join(\"product_variant\",\"product_variant.id_product\" , \"=\", \"product.id\")->where(\"product_variant.id\", \"=\",$id_item)->select(\"product.names\", \"product_variant.names as\")->get();\n+                $search_produk = ProductVariant::join(\"product_variant\",\"product_variant.id_product\" , \"=\", \"product.id\")->where(\"product_variant.id\", \"=\",$id_item)->select(\"product.names as nama_product\", \"product.images as images_product\", \"product_variant.names as nama_variant\", \"product_variant.prices as harga_variant\" , \"product_variant.discounts as discount_variant\" )->get();\n             }\n         }\n         \n         return view(\"cart\",compact('mycart','mycart_variant', \"mycart_list\"));\n"
+                },
+                {
+                    "date": 1719152375191,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,8 +45,18 @@\n             for($i = 0 ; $i < count($mycart_variant); $i++ ){\n                 $list_myitem = explode(\"_\",$mycart[$i]);\n                 $id_item = $list_myitem[0];\n                 $search_produk = ProductVariant::join(\"product_variant\",\"product_variant.id_product\" , \"=\", \"product.id\")->where(\"product_variant.id\", \"=\",$id_item)->select(\"product.names as nama_product\", \"product.images as images_product\", \"product_variant.names as nama_variant\", \"product_variant.prices as harga_variant\" , \"product_variant.discounts as discount_variant\" )->get();\n+                $name_produk = $search_produk[0]['nama_product'];\n+                $name_variant = $search_produk[0]['nama_variant'];\n+                $prices_produk = $search_produk[0]['harga_variant'];\n+                $discount_produk = $search_produk[0]['discount_variant'];\n+                $images_produk = $search_produk[0]['images_product'];\n+                \n+                \n+                \n+                \n+                \n             }\n         }\n         \n         return view(\"cart\",compact('mycart','mycart_variant', \"mycart_list\"));\n"
+                },
+                {
+                    "date": 1719152388628,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,13 +50,20 @@\n                 $name_variant = $search_produk[0]['nama_variant'];\n                 $prices_produk = $search_produk[0]['harga_variant'];\n                 $discount_produk = $search_produk[0]['discount_variant'];\n                 $images_produk = $search_produk[0]['images_product'];\n+                $mycart_list[] = [\n+                    \"name\" =>$name_produk,\n+                    \"description\" => $name_variant,\n+                    \"variant\" => \"-\",\n+                    \"price\" => $prices_produk,\n+                    \"discount\" => $discount_produk,\n+                    \"image\" => $images_produk\n+                ];\n                 \n                 \n                 \n                 \n-                \n             }\n         }\n         \n         return view(\"cart\",compact('mycart','mycart_variant', \"mycart_list\"));\n"
+                },
+                {
+                    "date": 1719152432665,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,17 +44,17 @@\n             $mycart_variant = Session::get('variantproduct');\n             for($i = 0 ; $i < count($mycart_variant); $i++ ){\n                 $list_myitem = explode(\"_\",$mycart[$i]);\n                 $id_item = $list_myitem[0];\n-                $search_produk = ProductVariant::join(\"product_variant\",\"product_variant.id_product\" , \"=\", \"product.id\")->where(\"product_variant.id\", \"=\",$id_item)->select(\"product.names as nama_product\", \"product.images as images_product\", \"product_variant.names as nama_variant\", \"product_variant.prices as harga_variant\" , \"product_variant.discounts as discount_variant\" )->get();\n+                $search_produk = ProductVariant::join(\"product_variant\",\"product_variant.id_product\" , \"=\", \"product.id\")->where(\"product_variant.id\", \"=\",$id_item)->select(\"product.names as nama_product\",\"product.descriptions as description_product\", \"product.images as images_product\", \"product_variant.names as nama_variant\", \"product_variant.prices as harga_variant\" , \"product_variant.discounts as discount_variant\" )->get();\n                 $name_produk = $search_produk[0]['nama_product'];\n                 $name_variant = $search_produk[0]['nama_variant'];\n                 $prices_produk = $search_produk[0]['harga_variant'];\n                 $discount_produk = $search_produk[0]['discount_variant'];\n                 $images_produk = $search_produk[0]['images_product'];\n                 $mycart_list[] = [\n                     \"name\" =>$name_produk,\n-                    \"description\" => $name_variant,\n+                    \"description\" => $description_produk,\n                     \"variant\" => \"-\",\n                     \"price\" => $prices_produk,\n                     \"discount\" => $discount_produk,\n                     \"image\" => $images_produk\n"
+                },
+                {
+                    "date": 1719152448620,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,8 +48,9 @@\n                 $search_produk = ProductVariant::join(\"product_variant\",\"product_variant.id_product\" , \"=\", \"product.id\")->where(\"product_variant.id\", \"=\",$id_item)->select(\"product.names as nama_product\",\"product.descriptions as description_product\", \"product.images as images_product\", \"product_variant.names as nama_variant\", \"product_variant.prices as harga_variant\" , \"product_variant.discounts as discount_variant\" )->get();\n                 $name_produk = $search_produk[0]['nama_product'];\n                 $name_variant = $search_produk[0]['nama_variant'];\n                 $prices_produk = $search_produk[0]['harga_variant'];\n+                $description_produk = $search_produk[0]['description_product'];\n                 $discount_produk = $search_produk[0]['discount_variant'];\n                 $images_produk = $search_produk[0]['images_product'];\n                 $mycart_list[] = [\n                     \"name\" =>$name_produk,\n"
+                },
+                {
+                    "date": 1719152496552,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -54,9 +54,9 @@\n                 $images_produk = $search_produk[0]['images_product'];\n                 $mycart_list[] = [\n                     \"name\" =>$name_produk,\n                     \"description\" => $description_produk,\n-                    \"variant\" => \"-\",\n+                    \"variant\" => $name_variant,\n                     \"price\" => $prices_produk,\n                     \"discount\" => $discount_produk,\n                     \"image\" => $images_produk\n                 ];\n"
+                },
+                {
+                    "date": 1719152546771,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -59,12 +59,8 @@\n                     \"price\" => $prices_produk,\n                     \"discount\" => $discount_produk,\n                     \"image\" => $images_produk\n                 ];\n-                \n-                \n-                \n-                \n             }\n         }\n         \n         return view(\"cart\",compact('mycart','mycart_variant', \"mycart_list\"));\n"
+                },
+                {
+                    "date": 1719152563282,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,9 +62,9 @@\n                 ];\n             }\n         }\n         \n-        return view(\"cart\",compact('mycart','mycart_variant', \"mycart_list\"));\n+        return view(\"cart\",compact(\"mycart_list\"));\n     }\n     public function listcart(){\n         \n     }\n"
+                }
+            ],
+            "date": 1719133258940,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Http\\Controllers;\n\nuse Illuminate\\Http\\Request;\n\nclass CartController extends Controller\n{\n    /**\n     * Display a listing of the resource.\n     *\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function index()\n    {\n        //\n    }\n   \n    /**\n     * Show the form for creating a new resource.\n     *\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function create()\n    {\n        //\n    }\n\n    /**\n     * Store a newly created resource in storage.\n     *\n     * @param  \\Illuminate\\Http\\Request  $request\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function store(Request $request)\n    {\n        //\n    }\n\n    /**\n     * Display the specified resource.\n     *\n     * @param  int  $id\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function show($id)\n    {\n        //\n    }\n\n    /**\n     * Show the form for editing the specified resource.\n     *\n     * @param  int  $id\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function edit($id)\n    {\n        //\n    }\n\n    /**\n     * Update the specified resource in storage.\n     *\n     * @param  \\Illuminate\\Http\\Request  $request\n     * @param  int  $id\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function update(Request $request, $id)\n    {\n        //\n    }\n\n    /**\n     * Remove the specified resource from storage.\n     *\n     * @param  int  $id\n     * @return \\Illuminate\\Http\\Response\n     */\n    public function destroy($id)\n    {\n        //\n    }\n}"
+        }
+    ]
+}
