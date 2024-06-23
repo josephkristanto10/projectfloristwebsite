@@ -254,7 +254,7 @@ hr {
                 <a class="nav-link" href="{{url('/')}}">Home </a>
               </li>
               <li class="nav-item ">
-                <a class="nav-link" href="{{url('/product')}}"> Product </a>
+                <a class="nav-link" href="{{url('/')}}#kotakproduk"> Product </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{url('/howtoorder')}}"> How to Order  </a>
