@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 41,
+            "activePatchIndex": 42,
             "patches": [
                 {
                     "date": 1718813462400,
@@ -172,6 +172,10 @@
                 {
                     "date": 1719137867700,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,15 +26,15 @@\n         $variants = ProductVariant::where('id_product','=',$id_product)->where('variant_status','=','1')->get(\"*\");\n         return response()->json(['variant' => $variants]);\n     }\n     public function addtocart(Request $request){\n-        if(count($request->array_of_products)>0){\n+        if(isset($request->array_of_products)){\n             for($i = 0 ; $i< count($request->array_of_products); $i++){\n                 Session::push('product',$request->array_of_products[$i]);\n             }\n          \n         }\n-        if(count($request->array_of_variants)>0){\n+        if(isset($request->array_of_variants)){\n             for($j = 0 ; $j< count($request->array_of_variants); $j++){\n                 Session::push('variantproduct',$request->array_of_variants[$j]);\n             }\n         }\n"
+                },
+                {
+                    "date": 1719159350703,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n         return view('index', compact('myproduct'));\n     }\n     public function detail_variant(Request $request){\n         $id_product = $request->id_products;\n-        $variants = ProductVariant::where('id_product','=',$id_product)->where('variant_status','=','1')->get(\"*\");\n+        $variants = ProductVariant::where('id_product','=',$id_product)->join(\"product\", \"product.id\",\"=\",\"product_variant.id_product\")->where('variant_status','=','1')->select(\"product_variant.*\",\"product.images\")->get();\n         return response()->json(['variant' => $variants]);\n     }\n     public function addtocart(Request $request){\n         if(isset($request->array_of_products)){\n"
                 }
             ],
             "date": 1718813462400,
