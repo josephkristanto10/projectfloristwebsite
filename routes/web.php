@@ -22,8 +22,11 @@ Route::post('/addtocart', [HhomeController::class, "addtocart"]);
 Route::resource('/masuk', LoginController::class);
 Route::post('/logincheck', [LoginController::class,"checklogin"]);
 Route::post('/register', [LoginController::class,"register"]);
+
+
 Route::get('/keluar', [LoginController::class,"logout"]);
 Route::resource('/cart', CartController::class);
+Route::post('/deletecart', [CartController::class,"deletecart"]);
 // Route::get('/listcart', [CartController::class,"listcart"]);
 Route::get('/product', function () {
     return view('product');

@@ -728,7 +728,7 @@ html {
   <!-- footer section -->
 
   {{-- Modal Varian --}}
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style = "z-index:100000;" >
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -798,12 +798,15 @@ function orderwithoutvariant(idproduct){
                         success: function (response) {
                    
                           arrayofproduct = [];
-                          Swal.fire({
-                            title: 'Success!',
-                            text: 'Produk telah ditambahkan di keranjang',
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                          })
+                          if (result.isConfirmed) {
+                              Swal.fire({
+                              title: 'Success!',
+                              text: 'Produk telah ditambahkan di keranjang',
+                              icon: 'success',
+                              confirmButtonText: 'OK'
+                            })
+                          } 
+                         
 
                         }
                       });
@@ -880,12 +883,14 @@ function getDetailVariant(id_product_for_variant){
       $("#data_variant").html("");
       var stringelement = "";
       if(response.variant.length >0){
+       stringelement += '<div class = "row">';
         for(var i = 0 ; i < response.variant.length; i++){
           var iamgefromproduct = String("{{url('images/')}}" + "/product/"+response.variant[i].images);
       
           var images_product = iamgefromproduct;
-          stringelement += '<div class = "row"><div class="col-lg-11 mx-auto"><ul class="list-group shadow"><li class="list-group-item"> <div class="media align-items-lg-center flex-column flex-lg-row p-3"> <div class="media-body order-2 order-lg-1">                          <h5 class="mt-0 font-weight-bold mb-2">'+response.variant[i].name+'</h5><p class="font-italic text-muted mb-0 small">'+response.variant[i].descriptions+'.</p>                          <div class="d-flex align-items-center justify-content-between mt-1">                            <h6 class="font-weight-bold my-2"><input id = "variant_number_'+response.variant[i].id+'" type = "number" onkeyup = "triggerupdateqty('+response.variant[i].id+')" onchange = "triggerupdateqty('+response.variant[i].id+')"  style = "width:50px;" value = "0" min = "0"> Rp'+(response.variant[i].prices-((response.variant[i].prices*response.variant[i].discounts)/100))+' / pcs</h6>                            <ul class="list-inline small">                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>                              <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>                              <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>                            </ul>                          </div>                        </div><img src='+images_product+' alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">                      </div>                    </li> </div> </div>';
+          stringelement += '<div class="col-lg-4 " style = " margin:5px;"><div class="media" style = "display:block;width:100%; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;" >  <div class="media-body "><img style = "width:100%;" src='+images_product+' alt="Generic placeholder image" " class="" ><h5 class="mt-0 font-weight-bold mb-2 " style = "padding-left:15px;padding-top:10px;">'+response.variant[i].name+'</h5><p class="font-italic text-muted mb-0 small" style = "padding-left:15px;padding-top:10px;">'+response.variant[i].descriptions+'.</p><div class="d-flex align-items-center justify-content-between mt-1"><h6 class="font-weight-bold my-2" style = "padding-left:15px;">Rp'+(response.variant[i].prices-((response.variant[i].prices*response.variant[i].discounts)/100))+' / pcs <input class = "form-control" id = "variant_number_'+response.variant[i].id+'" type = "number" onkeyup = "triggerupdateqty('+response.variant[i].id+')" onchange = "triggerupdateqty('+response.variant[i].id+')"  style = "width:100px;margin-top:10px;" value = "0" min = "0"> </h6></div></div></div></li> </div>';
         }
+         stringelement += '</div>';
         $("#data_variant").append(stringelement);
        }
       else{

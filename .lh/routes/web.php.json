@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 41,
+            "activePatchIndex": 42,
             "patches": [
                 {
                     "date": 1718595212827,
@@ -172,6 +172,10 @@
                 {
                     "date": 1719133533112,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n Route::resource('/masuk', LoginController::class);\n Route::post('/logincheck', [LoginController::class,\"checklogin\"]);\n Route::post('/register', [LoginController::class,\"register\"]);\n Route::get('/keluar', [LoginController::class,\"logout\"]);\n-Route::resource('/cart', HhomeController::class);\n+Route::resource('/cart', CartController::class);\n // Route::get('/listcart', [CartController::class,\"listcart\"]);\n Route::get('/product', function () {\n     return view('product');\n });\n"
+                },
+                {
+                    "date": 1719224712722,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,10 +21,13 @@\n Route::post('/addtocart', [HhomeController::class, \"addtocart\"]);\n Route::resource('/masuk', LoginController::class);\n Route::post('/logincheck', [LoginController::class,\"checklogin\"]);\n Route::post('/register', [LoginController::class,\"register\"]);\n+\n+\n Route::get('/keluar', [LoginController::class,\"logout\"]);\n Route::resource('/cart', CartController::class);\n+Route::post('/deletecart', [LoginController::class,\"deletecart\"]);\n // Route::get('/listcart', [CartController::class,\"listcart\"]);\n Route::get('/product', function () {\n     return view('product');\n });\n"
                 }
             ],
             "date": 1718595212827,

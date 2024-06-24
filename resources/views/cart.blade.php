@@ -291,13 +291,10 @@ a:hover{
 
   <!-- about section -->
   <section class="about_section " style =  "padding-top:30px;">
-    {{-- <div class="section_number">
-      01
-    </div> --}}
     <div class="container" id = "kotakproduk">
       <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; " id = "judul_best_seller">Supplier Florist Surabaya  </h1>
       <br>
-      {{-- <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #714423;">semua pesananmu akan berada disini </h5> --}}
+    
       <div class="row">
         <div class="card">
           <div class="row">
@@ -305,130 +302,32 @@ a:hover{
                   <div class="title">
                       <div class="row" >
                           <div class="col"><h4><b>Daftar Keranjang</b></h4></div>
-                          <div class="col align-self-center text-right text-muted">3 items</div>
+                          <div class="col align-self-center text-right text-muted"><b>{{$jumlahitems}}</b> items</div>
                       </div>
                   </div>    
-                  <div class="row border-top border-bottom">
-                      <div class="row main align-items-center">
-                          <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
-                          <div class="col">
-                              <div class="row text-muted">Shirt</div>
-                              <div class="row">Cotton T-shirt</div>
-                          </div>
-                          <div class="col">
-                              <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                          </div>
-                          <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="row main align-items-center">
-                          <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/ba3tvGm.jpg"></div>
-                          <div class="col">
-                              <div class="row text-muted">Shirt</div>
-                              <div class="row">Cotton T-shirt</div>
-                          </div>
-                          <div class="col">
-                              <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                          </div>
-                          <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                      </div>
-                  </div>
-                  <div class="row border-top border-bottom">
-                      <div class="row main align-items-center">
-                          <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
-                          <div class="col">
-                              <div class="row text-muted">Shirt</div>
-                              <div class="row">Cotton T-shirt</div>
-                          </div>
-                          <div class="col">
-                              <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                          </div>
-                          <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                      </div>
-                  </div>
-                  <div class="row border-top border-bottom">
-                    <div class="row main align-items-center">
-                        <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
-                        <div class="col">
-                            <div class="row text-muted">Shirt</div>
-                            <div class="row">Cotton T-shirt</div>
-                        </div>
-                        <div class="col">
-                            <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                        </div>
-                        <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                    </div>
-                </div>
-                <div class="row border-top border-bottom">
-                  <div class="row main align-items-center">
-                      <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
-                      <div class="col">
-                          <div class="row text-muted">Shirt</div>
-                          <div class="row">Cotton T-shirt</div>
-                      </div>
-                      <div class="col">
-                          <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                      </div>
-                      <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-                  </div>
-              </div>
-              <div class="row border-top border-bottom">
+            
+              @foreach($mycart_list as $key => $ml)
+              <div class="row border-top border-bottom" id = "kotakcart{{$key}}">
                 <div class="row main align-items-center">
-                    <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
+                    <div class="col-2"><img class="img-fluid" src="{{asset('images/product/'.$ml['image'])}}"></div>
                     <div class="col">
-                        <div class="row text-muted">Shirt</div>
-                        <div class="row">Cotton T-shirt</div>
+                        <div class="row text-muted">{{$ml['variant']}}</div>
+                        <div class="row">{{$ml['name']}}</div>
                     </div>
                     <div class="col">
-                        <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                        <b> {{$ml['qty']}}</b> Items
                     </div>
-                    <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
+                    <div class="col">Rp{{$ml['price']-(($ml['price']*$ml['discount'])/100)}} <span class="close" data-idcategory = "{{$ml['category']}}" data-idindex = "{{$ml['index']}}" data-idrow = "{{$key}}" onclick = "deleterowcart(this)">&#10005;</span></div>
                 </div>
-            </div>
-            <div class="row border-top border-bottom">
-              <div class="row main align-items-center">
-                  <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/pHQ3xT3.jpg"></div>
-                  <div class="col">
-                      <div class="row text-muted">Shirt</div>
-                      <div class="row">Cotton T-shirt</div>
-                  </div>
-                  <div class="col">
-                      <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
-                  </div>
-                  <div class="col">&euro; 44.00 <span class="close">&#10005;</span></div>
-              </div>
-          </div>
+             </div>
+             @endforeach
                   <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
               </div>
-              {{-- <div class="col-md-4 summary">
-                  <div><h5><b>Summary</b></h5></div>
-                  <hr>
-                  <div class="row">
-                      <div class="col" style="padding-left:0;">ITEMS 3</div>
-                      <div class="col text-right">&euro; 132.00</div>
-                  </div>
-                  <form>
-                      <p>SHIPPING</p>
-                      <select><option class="text-muted">Standard-Delivery- &euro;5.00</option></select>
-                      <p>GIVE CODE</p>
-                      <input id="code" placeholder="Enter your code">
-                  </form>
-                  <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
-                      <div class="col">TOTAL PRICE</div>
-                      <div class="col text-right">&euro; 137.00</div>
-                  </div>
-                  <button class="btn">CHECKOUT</button>
-              </div> --}}
+
           </div>
           
       </div>
-      {{-- <div class="credits">
-          <a target="_blank" href="https://www.freepik.com/premium-vector/vector-infographic-design-template-with-icons-8-options-steps_10571883.htm">inspired by</a>
-      </div> --}}
-            {{-- </div> --}}
-          
-            {{-- <div style = "margin:auto;width:100%;text-align:center;"><button class = "btn btn-primary" style = "background-color:#714423 !important;padding:10px;margin:auto; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">Lihat Semua Produk <i class="fa fa-chevron-right" aria-hidden="true"></i></button></div> --}}
+
       </div>
       
   </section>
@@ -465,189 +364,10 @@ a:hover{
       </h5>
     </div>
       <div style = "float:right;position: relative;right:30px;top:40px;background-color:#512E1B;border-radius:5px;height:30px;width:200px;color:white;text-align:center;font-weight:bold;padding-top:3px;font-size:15px;">Checkout <i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-      <div style = " float:right;position: relative;right:50px;top:30px;"><span style = "font-size:18px;">Total 4 Items :</span> <span style = "font-size:30px;margin-left:20px;">Rp750.000</span></div>
+      <div style = " float:right;position: relative;right:50px;top:30px;"><span style = "font-size:18px;">Total 4 Items :</span> <span style = "font-size:30px;margin-left:20px;">Rp{{$hasil}}</span></div>
   </div>
 
-  <!-- end why section -->
-
-  <!-- gallery section -->
-  {{-- <section class="gallery_section layout_padding">
-    <div class="section_number">
-      03
-    </div>
-    <div class="heading_container justify-content-center">
-      <h2>
-        Our Gallery
-      </h2>
-    </div>
-    <div class="container">
-      <div class="img_container">
-        <div class="box-1">
-          <div class="box-1-container">
-            <div class="b-1">
-              <div class="img-box">
-                <img src="images/g-1.jpg" alt="">
-              </div>
-              <div class="img-box">
-                <img src="images/g-4.jpg" alt="">
-              </div>
-            </div>
-            <div class="b-2">
-              <div class="img-box">
-                <img src="images/g-2.jpg" alt="">
-              </div>
-              <div class="img-box">
-                <img src="images/g-5.jpg" alt="">
-              </div>
-            </div>
-          </div>
-          <div class="b-3">
-            <div class="img-box">
-              <img src="images/g-7.jpg" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="box-2">
-          <div class="img-box">
-            <img src="images/g-3.jpg" alt="">
-          </div>
-          <div class="img-box">
-            <img src="images/g-6.jpg" alt="">
-          </div>
-          <div class="img-box flex-grow-1">
-            <img src="images/g-8.jpg" alt="">
-          </div>
-        </div>
-      </div>
-  </section> --}}
-  <!-- end gallery section -->
-
-  <!-- client section -->
-
-  {{-- <section class="client_section layout_padding">
-    <div class="container">
-      <div class="heading_container justify-content-center">
-        <h2>
-          What Our Customers Say
-        </h2>
-        <div class="section_number">
-          04
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="client_box">
-            <div class="detail_box">
-              <div class="img_box">
-                <img src="images/client-1.png">
-              </div>
-              <h5>
-                nomil du
-              </h5>
-              <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-                classical Latin literature from 45 BC, making it over </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="client_box">
-            <div class="detail_box">
-              <div class="img_box">
-                <img src="images/client-2.png">
-              </div>
-              <h5>
-                zabih jo
-              </h5>
-              <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-                classical Latin literature from 45 BC, making it over </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> --}}
-
-
-
-  <!-- end client section -->
-
-  <!-- arrange section -->
-
-  {{-- <section class="arrange_section">
-    <div class="container">
-      <div class="detail_box">
-        <h2>
-          Our Wonderful Arrangements
-        </h2>
-        <p>
-          Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
-          literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
-          College in Virginia, looked up one of the more obscure Latin words
-        </p>
-      </div>
-    </div>
-  </section> --}}
-
-
-
-  <!-- end arrange section -->
-
-  <!-- contact section -->
-{{-- 
-  <section class="contact_section layout_padding">
-    <div class="section_number">
-      05
-    </div>
-    <div class="container ">
-      <div class="heading_container justify-content-center">
-        <h2 class="">
-          Contact Us
-        </h2>
-      </div>
-
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 mx-auto">
-          <form action="">
-            <div>
-              <input type="text" placeholder="Name" />
-            </div>
-            <div>
-              <input type="email" placeholder="Email" />
-            </div>
-            <div>
-              <input type="text" placeholder="Pone Number" />
-            </div>
-            <div>
-              <input type="text" class="message-box" placeholder="Message" />
-            </div>
-            <div class="d-flex  mt-4 ">
-              <button>
-                SEND
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section> --}}
-
-  <!-- end contact section -->
-
-  <!-- map section -->
-
-  {{-- <div class="map_section">
-    <div class="map_container">
-      <div class="map">
-        <div id="googleMap"></div>
-      </div>
-    </div>
-  </div> --}}
-
-  <!-- end map section -->
+  
 
   <!-- info section -->
   <section class="info_section layout_padding">
@@ -664,78 +384,10 @@ a:hover{
           </div>
         </div>
         <div class="col-md-3">
-          {{-- <div class="info_links pl-lg-5">
-            <h5>
-              Useful Link
-            </h5>
-            <ul>
-              <li class="active">
-                <a href="index.html">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="about.html">
-                  Product
-                </a>
-              </li>
-              <li>
-                <a href="gallery.html">
-                  Gallery
-                </a>
-              </li>
-              <li>
-                <a href="contact.html">
-                  Contact Us
-                </a>
-              </li>
-            </ul>
-          </div> --}}
+       
         </div>
         <div class="col-md-3">
-          {{-- <div class="info_insta">
-            <h5>
-              Instagram
-            </h5>
-            <div class="insta_container">
-              <div>
-                <a href="">
-                  <div class="insta-box b-1">
-                    <img src="images/insta-1.png" alt="">
-                  </div>
-                </a>
-                <a href="">
-                  <div class="insta-box b-2">
-                    <img src="images/insta-2.png" alt="">
-                  </div>
-                </a>
-              </div>
-              <div>
-                <a href="">
-                  <div class="insta-box b-3">
-                    <img src="images/insta-3.png" alt="">
-                  </div>
-                </a>
-                <a href="">
-                  <div class="insta-box b-4">
-                    <img src="images/insta-4.png" alt="">
-                  </div>
-                </a>
-              </div>
-              <div>
-                <a href="">
-                  <div class="insta-box b-3">
-                    <img src="images/insta-5.png" alt="">
-                  </div>
-                </a>
-                <a href="">
-                  <div class="insta-box b-4">
-                    <img src="images/insta-6.png" alt="">
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div> --}}
+        
         </div>
         <div class="col-md-3">
           <div class="info_contact">
@@ -822,6 +474,44 @@ function logout(){
         });
     }
   });
+}
+
+function deleterowcart(myobj){
+  var id_delete = $(myobj).attr("data-idrow");
+  var id_category = $(myobj).attr("data-idcategory");
+  var id_index = $(myobj).attr("data-idindex");
+  
+      $.ajax({
+        type: "post",
+        url: "{{ url('/deletecart') }}",
+        data: {
+          "_token": "{{ csrf_token() }}",
+          "delete_id" : id_delete,
+          "category_id" : id_category,
+          "index_id" : id_index
+        },
+        dataType: "json",
+        success: function (response) {
+          // console.log(response);
+            Swal.fire({
+            title: "<strong>Item Dihapus</strong>",
+            icon: "success",
+            html: `
+            Item telah berhasil dihapus.
+            `,
+            showCloseButton: false,
+            showCancelButton: false,
+            allowOutsideClick:false,
+            focusConfirm: false,
+            confirmButtonText: `
+              <i class="fa fa-thumbs-up"></i> Ok
+            `,
+            confirmButtonAriaLabel: "Ok",
+          });
+        }
+      });
+
+  $("#kotakcart"+id_delete).remove();
 }
      
 
