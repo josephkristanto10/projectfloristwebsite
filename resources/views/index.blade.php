@@ -481,8 +481,8 @@ html {
       01
     </div>
     <div class="container" id = "kotakproduk">
-      <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; " id = "judul_best_seller">Best Seller Product  <img src = "{{ asset('/images/bunga.png')}}" style = "margin-top:-15px;width:75px;height:75px;"></h1>
-      <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #714423;">Produk unggulan di store <b>Supplier Florist Surabaya</b>  </h5>
+      <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #131312 !important;" id = "judul_best_seller">Best Seller Product  <img src = "{{ asset('/images/bunga.png')}}" style = "margin-top:-15px;width:75px;height:75px;"></h1>
+      <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #131312 !important;">Produk unggulan di store <b>Supplier Florist Surabaya</b>  </h5>
       <div class="row">
         @foreach($myproduct as $mp)
         <div class = "col-md-4">
@@ -493,15 +493,15 @@ html {
             </div>
             <div class="product-details">
               <span class="product-catagory"></span>
-              <h4><a href="" id = "namaproduk_{{$mp->id}}">{{$mp->names}}</a></h4>
-              <p>{{$mp->descriptions}}</p>
+              <h4><a  id = "namaproduk_{{$mp->id}}" style = "cursor:pointer;color:#131312;">{{$mp->names}}</a></h4>
+              <p style = "font-size:12px;">{{$mp->descriptions}}</p>
               <div class="product-bottom-details">
-                <div class="product-price" style = "color:#714423"><small></small>18k</div>
+                <div class="product-price" style = "color:#131312;font-size:22px;"><small></small>Rp{{number_format($mp->prices-(($mp->prices*$mp->discounts)/100)) }}</div>
                 <div class="product-links"> 
                   @if($mp->has_variants == 1)
-                  <a href="" style = "color:#714423" data-toggle="modal" data-target="#exampleModal" onclick = "showdetail({{$mp->id}})"><i class="fa fa-shopping-cart" ></i> Add to cart</a>
+                  <a href="" style = "color:#714423; cursor:pointer" data-toggle="modal" data-target="#exampleModal"  onclick = "showdetail({{$mp->id}})"><i class="fa fa-shopping-cart" ></i> Add to cart</a>
                   @else
-                  <a  style = "color:#714423"  onclick = "orderwithoutvariant({{$mp->id}})" ><i class="fa fa-shopping-cart" ></i> Add to cart</a>
+                  <a  style = "color:#714423; cursor:pointer"  onclick = "orderwithoutvariant({{$mp->id}})"  ><i class="fa fa-shopping-cart" ></i> Add to cart</a>
 
                   @endif
                 </div>
@@ -552,17 +552,17 @@ html {
       05
     </div>
     <div class="container ">
-      <div class="heading_container justify-content-center">
-        <h2 class="">
-          Contact Us
-        </h2>
-      </div>
-
+      <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #131312 !important; " id = "judul_best_seller">  Platform Kami</h1>
+      <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #131312;">Kita juga hadir di beberapa platform <b>E-commerce</b>  </h5>
     </div>
     <div class="container">
-      <div class="row">
-        <div class="col-md-6 mx-auto">
-          <form action="">
+      <div class="row"  >
+        <div class="col-md-6 mx-auto" style = "width:100%;text-align:center;margin-top:30px;">
+          <img src = "{{asset('images/shopee_transparent.png')}}" style = "width:75px;height:75px;margin-left:15px;">
+          <img src = "{{asset('images/instagram_transparent.png')}}" style = "width:75px;height:75px;margin-left:15px;">
+          <img src = "{{asset('images/tiktok_transparent.png')}}" style = "width:75px;height:75px;margin-left:15px;">
+          
+          {{-- <form action="">
             <div>
               <input type="text" placeholder="Name" />
             </div>
@@ -580,7 +580,7 @@ html {
                 SEND
               </button>
             </div>
-          </form>
+          </form> --}}
         </div>
       </div>
     </div>

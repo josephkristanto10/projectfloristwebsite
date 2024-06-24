@@ -302,10 +302,10 @@ a:hover{
                   <div class="title">
                       <div class="row" >
                           <div class="col"><h4><b>Daftar Keranjang</b></h4></div>
-                          <div class="col align-self-center text-right text-muted"><b>{{$jumlahitems}}</b> items</div>
+                          <div class="col align-self-center text-right text-muted"><b><span class = "jumlahitem">{{$jumlahitems}}</span></b> items</div>
                       </div>
                   </div>    
-            
+            <span id =  "data_cart">
               @foreach($mycart_list as $key => $ml)
               <div class="row border-top border-bottom" id = "kotakcart{{$key}}">
                 <div class="row main align-items-center">
@@ -317,10 +317,11 @@ a:hover{
                     <div class="col">
                         <b> {{$ml['qty']}}</b> Items
                     </div>
-                    <div class="col">Rp{{$ml['price']-(($ml['price']*$ml['discount'])/100)}} <span class="close" data-idcategory = "{{$ml['category']}}" data-idindex = "{{$ml['index']}}" data-idrow = "{{$key}}" onclick = "deleterowcart(this)">&#10005;</span></div>
+                    <div class="col">Rp {{number_format($ml['price']-(($ml['price']*$ml['discount'])/100))}} <span class="close" data-idcategory = "{{$ml['category']}}" data-idindex = "{{$ml['index']}}" data-idrow = "{{$key}}" onclick = "deleterowcart(this)">&#10005;</span></div>
                 </div>
              </div>
              @endforeach
+            </span>
                   <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
               </div>
 
@@ -363,8 +364,8 @@ a:hover{
         Harga Terjangkau - Berkualitas Tinggi
       </h5>
     </div>
-      <div style = "float:right;position: relative;right:30px;top:40px;background-color:#512E1B;border-radius:5px;height:30px;width:200px;color:white;text-align:center;font-weight:bold;padding-top:3px;font-size:15px;">Checkout <i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-      <div style = " float:right;position: relative;right:50px;top:30px;"><span style = "font-size:18px;">Total 4 Items :</span> <span style = "font-size:30px;margin-left:20px;">Rp{{$hasil}}</span></div>
+      <div style = "float:right;position: relative;right:30px;top:40px;background-color:#512E1B;border-radius:5px;height:30px;width:200px;color:white;text-align:center;font-weight:bold;padding-top:3px;font-size:15px;" onclick = "checkout()">Checkout <i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+      <div style = " float:right;position: relative;right:50px;top:30px;"><span style = "font-size:18px;">Total  Items : <span class = "jumlahitem"></span> <span style = "font-size:30px;margin-left:20px;">Rp<span class = "total_rupiah">{{number_format($hasil)}}</span></span></div>
   </div>
 
   
@@ -474,6 +475,77 @@ function logout(){
         });
     }
   });
+}
+function checkout(){
+  $.ajax({
+        type: "post",
+        url: "{{ url('/checkout') }}",
+        data: {
+          "_token": "{{ csrf_token() }}"
+        },
+        dataType: "json",
+        success: function (response) {
+          // console.log(response);
+          if(response.status_login == "login"){
+            Swal.fire({
+                title: "<strong>Checkout</strong>",
+                icon: "success",
+                html: "Order ID mu Telah terbuat, Order id kamu SFS-"+response.id_transaksi,
+                showCloseButton: false,
+                showCancelButton: false,
+                allowOutsideClick:false,
+                focusConfirm: false,
+                confirmButtonText: `
+                  <i class="fa fa-thumbs-up"></i> Ok
+                `,
+                confirmButtonAriaLabel: "Ok",
+            }).then((result) => {
+                $("#data_cart").html("");
+                $(".jumlahitem").html("0");
+                $(".total_rupiah").html("0");
+            });
+          }
+          else if(response.status_login == "kosong"){
+              Swal.fire({
+                  title: "<strong>Belum ada produk</strong>",
+                  icon: "error",
+                  html: `
+                  Silahkan pilih produk terlebih dahulu.
+                  `,
+                  showCloseButton: false,
+                  showCancelButton: false,
+                  allowOutsideClick:false,
+                  focusConfirm: false,
+                  confirmButtonText: `
+                    <i class="fa fa-thumbs-up"></i> Ok
+                  `,
+                  confirmButtonAriaLabel: "Ok",
+              }).then((result) => {
+              
+              });
+          }
+          else{
+            Swal.fire({
+                title: "<strong>Belum Login</strong>",
+                icon: "error",
+                html: `
+                Anda belum login.
+                `,
+                showCloseButton: false,
+                showCancelButton: false,
+                allowOutsideClick:false,
+                focusConfirm: false,
+                confirmButtonText: `
+                  <i class="fa fa-thumbs-up"></i> Login Dulu
+                `,
+                confirmButtonAriaLabel: "Ok",
+            }).then((result) => {
+              window.open("{{url('/masuk')}}", '_blank');
+            });
+          }
+           
+        }
+      });
 }
 
 function deleterowcart(myobj){

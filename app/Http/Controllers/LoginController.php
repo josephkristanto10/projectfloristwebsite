@@ -26,8 +26,8 @@ class LoginController extends Controller
         $myvisitor = Visitor::where("username","=",$myemail)->get();
         if($myvisitor->count() > 0){
             if(Hash::check($mypwd, $myvisitor[0]->password)) {
-                Session::push('id_user',$myvisitor[0]->id);
-                Session::push('user',$myvisitor[0]->username);
+                Session::put('id_user',$myvisitor[0]->id);
+                Session::put('user',$myvisitor[0]->username);
                 return "cocok";
             }
             else{

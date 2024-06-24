@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 59,
+            "activePatchIndex": 60,
             "patches": [
                 {
                     "date": 1718878070609,
@@ -244,6 +244,10 @@
                 {
                     "date": 1719120859104,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -58,9 +58,8 @@\n         if($calonvisitor->count() == 0){\n             $status_register = \"ok\";\n             $encrypted_password = bcrypt($mypwd);\n             Visitor::insert([\"nama\" => $myname, \"username\" => $myemail, \"password\" => $encrypted_password, \"address\" => $myaddress, \"whatsapp_number\" => $mwa]);\n-\n         }\n         if($myemail == \"\" || $mypwd == \"\"|| $mwa == \"\"|| $myaddress == \"\"|| $myname == \"\"){\n             $status_register = \"datakosong\";\n         }\n"
+                },
+                {
+                    "date": 1719244701174,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n         $myhashpassword = bcrypt(\"mypwd\");\n         $myvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if($myvisitor->count() > 0){\n             if(Hash::check($mypwd, $myvisitor[0]->password)) {\n-                Session::push('id_user',$myvisitor[0]->id);\n+                Session::put('id_user',$myvisitor[0]->id);\n                 Session::push('user',$myvisitor[0]->username);\n                 return \"cocok\";\n             }\n             else{\n"
                 }
             ],
             "date": 1718878070609,

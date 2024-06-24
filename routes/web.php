@@ -27,6 +27,7 @@ Route::post('/register', [LoginController::class,"register"]);
 Route::get('/keluar', [LoginController::class,"logout"]);
 Route::resource('/cart', CartController::class);
 Route::post('/deletecart', [CartController::class,"deletecart"]);
+Route::post('/checkout', [CartController::class,"checkout"]);
 // Route::get('/listcart', [CartController::class,"listcart"]);
 Route::get('/product', function () {
     return view('product');

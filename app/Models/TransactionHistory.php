@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -18,8 +19,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $qty
  * @property int $price
  * @property int $subtotal
- * @property int $updated_at
- * @property int $created_at
+ * @property Carbon $updated_at
+ * @property Carbon $created_at
  * @property int $transaction_history_status
  *
  * @package App\Models
