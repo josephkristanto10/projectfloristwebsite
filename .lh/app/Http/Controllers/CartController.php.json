@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 198,
+            "activePatchIndex": 200,
             "patches": [
                 {
                     "date": 1719133258940,
@@ -800,6 +800,14 @@
                 {
                     "date": 1719248854510,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -158,8 +158,9 @@\n                         \"image\" => $images_produk,\n                         \"qty\" => $qty_items\n                     ];\n                     $jumlahitems += $qty_items;\n+                    $subtotal = $qty_items * ($prices_produk-(($prices_produk*$discount_produk)/100));\n                     $hasil += $qty_items * ($prices_produk-(($prices_produk*$discount_produk)/100));\n                     \n                     \n                     $data_detail[] = [\n"
+                },
+                {
+                    "date": 1719250862609,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -194,8 +194,11 @@\n                 return response()->json(['status_login' => $status_login, \"id_transaksi\" => \"-\"]);\n             }\n            \n         }\n+        else{\n+            \n+        }\n      \n         \n    \n   \n"
+                },
+                {
+                    "date": 1719250872217,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -195,9 +195,9 @@\n             }\n            \n         }\n         else{\n-            \n+            return response()->json(['status_login' => $status_login, \"id_transaksi\" => \"-\"]);\n         }\n      \n         \n    \n"
                 }
             ],
             "date": 1719133258940,

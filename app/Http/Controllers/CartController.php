@@ -195,6 +195,9 @@ class CartController extends Controller
             }
            
         }
+        else{
+            return response()->json(['status_login' => $status_login, "id_transaksi" => "-"]);
+        }
      
         
    
