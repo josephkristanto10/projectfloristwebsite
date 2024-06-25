@@ -1,0 +1,22 @@
+{
+    "sourceFile": "app/Providers/AppServiceProvider.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1719337156763,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1719337162036,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,9 @@\n \n namespace App\\Providers;\n \n use Illuminate\\Support\\ServiceProvider;\n+use Illuminate\\Pagination\\Paginator;\n \n class AppServiceProvider extends ServiceProvider\n {\n     /**\n"
+                }
+            ],
+            "date": 1719337156763,
+            "name": "Commit-0",
+            "content": "<?php\n\nnamespace App\\Providers;\n\nuse Illuminate\\Support\\ServiceProvider;\n\nclass AppServiceProvider extends ServiceProvider\n{\n    /**\n     * Register any application services.\n     *\n     * @return void\n     */\n    public function register()\n    {\n        //\n    }\n\n    /**\n     * Bootstrap any application services.\n     *\n     * @return void\n     */\n    public function boot()\n    {\n        Paginator::useBootstrap();\n    }\n}"
+        }
+    ]
+}

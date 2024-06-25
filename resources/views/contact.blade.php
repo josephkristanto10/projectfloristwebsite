@@ -33,7 +33,10 @@
   <!-- Custom styles for this template -->
 
   <style>
-    
+     @keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
     @keyframes slideInFromLeft {
   0% {
     transform: translateX(-100%);
@@ -51,7 +54,7 @@
 }
 #judul_best_seller{
   font-size:50px !important;
-  color:#714423 !important;
+  color:#3A2D28 !important;
 }
 #pilihbunga{
   border:0px solid black;
@@ -262,6 +265,11 @@ hr {
               <li class="nav-item active">
                 <a class="nav-link" href="{{url('/contact')}}">Contact us <span class="sr-only">(current)</span></a>
               </li>
+              @if (Session::has('user'))
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('/invoice-list')}}">My Order</a>
+              </li>
+              @endif
             </ul>
           </b>
           </div>
@@ -298,7 +306,7 @@ hr {
     </div> --}}
     <div class="container" id = "kotakproduk">
       <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; " id = "judul_best_seller">Hubungi Kami  </h1>
-      <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #714423;">Hubungi Tim Admin Supplier Florist Surabaya </h5>
+      <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #3A2D28;">Hubungi Tim Admin Supplier Florist Surabaya </h5>
       <br>
 
     <div>
@@ -306,7 +314,7 @@ hr {
         <div class="row " >
           <div class="main" style = "text-align:center;">
             <ul class="cards justify-content-center" style = "margin:auto;text-align:center;">
-              <li class="cards_item">
+              <li class="cards_item" style = "animation: fadeIn 2s;">
                 <div class="card">
                   <div class="card_image">
                     <img src="{{ asset('images/ho_1.jpg')}}" alt="mixed vegetable salad in a mason jar." />
@@ -319,7 +327,7 @@ hr {
                       </p>
                       {{-- <hr /> --}}
                       <div style = "width:100%;text-align:center;">
-                        <button class  = "btn btn-primary" style = "background-color:#714423;">Klik disini</button>
+                        <button class  = "btn btn-primary" style = "background-color:#3A2D28;border:0px;">Klik disini</button>
                       </div>
                     
                     </div>
@@ -328,7 +336,7 @@ hr {
               </li>
           
           
-              <li class="cards_item">
+              <li class="cards_item" style = "animation: fadeIn 3s;">
                 <div class="card">
                   <div class="card_image">
                     <img src="{{ asset('images/ho_1.jpg')}}" alt="mixed vegetable salad in a mason jar." />
@@ -341,7 +349,7 @@ hr {
                       </p>
                       {{-- <hr /> --}}
                       <div style = "width:100%;text-align:center;">
-                        <button class  = "btn btn-primary" style = "background-color:#714423;">Klik disini</button>
+                        <button class  = "btn btn-primary" style = "background-color:#3A2D28;border:0px;">Klik disini</button>
                       </div>
                     
                     </div>

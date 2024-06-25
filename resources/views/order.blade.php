@@ -51,7 +51,7 @@
 }
 #judul_best_seller{
   font-size:50px !important;
-  color:#714423 !important;
+  color:#3A2D28 !important;
 }
 #pilihbunga{
   border:0px solid black;
@@ -224,6 +224,11 @@ a:hover{
   cursor: pointer;
 }
 
+.lihat_detail:hover{
+  color:#131312 !important;
+  background-color:#CBAD8D !important;
+}
+
   </style>
     <link href="{{ asset('css/style.css')}}" rel="stylesheet" />
     <!-- responsive style -->
@@ -297,7 +302,7 @@ a:hover{
   <!-- about section -->
   <section class="about_section " style =  "padding-top:30px;">
     <div class="container" id = "kotakproduk">
-      <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; " id = "judul_best_seller">Supplier Florist Surabaya  </h1>
+      <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; " id = "judul_best_seller">Daftar Invoice  </h1>
       <br>
     
       <div class="row">
@@ -306,28 +311,15 @@ a:hover{
               <div class="col-md-12 cart">
                   <div class="title">
                       <div class="row" >
-                          <div class="col"><h4><b>Daftar Keranjang</b></h4></div>
-                          <div class="col align-self-center text-right text-muted"><b><span class = "jumlahitem">{{$jumlahitems}}</span></b> items</div>
+                          <div class="col"><h4 ><b>Daftar Pesanan</b></h4></div>
+                          <div class="col align-self-center text-right text-muted" style  = "color:#3A2D28 !important; "><b><span class = "jumlahitem" >{{$transactions->count()}}</span></b> Pesanan</div>
                       </div>
                   </div>    
             <span id =  "data_cart">
-              @foreach($mycart_list as $key => $ml)
-              <div class="row border-top border-bottom" id = "kotakcart{{$key}}">
-                <div class="row main align-items-center">
-                    <div class="col-2"><img class="img-fluid" src="{{asset('images/product/'.$ml['image'])}}"></div>
-                    <div class="col">
-                        <div class="row text-muted">{{$ml['variant']}}</div>
-                        <div class="row">{{$ml['name']}}</div>
-                    </div>
-                    <div class="col">
-                        <b> {{$ml['qty']}}</b> Items
-                    </div>
-                    <div class="col">Rp {{number_format($ml['price']-(($ml['price']*$ml['discount'])/100))}} <span class="close" data-idcategory = "{{$ml['category']}}" data-idindex = "{{$ml['index']}}" data-idrow = "{{$key}}" onclick = "deleterowcart(this)">&#10005;</span></div>
-                </div>
-             </div>
-             @endforeach
+              @include('invoice_list')
+               
             </span>
-                  <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+                  <div class="back-to-shop"><a href="{{url('/')}}/#kotakproduk">&leftarrow;<span class="text-muted">Back to shop</span></a></div>
               </div>
 
           </div>
@@ -363,15 +355,7 @@ a:hover{
     </div>
   </section>
 
-  <div id = "checkoutbar"style = "height:100px;position:fixed;bottom:0;width:100%;background-color:#ffffff;z-index:10000; box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-    <div class="info_logo" style = "float:left;position:relative; top:20px;left:20px;font-family: 'Baloo Chettan', cursive;">
-      <h5 style = "font-size:18px;position:relative;left:60px;color:#512E1B" >
-        Harga Terjangkau - Berkualitas Tinggi
-      </h5>
-    </div>
-      <div style = "float:right;position: relative;right:30px;top:40px;background-color:#512E1B;border-radius:5px;height:30px;width:200px;color:white;text-align:center;font-weight:bold;padding-top:3px;font-size:15px;" onclick = "checkout()">Checkout <i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-      <div style = " float:right;position: relative;right:50px;top:30px;"><span style = "font-size:18px;">Total  Items : <span class = "jumlahitem"></span> <span style = "font-size:30px;margin-left:20px;">Rp<span class = "total_rupiah">{{number_format($hasil)}}</span></span></div>
-  </div>
+
 
   
 
@@ -424,6 +408,39 @@ a:hover{
     </div>
   </section>
 
+
+   {{-- Modal Varian --}}
+   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style = "z-index:100000;" >
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="judulproduk" ><i class="fa fa-list-alt" aria-hidden="true"></i>
+             Detail Invoice</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <h4>Informasi Invoice</h4>
+          <div style = "margin-left:10px;">
+          <p>No Invoice : <span id = "modal_invoice_id"></span> </p>
+          <p>Tanggal Invoice : <span id = "modal_invoice_tanggal_invoice"></span> </p>
+          <p>Grand Total : <span id = "modal_invoice_grand_total"></span> </p>
+          </div>
+
+          <h4>Daftar Item</h4>
+          <div id = "data_variant" >
+            
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
   <!-- end info_section -->
 
   <!-- footer section -->
@@ -446,6 +463,26 @@ a:hover{
 
 </html>
 <script>
+
+$(document).on('click', '.mylinks a', function(event){
+ 
+ event.preventDefault(); 
+ var page = $(this).attr('href').split('page=')[1];
+
+ fetch_data(page);
+});
+
+function fetch_data(page)
+{
+ $.ajax({
+  url:"/pagination/fetch_data_invoice?page="+page,
+  success:function(data)
+  {
+   $('#data_cart').html(data);
+  }
+ });
+}
+
 
 function logout(){
   $.ajax({
@@ -481,115 +518,48 @@ function logout(){
     }
   });
 }
-function checkout(){
+
+
+function getInvoiceDetail(myobj){
+ var data_trans =  $(myobj).attr("data-trans");
   $.ajax({
-        type: "post",
-        url: "{{ url('/checkout') }}",
-        data: {
-          "_token": "{{ csrf_token() }}"
-        },
-        dataType: "json",
-        success: function (response) {
-          // console.log(response);
-          if(response.status_login == "login"){
-            Swal.fire({
-                title: "<strong>Checkout</strong>",
-                icon: "success",
-                html: "Order ID mu Telah terbuat, Order id kamu SFS-"+response.id_transaksi,
-                showCloseButton: false,
-                showCancelButton: false,
-                allowOutsideClick:false,
-                focusConfirm: false,
-                confirmButtonText: `
-                  <i class="fa fa-thumbs-up"></i> Ok
-                `,
-                confirmButtonAriaLabel: "Ok",
-            }).then((result) => {
-                $("#data_cart").html("");
-                $(".jumlahitem").html("0");
-                $(".total_rupiah").html("0");
-            });
-          }
-          else if(response.status_login == "kosong"){
-              Swal.fire({
-                  title: "<strong>Belum ada produk</strong>",
-                  icon: "error",
-                  html: `
-                  Silahkan pilih produk terlebih dahulu.
-                  `,
-                  showCloseButton: false,
-                  showCancelButton: false,
-                  allowOutsideClick:false,
-                  focusConfirm: false,
-                  confirmButtonText: `
-                    <i class="fa fa-thumbs-up"></i> Ok
-                  `,
-                  confirmButtonAriaLabel: "Ok",
-              }).then((result) => {
-              
-              });
-          }
-          else{
-          
-            Swal.fire({
-                title: "<strong>Belum Login</strong>",
-                icon: "error",
-                html: `
-                Anda belum login.
-                `,
-                showCloseButton: false,
-                showCancelButton: false,
-                allowOutsideClick:false,
-                focusConfirm: false,
-                confirmButtonText: `
-                  <i class="fa fa-thumbs-up"></i> Login Dulu
-                `,
-                confirmButtonAriaLabel: "Ok",
-            }).then((result) => {
-              window.open("{{url('/masuk')}}", '_blank');
-            });
-          }
-           
+    type: "get",
+    url: "{{ url('/invoice-detail') }}",
+    data: {
+      "idtrans": data_trans,
+    },
+    dataType: "json",
+    success: function (response) {
+      var hasil = "";
+      var array_product = response.output;
+      var hasil_grandtotal = 0;
+      var hasil_date = "";
+     
+    
+    
+      
+      array_product.forEach(function(elem) {
+        hasil_grandtotal += elem['buy_subtotal'];
+        var variants = "";
+        var imageproduct = "{{asset('/images/')}}/product/" + elem['product_image'];
+        if(elem['variant_descriptions'] === null){
+          variants = "No Variants";
         }
-      });
-}
-
-function deleterowcart(myobj){
-  var id_delete = $(myobj).attr("data-idrow");
-  var id_category = $(myobj).attr("data-idcategory");
-  var id_index = $(myobj).attr("data-idindex");
-  
-      $.ajax({
-        type: "post",
-        url: "{{ url('/deletecart') }}",
-        data: {
-          "_token": "{{ csrf_token() }}",
-          "delete_id" : id_delete,
-          "category_id" : id_category,
-          "index_id" : id_index
-        },
-        dataType: "json",
-        success: function (response) {
-          // console.log(response);
-            Swal.fire({
-            title: "<strong>Item Dihapus</strong>",
-            icon: "success",
-            html: `
-            Item telah berhasil dihapus.
-            `,
-            showCloseButton: false,
-            showCancelButton: false,
-            allowOutsideClick:false,
-            focusConfirm: false,
-            confirmButtonText: `
-              <i class="fa fa-thumbs-up"></i> Ok
-            `,
-            confirmButtonAriaLabel: "Ok",
-          });
+        else{
+          variants = "Variant " +  elem['variant_descriptions'];
         }
+        hasil += "<div class = 'row mt-3' style = 'border-radius:5px;box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);padding:10px;'><img src = '"+imageproduct+"' style = 'width:75px;height:75px;'><div class ='col-xl-8' > <p style = 'color:grey;'><b>"+elem['buy_qty']+"</b> pcs - "+variants+" </p><b><p>"+elem['product_name']+"</p></b></div><div class = 'col-xl-2' style = 'padding-top:20px;'><b><p>Rp"+elem['buy_subtotal']+"</p></b></div></div>";
       });
 
-  $("#kotakcart"+id_delete).remove();
+
+      $("#modal_invoice_grand_total").text("Rp "+array_product[0]['total_invoice']);
+      $("#modal_invoice_tanggal_invoice").text(array_product[0]['date_invoice']);
+      $("#modal_invoice_id").text(data_trans);
+      $("#data_variant").html(hasil);
+   
+        console.log(hasil);
+    }
+  });
 }
      
 

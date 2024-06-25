@@ -34,6 +34,10 @@
 
   <style>
     
+    @keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
     @keyframes slideInFromLeft {
   0% {
     transform: translateX(-100%);
@@ -46,12 +50,12 @@
   animation: 1s ease-out 0s 1 slideInFromLeft;
   margin-top:15px;
   font-size: 50px !important;
-  color:#714423;
+  color:#3A2D28;
   
 }
 #judul_best_seller{
   font-size:50px !important;
-  color:#714423 !important;
+  color:#3A2D28 !important;
 }
 #pilihbunga{
   border:0px solid black;
@@ -260,6 +264,11 @@ hr {
               <li class="nav-item">
                 <a class="nav-link" href="{{url('/contact')}}">Contact us</a>
               </li>
+              @if (Session::has('user'))
+              <li class="nav-item">
+                <a class="nav-link" href="{{url('/invoice-list')}}">My Order</a>
+              </li>
+              @endif
             </ul>
           </b>
           </div>
@@ -296,20 +305,20 @@ hr {
     </div> --}}
     <div class="container" id = "kotakproduk">
       <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; " id = "judul_best_seller">How to Order?  </h1>
-      <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #714423;">Cara untuk Pesan di <b>Supplier Florist Surabaya</b> Lewat Website </h5>
+      <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #3A2D28;">Cara untuk Pesan di <b>Supplier Florist Surabaya</b> Lewat Website </h5>
       <div class="row">
         <div class="main">
           <ul class="cards">
-            <li class="cards_item">
+            <li class="cards_item" style = "animation: fadeIn 2s;">
               <div class="card">
                 <div class="card_image">
                   <img src="{{ asset('images/ho_1.jpg')}}" alt="mixed vegetable salad in a mason jar." />
        
                 </div>
                 <div class="card_content">
-                  <h2 class="card_title">Pilih Model Bunga</h2>
+                  <h2 class="card_title">Pilih Barang</h2>
                   <div class="card_text">
-                    <p>Kamu bisa memilih dahulu produk bunga yang kamu ingingkan lalu tekan buy now / add to cart.
+                    <p>Kamu bisa memilih dahulu produk yang kamu inginkan lalu tekan add to cart, kalian bisa memilih varian jika tersedia.
                     </p>
                     {{-- <hr /> --}}
 
@@ -318,7 +327,7 @@ hr {
               </div>
             </li>
         
-            <li class="cards_item">
+            <li class="cards_item" style = "animation: fadeIn 4s;" >
               <div class="card">
                 <div class="card_image">
                   <img src="{{ asset('images/ho_2.jpg')}}" alt="a Reuben sandwich on wax paper." />
@@ -327,7 +336,7 @@ hr {
                 <div class="card_content">
                   <h2 class="card_title">Checkout Cart</h2>
                   <div class="card_text">
-                    <p>Setelah memilih bunga, kamu bisa menuju ke halaman cart atau klik logo keranjang diatas.
+                    <p>Setelah memilih produk, kamu bisa menuju ke halaman cart atau klik logo keranjang diatas.
                     </p>
                   
                   </div>
@@ -335,7 +344,7 @@ hr {
               </div>
             </li>
         
-            <li class="cards_item">
+            <li class="cards_item" style = "animation: fadeIn 3s;">
               <div class="card">
                 <div class="card_image">
                   <span class="note">Penting</span>
@@ -343,9 +352,9 @@ hr {
          
                 </div>
                 <div class="card_content">
-                  <h2 class="card_title">Isi Data lalu Simpan Order ID</h2>
+                  <h2 class="card_title">Login dan Transaksi</h2>
                   <div class="card_text">
-                    <p>Setelah mengisi data, simpan order ID yang tertera setelah checkout. lalu berikan order ID tersebut kepada admin kami. Untuk nomor admin kami bisa <b>klik disini</b>
+                    <p>Setelah mengisi data dan login terlebih dahulu, simpan order ID yang tertera setelah checkout. lalu berikan order ID tersebut kepada admin kami. Untuk nomor admin kami bisa <b>klik disini</b>
                     </p>
                    
                   </div>

@@ -16,10 +16,16 @@ class HhomeController extends Controller
      */
     public function index()
     {
-   
-       
-        $myproduct = Product::latest('id')->paginate(10);
-        return view('index', compact('myproduct'));
+        $myproduct = Product::latest('id')->paginate(6);
+        return view('index')->withProducts($myproduct);
+    }
+    function fetch_data(Request $request)
+    {
+     if($request->ajax())
+     {
+      $products =  Product::latest('id')->paginate(6);
+      return view('product_cart', compact('products'))->render();
+     }
     }
     public function detail_variant(Request $request){
         $id_product = $request->id_products;
@@ -41,6 +47,8 @@ class HhomeController extends Controller
        
         return response()->json(['output' => Session::all()]);
     }
+
+
  
     /**
      * Show the form for creating a new resource.

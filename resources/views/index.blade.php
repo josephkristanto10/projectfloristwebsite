@@ -47,17 +47,17 @@ html {
   animation: 1s ease-out 0s 1 slideInFromLeft;
   margin-top:15px;
   font-size: 50px !important;
-  color:#714423;
+  color:#3A2D28;
   
 }
 #judul_best_seller{
   font-size:50px !important;
-  color:#714423 !important;
+  color:#3A2D28 !important;
 }
 #pilihbunga{
   border:0px solid black;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  background: linear-gradient(to left, #714423 50%, #E8B865 50%) right;
+  background: linear-gradient(to left, #3A2D28 50%, #E8B865 50%) right;
   background-size: 200%;
   
     transition: .5s ease-out;
@@ -357,6 +357,24 @@ html {
 #kotaklogin a{
   cursor: pointer;
 }
+
+.mylinks {
+  display: inline-block;
+}
+
+.mylinks a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.mylinks a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.mylinks a:hover:not(.active) {background-color: #ddd;}
   </style>
     <link href="{{ asset('css/style.css')}}" rel="stylesheet" />
     <!-- responsive style -->
@@ -394,6 +412,11 @@ html {
                 <li class="nav-item">
                   <a class="nav-link" href="{{url('/contact')}}">Contact us</a>
                 </li>
+                @if (Session::has('user'))
+                <li class="nav-item">
+                  <a class="nav-link" href="{{url('/invoice-list')}}">My Order</a>
+                </li>
+                @endif
               </ul>
             </b>
             </div>
@@ -422,20 +445,8 @@ html {
         </nav>
       </div>
     </header>
-    <!-- end header section -->
-    <!-- slider section -->
     <section class=" slider_section position-relative">
-      {{-- <div class="slider_number-container ">
-        <div class="number-box">
-          <span>
-            01
-          </span>
-          <hr>
-          <span>
-            02
-          </span>
-        </div>
-      </div> --}}
+ 
       <div class="container">
         <div class="row">
           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -459,14 +470,6 @@ html {
               </div>
            
             </div>
-            {{-- <div class="carousel_btn-container">
-              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="sr-only">Previous</span>
-              </a>
-              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="sr-only">Next</span>
-              </a>
-            </div> --}}
           </div>
         </div>
       </div>
@@ -481,37 +484,14 @@ html {
       01
     </div>
     <div class="container" id = "kotakproduk">
-      <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #131312 !important;" id = "judul_best_seller">Best Seller Product  <img src = "{{ asset('/images/bunga.png')}}" style = "margin-top:-15px;width:75px;height:75px;"></h1>
-      <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #131312 !important;">Produk unggulan di store <b>Supplier Florist Surabaya</b>  </h5>
-      <div class="row">
-        @foreach($myproduct as $mp)
-        <div class = "col-md-4">
-          <div class="product-card">
-            <div class="badge">Hot</div>
-            <div class="product-tumb">
-              <img src="{{asset('images/product/'.$mp->images)}}" alt="">
-            </div>
-            <div class="product-details">
-              <span class="product-catagory"></span>
-              <h4><a  id = "namaproduk_{{$mp->id}}" style = "cursor:pointer;color:#131312;">{{$mp->names}}</a></h4>
-              <p style = "font-size:12px;">{{$mp->descriptions}}</p>
-              <div class="product-bottom-details">
-                <div class="product-price" style = "color:#131312;font-size:22px;"><small></small>Rp{{number_format($mp->prices-(($mp->prices*$mp->discounts)/100)) }}</div>
-                <div class="product-links"> 
-                  @if($mp->has_variants == 1)
-                  <a href="" style = "color:#714423; cursor:pointer" data-toggle="modal" data-target="#exampleModal"  onclick = "showdetail({{$mp->id}})"><i class="fa fa-shopping-cart" ></i> Add to cart</a>
-                  @else
-                  <a  style = "color:#714423; cursor:pointer"  onclick = "orderwithoutvariant({{$mp->id}})"  ><i class="fa fa-shopping-cart" ></i> Add to cart</a>
-
-                  @endif
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        @endforeach
-        </div>
-       </div>
+      <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #3A2D28 !important;" id = "judul_best_seller"> Produk Kami  <img src = "{{ asset('/images/bunga.png')}}" style = "margin-top:-15px;width:75px;height:75px;"></h1>
+      <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #3A2D28 !important;">Semua produk di store <b>Supplier Florist Surabaya</b>  </h5>
+      <span id ="semuaproduk">
+        @include('product_cart')
+     
+      
+      </span>
+    
   </section>
   <!-- end about section -->
 
@@ -562,25 +542,7 @@ html {
           <img src = "{{asset('images/instagram_transparent.png')}}" style = "width:75px;height:75px;margin-left:15px;">
           <img src = "{{asset('images/tiktok_transparent.png')}}" style = "width:75px;height:75px;margin-left:15px;">
           
-          {{-- <form action="">
-            <div>
-              <input type="text" placeholder="Name" />
-            </div>
-            <div>
-              <input type="email" placeholder="Email" />
-            </div>
-            <div>
-              <input type="text" placeholder="Pone Number" />
-            </div>
-            <div>
-              <input type="text" class="message-box" placeholder="Message" />
-            </div>
-            <div class="d-flex  mt-4 ">
-              <button>
-                SEND
-              </button>
-            </div>
-          </form> --}}
+        
         </div>
       </div>
     </div>
@@ -615,33 +577,6 @@ html {
           </div>
         </div>
         <div class="col-md-3">
-          {{-- <div class="info_links pl-lg-5">
-            <h5>
-              Useful Link
-            </h5>
-            <ul>
-              <li class="active">
-                <a href="index.html">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="about.html">
-                  Product
-                </a>
-              </li>
-              <li>
-                <a href="gallery.html">
-                  Gallery
-                </a>
-              </li>
-              <li>
-                <a href="contact.html">
-                  Contact Us
-                </a>
-              </li>
-            </ul>
-          </div> --}}
         </div>
         <div class="col-md-3">
           {{-- <div class="info_insta">
@@ -766,6 +701,25 @@ html {
 
 <script>
 
+$(document).on('click', '.mylinks a', function(event){
+ 
+    event.preventDefault(); 
+    var page = $(this).attr('href').split('page=')[1];
+  
+    fetch_data(page);
+   });
+  
+   function fetch_data(page)
+   {
+    $.ajax({
+     url:"/pagination/fetch_data_index?page="+page,
+     success:function(data)
+     {
+      $('#semuaproduk').html(data);
+     }
+    });
+   }
+
 var arrayofproduct = [];
 var arrayofvariant = [];
 var globalproduct = "0";
@@ -810,14 +764,7 @@ function orderwithoutvariant(idproduct){
 
                         }
                       });
-
-
-
-
-
       });
-
-      
 }
 function triggerupdateqty(mynumber){
   var nilaiqty =  $("#variant_number_"+mynumber).val();
@@ -860,11 +807,6 @@ function inserttocart(){
     }
   });
 }
-
-// $(".modal :input").bind('keyup mouseup', function () {
-//     alert("changed");            
-// });
-
 function showdetail(id_product){
   var value = $("#namaproduk_"+id_product).text();
   $("#judulproduk").text("Variant " + value);
@@ -933,6 +875,4 @@ function logout(){
     }
   });
 }
-
-
 </script>

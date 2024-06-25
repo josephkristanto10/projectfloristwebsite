@@ -1,0 +1,30 @@
+{
+    "sourceFile": "resources/views/invoice_list.blade.php",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1719337629254,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1719337642641,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,23 @@\n+@foreach($transactions as $key => $ml)   \r\n+<div class=\"row border-top border-bottom\" id = \"kotakcart{{$key}}\">\r\n+  <div class=\"row main align-items-center\">\r\n+      <div class=\"col-2\"><i class=\"fa fa-check-circle\" style = \"color:green;\" aria-hidden=\"true\"></i>\r\n+      </div>\r\n+      <div class=\"col\">\r\n+          <div class=\"row text-muted\">ID : SFS-{{$ml['id']}}</div>\r\n+          <div class=\"row\">{{$ml['date_invoice']}}</div>\r\n+      </div>\r\n+      <div class=\"col\">\r\n+          <b> {{$ml['total_qty']}}</b> Items\r\n+      </div>\r\n+      <div class=\"col\">Rp {{number_format($ml['total_price'])}} </div>\r\n+      <div class=\"col\"><button data-trans = \"{{$ml['id']}}\" onclick = \"getInvoiceDetail(this)\"  data-toggle=\"modal\" data-target=\"#exampleModal\" class = \"lihat_detail\" style = \"padding:5px;border-radius:10px;font-size:16px;background-color:#3A2D28;color:white;\">Lihat Invoice <i class=\"fa fa-info-circle\" aria-hidden=\"true\"></i>\r\n+      </button> </div>\r\n+  </div>\r\n+</div>\r\n+@endforeach\r\n+\r\n+<div class = \"mylinks\" >\r\n+    {!! $products->links() !!}\r\n+  </div>\r\n+</div>\r\n"
+                },
+                {
+                    "date": 1719337660321,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,22 +20,4 @@\n <div class = \"mylinks\" >\r\n     {!! $products->links() !!}\r\n   </div>\r\n </div>\r\n-@foreach($transactions as $key => $ml)   \r\n-<div class=\"row border-top border-bottom\" id = \"kotakcart{{$key}}\">\r\n-  <div class=\"row main align-items-center\">\r\n-      <div class=\"col-2\"><i class=\"fa fa-check-circle\" style = \"color:green;\" aria-hidden=\"true\"></i>\r\n-      </div>\r\n-      <div class=\"col\">\r\n-          <div class=\"row text-muted\">ID : SFS-{{$ml['id']}}</div>\r\n-          <div class=\"row\">{{$ml['date_invoice']}}</div>\r\n-      </div>\r\n-      <div class=\"col\">\r\n-          <b> {{$ml['total_qty']}}</b> Items\r\n-      </div>\r\n-      <div class=\"col\">Rp {{number_format($ml['total_price'])}} </div>\r\n-      <div class=\"col\"><button data-trans = \"{{$ml['id']}}\" onclick = \"getInvoiceDetail(this)\"  data-toggle=\"modal\" data-target=\"#exampleModal\" class = \"lihat_detail\" style = \"padding:5px;border-radius:10px;font-size:16px;background-color:#3A2D28;color:white;\">Lihat Invoice <i class=\"fa fa-info-circle\" aria-hidden=\"true\"></i>\r\n-      </button> </div>\r\n-  </div>\r\n-</div>\r\n-@endforeach\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1719337692932,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,23 @@\n+@foreach($transactions as $key => $ml)   \r\n+<div class=\"row border-top border-bottom\" id = \"kotakcart{{$key}}\">\r\n+  <div class=\"row main align-items-center\">\r\n+      <div class=\"col-2\"><i class=\"fa fa-check-circle\" style = \"color:green;\" aria-hidden=\"true\"></i>\r\n+      </div>\r\n+      <div class=\"col\">\r\n+          <div class=\"row text-muted\">ID : SFS-{{$ml['id']}}</div>\r\n+          <div class=\"row\">{{$ml['date_invoice']}}</div>\r\n+      </div>\r\n+      <div class=\"col\">\r\n+          <b> {{$ml['total_qty']}}</b> Items\r\n+      </div>\r\n+      <div class=\"col\">Rp {{number_format($ml['total_price'])}} </div>\r\n+      <div class=\"col\"><button data-trans = \"{{$ml['id']}}\" onclick = \"getInvoiceDetail(this)\"  data-toggle=\"modal\" data-target=\"#exampleModal\" class = \"lihat_detail\" style = \"padding:5px;border-radius:10px;font-size:16px;background-color:#3A2D28;color:white;\">Lihat Invoice <i class=\"fa fa-info-circle\" aria-hidden=\"true\"></i>\r\n+      </button> </div>\r\n+  </div>\r\n+</div>\r\n+@endforeach\r\n+\r\n+<div class = \"mylinks\" >\r\n+    {!! $transactions->links() !!}\r\n+  </div>\r\n+</div>\r\n"
+                }
+            ],
+            "date": 1719337629254,
+            "name": "Commit-0",
+            "content": "@foreach($transactions as $key => $ml)   \r\n<div class=\"row border-top border-bottom\" id = \"kotakcart{{$key}}\">\r\n  <div class=\"row main align-items-center\">\r\n      <div class=\"col-2\"><i class=\"fa fa-check-circle\" style = \"color:green;\" aria-hidden=\"true\"></i>\r\n      </div>\r\n      <div class=\"col\">\r\n          <div class=\"row text-muted\">ID : SFS-{{$ml['id']}}</div>\r\n          <div class=\"row\">{{$ml['date_invoice']}}</div>\r\n      </div>\r\n      <div class=\"col\">\r\n          <b> {{$ml['total_qty']}}</b> Items\r\n      </div>\r\n      <div class=\"col\">Rp {{number_format($ml['total_price'])}} </div>\r\n      <div class=\"col\"><button data-trans = \"{{$ml['id']}}\" onclick = \"getInvoiceDetail(this)\"  data-toggle=\"modal\" data-target=\"#exampleModal\" class = \"lihat_detail\" style = \"padding:5px;border-radius:10px;font-size:16px;background-color:#3A2D28;color:white;\">Lihat Invoice <i class=\"fa fa-info-circle\" aria-hidden=\"true\"></i>\r\n      </button> </div>\r\n  </div>\r\n</div>\r\n@endforeach"
+        }
+    ]
+}
