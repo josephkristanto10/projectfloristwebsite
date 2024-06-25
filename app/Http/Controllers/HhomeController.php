@@ -16,14 +16,14 @@ class HhomeController extends Controller
      */
     public function index()
     {
-        $myproduct = Product::latest('id')->paginate(6);
+        $myproduct = Product::latest('id')->paginate(2);
         return view('index')->withProducts($myproduct);
     }
     function fetch_data(Request $request)
     {
      if($request->ajax())
      {
-      $products =  Product::latest('id')->paginate(6);
+      $products =  Product::latest('id')->paginate(2);
       return view('product_cart', compact('products'))->render();
      }
     }
