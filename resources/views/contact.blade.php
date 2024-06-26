@@ -229,6 +229,43 @@ hr {
 }
 
 
+@media (max-width: 576px) { 
+
+    .mobileonly{
+      display:block !important;
+    }
+ }
+@media (min-width: 576px) { 
+
+    .mobileonly{
+      display:block !important;
+    }
+ }
+
+
+@media (min-width: 768px) { 
+
+  .mobileonly{
+      display:none !important;
+    }
+ }
+
+
+@media (min-width: 992px) { 
+
+    .mobileonly{
+      display:none !important;
+    }
+ }
+
+
+@media (min-width: 1200px) { 
+
+    .mobileonly{
+      display:none !important;
+    }
+ }
+
   </style>
     <link href="{{ asset('css/style.css')}}" rel="stylesheet" />
     <!-- responsive style -->
@@ -270,6 +307,28 @@ hr {
                 <a class="nav-link" href="{{url('/invoice-list')}}">My Order</a>
               </li>
               @endif
+
+              <li class="nav-item mobileonly"  style = "display:none;">
+                <a class = "nav-link" href="{{url('/cart')}}">
+                  <img src="images/cart.png" alt=""> Cart
+                </a>
+              </li>
+              <li class="nav-item mobileonly"  style = "display:none;">
+                <span id = "kotaklogin">
+                  @if (Session::has('user'))
+                  {{-- do something with session key --}}
+                  <a class = "nav-link" onclick = "logout()">
+                    Log out
+                  </a>
+                  @else
+                  {{-- session key dosen't exist  --}}
+                  <a class = "nav-link" href="{{url('/masuk')}}">
+                    Log in
+                  </a>
+                  @endif
+                </span>
+             
+              </li>
             </ul>
           </b>
           </div>

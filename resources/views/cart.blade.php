@@ -149,9 +149,9 @@ a{
     margin-left: auto;
     font-size: 0.7rem;
 }
-img{
+/* img{
     width: 3.5rem;
-}
+} */
 .back-to-shop{
     margin-top: 4.5rem;
 }
@@ -224,6 +224,93 @@ a:hover{
   cursor: pointer;
 }
 
+@media (max-width: 576px) { 
+
+  .mobileonly{
+    display:block !important;
+  }
+  #judul_cart{
+    font-size:10px;
+  }
+  #qty_cart{
+    font-size:10px;
+  }
+  #harga_cart{
+    font-size:10px;
+  }
+}
+@media (min-width: 576px) { 
+
+.mobileonly{
+  display:block !important;
+}
+
+#judul_cart{
+    font-size:10px;
+  }
+  #qty_cart{
+    font-size:10px;
+  }
+  #harga_cart{
+    font-size:10px;
+  }
+}
+
+
+@media (min-width: 768px) { 
+
+.mobileonly{
+  display:none !important;
+}
+#judul_cart{
+    font-size:12px;
+  }
+  #qty_cart{
+    font-size:14px;
+  }
+  #harga_cart{
+    font-size:14px;
+  }
+}
+
+
+@media (min-width: 992px) { 
+
+.mobileonly{
+  display:none !important;
+}
+#judul_cart{
+    font-size:14px;
+  }
+  #qty_cart{
+    font-size:16px;
+  }
+  #harga_cart{
+    font-size:16px;
+  }
+}
+
+
+@media (min-width: 1200px) { 
+
+.mobileonly{
+  display:none !important;
+}
+#judul_cart{
+    font-size:14px;
+  }
+  #qty_cart{
+    font-size:16px;
+  }
+  #harga_cart{
+    font-size:16px;
+  }
+ 
+
+
+
+}
+
   </style>
     <link href="{{ asset('css/style.css')}}" rel="stylesheet" />
     <!-- responsive style -->
@@ -245,7 +332,7 @@ a:hover{
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style = "width: 1000px; background-color: #f1f1f1; z-index: 2;margin-left: -20px;margin-right: -20px;">
           <div class="d-flex mx-auto flex-column flex-lg-row align-items-center"><b>
             <ul class="navbar-nav  ">
               <li class="nav-item ">
@@ -265,6 +352,28 @@ a:hover{
                 <a class="nav-link" href="{{url('/invoice-list')}}">My Order</a>
               </li>
               @endif
+              <li class="nav-item mobileonly"  style = "display:none;">
+                <a class = "nav-link" href="{{url('/cart')}}">
+                  <img src="images/cart.png" alt=""> Cart
+                </a>
+              </li>
+              <li class="nav-item mobileonly"  style = "display:none;">
+                <span id = "kotaklogin">
+                  @if (Session::has('user'))
+                  {{-- do something with session key --}}
+                  <a class = "nav-link" onclick = "logout()">
+                    Log out
+                  </a>
+                  @else
+                  {{-- session key dosen't exist  --}}
+                  <a class = "nav-link" href="{{url('/masuk')}}">
+                    Log in
+                  </a>
+                  @endif
+                </span>
+             
+              </li>
+              
             </ul>
           </b>
           </div>
@@ -317,12 +426,12 @@ a:hover{
                     <div class="col-2"><img class="img-fluid" src="{{asset('images/product/'.$ml['image'])}}"></div>
                     <div class="col">
                         <div class="row text-muted">{{$ml['variant']}}</div>
-                        <div class="row">{{$ml['name']}}</div>
+                        <div class="row" id = "judul_cart">{{$ml['name']}}</div>
                     </div>
-                    <div class="col">
+                    <div class="col" id = "qty_cart">
                         <b> {{$ml['qty']}}</b> Items
                     </div>
-                    <div class="col">Rp {{number_format($ml['price']-(($ml['price']*$ml['discount'])/100))}} <span class="close" data-idcategory = "{{$ml['category']}}" data-idindex = "{{$ml['index']}}" data-idrow = "{{$key}}" onclick = "deleterowcart(this)">&#10005;</span></div>
+                    <div class="col" id = "harga_cart">Rp {{number_format($ml['price']-(($ml['price']*$ml['discount'])/100))}} <span class="close" data-idcategory = "{{$ml['category']}}" data-idindex = "{{$ml['index']}}" data-idrow = "{{$key}}" onclick = "deleterowcart(this)">&#10005;</span></div>
                 </div>
              </div>
              @endforeach

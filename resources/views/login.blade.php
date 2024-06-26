@@ -256,12 +256,6 @@
   width: 40px;
 }
 
-/* body {
-  background-image: url("https://griyamu.com/assets/image/properti_page/login_page_bg.png");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-} */
 
 .or {
   display: flex;
@@ -556,12 +550,6 @@
   width: 40px;
 }
 
-body {
-  background-image: url("https://griyamu.com/assets/image/properti_page/login_page_bg.png");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-}
 
 .or {
   display: flex;
@@ -729,10 +717,11 @@ body {
               </div>
   
               <form class="form_login" enctype="multipart/form-data" style="align-items:baseline;padding: 0 30px;">
-                  <input class="form-control" style = "box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);background-color:white;" type="email" placeholder="Email" name="email" id = "emaillogin_mobile" required />
+        
+                  <input class="form-control" style = "box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);background-color:white; margin-top:20px;" type="email" placeholder="Email" name="email" id = "emaillogin_mobile" required />
                   <input class="form-control" style = "box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);background-color:white;" type="password"  id = "pwd_mobile" placeholder="Password" name="password" required />
                   {{-- <span style="cursor: pointer;" id="show_password_login_mobile"><i class="fas fa-lock-open"></i>&nbsp; Show Password</span><br> --}}
-                  <br><br><br>
+                  <br>
                   <button id="loginbutton_mobile"  class="btn btn-warning float-end"  style = "margin-top:10px;" type = "button">Sign In</button>
                   <p id="belum_punya_akun" style="font-weight:200;font-size:13px;">Belum Punya Akun ?</p>
               </form>

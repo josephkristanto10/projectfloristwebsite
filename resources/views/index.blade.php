@@ -391,6 +391,9 @@ html {
     #description_judul{
       text-align: left;
     }
+    .mobileonly{
+      display:block !important;
+    }
  }
 @media (min-width: 576px) { 
   /* .slider_section .container{
@@ -401,6 +404,9 @@ html {
   }
     #judul{
         color: #3A2D28 !important;
+    }
+    .mobileonly{
+      display:block !important;
     }
  }
 
@@ -417,6 +423,9 @@ html {
   .detail_box{
     width:300px;
   }
+  .mobileonly{
+      display:none !important;
+    }
  }
 
 
@@ -424,12 +433,18 @@ html {
   #judul{
         color:#3A2D28 !important;
     }
+    .mobileonly{
+      display:none !important;
+    }
  }
 
 
 @media (min-width: 1200px) { 
   #judul{
         color:#3A2D28 !important;
+    }
+    .mobileonly{
+      display:none !important;
     }
  }
   </style>
@@ -474,6 +489,28 @@ html {
                   <a class="nav-link" href="{{url('/invoice-list')}}">My Order</a>
                 </li>
                 @endif
+                <li class="nav-item mobileonly"  style = "display:none;">
+                  <a class = "nav-link" href="{{url('/cart')}}">
+                    <img src="images/cart.png" alt=""> Cart
+                  </a>
+                </li>
+                <li class="nav-item mobileonly"  style = "display:none;">
+                  <span id = "kotaklogin">
+                    @if (Session::has('user'))
+                    {{-- do something with session key --}}
+                    <a class = "nav-link" onclick = "logout()">
+                      Log out
+                    </a>
+                    @else
+                    {{-- session key dosen't exist  --}}
+                    <a class = "nav-link" href="{{url('/masuk')}}">
+                      Log in
+                    </a>
+                    @endif
+                  </span>
+               
+                </li>
+                
               </ul>
             </b>
             </div>
@@ -494,7 +531,7 @@ html {
             <a href="{{url('/cart')}}">
                 <img src="images/cart.png" alt="">
               </a>
-              <form class="form-inline">
+            <form class="form-inline">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
               </form>
             </div>
