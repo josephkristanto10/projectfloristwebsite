@@ -238,6 +238,19 @@ a:hover{
   #harga_cart{
     font-size:10px;
   }
+  #tagline{
+    display:none;
+  }
+  #totalitems{
+    font-size:14px !important;
+    display:none;
+    
+  }
+  #grandtotal{
+    font-size:26px !important;
+    display:block;
+    margin-top:15px !important;
+  }
 }
 @media (min-width: 576px) { 
 
@@ -253,6 +266,18 @@ a:hover{
   }
   #harga_cart{
     font-size:10px;
+  }
+  #tagline{
+    display:none;
+  }
+  #totalitems{
+    font-size:14px !important;
+    display:none;
+  }
+  #grandtotal{
+    font-size:26px !important;
+    display:block;
+    margin-top:15px !important;
   }
 }
 
@@ -271,6 +296,18 @@ a:hover{
   #harga_cart{
     font-size:14px;
   }
+  #tagline{
+    display:none;
+  }
+  #totalitems{
+    font-size:14px !important;
+    display:none;
+  }
+  #grandtotal{
+    font-size:26px !important;
+    display:block;
+    margin-top:15px !important;
+  }
 }
 
 
@@ -287,6 +324,18 @@ a:hover{
   }
   #harga_cart{
     font-size:16px;
+  }
+  #tagline{
+    display:block;
+  }
+  #totalitems{
+    font-size:18px !important;
+    display:block;
+  }
+  #grandtotal{
+    font-size:30px !important;
+    display:block;
+    margin-top:15px !important;
   }
 }
 
@@ -305,9 +354,18 @@ a:hover{
   #harga_cart{
     font-size:16px;
   }
- 
+  #tagline{
+    display:block;
+  }
 
-
+  #totalitems{
+    font-size:18px !important;
+    display:block;
+  }
+  #grandtotal{
+    font-size:30px !important;
+    display:block;
+  }
 
 }
 
@@ -474,12 +532,12 @@ a:hover{
 
   <div id = "checkoutbar"style = "height:100px;position:fixed;bottom:0;width:100%;background-color:#ffffff;z-index:10000; box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
     <div class="info_logo" style = "float:left;position:relative; top:20px;left:20px;font-family: 'Baloo Chettan', cursive;">
-      <h5 style = "font-size:18px;position:relative;left:60px;color:#512E1B" >
+      <h5 style = "font-size:18px;position:relative;left:60px;color:#512E1B" id = "tagline" >
         Harga Terjangkau - Berkualitas Tinggi
       </h5>
     </div>
       <div style = "float:right;position: relative;right:30px;top:40px;background-color:#512E1B;border-radius:5px;height:30px;width:200px;color:white;text-align:center;font-weight:bold;padding-top:3px;font-size:15px;" onclick = "checkout()">Checkout <i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-      <div style = " float:right;position: relative;right:50px;top:30px;"><span style = "font-size:18px;">Total  Items : <span class = "jumlahitem"></span> <span style = "font-size:30px;margin-left:20px;">Rp<span class = "total_rupiah">{{number_format($hasil)}}</span></span></div>
+      <div style = " float:right;position: relative;right:50px;top:20px;"><span style = "font-size:18px;" > <span style = "font-size:30px;margin-left:20px;margin-top:10px;" id = "grandtotal">Rp<span class = "total_rupiah">{{number_format($hasil)}}</span></span></div>
   </div>
 
   
