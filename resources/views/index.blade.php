@@ -375,6 +375,63 @@ html {
 }
 
 .mylinks a:hover:not(.active) {background-color: #ddd;}
+
+@media (max-width: 576px) { 
+  /* .slider_section .container{
+    max-width: 500px !important;
+  } */
+    #judul{
+        color: #3A2D28 !important;
+        text-align: left;
+        
+    }
+    .detail_box{
+    width:300px;
+  }
+    #description_judul{
+      text-align: left;
+    }
+ }
+@media (min-width: 576px) { 
+  /* .slider_section .container{
+    max-width: 500px !important;
+  } */
+  .detail_box{
+    width:250px;
+  }
+    #judul{
+        color: #3A2D28 !important;
+    }
+ }
+
+
+@media (min-width: 768px) { 
+  /* .slider_section .container{
+    max-width: 500px ;
+  } */
+
+  #judul{
+        font-size:30px ;
+        color:#3A2D28 !important;
+    }
+  .detail_box{
+    width:300px;
+  }
+ }
+
+
+@media (min-width: 992px) { 
+  #judul{
+        color:#3A2D28 !important;
+    }
+ }
+
+
+@media (min-width: 1200px) { 
+  #judul{
+        color:#3A2D28 !important;
+    }
+ }
   </style>
     <link href="{{ asset('css/style.css')}}" rel="stylesheet" />
     <!-- responsive style -->
@@ -452,13 +509,13 @@ html {
           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-6 col-md-8 col-sm-4">
                   <div class="detail_box">
                     
-                    <h1  id = "judul">
-                      Supplier Florist Surabaya
+                    <h1  id = "judul" style = "">
+                      Supplier<br>Florist </br>Surabaya
                     </h1>
-                    <p>
+                    <p id = "description_judul">
                       Pusat <u style = "text-decoration: underline  #dc3545 2.5px; text-underline-offset: 5px;font-weight:700;">Perlengkapan Florist</u> Di Surabaya, Kualitas Super dan Terbaik, Harga Bersaing. 
                       
                     </p>
