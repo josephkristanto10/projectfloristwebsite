@@ -250,7 +250,7 @@ a:hover{
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style = "width: 1000px; background-color: #f1f1f1; z-index: 2;margin-left: -20px;margin-right: -20px;">
           <div class="d-flex mx-auto flex-column flex-lg-row align-items-center"><b>
             <ul class="navbar-nav  ">
               <li class="nav-item ">
