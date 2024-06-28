@@ -382,9 +382,13 @@ html {
     max-width: 500px !important;
   } */
     #judul{
+      font-size:23px !important;
         color: #3A2D28 !important;
         text-align: left;
         
+    }
+    #description_judul{
+      font-size:14px !important;
     }
     .detail_box{
     width:300px;
@@ -404,6 +408,7 @@ html {
     width:250px;
   }
     #judul{
+   
         color: #3A2D28 !important;
     }
     .mobileonly{
@@ -418,7 +423,8 @@ html {
   } */
 
   #judul{
-        font-size:30px ;
+    
+    font-size:30px ;
         color:#3A2D28 !important;
     }
   .detail_box{
@@ -462,8 +468,8 @@ html {
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="{{url('/')}}">
-            <span style = "color:#714423">
-              SFS
+            <span style = "color:#714423; font-size:18px;font-family:arial;">
+              Supplier Florist Surabaya
             </span>
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -551,7 +557,7 @@ html {
                   <div class="detail_box">
                     
                     <h1  id = "judul" style = "">
-                      Supplier<br>Florist </br>Surabaya
+                     Hi, <br>Welcome to our<br> online store
                     </h1>
                     <p id = "description_judul">
                       Pusat <u style = "text-decoration: underline  #dc3545 2.5px; text-underline-offset: 5px;font-weight:700;">Perlengkapan Florist</u> Di Surabaya, Kualitas Super dan Terbaik, Harga Bersaing. 
@@ -591,7 +597,7 @@ html {
   <!-- end about section -->
 
   <!-- why section -->
-  <section class="why_section layout_padding">
+  {{-- <section class="why_section layout_padding">
     <div class="section_number">
       02
     </div>
@@ -612,7 +618,7 @@ html {
         </div>
       </div>
     </div>
-  </section>
+  </section> --}}
 
 
 
