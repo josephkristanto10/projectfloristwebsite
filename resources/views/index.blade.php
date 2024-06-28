@@ -622,7 +622,7 @@ html {
 
   <!-- contact section -->
 
-  <section class="contact_section layout_padding" style = "background:#ffffff">
+  <section class="contact_section layout_padding" style = "background:#ffffff; background-image:none;">
     <div class="section_number">
       05
     </div>
