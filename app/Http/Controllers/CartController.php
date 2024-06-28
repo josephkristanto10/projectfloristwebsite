@@ -57,13 +57,13 @@ class CartController extends Controller
                 $list_myitem = explode("_",$mycart_variants[$i]);
                 $id_item = $list_myitem[0];
                 $qty_items = $list_myitem[1];
-                $search_produk = ProductVariant::join("product","product_variant.id_product" , "=", "product.id")->where("product_variant.id", "=",$id_item)->select("product.names as nama_product","product.descriptions as description_product", "product.images as images_product", "product_variant.descriptions as nama_variant", "product_variant.prices as harga_variant" , "product_variant.discounts as discount_variant" )->get();
+                $search_produk = ProductVariant::join("product","product_variant.id_product" , "=", "product.id")->where("product_variant.id", "=",$id_item)->select("product.names as nama_product","product.descriptions as description_product", "product.images as images_product", "product_variant.descriptions as nama_variant", "product_variant.prices as harga_variant" , "product_variant.discounts as discount_variant", "product_variant.images_variant" )->get();
                 $name_produk = $search_produk[0]['nama_product'];
                 $name_variant = $search_produk[0]['nama_variant'];
                 $prices_produk = $search_produk[0]['harga_variant'];
                 $description_produk = $search_produk[0]['description_product'];
                 $discount_produk = $search_produk[0]['discount_variant'];
-                $images_produk = $search_produk[0]['images_product'];
+                $images_produk = $search_produk[0]['images_variant'];
                 $mycart_list[] = [
                     "index"=>$i,
                     "category"=>"v",

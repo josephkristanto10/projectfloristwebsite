@@ -543,9 +543,11 @@ function getInvoiceDetail(myobj){
         var variants = "";
         var imageproduct = "{{asset('/images/')}}/product/" + elem['product_image'];
         if(elem['variant_descriptions'] === null){
+          
           variants = "No Variants";
         }
         else{
+          imageproduct = "{{asset('/images/')}}/variant/" + elem['images_variant'];
           variants = "Variant " +  elem['variant_descriptions'];
         }
         hasil += "<div class = 'row mt-3' style = 'border-radius:5px;box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);padding:10px;'><img src = '"+imageproduct+"' style = 'width:75px;height:75px;'><div class ='col-xl-8' > <p style = 'color:grey;'><b>"+elem['buy_qty']+"</b> pcs - "+variants+" </p><b><p>"+elem['product_name']+"</p></b></div><div class = 'col-xl-2' style = 'padding-top:20px;'><b><p>Rp"+elem['buy_subtotal']+"</p></b></div></div>";

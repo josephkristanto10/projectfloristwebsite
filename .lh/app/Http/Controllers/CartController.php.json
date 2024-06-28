@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 200,
+            "activePatchIndex": 202,
             "patches": [
                 {
                     "date": 1719133258940,
@@ -808,6 +808,14 @@
                 {
                     "date": 1719250872217,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -195,9 +195,9 @@\n             }\n            \n         }\n         else{\n-            \n+            return response()->json(['status_login' => $status_login, \"id_transaksi\" => \"-\"]);\n         }\n      \n         \n    \n"
+                },
+                {
+                    "date": 1719552576190,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -56,9 +56,9 @@\n             foreach($mycart_variants as $i => $mycart_variant){\n                 $list_myitem = explode(\"_\",$mycart_variants[$i]);\n                 $id_item = $list_myitem[0];\n                 $qty_items = $list_myitem[1];\n-                $search_produk = ProductVariant::join(\"product\",\"product_variant.id_product\" , \"=\", \"product.id\")->where(\"product_variant.id\", \"=\",$id_item)->select(\"product.names as nama_product\",\"product.descriptions as description_product\", \"product.images as images_product\", \"product_variant.descriptions as nama_variant\", \"product_variant.prices as harga_variant\" , \"product_variant.discounts as discount_variant\" )->get();\n+                $search_produk = ProductVariant::join(\"product\",\"product_variant.id_product\" , \"=\", \"product.id\")->where(\"product_variant.id\", \"=\",$id_item)->select(\"product.names as nama_product\",\"product.descriptions as description_product\", \"product.images as images_product\", \"product_variant.descriptions as nama_variant\", \"product_variant.prices as harga_variant\" , \"product_variant.discounts as discount_variant\", \"product_variant.images_variant\" )->get();\n                 $name_produk = $search_produk[0]['nama_product'];\n                 $name_variant = $search_produk[0]['nama_variant'];\n                 $prices_produk = $search_produk[0]['harga_variant'];\n                 $description_produk = $search_produk[0]['description_product'];\n"
+                },
+                {
+                    "date": 1719552589635,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,9 +62,9 @@\n                 $name_variant = $search_produk[0]['nama_variant'];\n                 $prices_produk = $search_produk[0]['harga_variant'];\n                 $description_produk = $search_produk[0]['description_product'];\n                 $discount_produk = $search_produk[0]['discount_variant'];\n-                $images_produk = $search_produk[0]['images_product'];\n+                $images_produk = $search_produk[0]['images_variant'];\n                 $mycart_list[] = [\n                     \"index\"=>$i,\n                     \"category\"=>\"v\",\n                     \"name\" =>$name_produk,\n"
                 }
             ],
             "date": 1719133258940,

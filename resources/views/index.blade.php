@@ -921,7 +921,7 @@ function getDetailVariant(id_product_for_variant){
       if(response.variant.length >0){
        stringelement += '<div class = "row">';
         for(var i = 0 ; i < response.variant.length; i++){
-          var iamgefromproduct = String("{{url('images/')}}" + "/product/"+response.variant[i].images);
+          var iamgefromproduct = String("{{url('images/')}}" + "/variant/"+response.variant[i].images_variant);
       
           var images_product = iamgefromproduct;
           stringelement += '<div class="col-lg-4 " style = " margin:5px;"><div class="media" style = "display:block;width:100%; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;" >  <div class="media-body "><img style = "width:100%;" src='+images_product+' alt="Generic placeholder image" " class="" ><h5 class="mt-0 font-weight-bold mb-2 " style = "padding-left:15px;padding-top:10px;">'+response.variant[i].name+'</h5><p class="font-italic text-muted mb-0 small" style = "padding-left:15px;padding-top:10px;">'+response.variant[i].descriptions+'.</p><div class="d-flex align-items-center justify-content-between mt-1"><h6 class="font-weight-bold my-2" style = "padding-left:15px;">Rp'+(response.variant[i].prices-((response.variant[i].prices*response.variant[i].discounts)/100))+' / pcs <input class = "form-control" id = "variant_number_'+response.variant[i].id+'" type = "number" onkeyup = "triggerupdateqty('+response.variant[i].id+')" onchange = "triggerupdateqty('+response.variant[i].id+')"  style = "width:100px;margin-top:10px;" value = "0" min = "0"> </h6></div></div></div></li> </div>';

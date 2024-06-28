@@ -255,7 +255,7 @@ a:hover{
 @media (min-width: 576px) { 
 
 .mobileonly{
-  display:block !important;
+  display:block  !important;
 }
 
 #judul_cart{
@@ -481,7 +481,12 @@ a:hover{
               @foreach($mycart_list as $key => $ml)
               <div class="row border-top border-bottom" id = "kotakcart{{$key}}">
                 <div class="row main align-items-center">
+                  @if($ml['category'] == 'p')
                     <div class="col-2"><img class="img-fluid" src="{{asset('images/product/'.$ml['image'])}}"></div>
+                  @endif
+                  @if($ml['category'] == 'v')
+                  <div class="col-2"><img class="img-fluid" src="{{asset('images/variant/'.$ml['image'])}}"></div>
+                  @endif
                     <div class="col">
                         <div class="row text-muted">{{$ml['variant']}}</div>
                         <div class="row" id = "judul_cart">{{$ml['name']}}</div>
