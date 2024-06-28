@@ -581,7 +581,17 @@ a:hover{
             <div>
               <img src="images/telephone-white.png" alt="">
               <p>
-                083858428412
+                <a href = "https://wa.me/+6285161116235?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 1</a>
+
+                
+              </p>
+            </div>
+            <div>
+              <img src="images/telephone-white.png" alt="">
+              <p>
+                <a href = "https://wa.me/+6285175388547?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 2</a>
+
+                
               </p>
             </div>
             <div>

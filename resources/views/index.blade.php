@@ -647,14 +647,15 @@ html {
 
   <!-- map section -->
 
-  <div class="map_section">
+  {{-- <div class="map_section">
     <div class="map_container">
       <div class="map">
         <div id="googleMap"></div>
       </div>
     </div>
-  </div>
-
+  </div> --}}
+  <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #131312 !important; " id = "judul_best_seller">  Lokasi Kami</h1>
+  <div style = "text-align:center;width:100%;"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.035248363381!2d112.72973599999999!3d-7.2368193!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7f9252591ffa3%3A0xe161139591ddb221!2sJl.%20Kawung%20II%20No.1%2C%20Kemayoran%2C%20Kec.%20Krembangan%2C%20Surabaya%2C%20Jawa%20Timur%2060176!5e0!3m2!1sen!2sid!4v1719580251422!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
   <!-- end map section -->
 
   <!-- info section -->
@@ -732,9 +733,20 @@ html {
             <div>
               <img src="images/telephone-white.png" alt="">
               <p>
-                083858428412
+                <a href = "https://wa.me/+6285161116235?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 1</a>
+
+                
               </p>
             </div>
+            <div>
+              <img src="images/telephone-white.png" alt="">
+              <p>
+                <a href = "https://wa.me/+6285175388547?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 2</a>
+
+                
+              </p>
+            </div>
+
             <div>
               <img src="images/envelope-white.png" alt="">
               <p>

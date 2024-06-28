@@ -382,11 +382,14 @@ hr {
                   <div class="card_content">
                     <h2 class="card_title">Admin CS 1</h2>
                     <div class="card_text">
-                      <p>Hubungi Tami sebagai Admin CS 1 untuk keluhan dan checkout orderan kamu.
+                      <p>Klik Disini untuk chat Admin CS 1 untuk keluhan dan checkout orderan kamu.
                       </p>
                       {{-- <hr /> --}}
                       <div style = "width:100%;text-align:center;">
-                        <button class  = "btn btn-primary" style = "background-color:#3A2D28;border:0px;">Klik disini</button>
+                        <a href = "https://wa.me/+6285161116235?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">   <button class  = "btn btn-primary" style = "background-color:#3A2D28;border:0px;">Klik disini</button></a>
+
+        
+                     
                       </div>
                     
                     </div>
@@ -408,7 +411,9 @@ hr {
                       </p>
                       {{-- <hr /> --}}
                       <div style = "width:100%;text-align:center;">
-                        <button class  = "btn btn-primary" style = "background-color:#3A2D28;border:0px;">Klik disini</button>
+                        <a href = "https://wa.me/+6285175388547?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya."><button class  = "btn btn-primary" style = "background-color:#3A2D28;border:0px;">Klik disini</button></a>
+
+                        
                       </div>
                     
                     </div>
@@ -746,7 +751,17 @@ hr {
             <div>
               <img src="images/telephone-white.png" alt="">
               <p>
-                083858428412
+                <a href = "https://wa.me/+6285161116235?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 1</a>
+
+                
+              </p>
+            </div>
+            <div>
+              <img src="images/telephone-white.png" alt="">
+              <p>
+                <a href = "https://wa.me/+6285175388547?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 2</a>
+
+                
               </p>
             </div>
             <div>
