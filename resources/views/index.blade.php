@@ -270,7 +270,7 @@ html {
 }
 
 .product-details {
-    padding: 30px;
+    padding: 0px;
 }
 
 .product-catagory {
@@ -314,12 +314,13 @@ html {
 .product-bottom-details {
     overflow: hidden;
     border-top: 1px solid #eee;
-    padding-top: 20px;
+    padding-top: 10px;
+    padding-left:5px;
 }
 
 .product-bottom-details div {
     float: left;
-    width: 50%;
+    width: 100%;
 }
 
 .product-price {

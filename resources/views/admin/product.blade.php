@@ -97,44 +97,15 @@
       <!--  Header Start -->
       <header class="app-header">
         <nav class="navbar navbar-expand-lg navbar-light">
-          <ul class="navbar-nav">
-            <li class="nav-item d-block d-xl-none">
-              <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
-                <i class="ti ti-menu-2"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link nav-icon-hover" href="javascript:void(0)">
-                <i class="ti ti-bell-ringing"></i>
-                <div class="notification bg-primary rounded-circle"></div>
-              </a>
-            </li>
-          </ul>
           <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
             <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-              <a href="https://adminmart.com/product/modernize-free-bootstrap-admin-dashboard/" target="_blank" class="btn btn-primary">Download Free</a>
               <li class="nav-item dropdown">
                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                   aria-expanded="false">
+                  Hello {{session()->get("nama_superadmin")}} &nbsp;
                   <img src="{{asset('admin/assets/images/profile/user-1.jpg')}}" alt="" width="35" height="35" class="rounded-circle">
                 </a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
-                  <div class="message-body">
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-user fs-6"></i>
-                      <p class="mb-0 fs-3">My Profile</p>
-                    </a>
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-mail fs-6"></i>
-                      <p class="mb-0 fs-3">My Account</p>
-                    </a>
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-list-check fs-6"></i>
-                      <p class="mb-0 fs-3">My Task</p>
-                    </a>
-                    <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
-                  </div>
-                </div>
+              
               </li>
             </ul>
           </div>
@@ -149,6 +120,7 @@
             <div class="card w-100">
           
               <div class="card-body p-4">
+                <span style = "float:right;margin-right:20px;" ><button class = "btn btn-primary" data-toggle = "modal" data-target="#modal_add_product" >Tambah Produk</button></span>
                 <h1>Product</h1>
                 <table id="table-product" class="table table-bordered table-hover">
                   <thead>
@@ -176,54 +148,101 @@
     </div>
   </div>
 
+ 
   <div class="modal fade" id="modal_detail_product" tabindex="-1" role="dialog" aria-labelledby="modal_detail_productLabel" aria-hidden="true" style = "z-index:100000;" >
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-title" id="judulproduk" ><i class="fa fa-list-alt" aria-hidden="true"></i>
-             Produk</h3>
-          <button type="button" id = "closeeditproduct" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <h4>Detail Produk</h4>
-          <form id = "formedit" enctype="multipart/form-data">
-            {!! csrf_field() !!}
-          <div class = "row mt-3 mb-3">
-            <div class = "col-6">Gambar Produk <input id = "edit_gambarproduk" name = "gbr_produk" type = "file" class = "form-control"> </div>
-            <div class = "col-6">Nama Produk <input  id = "edit_namaproduk" name = "nama_produk" type = "text" class = "form-control" required></div>
-          </div>
-          <div class = "row mt-3 mb-3">
-            <div class = "col-6">Harga Produk <input id = "edit_hargaproduk" name = "hrg_produk" type = "text" class = "form-control" required></div>
-            <div class = "col-6">Discount Produk <input  id = "edit_discountproduk" name = "dsc_produk" type = "text" class = "form-control" required></div>
-          </div>
-          <div class = "row mt-3 mb-3">
-            <div class = "col-12">Description Produk <input  id = "edit_descriptionproduk" name = "desc_produk" type = "text" class = "form-control" required></div>
-          </div>
-          <div class = "row mt-3 mb-3">
-            <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success "  value = "Ganti"></div>
-          </div>
-        </form>
-          <h4>List Variant Produk</h4>
-          <table id="table-product" class="table table-bordered table-hover">
-            <thead>
-              <tr>
-                <th>Gambar</th>
-                <th>Variant Name</th>
-                <th>Discount</th>
-                <th>Price</th>
-             
-              </tr>
-            </thead>
-            <tbody id = "isian_variant_produk"></tbody>
-          </table>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
+            <div class="modal-header">
+              <h3 class="modal-title" id="judulproduk" ><i class="fa fa-list-alt" aria-hidden="true"></i>
+                Produk</h3>
+              <button type="button" id = "closeeditproduct" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h4>Detail Produk</h4>
+              <form id = "formedit" enctype="multipart/form-data">
+                {!! csrf_field() !!}
+              <div class = "row mt-3 mb-3">
+                <div class = "col-6">Gambar Produk <input id = "edit_gambarproduk" name = "gbr_produk" type = "file" class = "form-control"> </div>
+                <div class = "col-6">Nama Produk <input  id = "edit_namaproduk" name = "nama_produk" type = "text" class = "form-control" required></div>
+              </div>
+              <div class = "row mt-3 mb-3">
+                <div class = "col-6">Harga Produk <input id = "edit_hargaproduk" name = "hrg_produk" type = "text" class = "form-control" required></div>
+                <div class = "col-6">Discount Produk <input  id = "edit_discountproduk" name = "dsc_produk" type = "text" class = "form-control" required></div>
+              </div>
+              <div class = "row mt-3 mb-3">
+                <div class = "col-12">Description Produk <input  id = "edit_descriptionproduk" name = "desc_produk" type = "text" class = "form-control" required></div>
+              </div>
+              <div class = "row mt-3 mb-3">
+                <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success "  value = "Ganti"></div>
+              </div>
+            </form>
+              <h4>List Variant Produk</h4>
+              <table id="table-product" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>Gambar</th>
+                    <th>Variant Name</th>
+                    <th>Discount</th>
+                    <th>Price</th>
+                
+                  </tr>
+                </thead>
+                <tbody id = "isian_variant_produk"></tbody>
+              </table>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
       </div>
     </div>
   </div>
+</div>
+
+<div class="modal fade" id="modal_add_product" tabindex="-1" role="dialog" aria-labelledby="modal_add_productLabel" aria-hidden="true" style = "z-index:100000;" >
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="judulproduks" ><i class="fa fa-list-alt" aria-hidden="true"></i>
+                Produk</h3>
+              <button type="button" id = "closeaddproduct" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h4>Tambah Produk</h4>
+              <form id = "formtambah" enctype="multipart/form-data">
+                {!! csrf_field() !!}
+              <div class = "row mt-3 mb-3">
+                <div class = "col-6">Gambar Produk <input id = "add_gambarproduk" name = "add_gbr_produk" type = "file" class = "form-control"> </div>
+                <div class = "col-6">Nama Produk <input  id = "add_namaproduk" name = "add_nama_produk" type = "text" class = "form-control" required></div>
+              </div>
+              <div class = "row mt-3 mb-3">
+                <div class = "col-6">Harga Produk <input id = "add_hargaproduk" name = "add_hrg_produk" type = "text" class = "form-control" required></div>
+                <div class = "col-6">Discount Produk <input  id = "add_discountproduk" name = "add_dsc_produk" type = "text" class = "form-control" required></div>
+              </div>
+              <div class = "row mt-3 mb-3">
+                <div class = "col-12">Description Produk <input  id = "add_descriptionproduk" name = "add_desc_produk" type = "text" class = "form-control" required></div>
+              </div>
+              <div class = "row mt-3 mb-3">
+                <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success "  value = "Tambah"></div>
+              </div>
+            </form>
+             
+            
+            {{-- <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div> --}}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
   <script src="{{asset('admin/assets/libs/jquery/dist/jquery.min.js')}}"></script>
   <script src="{{asset('admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{asset('admin/assets/js/sidebarmenu.js')}}"></script>
@@ -374,5 +393,38 @@
             },
         });
     }));
+
+      $("#formtambah").on('submit',(function(e){
+          e.preventDefault();
+          var formdata = new FormData(this);
+          $.ajax({
+            url: "{{url('/addproductadmin')}}",
+              type: "POST",
+              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+              data: formdata,
+              contentType: false,
+              cache: false,
+              processData:false,
+              success: function(data){
+                $('#table-product').DataTable().ajax.reload();
+                // $('#modal_detail_product').modal();
+                $("#closeaddproduct").click();
+                Swal.fire({
+                  title: "<strong>Produk Ditambahkan</strong>",
+                  icon: "success",
+                  html: "Jika tidak tertambah, hubungi Developer",
+                  showCloseButton: false,
+                  showCancelButton: false,
+                  allowOutsideClick:false,
+                  focusConfirm: false,
+                  confirmButtonText: `
+                    <i class="fa fa-thumbs-up"></i> Ok
+                  `,
+                  confirmButtonAriaLabel: "Ok",
+              });
+
+              },
+          });
+      }));
 
 </script>

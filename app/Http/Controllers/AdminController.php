@@ -200,7 +200,8 @@ class AdminController extends Controller
 
     public function listvariant(){
         if(Session::has('id_superadmin')){
-            return view('admin.variant_product');
+            $list_product = Product::latest()->get();
+            return view('admin.variant_product', compact('list_product'));
          }else{
              return view('admin.login');
          }
@@ -214,6 +215,65 @@ class AdminController extends Controller
          }else{
              return view('admin.login');
          }
+    }
+    public function addproductadmin(Request $request){
+        // $id_productvariant = $request->id_variant_product;
+        $nama_product = $request->add_nama_produk;
+        $harga_product = $request->add_hrg_produk;
+        $discount_product = $request->add_dsc_produk;
+        $desc_product =  $request->add_desc_produk;
+        $status_gbr_product = "";
+        if($request->hasFile('add_gbr_produk')) {
+            $file_product = $request->file('add_gbr_produk');
+            $tujuan_upload = public_path('images/product');
+            // $nama_file = "product".$id_productvariant.".".$file_product->getClientOriginalExtension();
+           
+            $status_gbr_product = "ada";
+        }
+       
+        if($status_gbr_product == "ada"){
+            $myproduk = Product::create(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "0", "product_status" => "1","images" => "-", "updated_at" => now(), "created_at" => now()]);
+            $products_id = $myproduk->id;
+            $nama_file = "product".$products_id.".".$file_product->getClientOriginalExtension();
+            $file_product->move($tujuan_upload, $nama_file);
+            Product::where(['id' => $products_id ])->update(['images' => $nama_file]);
+
+
+        }else{
+            Product::insert(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "0", "product_status" => "1", "images" => "-", "updated_at" => now(), "created_at"=>now()]);
+
+
+        }
+    }
+    public function addvariantproductadmin(Request $request){
+        $pilihan_productvariant = $request->add_pil_produk;
+        $nama_product = $request->add_nama_produk;
+        $nama_product = $request->add_nama_produk;
+        $harga_product = $request->add_hrg_produk;
+        $discount_product = $request->add_dsc_produk;
+        // $desc_product =  $request->add_desc_produk;
+        $status_gbr_product = "";
+        if($request->hasFile('add_gbr_produk')) {
+            $file_product = $request->file('add_gbr_produk');
+            $tujuan_upload = public_path('images/variant');
+            // $nama_file = "product".$id_productvariant.".".$file_product->getClientOriginalExtension();
+           
+            $status_gbr_product = "ada";
+        }
+       
+        if($status_gbr_product == "ada"){
+            $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => "1", "name" => $nama_product, "variant_status" => "1","images_variant" => "-", "updated_at" => now(), "created_at" => now()]);
+            $products_id = $myproduk->id;
+            $nama_file = "product_variant".$products_id.".".$file_product->getClientOriginalExtension();
+            $file_product->move($tujuan_upload, $nama_file);
+            ProductVariant::where(['id' => $products_id ])->update(['images_variant' => $nama_file]);
+            Product::where(['id' => $pilihan_productvariant ])->update(['has_variants' => 1]);
+
+        }else{
+            $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => "1", "name" => $nama_product, "variant_status" => "1","images_variant" => "-", "updated_at" => now(), "created_at" => now()]);
+            Product::where(['id' => $pilihan_productvariant ])->update(['has_variants' => 1]);
+
+        }
     }
     
 

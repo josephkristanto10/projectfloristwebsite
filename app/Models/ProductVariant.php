@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property string $descriptions
  * @property int $variant_status
+ * @property string $images_variant
  *
  * @package App\Models
  */
@@ -44,6 +45,7 @@ class ProductVariant extends Model
 		'discounts',
 		'name',
 		'descriptions',
-		'variant_status'
+		'variant_status',
+		'images_variant'
 	];
 }
