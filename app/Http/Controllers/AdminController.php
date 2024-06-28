@@ -131,8 +131,9 @@ class AdminController extends Controller
         $myproduct = ProductVariant::leftJoin("product",'product.id','=','product_variant.id_product')->where("product_variant.id_product",'=',$id_product)->select("product_variant.*","product.images as gambar_produk", "product.names as nama_produk", "product.prices as harga_produk", "product.discounts as discount_produk")->get();
         $products = Product::where("id",'=',$id_product)->get();
         foreach($myproduct as $mp){
-           
-            $hasil .= '<tr><td>'.$mp->gambar_produk.'</td>'.'<td>'.$mp->descriptions.'</td>'.'<td>'.$mp->discounts.'</td>'.'<td>'.$mp->prices.'</td></tr>';
+           $gambar = asset('images/variant/'.$mp->images_variant);
+
+            $hasil .= '<tr><td><img src = "'.$gambar.'" style = "width:50px;height:50px;"></td>'.'<td>'.$mp->descriptions.'</td>'.'<td>'.$mp->discounts.'</td>'.'<td>'.$mp->prices.'</td></tr>';
         }
         return response()->json(['output' => $hasil, "output_proudct"=>$products]);
     }
@@ -274,6 +275,35 @@ class AdminController extends Controller
             Product::where(['id' => $pilihan_productvariant ])->update(['has_variants' => 1]);
 
         }
+    }
+    public function changestatusvariant(Request $request){
+        $id_variant = $request->idproductvariant;
+        $status = ProductVariant::where("id",'=',$id_variant)->get();
+        $status_variant = $status[0]['variant_status'];
+        $ganti = "0";
+        if($status_variant == "0"){
+            $ganti = "1";
+        }
+        else{
+            $ganti ="0";
+        }
+        ProductVariant::where(['id' => $id_variant ])->update(['variant_status' => $ganti]);
+        return response()->json(['output' => "ok"]);
+    }
+    public function changestatusproduct(Request $request){
+        $id_product = $request->idproduct;
+        $status = Product::where("id",'=',$id_product)->get();
+        $status_product = $status[0]['product_status'];
+        $ganti = "0";
+        if($status_product == "0"){
+            $ganti = "1";
+        }
+        else{
+            $ganti ="0";
+        }
+        Product::where(['id' => $id_product ])->update(['product_status' => $ganti]);
+        return response()->json(['output' => "ok"]);
+
     }
     
 

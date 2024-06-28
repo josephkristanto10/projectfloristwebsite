@@ -56,7 +56,8 @@ Route::get("/getdetailvariantproductadmin", [AdminController::class,"getdetailva
 Route::POST("/editproductvariantadmin", [AdminController::class,"editproductvariantadmin"]);
 Route::POST("/addproductadmin", [AdminController::class,"addproductadmin"]);
 Route::POST("/addvariantproductadmin", [AdminController::class,"addvariantproductadmin"]);
-
+Route::POST("/changestatusvariant", [AdminController::class,"changestatusvariant"]);
+Route::POST("/changestatusproduct", [AdminController::class,"changestatusproduct"]);
 
 
 

@@ -7,6 +7,8 @@
   <title>Supplier Florist Surabaya</title>
   <link rel="shortcut icon" type="image/png" href="{{asset('admin/assets/images/logos/favicon.png')}}" />
   <link rel="stylesheet" href="{{asset('admin/assets/css/styles.min.css')}}" />
+  <link rel="stylesheet" type="text/css" href = "{{asset('css/font-awesome-4.7.0/css/font-awesome.css')}}"/>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
   <style>
     .row{
@@ -131,10 +133,11 @@
                       <th>Nama</th>
                       <th>Variant</th>
                       <th>Harga</th>
-                  
+                      <th>Status</th>
                       <th>Action</th>
                     </tr>
                   </thead>
+                 
                 </table>
               </div>
             </div>
@@ -280,10 +283,19 @@
         {
            data: 'prices'
         },
-       
+        {
+           
+           "render": function ( data, type, row ) {
+            var status_variantproduk = "<span style = 'color:green;'>aktif</span>";
+            if(row.variant_status == 0){
+              status_variantproduk = "<span style = 'color:red;'>tidak aktif</span>";
+            }
+             return status_variantproduk;
+           }
+        },
         {
            "render": function ( data, type, row ) {
-            return '<button class="btn btn-primary" onclick = "getdetailTransaction(this)" data-id = "'+row.id+'" btn-sm" data-toggle="modal" data-target="#modal_detail_product" >Lihat</button>';
+            return '<button class="btn btn-warning" onclick = "getdetailTransaction(this)" data-id = "'+row.id+'" btn-sm" data-toggle="modal" data-target="#modal_detail_product" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button><br><br><button class="btn btn-danger" onclick = "getStatusChange(this)" data-id = "'+row.id+'" btn-sm"  ><i class="fa fa-exchange" aria-hidden="true"></i></button>';
           }
         }
       ],
@@ -325,15 +337,7 @@
       data: {"idproduct" : productid},
       dataType: "json",
       success: function (response) {
-        // $("#isian_variant_produk").html("");
-        // $("#isian_variant_produk").html(response.output);
-        
-
-
-        // $("#edit_namaproduk").val(response.output_proudct[0].names);
-        // $("#edit_hargaproduk").val(response.output_proudct[0].prices);
-        // $("#edit_discountproduk").val(response.output_proudct[0].discounts);
-        
+      
         
         
       }
@@ -407,6 +411,35 @@
               },
           });
       }));
+
+
+      function getStatusChange(myobj){
+        var idproductvariant = $(myobj).attr("data-id");
+   
+        $.ajax({
+          type: "post",
+          url: "{{url('/changestatusvariant')}}",
+          data: { "_token": "{{ csrf_token() }}","idproductvariant" : idproductvariant},
+          dataType: "json",
+          success: function (response) {
+            Swal.fire({
+                  title: "<strong>Varian ini dinonaktifkan</strong>",
+                  icon: "success",
+                  html: "Jika tidak terganti, hubungi Developer",
+                  showCloseButton: false,
+                  showCancelButton: false,
+                  allowOutsideClick:false,
+                  focusConfirm: false,
+                  confirmButtonText: `
+                    <i class="fa fa-thumbs-up"></i> Ok
+                  `,
+                  confirmButtonAriaLabel: "Ok",
+              });
+              $('#table-variant-product').DataTable().ajax.reload();
+            
+          }
+        });
+      }
      
       
 </script>
