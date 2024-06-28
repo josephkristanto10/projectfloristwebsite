@@ -126,9 +126,10 @@
               <div class="card-body">
                 <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
                   <div class="row w-100" >
-                    <div class="col-lg-4">
+                    <div class="col-lg-4" >
                       <!-- Yearly Breakup -->
                       <div class="card overflow-hidden">
+                        <a href = "{{url('pagelistproduk')}}">
                         <div class="card-body p-4">
                           <h5 class="card-title mb-9 fw-semibold">Produk</h5>
                           <div class="row align-items-center">
@@ -149,12 +150,15 @@
                          
                           </div>
                         </div>
+                      </a>
                       </div>
                     </div>
+                 
                     <div class="col-lg-4">
                       <!-- Monthly Earnings -->
                       <div class="card">
-                        <div class="card-body">
+                        <a href = "{{url('pagelistuser')}}">
+                        <div class="card-body" >
                           <div class="row alig n-items-start">
                             <div class="col-12">
                               <h5 class="card-title mb-9 fw-semibold">  User </h5>
@@ -178,12 +182,14 @@
                             </div> --}}
                           </div>
                         </div>
+                      </a>
                         {{-- <div id="earning"></div> --}}
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <!-- Monthly Earnings -->
                       <div class="card">
+                        <a href = "{{url('pagelisttrx')}}">
                         <div class="card-body">
                           <div class="row alig n-items-start">
                             <div class="col-12">
@@ -194,6 +200,7 @@
                           
                           </div>
                         </div>
+                      </a>
                         {{-- <div id="earning"></div> --}}
                       </div>
                     </div>
