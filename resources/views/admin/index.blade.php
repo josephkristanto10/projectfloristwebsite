@@ -199,8 +199,8 @@
                     </div>
                   </div>
                 </div>
-                <h1>Transaksi Bulan ini</h1>
-                <div id="chart"></div>
+                {{-- <h1>Transaksi Bulan ini</h1>
+                <div id="chart"></div> --}}
               </div>
             </div>
           </div>
