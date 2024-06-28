@@ -293,7 +293,7 @@
           "render": function ( data, type, row ) {
             var status_variants = "Tidak ada";
             if(row.has_variants == 1){
-              status_variants = row.has_variants;
+              status_variants = "Ada Variant";
             }
              return status_variants;
            }
