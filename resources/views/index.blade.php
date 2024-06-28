@@ -581,9 +581,9 @@ html {
 
   <!-- about section -->
   <section class="about_section " >
-    <div class="section_number">
+    {{-- <div class="section_number">
       01
-    </div>
+    </div> --}}
     <div class="container" id = "kotakproduk">
       <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #3A2D28 !important;" id = "judul_best_seller"> Produk Kami  <img src = "{{ asset('/images/bunga.png')}}" style = "margin-top:-15px;width:75px;height:75px;"></h1>
       <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #3A2D28 !important;">Semua produk di store <b>Supplier Florist Surabaya</b>  </h5>
@@ -629,9 +629,7 @@ html {
   <!-- contact section -->
 
   <section class="contact_section layout_padding" style = "background:#ffffff; background-image:none;">
-    <div class="section_number">
-      05
-    </div>
+   
     <div class="container ">
       <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #131312 !important; " id = "judul_best_seller">  Platform Kami</h1>
       <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #131312;">Kita juga hadir di beberapa platform <b>E-commerce</b>  </h5>
