@@ -467,7 +467,7 @@ html {
     <header class="header_section" style = "padding-top:5px;background-color:#f1f1f1;  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;height:70px;">
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="{{url('/')}}" style = "width:300px;">
+          <a class="navbar-brand" href="{{url('/')}}" style = "width:270px;">
             <span style = "color:#714423; font-size:18px;font-family:arial;">
               Supplier Florist Surabaya
             </span>
