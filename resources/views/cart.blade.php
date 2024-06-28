@@ -381,9 +381,9 @@ a:hover{
   <header class="header_section" style = "padding-top:5px;background-color:#f1f1f1;  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;height:70px;">
     <div class="container">
       <nav class="navbar navbar-expand-lg custom_nav-container ">
-        <a class="navbar-brand" href="{{url('/')}}">
-          <span style = "color:#714423">
-            SFS
+        <a class="navbar-brand" href="{{url('/')}}" style = "width:270px;">
+          <span style = "color:#714423; font-size:18px;font-family:arial;">
+            Supplier Florist Surabaya
           </span>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -552,36 +552,40 @@ a:hover{
     <div class="container">
       <div class="row">
         <div class="col-md-3">
-          <div class="info_logo">
-            <h5 >
-              SFS
-            </h5>
-            <p>
-              Florist Bunga terbaik di Surabaya, Percayakan urusan bunga kepada kami.
-            </p>
-          </div>
-        </div>
-        <div class="col-md-3">
        
         </div>
-        <div class="col-md-3">
-        
+       
+        <div class="col-md-6">
+          <div class="info_contact">
+            <h5>
+              Jam operasional
+            </h5>
+       
+          <p>Senin - Sabtu : 08.00 Pagi - 16.00 Sore</p>
+         <p> Kecuali Tgl merah & hari minggu tutup</p>
+          </div>
         </div>
+     
         <div class="col-md-3">
           <div class="info_contact">
             <h5>
               Contact
             </h5>
+         
             <div>
               <img src="images/location-white.png" alt="">
+             <u><a href = "https://www.google.com/maps?ll=-7.236819,112.729736&z=16&t=m&hl=en&gl=ID&mapclient=embed&q=Jl.+Kawung+II+No.1+Kemayoran+Kec.+Krembangan+Surabaya,+Jawa+Timur+60176" style = "color:white;">
               <p>
-               Surabaya
+               Jl.Kawung II no 1
               </p>
+            </a>
+          </u>
             </div>
+          </a>
             <div>
               <img src="images/telephone-white.png" alt="">
               <p>
-                <a href = "https://wa.me/+6285161116235?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 1</a>
+               <u> <a style = "color:white;" href = "https://wa.me/+6285161116235?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 1</a></u>
 
                 
               </p>
@@ -589,17 +593,18 @@ a:hover{
             <div>
               <img src="images/telephone-white.png" alt="">
               <p>
-                <a href = "https://wa.me/+6285175388547?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 2</a>
+                <u><a style = "color:white;" href = "https://wa.me/+6285175388547?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 2</a></u>
 
                 
               </p>
             </div>
-            <div>
+
+            {{-- <div>
               <img src="images/envelope-white.png" alt="">
               <p>
                 sfs@gmail.com
               </p>
-            </div>
+            </div> --}}
           </div>
         </div>
       </div>

@@ -286,9 +286,9 @@ hr {
   <header class="header_section" style = "padding-top:5px;background-color:#f1f1f1;  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;height:70px;">
     <div class="container">
       <nav class="navbar navbar-expand-lg custom_nav-container ">
-        <a class="navbar-brand" href="{{url('/')}}">
-          <span style = "color:#714423">
-            SFS
+        <a class="navbar-brand" href="{{url('/')}}" style = "width:270px;">
+          <span style = "color:#714423; font-size:18px;font-family:arial;">
+            Supplier Florist Surabaya
           </span>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -441,208 +441,11 @@ hr {
   </section>
   <!-- end about section -->
 
-  <!-- why section -->
-  <section class="why_section layout_padding">
-    <div class="section_number">
-      02
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <h2>
-            Kenapa Pilih Supplier Florist Surabaya?
-          </h2>
-          <p>
-            Supplier Florist Surabaya Berdiri sejak tahun 2011, Toko Kami berlokasi di Surabaya Pusat area Kayoon. Kami siap untuk melayani anda dalam membuat bunga rakit. 
-          </p>
-          <div>
-            <a href="">
-              Read More
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
   <!-- end why section -->
 
-  <!-- gallery section -->
-  {{-- <section class="gallery_section layout_padding">
-    <div class="section_number">
-      03
-    </div>
-    <div class="heading_container justify-content-center">
-      <h2>
-        Our Gallery
-      </h2>
-    </div>
-    <div class="container">
-      <div class="img_container">
-        <div class="box-1">
-          <div class="box-1-container">
-            <div class="b-1">
-              <div class="img-box">
-                <img src="images/g-1.jpg" alt="">
-              </div>
-              <div class="img-box">
-                <img src="images/g-4.jpg" alt="">
-              </div>
-            </div>
-            <div class="b-2">
-              <div class="img-box">
-                <img src="images/g-2.jpg" alt="">
-              </div>
-              <div class="img-box">
-                <img src="images/g-5.jpg" alt="">
-              </div>
-            </div>
-          </div>
-          <div class="b-3">
-            <div class="img-box">
-              <img src="images/g-7.jpg" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="box-2">
-          <div class="img-box">
-            <img src="images/g-3.jpg" alt="">
-          </div>
-          <div class="img-box">
-            <img src="images/g-6.jpg" alt="">
-          </div>
-          <div class="img-box flex-grow-1">
-            <img src="images/g-8.jpg" alt="">
-          </div>
-        </div>
-      </div>
-  </section> --}}
-  <!-- end gallery section -->
-
-  <!-- client section -->
-
-  {{-- <section class="client_section layout_padding">
-    <div class="container">
-      <div class="heading_container justify-content-center">
-        <h2>
-          What Our Customers Say
-        </h2>
-        <div class="section_number">
-          04
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="client_box">
-            <div class="detail_box">
-              <div class="img_box">
-                <img src="images/client-1.png">
-              </div>
-              <h5>
-                nomil du
-              </h5>
-              <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-                classical Latin literature from 45 BC, making it over </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="client_box">
-            <div class="detail_box">
-              <div class="img_box">
-                <img src="images/client-2.png">
-              </div>
-              <h5>
-                zabih jo
-              </h5>
-              <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
-                classical Latin literature from 45 BC, making it over </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> --}}
-
-
-
-  <!-- end client section -->
-
-  <!-- arrange section -->
-
-  {{-- <section class="arrange_section">
-    <div class="container">
-      <div class="detail_box">
-        <h2>
-          Our Wonderful Arrangements
-        </h2>
-        <p>
-          Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin
-          literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney
-          College in Virginia, looked up one of the more obscure Latin words
-        </p>
-      </div>
-    </div>
-  </section> --}}
-
-
-
-  <!-- end arrange section -->
-
-  <!-- contact section -->
-{{-- 
-  <section class="contact_section layout_padding">
-    <div class="section_number">
-      05
-    </div>
-    <div class="container ">
-      <div class="heading_container justify-content-center">
-        <h2 class="">
-          Contact Us
-        </h2>
-      </div>
-
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 mx-auto">
-          <form action="">
-            <div>
-              <input type="text" placeholder="Name" />
-            </div>
-            <div>
-              <input type="email" placeholder="Email" />
-            </div>
-            <div>
-              <input type="text" placeholder="Pone Number" />
-            </div>
-            <div>
-              <input type="text" class="message-box" placeholder="Message" />
-            </div>
-            <div class="d-flex  mt-4 ">
-              <button>
-                SEND
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section> --}}
-
-  <!-- end contact section -->
-
-  <!-- map section -->
-
-  {{-- <div class="map_section">
-    <div class="map_container">
-      <div class="map">
-        <div id="googleMap"></div>
-      </div>
-    </div>
-  </div> --}}
+ 
 
   <!-- end map section -->
 
@@ -651,112 +454,59 @@ hr {
     <div class="container">
       <div class="row">
         <div class="col-md-3">
-          <div class="info_logo">
-            <h5 >
-              SFS
+       
+        </div>
+       
+        <div class="col-md-6">
+          <div class="info_contact">
+            <h5>
+              Jam operasional
             </h5>
-            <p>
-              Florist Bunga terbaik di Surabaya, Percayakan urusan bunga kepada kami.
-            </p>
+       
+          <p>Senin - Sabtu : 08.00 Pagi - 16.00 Sore</p>
+         <p> Kecuali Tgl merah & hari minggu tutup</p>
           </div>
         </div>
-        <div class="col-md-3">
-          {{-- <div class="info_links pl-lg-5">
-            <h5>
-              Useful Link
-            </h5>
-            <ul>
-              <li class="active">
-                <a href="index.html">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="about.html">
-                  Product
-                </a>
-              </li>
-              <li>
-                <a href="gallery.html">
-                  Gallery
-                </a>
-              </li>
-              <li>
-                <a href="contact.html">
-                  Contact Us
-                </a>
-              </li>
-            </ul>
-          </div> --}}
-        </div>
-        <div class="col-md-3">
-          {{-- <div class="info_insta">
-            <h5>
-              Instagram
-            </h5>
-            <div class="insta_container">
-              <div>
-                <a href="">
-                  <div class="insta-box b-1">
-                    <img src="images/insta-1.png" alt="">
-                  </div>
-                </a>
-                <a href="">
-                  <div class="insta-box b-2">
-                    <img src="images/insta-2.png" alt="">
-                  </div>
-                </a>
-              </div>
-              <div>
-                <a href="">
-                  <div class="insta-box b-3">
-                    <img src="images/insta-3.png" alt="">
-                  </div>
-                </a>
-                <a href="">
-                  <div class="insta-box b-4">
-                    <img src="images/insta-4.png" alt="">
-                  </div>
-                </a>
-              </div>
-              <div>
-                <a href="">
-                  <div class="insta-box b-3">
-                    <img src="images/insta-5.png" alt="">
-                  </div>
-                </a>
-                <a href="">
-                  <div class="insta-box b-4">
-                    <img src="images/insta-6.png" alt="">
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div> --}}
-        </div>
+     
         <div class="col-md-3">
           <div class="info_contact">
             <h5>
               Contact
             </h5>
+         
             <div>
               <img src="images/location-white.png" alt="">
+             <u><a href = "https://www.google.com/maps?ll=-7.236819,112.729736&z=16&t=m&hl=en&gl=ID&mapclient=embed&q=Jl.+Kawung+II+No.1+Kemayoran+Kec.+Krembangan+Surabaya,+Jawa+Timur+60176" style = "color:white;">
               <p>
-               Surabaya
+               Jl.Kawung II no 1
+              </p>
+            </a>
+          </u>
+            </div>
+          </a>
+            <div>
+              <img src="images/telephone-white.png" alt="">
+              <p>
+               <u> <a style = "color:white;" href = "https://wa.me/+6285161116235?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 1</a></u>
+
+                
               </p>
             </div>
             <div>
               <img src="images/telephone-white.png" alt="">
               <p>
-                083858428412
+                <u><a style = "color:white;" href = "https://wa.me/+6285175388547?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 2</a></u>
+
+                
               </p>
             </div>
-            <div>
+
+            {{-- <div>
               <img src="images/envelope-white.png" alt="">
               <p>
                 sfs@gmail.com
               </p>
-            </div>
+            </div> --}}
           </div>
         </div>
       </div>

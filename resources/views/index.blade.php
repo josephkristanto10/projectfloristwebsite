@@ -557,10 +557,10 @@ html {
                   <div class="detail_box">
                     
                     <h1  id = "judul" style = "">
-                     Hi, <br>Welcome to our<br> online store
+                     Welcome to <br>Supplier  Florist Surabaya
                     </h1>
-                    <p id = "description_judul">
-                      Pusat <u style = "text-decoration: underline  #dc3545 2.5px; text-underline-offset: 5px;font-weight:700;">Perlengkapan Florist</u> Di Surabaya, Kualitas Super dan Terbaik, Harga Bersaing. 
+                    <p id = "description_judul">   
+                      Membantu melengkapi <u style = "text-decoration: underline  #dc3545 2.5px; text-underline-offset: 5px;font-weight:700;"> kebutuhan florist</u> dengan harga terjangkau. 
                       
                     </p>
                     <div>
@@ -668,14 +668,7 @@ html {
     <div class="container">
       <div class="row">
         <div class="col-md-3">
-          <div class="info_logo">
-            <h5 style = "font-family:arial;">
-              SFS
-            </h5>
-            <p>
-              Membantu melengkapi kebutuhan florist dengan harga terjangkau.
-            </p>
-          </div>
+       
         </div>
        
         <div class="col-md-6">
@@ -688,51 +681,7 @@ html {
          <p> Kecuali Tgl merah & hari minggu tutup</p>
           </div>
         </div>
-        {{-- <div class="col-md-3">
-          <div class="info_insta">
-            <h5>
-              Instagram
-            </h5>
-            <div class="insta_container">
-              <div>
-                <a href="">
-                  <div class="insta-box b-1">
-                    <img src="images/insta-1.png" alt="">
-                  </div>
-                </a>
-                <a href="">
-                  <div class="insta-box b-2">
-                    <img src="images/insta-2.png" alt="">
-                  </div>
-                </a>
-              </div>
-              <div>
-                <a href="">
-                  <div class="insta-box b-3">
-                    <img src="images/insta-3.png" alt="">
-                  </div>
-                </a>
-                <a href="">
-                  <div class="insta-box b-4">
-                    <img src="images/insta-4.png" alt="">
-                  </div>
-                </a>
-              </div>
-              <div>
-                <a href="">
-                  <div class="insta-box b-3">
-                    <img src="images/insta-5.png" alt="">
-                  </div>
-                </a>
-                <a href="">
-                  <div class="insta-box b-4">
-                    <img src="images/insta-6.png" alt="">
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div> --}}
+     
         <div class="col-md-3">
           <div class="info_contact">
             <h5>
