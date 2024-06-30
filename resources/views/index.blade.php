@@ -382,7 +382,7 @@ html {
     max-width: 500px !important;
   } */
     #judul{
-      font-size:23px !important;
+      font-size:35px !important;
         color: #f9c265 !important;
         text-align: left;
         
@@ -408,7 +408,7 @@ html {
     width:250px;
   }
     #judul{
-   
+      font-size:35px !important;
         color: #f9c265 !important;
     }
     .mobileonly{
