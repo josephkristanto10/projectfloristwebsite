@@ -383,7 +383,7 @@ html {
   } */
     #judul{
       font-size:23px !important;
-        color: #3A2D28 !important;
+        color: #f9c265 !important;
         text-align: left;
         
     }
@@ -409,7 +409,7 @@ html {
   }
     #judul{
    
-        color: #3A2D28 !important;
+        color: #f9c265 !important;
     }
     .mobileonly{
       display:block !important;
@@ -425,7 +425,7 @@ html {
   #judul{
     
     font-size:30px ;
-        color:#3A2D28 !important;
+        color:#f9c265 !important;
     }
   .detail_box{
     width:300px;
@@ -472,7 +472,7 @@ html {
 
 <body>
 
-  <div class="hero_area" style = "">
+  <div class="hero_area" style = "background-image:url('{{asset('images/hero_section.png')}}')">
     <!-- header section strats -->
     <header class="header_section" style = "padding-top:5px;background-color:#f1f1f1;  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;height:70px;">
       <div class="container">
