@@ -472,7 +472,8 @@ html {
 
 <body>
 
-  <div class="hero_area" style = "background-image:url('{{asset('images/hero_section.png')}}') !important;">
+  <div class="hero_area" style = "  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('{{asset('images/hero_section.png')}}') !important;">
     <!-- header section strats -->
     <header class="header_section" style = "padding-top:5px;background-color:#f1f1f1;  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;height:70px;">
       <div class="container">
@@ -588,6 +589,7 @@ html {
     </section>
     <!-- end slider section -->
   </div>
+
 
   <!-- about section -->
   <section class="about_section " >
