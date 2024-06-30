@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 60,
+            "activePatchIndex": 61,
             "patches": [
                 {
                     "date": 1718878070609,
@@ -248,6 +248,10 @@
                 {
                     "date": 1719244701174,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n         $myhashpassword = bcrypt(\"mypwd\");\n         $myvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if($myvisitor->count() > 0){\n             if(Hash::check($mypwd, $myvisitor[0]->password)) {\n-                Session::push('id_user',$myvisitor[0]->id);\n+                Session::put('id_user',$myvisitor[0]->id);\n                 Session::push('user',$myvisitor[0]->username);\n                 return \"cocok\";\n             }\n             else{\n"
+                },
+                {
+                    "date": 1719725065610,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n         $myvisitor = Visitor::where(\"username\",\"=\",$myemail)->get();\n         if($myvisitor->count() > 0){\n             if(Hash::check($mypwd, $myvisitor[0]->password)) {\n                 Session::put('id_user',$myvisitor[0]->id);\n-                Session::push('user',$myvisitor[0]->username);\n+                Session::put('user',$myvisitor[0]->username);\n                 return \"cocok\";\n             }\n             else{\n                 return \"tidak cocok\";\n"
                 }
             ],
             "date": 1718878070609,

@@ -438,7 +438,7 @@ html {
 
 @media (min-width: 992px) { 
   #judul{
-        color:#3A2D28 !important;
+        color:#f9c265 !important;
     }
     .mobileonly{
       display:none !important;
@@ -448,12 +448,22 @@ html {
 
 @media (min-width: 1200px) { 
   #judul{
-        color:#3A2D28 !important;
+        color:#f9c265 !important;
     }
     .mobileonly{
       display:none !important;
     }
  }
+
+ .contact_section {
+  background-image: none !important;
+}
+
+.footer_section::before {
+
+  background-image: none !important;
+
+}
   </style>
     <link href="{{ asset('css/style.css')}}" rel="stylesheet" />
     <!-- responsive style -->
@@ -469,7 +479,7 @@ html {
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="{{url('/')}}" style = "width:270px;">
             <span style = "color:#714423; font-size:18px;font-family:arial;">
-              Supplier Florist Surabaya
+              Hi,
             </span>
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -556,11 +566,11 @@ html {
                 <div class="col-lg-6 col-md-8 col-sm-4">
                   <div class="detail_box">
                     
-                    <h1  id = "judul" style = "">
+                    <h1  id = "judul" style = " text-shadow: 2px 2px #3A2D28;">
                      Welcome to <br>Supplier  Florist Surabaya
                     </h1>
-                    <p id = "description_judul">   
-                      Membantu melengkapi <u style = "text-decoration: underline  #dc3545 2.5px; text-underline-offset: 5px;font-weight:700;"> kebutuhan florist</u> dengan harga terjangkau. 
+                    <p id = "description_judul" style = "color:#f9c265;text-shadow: 2px 2px #3A2D28; font-size:12px !important;">   
+                      Membantu melengkapi <u style = "text-decoration: underline  #dc3545 1px; text-underline-offset: 5px;font-weight:700;"> KEBUTUHAN FLORIST</u> <br>dengan harga terjangkau. 
                       
                     </p>
                     <div>
@@ -596,29 +606,7 @@ html {
   </section>
   <!-- end about section -->
 
-  <!-- why section -->
-  {{-- <section class="why_section layout_padding">
-    <div class="section_number">
-      02
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <h2>
-            Kenapa Pilih Supplier Florist Surabaya?
-          </h2>
-          <p>
-            Supplier Florist Surabaya Berdiri sejak tahun 2011, Toko Kami berlokasi di Surabaya Pusat area Kayoon. Kami siap untuk melayani anda dalam membuat bunga rakit. 
-          </p>
-          <div>
-            <a href="">
-              Read More
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> --}}
+
 
 
 
@@ -650,21 +638,14 @@ html {
 
   <!-- end contact section -->
 
-  <!-- map section -->
 
-  {{-- <div class="map_section">
-    <div class="map_container">
-      <div class="map">
-        <div id="googleMap"></div>
-      </div>
-    </div>
-  </div> --}}
   <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #131312 !important; " id = "judul_best_seller">  Lokasi Kami</h1>
   <div style = "text-align:center;width:100%;"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.035248363381!2d112.72973599999999!3d-7.2368193!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7f9252591ffa3%3A0xe161139591ddb221!2sJl.%20Kawung%20II%20No.1%2C%20Kemayoran%2C%20Kec.%20Krembangan%2C%20Surabaya%2C%20Jawa%20Timur%2060176!5e0!3m2!1sen!2sid!4v1719580251422!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
   <!-- end map section -->
 
   <!-- info section -->
-  <section class="info_section layout_padding">
+  <!-- info section -->
+  <section class="info_section layout_padding" style  = "background-color: #E3BC9A;color:#3A2D28 !important;">
     <div class="container">
       <div class="row">
         <div class="col-md-3">
@@ -674,23 +655,23 @@ html {
         <div class="col-md-6">
           <div class="info_contact">
             <h5>
-              Jam operasional
+              JAM OPERASIONAL
             </h5>
        
-          <p>Senin - Sabtu : 08.00 Pagi - 16.00 Sore</p>
-         <p> Kecuali Tgl merah & hari minggu tutup</p>
+          <p>Senin - Sabtu : 08.00 - 16.00 </p>
+         <p> Tgl merah & hari minggu tutup</p>
           </div>
         </div>
      
         <div class="col-md-3">
           <div class="info_contact">
             <h5>
-              Contact
+              CONTACT
             </h5>
          
-            <div>
-              <img src="images/location-white.png" alt="">
-             <u><a href = "https://www.google.com/maps?ll=-7.236819,112.729736&z=16&t=m&hl=en&gl=ID&mapclient=embed&q=Jl.+Kawung+II+No.1+Kemayoran+Kec.+Krembangan+Surabaya,+Jawa+Timur+60176" style = "color:white;">
+            <div style = "color:#3A2D28">
+              <img src="images/location-white.png" alt="" >
+             <u><a href = "https://www.google.com/maps?ll=-7.236819,112.729736&z=16&t=m&hl=en&gl=ID&mapclient=embed&q=Jl.+Kawung+II+No.1+Kemayoran+Kec.+Krembangan+Surabaya,+Jawa+Timur+60176" style = "color:#3A2D28;">
               <p>
                Jl.Kawung II no 1
               </p>
@@ -701,7 +682,7 @@ html {
             <div>
               <img src="images/telephone-white.png" alt="">
               <p>
-               <u> <a style = "color:white;" href = "https://wa.me/+6285161116235?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 1</a></u>
+               <u> <a style = "color:#3A2D28;" href = "https://wa.me/+6285161116235?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 1</a></u>
 
                 
               </p>
@@ -709,7 +690,7 @@ html {
             <div>
               <img src="images/telephone-white.png" alt="">
               <p>
-                <u><a style = "color:white;" href = "https://wa.me/+6285175388547?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 2</a></u>
+                <u><a style = "color:#3A2D28;" href = "https://wa.me/+6285175388547?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 2</a></u>
 
                 
               </p>
@@ -730,8 +711,8 @@ html {
   <!-- end info_section -->
 
   <!-- footer section -->
-  <footer class="container-fluid footer_section">
-    <p>
+  <footer class="container-fluid footer_section" style = "background-color:#E3BC9A;color:#3A2D28 !important;">
+    <p style = "color:#3A2D28 !important;">
       &copy; 2024 Supplier Florist Surabaya
     </p>
   </footer>

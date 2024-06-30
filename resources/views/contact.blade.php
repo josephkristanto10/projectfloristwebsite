@@ -443,7 +443,8 @@ hr {
   <!-- end map section -->
 
   <!-- info section -->
-  <section class="info_section layout_padding">
+  <!-- info section -->
+  <section class="info_section layout_padding" style  = "background-color: #E3BC9A;color:#3A2D28 !important;">
     <div class="container">
       <div class="row">
         <div class="col-md-3">
@@ -453,23 +454,23 @@ hr {
         <div class="col-md-6">
           <div class="info_contact">
             <h5>
-              Jam operasional
+              JAM OPERASIONAL
             </h5>
        
-          <p>Senin - Sabtu : 08.00 Pagi - 16.00 Sore</p>
-         <p> Kecuali Tgl merah & hari minggu tutup</p>
+          <p>Senin - Sabtu : 08.00 - 16.00 </p>
+         <p> Tgl merah & hari minggu tutup</p>
           </div>
         </div>
      
         <div class="col-md-3">
           <div class="info_contact">
             <h5>
-              Contact
+              CONTACT
             </h5>
          
-            <div>
-              <img src="images/location-white.png" alt="">
-             <u><a href = "https://www.google.com/maps?ll=-7.236819,112.729736&z=16&t=m&hl=en&gl=ID&mapclient=embed&q=Jl.+Kawung+II+No.1+Kemayoran+Kec.+Krembangan+Surabaya,+Jawa+Timur+60176" style = "color:white;">
+            <div style = "color:#3A2D28">
+              <img src="images/location-white.png" alt="" >
+             <u><a href = "https://www.google.com/maps?ll=-7.236819,112.729736&z=16&t=m&hl=en&gl=ID&mapclient=embed&q=Jl.+Kawung+II+No.1+Kemayoran+Kec.+Krembangan+Surabaya,+Jawa+Timur+60176" style = "color:#3A2D28;">
               <p>
                Jl.Kawung II no 1
               </p>
@@ -480,7 +481,7 @@ hr {
             <div>
               <img src="images/telephone-white.png" alt="">
               <p>
-               <u> <a style = "color:white;" href = "https://wa.me/+6285161116235?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 1</a></u>
+               <u> <a style = "color:#3A2D28;" href = "https://wa.me/+6285161116235?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 1</a></u>
 
                 
               </p>
@@ -488,7 +489,7 @@ hr {
             <div>
               <img src="images/telephone-white.png" alt="">
               <p>
-                <u><a style = "color:white;" href = "https://wa.me/+6285175388547?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 2</a></u>
+                <u><a style = "color:#3A2D28;" href = "https://wa.me/+6285175388547?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 2</a></u>
 
                 
               </p>
@@ -509,8 +510,8 @@ hr {
   <!-- end info_section -->
 
   <!-- footer section -->
-  <footer class="container-fluid footer_section">
-    <p>
+  <footer class="container-fluid footer_section" style = "background-color:#E3BC9A;color:#3A2D28 !important;">
+    <p style = "color:#3A2D28 !important;">
       &copy; 2024 Supplier Florist Surabaya
     </p>
   </footer>

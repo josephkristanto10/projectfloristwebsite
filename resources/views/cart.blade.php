@@ -512,28 +512,7 @@ a:hover{
   <!-- end about section -->
 
   <!-- why section -->
-  <section class="why_section layout_padding">
-    <div class="section_number">
-      02
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <h2>
-            Kenapa Pilih Supplier Florist Surabaya?
-          </h2>
-          <p>
-            Supplier Florist Surabaya Berdiri sejak tahun 2011, Toko Kami berlokasi di Surabaya Pusat area Kayoon. Kami siap untuk melayani anda dalam membuat bunga rakit. 
-          </p>
-          <div>
-            <a href="">
-              Read More
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+ 
 
   <div id = "checkoutbar"style = "height:100px;position:fixed;bottom:0;width:100%;background-color:#ffffff;z-index:10000; box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
     <div class="info_logo" style = "float:left;position:relative; top:20px;left:20px;font-family: 'Baloo Chettan', cursive;">
@@ -548,7 +527,7 @@ a:hover{
   
 
   <!-- info section -->
-  <section class="info_section layout_padding">
+  <section class="info_section layout_padding" style  = "background-color: #E3BC9A;color:#3A2D28 !important;">
     <div class="container">
       <div class="row">
         <div class="col-md-3">
@@ -558,23 +537,23 @@ a:hover{
         <div class="col-md-6">
           <div class="info_contact">
             <h5>
-              Jam operasional
+              JAM OPERASIONAL
             </h5>
        
-          <p>Senin - Sabtu : 08.00 Pagi - 16.00 Sore</p>
-         <p> Kecuali Tgl merah & hari minggu tutup</p>
+          <p>Senin - Sabtu : 08.00 - 16.00 </p>
+         <p> Tgl merah & hari minggu tutup</p>
           </div>
         </div>
      
         <div class="col-md-3">
           <div class="info_contact">
             <h5>
-              Contact
+              CONTACT
             </h5>
          
-            <div>
-              <img src="images/location-white.png" alt="">
-             <u><a href = "https://www.google.com/maps?ll=-7.236819,112.729736&z=16&t=m&hl=en&gl=ID&mapclient=embed&q=Jl.+Kawung+II+No.1+Kemayoran+Kec.+Krembangan+Surabaya,+Jawa+Timur+60176" style = "color:white;">
+            <div style = "color:#3A2D28">
+              <img src="images/location-white.png" alt="" >
+             <u><a href = "https://www.google.com/maps?ll=-7.236819,112.729736&z=16&t=m&hl=en&gl=ID&mapclient=embed&q=Jl.+Kawung+II+No.1+Kemayoran+Kec.+Krembangan+Surabaya,+Jawa+Timur+60176" style = "color:#3A2D28;">
               <p>
                Jl.Kawung II no 1
               </p>
@@ -585,7 +564,7 @@ a:hover{
             <div>
               <img src="images/telephone-white.png" alt="">
               <p>
-               <u> <a style = "color:white;" href = "https://wa.me/+6285161116235?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 1</a></u>
+               <u> <a style = "color:#3A2D28;" href = "https://wa.me/+6285161116235?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 1</a></u>
 
                 
               </p>
@@ -593,7 +572,7 @@ a:hover{
             <div>
               <img src="images/telephone-white.png" alt="">
               <p>
-                <u><a style = "color:white;" href = "https://wa.me/+6285175388547?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 2</a></u>
+                <u><a style = "color:#3A2D28;" href = "https://wa.me/+6285175388547?text=Halo%2C%20Saya%20klik%20ini%20dari%20website%20supplierfloristsurabaya.%20Saya%20mau%20bertanya.">Admin - 2</a></u>
 
                 
               </p>
@@ -614,8 +593,8 @@ a:hover{
   <!-- end info_section -->
 
   <!-- footer section -->
-  <footer class="container-fluid footer_section">
-    <p>
+  <footer class="container-fluid footer_section" style = "background-color:#E3BC9A;color:#3A2D28 !important;">
+    <p style = "color:#3A2D28 !important;">
       &copy; 2024 Supplier Florist Surabaya
     </p>
   </footer>
