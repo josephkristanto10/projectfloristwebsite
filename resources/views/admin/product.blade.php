@@ -122,7 +122,7 @@
           
               <div class="card-body p-4">
                 <span style = "float:right;margin-right:20px;" ><button class = "btn btn-primary" data-toggle = "modal" data-target="#modal_add_product" >Tambah Produk</button></span>
-                <h1>Product</h1> 
+                <h1>Product</h1>
                 <table id="table-product" class="table table-bordered table-hover">
                   <thead>
                     <tr>
@@ -156,7 +156,6 @@
             <div class="modal-header">
               <h3 class="modal-title" id="judulproduk" ><i class="fa fa-list-alt" aria-hidden="true"></i>
                 Produk</h3>
-           
               <button type="button" id = "closeeditproduct" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -212,7 +211,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <h4>Tambah Produk</h4>      
+              <h4>Tambah Produk</h4>
               <form id = "formtambah" enctype="multipart/form-data">
                 {!! csrf_field() !!}
               <div class = "row mt-3 mb-3">
@@ -239,6 +238,7 @@
               <div class = "row mt-3 mb-3">
                 <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success "  value = "Tambah"></div>
               </div>
+              
             </form>
              
             
@@ -416,8 +416,6 @@
 
       $("#formtambah").on('submit',(function(e){
           e.preventDefault();
-          // $("#add_alert_notif_success").css("display","none");
-          // $("#add_alert_notif_danger").css("display","none");
           var formdata = new FormData(this);
           $.ajax({
             url: "{{url('/addproductadmin')}}",

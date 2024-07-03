@@ -247,15 +247,21 @@ class AdminController extends Controller
         }
     }
     public function addvariantproductadmin(Request $request){
+        $data = $request->all();
+        $myallname = "";
         $pilihan_productvariant = $request->add_pil_produk;
-        $nama_product = $request->add_nama_produk;
-        $nama_product = $request->add_nama_produk;
-        $harga_product = $request->add_hrg_produk;
-        $discount_product = $request->add_dsc_produk;
+        foreach( $request->add_nama_produk as $myindex => $dat){
+            $myallname .= $request->add_nama_produk[$myindex];
+        
+      
+        $nama_product = $request->add_nama_produk[$myindex];
+        $nama_product = $request->add_nama_produk[$myindex];
+        $harga_product = $request->add_hrg_produk[$myindex];
+        $discount_product = $request->add_dsc_produk[$myindex];
         // $desc_product =  $request->add_desc_produk;
         $status_gbr_product = "";
         if($request->hasFile('add_gbr_produk')) {
-            $file_product = $request->file('add_gbr_produk');
+            $file_product = $request->file('add_gbr_produk')[$myindex];
             $tujuan_upload = public_path('images/variant');
             // $nama_file = "product".$id_productvariant.".".$file_product->getClientOriginalExtension();
            
@@ -275,6 +281,8 @@ class AdminController extends Controller
             Product::where(['id' => $pilihan_productvariant ])->update(['has_variants' => 1]);
 
         }
+         }
+        return response()->json(['output' => $myallname]);
     }
     public function changestatusvariant(Request $request){
         $id_variant = $request->idproductvariant;

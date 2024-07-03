@@ -164,30 +164,42 @@
               </button>
             </div>
             <div class="modal-body">
-              <h4>Tambah Variant Produk</h4>
+           
+              <h4>Tambah Variant Produk </h4>
+             
               <form id = "formtambah" enctype="multipart/form-data">
                 {!! csrf_field() !!}
               <div class = "row mt-3 mb-3">
-                <div class = "col-6">Pilih Produk <select id = "add_pilihan_produk" name = "add_pil_produk"  class = "form-control">
+                <div class = "col-12">Pilih Produk <select id = "add_pilihan_produk" name = "add_pil_produk"  class = "form-control">
                 @foreach ($list_product as $lp)
                 <option value = '{{$lp->id}}'>{{$lp->id}} - {{$lp->names}}</option>
                 @endforeach  
                 </select> </div>
+              </div>
+              <div class = "row mt-3 mb-3">
+                <div class = "col-3">Gambar Produk <input id = "add_gambarproduk" name = "add_gbr_produk[]" type = "file" class = "form-control" required> </div>
+                <div class = "col-3">Nama Produk <input  id = "add_namaproduk" name = "add_nama_produk[]" type = "text" class = "form-control" required></div>
+                <div class = "col-3">Harga Produk <input id = "add_hargaproduk" name = "add_hrg_produk[]" type = "text" class = "form-control" required></div>
+                <div class = "col-3">Discount Produk <input  id = "add_discountproduk" name = "add_dsc_produk[]" type = "text" class = "form-control" required></div>
 
               </div>
-              <div class = "row mt-3 mb-3">
-                <div class = "col-6">Gambar Produk <input id = "add_gambarproduk" name = "add_gbr_produk" type = "file" class = "form-control"> </div>
-                <div class = "col-6">Nama Produk <input  id = "add_namaproduk" name = "add_nama_produk" type = "text" class = "form-control" required></div>
+              <div id = "tambahan_variant">
+                  <div id = "append_tambahan_variant"></div>
               </div>
-              <div class = "row mt-3 mb-3">
-                <div class = "col-6">Harga Produk <input id = "add_hargaproduk" name = "add_hrg_produk" type = "text" class = "form-control" required></div>
-                <div class = "col-6">Discount Produk <input  id = "add_discountproduk" name = "add_dsc_produk" value = "0" type = "text" class = "form-control" required></div>
+              <div class="alert alert-success d-flex align-items-center" role="alert" id = "add_alert_notif_success" style = "display:none !important;">
+                <div>
+                  Produk Sukses Ditambah pada <span id = "add_tanggal_alert_success"></span>. Jika tidak tertambah, Hubungi Developer.
+                </div>
               </div>
-              {{-- <div class = "row mt-3 mb-3">
-                <div class = "col-12">Description Produk <input  id = "add_descriptionproduk" name = "add_desc_produk" type = "text" class = "form-control" required></div>
-              </div> --}}
+              <div class="alert alert-danger d-flex align-items-center" role="alert" id = "add_alert_notif_danger" style = "display:none !important;">
+                <div>
+                  Produk gagal Ditambah <span id = "add_tanggal_alert_danger"></span>.. Segera Hubungi Developer.
+                </div>
+              </div>
+              <span style = "float:right;margin-right:30px;"><button type = "button" class = "btn btn-primary" onclick = "tambahvariantlain()">Tambah variant lain</button></span>
+              <br><br>
               <div class = "row mt-3 mb-3">
-                <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success "  value = "Tambah"></div>
+                <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success "  value = "Upload Variant"></div>
               </div>
             </form>
              
@@ -225,6 +237,7 @@
               <div class = "col-12">Gambar Variant <input id = "edit_gambarproduk" name = "gbr_produk" type = "file" class = "form-control"> </div>
               {{-- <div class = "col-6">Nama Variant <input  id = "edit_namaproduk" name = "nama_produk" type = "text" class = "form-control" required></div> --}}
             </div>
+            
           <div class = "row mt-3 mb-3">
             <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success "  value = "Ganti"></div>
           </div>
@@ -256,6 +269,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+  var jumlahaddvariant = 0;
   var globalselectedproduct = "";
    $(document).ready(function () {
    var mytable =  $('#table-variant-product').DataTable({
@@ -392,22 +406,34 @@
               processData:false,
               success: function(data){
                 $('#table-variant-product').DataTable().ajax.reload();
-                // $('#modal_detail_product').modal();
-                $("#closeaddproduct").click();
-                Swal.fire({
-                  title: "<strong>Produk Ditambahkan</strong>",
-                  icon: "success",
-                  html: "Jika tidak tertambah, hubungi Developer",
-                  showCloseButton: false,
-                  showCancelButton: false,
-                  allowOutsideClick:false,
-                  focusConfirm: false,
-                  confirmButtonText: `
-                    <i class="fa fa-thumbs-up"></i> Ok
-                  `,
-                  confirmButtonAriaLabel: "Ok",
-              });
 
+                var currentdate = new Date(); 
+                var tgl =  currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+                $("#add_alert_notif_danger").attr("style", "display: none !important");
+                $("#add_alert_notif_success").attr("style", "display: block !important");
+                $("#add_tanggal_alert_success").html(tgl);
+                $("#append_tambahan_variant").html("");
+                
+                $("#formtambah").trigger("reset");
+                jumlahaddvariant = 0;
+
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                var currentdate = new Date(); 
+                var tgl =  currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+                $("#add_alert_notif_success").attr("style", "display: none !important");
+                $("#add_alert_notif_danger").attr("style", "display: block !important");
+                $("#add_tanggal_alert_danger").html(tgl);
               },
           });
       }));
@@ -440,6 +466,21 @@
           }
         });
       }
+      function tambahvariantlain(){
+        var stringelement = '<div class ="row mt-3 mb-3" id = "row_add_'+jumlahaddvariant+'"><div class = "col-3">Gambar Produk <input  name = "add_gbr_produk[]" type = "file" class = "form-control"> </div><div class = "col-3">Nama Produk <input name = "add_nama_produk[]" type = "text" class = "form-control" required></div><div class = "col-3">Harga Produk <input name = "add_hrg_produk[]" type = "text" class = "form-control" required></div>                <div class = "col-2">Discount Produk <input   name = "add_dsc_produk[]" type = "text" class = "form-control" required></div><div class = "col-1"><br><button class = "btn btn-danger" onclick = "removevariantlain(this)" data-id-jumlah = "'+jumlahaddvariant+'"><i class = "fa fa-trash"></i></button></div></div>';
+        $("#append_tambahan_variant").append(stringelement);
+        jumlahaddvariant +=1;
+      }
+      function removevariantlain(myobj){
+         var idjumlah =  $(myobj).attr("data-id-jumlah");
+         $("#row_add_"+idjumlah).remove();
+      }
      
       
 </script>
+
+
+{{-- Unused --}}
+{{-- <div class = "row mt-3 mb-3">
+                <div class = "col-12">Description Produk <input  id = "add_descriptionproduk" name = "add_desc_produk" type = "text" class = "form-control" required></div>
+              </div> --}}
