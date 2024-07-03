@@ -122,7 +122,7 @@
           
               <div class="card-body p-4">
                 <span style = "float:right;margin-right:20px;" ><button class = "btn btn-primary" data-toggle = "modal" data-target="#modal_add_product" >Tambah Produk</button></span>
-                <h1>Product</h1>
+                <h1>Product</h1> 
                 <table id="table-product" class="table table-bordered table-hover">
                   <thead>
                     <tr>
@@ -156,6 +156,7 @@
             <div class="modal-header">
               <h3 class="modal-title" id="judulproduk" ><i class="fa fa-list-alt" aria-hidden="true"></i>
                 Produk</h3>
+           
               <button type="button" id = "closeeditproduct" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -211,7 +212,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <h4>Tambah Produk</h4>
+              <h4>Tambah Produk</h4>      
               <form id = "formtambah" enctype="multipart/form-data">
                 {!! csrf_field() !!}
               <div class = "row mt-3 mb-3">
@@ -224,6 +225,16 @@
               </div>
               <div class = "row mt-3 mb-3">
                 <div class = "col-12">Description Produk <input  id = "add_descriptionproduk" name = "add_desc_produk" type = "text" class = "form-control" required></div>
+              </div>
+              <div class="alert alert-success d-flex align-items-center" role="alert" id = "add_alert_notif_success" style = "display:none !important;">
+                <div>
+                  Produk Sukses Ditambah pada <span id = "add_tanggal_alert_success"></span>. Jika tidak tertambah, Hubungi Developer.
+                </div>
+              </div>
+              <div class="alert alert-danger d-flex align-items-center" role="alert" id = "add_alert_notif_danger" style = "display:none !important;">
+                <div>
+                  Produk gagal Ditambah <span id = "add_tanggal_alert_danger"></span>.. Segera Hubungi Developer.
+                </div>
               </div>
               <div class = "row mt-3 mb-3">
                 <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success "  value = "Tambah"></div>
@@ -405,6 +416,8 @@
 
       $("#formtambah").on('submit',(function(e){
           e.preventDefault();
+          // $("#add_alert_notif_success").css("display","none");
+          // $("#add_alert_notif_danger").css("display","none");
           var formdata = new FormData(this);
           $.ajax({
             url: "{{url('/addproductadmin')}}",
@@ -416,22 +429,31 @@
               processData:false,
               success: function(data){
                 $('#table-product').DataTable().ajax.reload();
-                // $('#modal_detail_product').modal();
-                $("#closeaddproduct").click();
-                Swal.fire({
-                  title: "<strong>Produk Ditambahkan</strong>",
-                  icon: "success",
-                  html: "Jika tidak tertambah, hubungi Developer",
-                  showCloseButton: false,
-                  showCancelButton: false,
-                  allowOutsideClick:false,
-                  focusConfirm: false,
-                  confirmButtonText: `
-                    <i class="fa fa-thumbs-up"></i> Ok
-                  `,
-                  confirmButtonAriaLabel: "Ok",
-              });
+                var currentdate = new Date(); 
+                var tgl =  currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+                $("#add_alert_notif_danger").attr("style", "display: none !important");
+                $("#add_alert_notif_success").attr("style", "display: block !important");
+                $("#add_tanggal_alert_success").html(tgl);
+                $("#formtambah").trigger("reset");
 
+
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                var currentdate = new Date(); 
+                var tgl =  currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+                $("#add_alert_notif_success").attr("style", "display: none !important");
+                $("#add_alert_notif_danger").attr("style", "display: block !important");
+                $("#add_tanggal_alert_danger").html(tgl);
               },
           });
       }));

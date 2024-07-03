@@ -181,7 +181,7 @@
               </div>
               <div class = "row mt-3 mb-3">
                 <div class = "col-6">Harga Produk <input id = "add_hargaproduk" name = "add_hrg_produk" type = "text" class = "form-control" required></div>
-                <div class = "col-6">Discount Produk <input  id = "add_discountproduk" name = "add_dsc_produk" type = "text" class = "form-control" required></div>
+                <div class = "col-6">Discount Produk <input  id = "add_discountproduk" name = "add_dsc_produk" value = "0" type = "text" class = "form-control" required></div>
               </div>
               {{-- <div class = "row mt-3 mb-3">
                 <div class = "col-12">Description Produk <input  id = "add_descriptionproduk" name = "add_desc_produk" type = "text" class = "form-control" required></div>
