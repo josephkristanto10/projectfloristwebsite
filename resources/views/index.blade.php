@@ -57,7 +57,7 @@ html {
 #pilihbunga{
   border:0px solid black;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  background: linear-gradient(to left, #3A2D28 50%, #E8B865 50%) right;
+  background: linear-gradient(to left, #d68b2d 50%, #E8B865 50%) right;
   background-size: 200%;
   
     transition: .5s ease-out;
@@ -471,9 +471,8 @@ html {
 </head>
 
 <body>
-
-  <div class="hero_area" style = "background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('{{asset('images/hero_section.png')}}') !important; background-size:cover !important; background-repeat:no-repeat !important;background-position:left;">
+  {{-- linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) --}}
+  <div class="hero_area" style = "background:url('{{asset('images/hero_section.jpg')}}') !important; background-size:cover !important; background-repeat:no-repeat !important;background-position:right;">
     <!-- header section strats -->
     <header class="header_section" style = "padding-top:5px;background-color:#f1f1f1;  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;height:70px;">
       <div class="container">
@@ -567,11 +566,11 @@ html {
                 <div class="col-lg-6 col-md-8 col-sm-4">
                   <div class="detail_box">
                     
-                    <h1  id = "judul" style = " text-shadow: 2px 2px #3A2D28;">
-                     Welcome to <br>Supplier  Florist Surabaya
+                    <h1  id = "judul" style = "color: #F2D2BD;">
+                      <span style = "font-size:28px !important;"> Welcome to </span> <br><span style = "font-size:48px;">Supplier  Florist Surabaya</span>
                     </h1>
-                    <p id = "description_judul" style = "color:#f9c265;text-shadow: 2px 2px #3A2D28; font-size:12px !important;">   
-                      Membantu melengkapi <u style = "text-decoration: underline  #dc3545 1px; text-underline-offset: 5px;font-weight:700;"> KEBUTUHAN FLORIST</u> <br>dengan harga terjangkau. 
+                    <p id = "description_judul" style = "color:#f9c265; font-size:13px !important;">   
+                      Membantu melengkapi <u style = "font-weight:700;"> KEBUTUHAN FLORIST</u> <br>dengan harga terjangkau. 
                       
                     </p>
                     <div>
