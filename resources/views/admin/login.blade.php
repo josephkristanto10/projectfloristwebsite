@@ -7,6 +7,11 @@
   <title>Supplier Florist Surabaya</title>
   <link rel="shortcut icon" type="image/png" href="{{asset('images/logo.png')}}" />
   <link rel="stylesheet" href="{{asset('admin/assets/css/styles.min.css')}}" />
+  <style>
+    body{
+      background-color:#F2D2BD !important;
+    }
+  </style>
 </head>
 
 <body>
@@ -21,7 +26,7 @@
             <div class="card mb-0">
               <div class="card-body">
                 <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                  <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">
+                  <img src="{{asset('images/logo-modified.png')}}" style = "width:110px;height:110px;" alt="">
                 </a>
                 <h1 style = "text-align:center;"> Admin Site</h1>
                 <p class="text-center">Selamat datang di admin site supplier florist surabaya</p>
@@ -43,7 +48,7 @@
                     </div>
                     {{-- <a class="text-primary fw-bold" href="./index.html">Forgot Password ?</a> --}}
                   </div>
-                  <button id = "login" type= "button" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In</button>
+                  <button id = "login" type= "button" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" style = " background-color:#F2D2BD !important;color:#131312; border:0px;">Sign In</button>
                   <div class="d-flex align-items-center justify-content-center">
                     {{-- <p class="fs-4 mb-0 fw-bold">New to Modernize?</p> --}}
                     {{-- <a class="text-primary fw-bold ms-2" href="./authentication-register.html">Create an account</a> --}}

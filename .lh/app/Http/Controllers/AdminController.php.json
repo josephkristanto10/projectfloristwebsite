@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 424,
+            "activePatchIndex": 427,
             "patches": [
                 {
                     "date": 1719492549189,
@@ -1704,6 +1704,18 @@
                 {
                     "date": 1720851409629,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -131,9 +131,9 @@\n     public function getdetailproductadmin(Request $request){\n         $id_product = $request->idproduct;\n         $hasil = \"\";\n         $myproduct = ProductVariant::leftJoin(\"product\",'product.id','=','product_variant.id_product')->where(\"product_variant.id_product\",'=',$id_product)->select(\"product_variant.*\",\"product.images as gambar_produk\", \"product.names as nama_produk\", \"product.prices as harga_produk\", \"product.discounts as discount_produk\")->get();\n-        $products = Product::leftJoin(\"category\", \"category.id\",'=',\"product.product_category\")->where(\"id\",'=',$id_product)->select(\"product.*\",\"category.category_name\", \"category.id as category_id\")->get();\n+        $products = Product::leftJoin(\"category\", \"category.id\",'=',\"product.product_category\")->where(\"product.id\",'=',$id_product)->select(\"product.*\",\"category.category_name\", \"category.id as category_id\")->get();\n         foreach($myproduct as $mp){\n            $gambar = asset('images/variant/'.$mp->images_variant);\n \n             $hasil .= '<tr><td><img src = \"'.$gambar.'\" style = \"width:50px;height:50px;\"></td>'.'<td>'.$mp->descriptions.'</td>'.'<td>'.$mp->discounts.'</td>'.'<td>'.$mp->prices.'</td></tr>';\n"
+                },
+                {
+                    "date": 1720851786402,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,16 +27,16 @@\n      */\n     public function index()\n     {\n \n-        if(Session::has('id_superadmin')){\n+        // if(Session::has('id_superadmin')){\n            $visitor = Visitor::all();\n            $product = Product::all();\n            $transaction = Transaction::all();\n             return view('admin.index', compact('visitor','product','transaction'));\n-        }else{\n-            return view('admin.login');\n-        }\n+        // }else{\n+        //     return view('admin.login');\n+        // }\n     }\n     public function loginadmincheck(Request $request){\n         $username = $request->user;\n         $password = $request->pass;\n"
+                },
+                {
+                    "date": 1720851819002,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,14 +28,14 @@\n     public function index()\n     {\n \n         // if(Session::has('id_superadmin')){\n-           $visitor = Visitor::all();\n-           $product = Product::all();\n-           $transaction = Transaction::all();\n-            return view('admin.index', compact('visitor','product','transaction'));\n+        //    $visitor = Visitor::all();\n+        //    $product = Product::all();\n+        //    $transaction = Transaction::all();\n+        //     return view('admin.index', compact('visitor','product','transaction'));\n         // }else{\n-        //     return view('admin.login');\n+            return view('admin.login');\n         // }\n     }\n     public function loginadmincheck(Request $request){\n         $username = $request->user;\n"
+                },
+                {
+                    "date": 1720851975282,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,16 +27,16 @@\n      */\n     public function index()\n     {\n \n-        // if(Session::has('id_superadmin')){\n-        //    $visitor = Visitor::all();\n-        //    $product = Product::all();\n-        //    $transaction = Transaction::all();\n-        //     return view('admin.index', compact('visitor','product','transaction'));\n-        // }else{\n+        if(Session::has('id_superadmin')){\n+           $visitor = Visitor::all();\n+           $product = Product::all();\n+           $transaction = Transaction::all();\n+            return view('admin.index', compact('visitor','product','transaction'));\n+        }else{\n             return view('admin.login');\n-        // }\n+        }\n     }\n     public function loginadmincheck(Request $request){\n         $username = $request->user;\n         $password = $request->pass;\n"
                 }
             ],
             "date": 1719492549189,

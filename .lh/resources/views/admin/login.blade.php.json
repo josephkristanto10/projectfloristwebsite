@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 36,
+            "activePatchIndex": 46,
             "patches": [
                 {
                     "date": 1719492421584,
@@ -152,6 +152,46 @@
                 {
                     "date": 1720794916749,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n <head>\n   <meta charset=\"utf-8\">\n   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n   <title>Supplier Florist Surabaya</title>\n-  <link rel=\"shortcut icon\" type=\"image/png\" href=\"{{asset('admin/assets/images/logos/favicon.png')}}\" />\n+  <link rel=\"shortcut icon\" type=\"image/png\" href=\"{{asset('images/logo.png')}}\" />\n   <link rel=\"stylesheet\" href=\"{{asset('admin/assets/css/styles.min.css')}}\" />\n </head>\n \n <body>\n"
+                },
+                {
+                    "date": 1720851743016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,13 @@\n   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n   <title>Supplier Florist Surabaya</title>\n   <link rel=\"shortcut icon\" type=\"image/png\" href=\"{{asset('images/logo.png')}}\" />\n   <link rel=\"stylesheet\" href=\"{{asset('admin/assets/css/styles.min.css')}}\" />\n+  <style>\n+    body{\n+      background-color:#F2D2BD;\n+    }\n+  </style>\n </head>\n \n <body>\n   <!--  Body Wrapper -->\n"
+                },
+                {
+                    "date": 1720851846409,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   <link rel=\"shortcut icon\" type=\"image/png\" href=\"{{asset('images/logo.png')}}\" />\n   <link rel=\"stylesheet\" href=\"{{asset('admin/assets/css/styles.min.css')}}\" />\n   <style>\n     body{\n-      background-color:#F2D2BD;\n+      background-color:#F2D2BD !important;\n     }\n   </style>\n </head>\n \n@@ -25,9 +25,9 @@\n           <div class=\"col-md-8 col-lg-6 col-xxl-3\">\n             <div class=\"card mb-0\">\n               <div class=\"card-body\">\n                 <a href=\"./index.html\" class=\"text-nowrap logo-img text-center d-block py-3 w-100\">\n-                  <img src=\"../assets/images/logos/dark-logo.svg\" width=\"180\" alt=\"\">\n+                  <img src=\"{{asset('images/logo.png')}}\"\" width=\"180\" alt=\"\">\n                 </a>\n                 <h1 style = \"text-align:center;\"> Admin Site</h1>\n                 <p class=\"text-center\">Selamat datang di admin site supplier florist surabaya</p>\n                 <form>\n"
+                },
+                {
+                    "date": 1720851862643,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n           <div class=\"col-md-8 col-lg-6 col-xxl-3\">\n             <div class=\"card mb-0\">\n               <div class=\"card-body\">\n                 <a href=\"./index.html\" class=\"text-nowrap logo-img text-center d-block py-3 w-100\">\n-                  <img src=\"{{asset('images/logo.png')}}\"\" width=\"180\" alt=\"\">\n+                  <img src=\"{{asset('images/logo.png')}}\" style = \"width:150px;\" alt=\"\">\n                 </a>\n                 <h1 style = \"text-align:center;\"> Admin Site</h1>\n                 <p class=\"text-center\">Selamat datang di admin site supplier florist surabaya</p>\n                 <form>\n"
+                },
+                {
+                    "date": 1720851869273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n           <div class=\"col-md-8 col-lg-6 col-xxl-3\">\n             <div class=\"card mb-0\">\n               <div class=\"card-body\">\n                 <a href=\"./index.html\" class=\"text-nowrap logo-img text-center d-block py-3 w-100\">\n-                  <img src=\"{{asset('images/logo.png')}}\" style = \"width:150px;\" alt=\"\">\n+                  <img src=\"{{asset('images/logo.png')}}\" style = \"width:150px;height:150px.\" alt=\"\">\n                 </a>\n                 <h1 style = \"text-align:center;\"> Admin Site</h1>\n                 <p class=\"text-center\">Selamat datang di admin site supplier florist surabaya</p>\n                 <form>\n"
+                },
+                {
+                    "date": 1720851889005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n           <div class=\"col-md-8 col-lg-6 col-xxl-3\">\n             <div class=\"card mb-0\">\n               <div class=\"card-body\">\n                 <a href=\"./index.html\" class=\"text-nowrap logo-img text-center d-block py-3 w-100\">\n-                  <img src=\"{{asset('images/logo.png')}}\" style = \"width:150px;height:150px.\" alt=\"\">\n+                  <img src=\"{{asset('images/logo_modified.png')}}\" style = \"width:150px;height:150px;\" alt=\"\">\n                 </a>\n                 <h1 style = \"text-align:center;\"> Admin Site</h1>\n                 <p class=\"text-center\">Selamat datang di admin site supplier florist surabaya</p>\n                 <form>\n"
+                },
+                {
+                    "date": 1720851900802,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n           <div class=\"col-md-8 col-lg-6 col-xxl-3\">\n             <div class=\"card mb-0\">\n               <div class=\"card-body\">\n                 <a href=\"./index.html\" class=\"text-nowrap logo-img text-center d-block py-3 w-100\">\n-                  <img src=\"{{asset('images/logo_modified.png')}}\" style = \"width:150px;height:150px;\" alt=\"\">\n+                  <img src=\"{{asset('images/logo-modified.png')}}\" style = \"width:150px;height:150px;\" alt=\"\">\n                 </a>\n                 <h1 style = \"text-align:center;\"> Admin Site</h1>\n                 <p class=\"text-center\">Selamat datang di admin site supplier florist surabaya</p>\n                 <form>\n"
+                },
+                {
+                    "date": 1720851915247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n           <div class=\"col-md-8 col-lg-6 col-xxl-3\">\n             <div class=\"card mb-0\">\n               <div class=\"card-body\">\n                 <a href=\"./index.html\" class=\"text-nowrap logo-img text-center d-block py-3 w-100\">\n-                  <img src=\"{{asset('images/logo-modified.png')}}\" style = \"width:150px;height:150px;\" alt=\"\">\n+                  <img src=\"{{asset('images/logo-modified.png')}}\" style = \"width:110px;height:110px;\" alt=\"\">\n                 </a>\n                 <h1 style = \"text-align:center;\"> Admin Site</h1>\n                 <p class=\"text-center\">Selamat datang di admin site supplier florist surabaya</p>\n                 <form>\n"
+                },
+                {
+                    "date": 1720851933360,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n                       </label> --}}\n                     </div>\n                     {{-- <a class=\"text-primary fw-bold\" href=\"./index.html\">Forgot Password ?</a> --}}\n                   </div>\n-                  <button id = \"login\" type= \"button\" class=\"btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2\">Sign In</button>\n+                  <button id = \"login\" type= \"button\" class=\"btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2\" style = \" background-color:#F2D2BD !important;\">Sign In</button>\n                   <div class=\"d-flex align-items-center justify-content-center\">\n                     {{-- <p class=\"fs-4 mb-0 fw-bold\">New to Modernize?</p> --}}\n                     {{-- <a class=\"text-primary fw-bold ms-2\" href=\"./authentication-register.html\">Create an account</a> --}}\n                   </div>\n"
+                },
+                {
+                    "date": 1720851942829,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n                       </label> --}}\n                     </div>\n                     {{-- <a class=\"text-primary fw-bold\" href=\"./index.html\">Forgot Password ?</a> --}}\n                   </div>\n-                  <button id = \"login\" type= \"button\" class=\"btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2\" style = \" background-color:#F2D2BD !important;\">Sign In</button>\n+                  <button id = \"login\" type= \"button\" class=\"btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2\" style = \" background-color:#F2D2BD !important;color:#131312;\">Sign In</button>\n                   <div class=\"d-flex align-items-center justify-content-center\">\n                     {{-- <p class=\"fs-4 mb-0 fw-bold\">New to Modernize?</p> --}}\n                     {{-- <a class=\"text-primary fw-bold ms-2\" href=\"./authentication-register.html\">Create an account</a> --}}\n                   </div>\n"
+                },
+                {
+                    "date": 1720851948293,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n                       </label> --}}\n                     </div>\n                     {{-- <a class=\"text-primary fw-bold\" href=\"./index.html\">Forgot Password ?</a> --}}\n                   </div>\n-                  <button id = \"login\" type= \"button\" class=\"btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2\" style = \" background-color:#F2D2BD !important;color:#131312;\">Sign In</button>\n+                  <button id = \"login\" type= \"button\" class=\"btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2\" style = \" background-color:#F2D2BD !important;color:#131312; border:0px;\">Sign In</button>\n                   <div class=\"d-flex align-items-center justify-content-center\">\n                     {{-- <p class=\"fs-4 mb-0 fw-bold\">New to Modernize?</p> --}}\n                     {{-- <a class=\"text-primary fw-bold ms-2\" href=\"./authentication-register.html\">Create an account</a> --}}\n                   </div>\n"
                 }
             ],
             "date": 1719492421584,
