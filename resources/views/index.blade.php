@@ -22,452 +22,12 @@
   <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css')}}" />
   <link rel="stylesheet" type="text/css" href = "{{asset('css/font-awesome-4.7.0/css/font-awesome.css')}}"/>
 
-  
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/home/index.css')}}" />
 
-  <!-- fonts style -->
-  {{-- <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Poppins:400,600,700&display=swap" rel="stylesheet"> --}}
-  
-  <!-- Custom styles for this template -->
-
-  <style>
-    
-    @keyframes slideInFromLeft {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-html {
-  scroll-behavior: smooth;
-}
-#judul{
-  animation: 1s ease-out 0s 1 slideInFromLeft;
-  margin-top:15px;
-  font-size: 50px !important;
-  color:#3A2D28;
-  
-}
-#judul_best_seller{
-  font-size:50px !important;
-  color:#3A2D28 !important;
-}
-#pilihbunga{
-  border:0px solid black;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  background: linear-gradient(to left, #d68b2d 50%, #E8B865 50%) right;
-  background-size: 200%;
-  
-    transition: .5s ease-out;
-    animation: 2s ease-out 0s 1 slideInFromLeft;
-}
-
-#pilihbunga:hover{
-  background-color:#E3BC9A;
-  border-color:#E3BC9A;
-  background-position: left;
-
-}
-
-.custom_nav-container.navbar-expand-lg .navbar-nav .nav-item.active .nav-link::after{
-  background-color:#714423 !important;
- 
-}
-.nav-link:hover{
-
-  text-underline-offset:8px;
-  text-decoration : underline #714423 2px;
-}
-/* Ini Style Product */
-#kotakproduk #container{
-  box-shadow: 0 15px 30px 1px rgba(128, 128, 128, 0.31);
-  background: rgba(255, 255, 255, 0.90);
-  text-align: center;
-  border-radius: 5px;
-  overflow: hidden;
-  margin: 5em auto;
-  height: 350px;
-  width: 100%;
-  
-}
-
-
-
-
-
-
-/* @keyframes chan-sh {
-  from  {content: 'free shipping';}
-  to  {content: 'New';}
-  
-} */
-
-/*Product Rating  */
-#kotakproduk .hint-star {
-  display: inline-block;
-  margin-left: 0.5em;
-  color: gold;
-  width: 50%;
-}
-
-
-/* The most important information about the product */
-#kotakproduk #container .product-details > p {
-  font-family: 'Farsan', cursive;
-  text-align: center;
-  font-size: 15px;
-  color: #7d7d7d;
-  
-}
-
-/* control */
-
-#kotakproduk .control{
-  position: relative;
-  text-align: center;
-  width: 100%;
-  margin:auto;
-  /* bottom: 20%; */
-  /* left: 22.8%; */
-  
-}
-/* the Button */
-#kotakproduk .btn {
-  transform: translateY(0px);
-  transition: 0.3s linear;
-  background: #714423;
-  border-radius: 5px;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  outline: none;
-  border: none;
-  color: #eee;
-  padding: 0;
-  margin: 0;
-  
-}
-
-#kotakproduk .btn:hover{transform: translateY(-4px);}
-
-#kotakproduk .btn span {
-  font-family: 'Farsan', cursive;
-  transition: transform 0.3s;
-  display: inline-block;
-  padding: 5px 10px;
-  font-size: 1.2em;
-  margin:0;
-  
-}
-/* shopping cart icon */
-#kotakproduk .btn .price, .shopping-cart{
-  background: #333;
-  border: 0;
-  margin: 0;
-}
-
-#kotakproduk .btn .price {
-  /* transform: translateX(-10%); padding-right: 15px; */
-}
-
-/* the Icon */
-#kotakproduk .btn .shopping-cart {
-  transform: translateX(-100%);
-  position: absolute;
-  background: #333;
-  z-index: 1;
-  left: 0;
-  top: 0;
-}
-
-/* buy */
-#kotakproduk .btn .buy {z-index: 3; font-weight: bolder;}
-
-/* #kotakproduk .btn:hover .price {transform: translateX(-110%);} */
-
-/* #kotakproduk .btn:hover .shopping-cart {transform: translateX(0%);} */
-
-
-
-/* product image  */
-#kotakproduk .product-image {
-  transition: all 0.3s ease-out;
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-  height: 100%;
-  float: right;
-  width: 50%;
-  display: inline-block;
-}
-
-#container img {width: 100%;height: 350px;}
-
-#kotakproduk .info {
-    background: rgba(27, 26, 26, 0.9);
-    font-family: 'Farsan', cursive;
-    transition: all 0.3s ease-out;
-    transform: translateX(-100%);
-    position: absolute;
-    line-height: 1.9;
-    text-align: left;
-    font-size: 80%;
-    cursor: no-drop;
-    color: #FFF;
-    height: 350px;
-    width: 100%;
-    left: 0;
-    top: 0;
-    padding-top:20px;
-}
-
-#kotakproduk .info h2 {text-align: center}
-#kotakproduk .product-image:hover .info{transform: translateX(0);}
-
-#kotakproduk .info ul li{transition: 0.3s ease;}
-#kotakproduk .info ul li:hover{transform: translateX(50px) scale(1.3);}
-
-#kotakproduk .product-image:hover img {transition: all 0.3s ease-out;}
-#kotakproduk .product-image:hover img {transform: scale(1.2, 1.2);}
-
-/* End Style Product */
-
-
-.product-card {
-    width: 100%;
-    position: relative;
-    box-shadow: 0 2px 7px #dfdfdf;
-    margin: 50px auto;
-    background: #fafafa;
-}
-
-.badge {
-    position: absolute;
-    left: 0;
-    top: 20px;
-    text-transform: uppercase;
-    font-size: 13px;
-    font-weight: 700;
-    background: red;
-    color: #fff;
-    padding: 3px 10px;
-}
-
-.product-tumb {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    /* padding: 50px; */
-    background: #f0f0f0;
-}
-
-.product-tumb img {
-    max-width: 100%;
-    max-height: 100%;
-}
-
-.product-details {
-    padding: 0px;
-}
-
-.product-catagory {
-    display: block;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #ccc;
-    margin-bottom: 18px;
-}
-
-.product-details h4 a {
-    font-weight: 500;
-    display: block;
-    margin-bottom: 18px;
-    text-transform: uppercase;
-    color: #363636;
-    text-decoration: none;
-    transition: 0.3s;
-    font-size:20px;
-}
-
-.product-details h4 a:hover {
-    color: #fbb72c;
-}
-
-.product-details p {
-    font-size: 15px;
-    line-height: 22px;
-    margin-bottom: 18px;
-    color: #999;
-    display: -webkit-box;
-  max-width: 400px;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-    
-}
-
-.product-bottom-details {
-    overflow: hidden;
-    border-top: 1px solid #eee;
-    padding-top: 10px;
-    padding-left:5px;
-}
-
-.product-bottom-details div {
-    float: left;
-    width: 100%;
-}
-
-.product-price {
-    font-size: 18px;
-    color: #fbb72c;
-    font-weight: 600;
-}
-
-.product-price small {
-    font-size: 80%;
-    font-weight: 400;
-    text-decoration: line-through;
-    display: inline-block;
-    margin-right: 5px;
-}
-
-.product-links {
-    text-align: right;
-}
-
-.product-links a {
-    display: inline-block;
-    margin-left: 5px;
-    color: #e1e1e1;
-    transition: 0.3s;
-    font-size: 17px;
-}
-
-.product-links a:hover {
-    color: #fbb72c;
-}
-
-
-
-#kotaklogin a{
-  cursor: pointer;
-}
-
-.mylinks {
-  display: inline-block;
-}
-
-.mylinks a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-}
-
-.mylinks a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.mylinks a:hover:not(.active) {background-color: #ddd;}
-
-@media (max-width: 576px) { 
-  /* .slider_section .container{
-    max-width: 500px !important;
-  } */
-    #judul{
-      font-size:35px !important;
-        color: #f9c265 !important;
-        text-align: left;
-        
-    }
-    #description_judul{
-      font-size:14px !important;
-    }
-    .detail_box{
-    width:300px;
-  }
-    #description_judul{
-      text-align: left;
-    }
-    .mobileonly{
-      display:block !important;
-    }
- }
-@media (min-width: 576px) { 
-  /* .slider_section .container{
-    max-width: 500px !important;
-  } */
-  .detail_box{
-    width:250px;
-  }
-    #judul{
-      font-size:35px !important;
-        color: #f9c265 !important;
-    }
-    .mobileonly{
-      display:block !important;
-    }
- }
-
-
-@media (min-width: 768px) { 
-  /* .slider_section .container{
-    max-width: 500px ;
-  } */
-
-  #judul{
-    
-    font-size:30px ;
-        color:#f9c265 !important;
-    }
-  .detail_box{
-    width:300px;
-  }
-  .mobileonly{
-      display:none !important;
-    }
- }
-
-
-@media (min-width: 992px) { 
-  #judul{
-        color:#f9c265 !important;
-    }
-    .mobileonly{
-      display:none !important;
-    }
- }
-
-
-@media (min-width: 1200px) { 
-  #judul{
-        color:#f9c265 !important;
-    }
-    .mobileonly{
-      display:none !important;
-    }
- }
-
- .contact_section {
-  background-image: none !important;
-}
-
-.footer_section::before {
-
-  background-image: none !important;
-
-}
-  </style>
     <link href="{{ asset('css/style.css')}}" rel="stylesheet" />
     <!-- responsive style -->
     <link href="{{ asset('css/responsive.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('owl/dist/assets/owl.carousel.min.css')}} " />
 </head>
 
 <body>
@@ -596,13 +156,38 @@ html {
       01
     </div> --}}
     <div class="container" id = "kotakproduk">
-      <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #3A2D28 !important;" id = "judul_best_seller"> Produk Kami  <img src = "{{ asset('/images/bunga.png')}}" style = "margin-top:-15px;width:75px;height:75px;"></h1>
-      <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #3A2D28 !important;">Semua produk di store <b>Supplier Florist Surabaya</b>  </h5>
-      <span id ="semuaproduk">
+      {{-- <h1 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #3A2D28 !important;" id = "judul_best_seller"> Produk Kami  <img src = "{{ asset('/images/bunga.png')}}" style = "margin-top:-15px;width:75px;height:75px;"></h1>
+      <h5 style = "text-align:center;  font-family: 'Old Standard TT', serif; color: #3A2D28 !important;">Semua produk di store <b>Supplier Florist Surabaya</b>  </h5> --}}
+      <div class="container text-center">
+        <h1>Produk Kami</h1>
+        <h5>Langsung Pilih dan Masukan Kekeranjang <i class="fa fa-shopping-cart" aria-hidden="true"></i> </h5>
+          {{-- <span>Create With <i class="zmdi zmdi-favorite red"></i>  By: <strong>Deni Kurniawan</strong> From: <i><a href="http://blog.wingerdstok.com" class="wsk-btn">Wingerdstok</a></i></span> --}}
+        </div>
+        {{-- as $mp --}}
+      
+      
+        <div class = "row" style = "">
+          <div class="owl-carousel owl-theme" style = "width:100%;margin-top:50px;text-align:center;">
+            <div class = "owl_category_card category_active"  data-id = "0"> All </div>
+            @foreach($mycategory as $mc)
+            <div class = "owl_category_card"  data-id = "{{$mc->id}}"> {{$mc->category_name}} </div>
+            @endforeach
+          </div>
+        </div>
+        {{-- {{dd(session()->get("product"))}} --}}
+        <div class="shell">
+        
+          <div class="containers" id = "replace_product">
+            @include('product_cart')
+       
+          </div>
+        </div>
+        
+      {{-- <span id ="semuaproduk">
         @include('product_cart')
      
       
-      </span>
+      </span> --}}
     
   </section>
   <!-- end about section -->
@@ -697,12 +282,7 @@ html {
               </p>
             </div>
 
-            {{-- <div>
-              <img src="images/envelope-white.png" alt="">
-              <p>
-                sfs@gmail.com
-              </p>
-            </div> --}}
+          
           </div>
         </div>
       </div>
@@ -749,6 +329,7 @@ html {
   </script>
   <!-- End Google Map -->
 
+<script src="{{ asset('owl/dist/owl.carousel.min.js')}}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
@@ -757,6 +338,30 @@ html {
 
 
 <script>
+$(document).ready(function(){
+  $('.owl-carousel').owlCarousel({
+    margin:10,
+    loop:false,
+    autoWidth:true,
+    items:4
+  })
+});
+$(".owl_category_card").on("click", function(){
+  $(".owl_category_card").removeClass("category_active");
+   $(this).addClass("category_active");
+    var id_category = $(this).attr("data-id");
+    $.ajax({
+     url:"/pagination/fetch_data_index?page="+1,
+     data:{
+      "id_category" : id_category
+     },
+     success:function(data)
+     {
+      $('#replace_product').html(data);
+     }
+    });
+});
+   
 
 $(document).on('click', '.mylinks a', function(event){
  
@@ -772,7 +377,7 @@ $(document).on('click', '.mylinks a', function(event){
      url:"/pagination/fetch_data_index?page="+page,
      success:function(data)
      {
-      $('#semuaproduk').html(data);
+      $('#replace_product').html(data);
      }
     });
    }

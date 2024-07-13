@@ -23,7 +23,7 @@ class CartController extends Controller
         $mycart = [];
         $hasil = 0;
         $jumlahitems = 0;
-        if(Session::get('product')){
+        if(Session::has('product')){
             $mycarts = Session::get('product');
             foreach($mycarts as $i => $mycart){
                     $list_myitem = explode("_",$mycarts[$i]);
@@ -51,7 +51,7 @@ class CartController extends Controller
             }
         }
         $mycart_variants = [];
-        if(Session::get('variantproduct')){
+        if(Session::has('variantproduct')){
             $mycart_variants = Session::get('variantproduct');
             foreach($mycart_variants as $i => $mycart_variant){
                 $list_myitem = explode("_",$mycart_variants[$i]);
@@ -91,13 +91,18 @@ class CartController extends Controller
         if($category_delete == "p"){
             $products[] =  Session::get('product');
             unset($products[$index_delete]);
-            session()->put('product', $products);
+            if(count(Session::get('product'))> 0){
+                session()->put('product', $products);
+            }
+          
         }
         else{
             // Second argument is a default value
             $variant_products[] =  Session::get('variantproduct');
             unset($variant_products[$index_delete]);
-            session()->put('variantproduct', $variant_products);
+            if(count(Session::get('variantproduct'))> 0){
+                session()->put('variantproduct', $variant_products);
+            }
         }  
         return response()->json(['status_delete' => "ok"]);
      

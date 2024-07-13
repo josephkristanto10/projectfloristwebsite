@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 202,
+            "activePatchIndex": 206,
             "patches": [
                 {
                     "date": 1719133258940,
@@ -816,6 +816,22 @@
                 {
                     "date": 1719552589635,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,9 +62,9 @@\n                 $name_variant = $search_produk[0]['nama_variant'];\n                 $prices_produk = $search_produk[0]['harga_variant'];\n                 $description_produk = $search_produk[0]['description_product'];\n                 $discount_produk = $search_produk[0]['discount_variant'];\n-                $images_produk = $search_produk[0]['images_product'];\n+                $images_produk = $search_produk[0]['images_variant'];\n                 $mycart_list[] = [\n                     \"index\"=>$i,\n                     \"category\"=>\"v\",\n                     \"name\" =>$name_produk,\n"
+                },
+                {
+                    "date": 1720888492035,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n         $mycart_list = [];\n         $mycart = [];\n         $hasil = 0;\n         $jumlahitems = 0;\n-        if(Session::get('product')){\n+        if(Session::has('product')){\n             $mycarts = Session::get('product');\n             foreach($mycarts as $i => $mycart){\n                     $list_myitem = explode(\"_\",$mycarts[$i]);\n                     $id_item = $list_myitem[0];\n"
+                },
+                {
+                    "date": 1720889433518,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,9 +50,9 @@\n                     $hasil += $qty_item * ($prices_produk-(($prices_produk*$discount_produk)/100));\n             }\n         }\n         $mycart_variants = [];\n-        if(Session::get('variantproduct')){\n+        if(Session::has('variantproduct')){\n             $mycart_variants = Session::get('variantproduct');\n             foreach($mycart_variants as $i => $mycart_variant){\n                 $list_myitem = explode(\"_\",$mycart_variants[$i]);\n                 $id_item = $list_myitem[0];\n@@ -90,15 +90,20 @@\n \n         if($category_delete == \"p\"){\n             $products[] =  Session::get('product');\n             unset($products[$index_delete]);\n-            session()->put('product', $products);\n+            if(count(Session::get('product'))> 0){\n+                session()->put('product', $products);\n+            }\n+          \n         }\n         else{\n             // Second argument is a default value\n             $variant_products[] =  Session::get('variantproduct');\n             unset($variant_products[$index_delete]);\n-            session()->put('variantproduct', $variant_products);\n+            if(count(Session::get('variantproduct'))> 0){\n+                session()->put('variantproduct', $variant_products);\n+            }\n         }  \n         return response()->json(['status_delete' => \"ok\"]);\n      \n     }\n"
+                },
+                {
+                    "date": 1720889593918,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,20 +90,20 @@\n \n         if($category_delete == \"p\"){\n             $products[] =  Session::get('product');\n             unset($products[$index_delete]);\n-            if(count(Session::get('product'))> 0){\n+            // if(count(Session::get('product'))> 0){\n                 session()->put('product', $products);\n-            }\n+            // }\n           \n         }\n         else{\n             // Second argument is a default value\n             $variant_products[] =  Session::get('variantproduct');\n             unset($variant_products[$index_delete]);\n-            if(count(Session::get('variantproduct'))> 0){\n+            // if(count(Session::get('variantproduct'))> 0){\n                 session()->put('variantproduct', $variant_products);\n-            }\n+            // }\n         }  \n         return response()->json(['status_delete' => \"ok\"]);\n      \n     }\n"
+                },
+                {
+                    "date": 1720889643943,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,20 +90,20 @@\n \n         if($category_delete == \"p\"){\n             $products[] =  Session::get('product');\n             unset($products[$index_delete]);\n-            // if(count(Session::get('product'))> 0){\n+            if(count(Session::get('product'))> 0){\n                 session()->put('product', $products);\n-            // }\n+            }\n           \n         }\n         else{\n             // Second argument is a default value\n             $variant_products[] =  Session::get('variantproduct');\n             unset($variant_products[$index_delete]);\n-            // if(count(Session::get('variantproduct'))> 0){\n+            if(count(Session::get('variantproduct'))> 0){\n                 session()->put('variantproduct', $variant_products);\n-            // }\n+            }\n         }  \n         return response()->json(['status_delete' => \"ok\"]);\n      \n     }\n"
                 }
             ],
             "date": 1719133258940,

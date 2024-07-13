@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
 use App\Models\ProductVariant;
 use Session;
 
@@ -16,16 +17,25 @@ class HhomeController extends Controller
      */
     public function index()
     {
+        Session::flush();
+        $mycategory = Category::latest("id")->get();
         $myproduct = Product::latest('id')->paginate(6);
-        return view('index')->withProducts($myproduct);
+        return view('index', compact("mycategory"))->withProducts($myproduct);
     }
     function fetch_data(Request $request)
     {
-     if($request->ajax())
-     {
-      $products =  Product::latest('id')->paginate(6);
-      return view('product_cart', compact('products'))->render();
-     }
+        if($request->ajax())
+        {
+            if(isset($request->id_category) && $request->id_category != "0"){
+                $products =  Product::leftJoin("category", "category.id",'=',"product.product_category")->where("category.id","=", $request->id_category)->latest('id')->select("product.*","category.category_name", "category.id as category_id")->paginate(6);
+
+            }
+            else{
+                $products =  Product::leftJoin("category", "category.id",'=',"product.product_category")->latest('id')->select("product.*","category.category_name", "category.id as category_id")->paginate(6);
+
+            }
+            return view('product_cart', compact('products'))->render();
+        }
     }
     public function detail_variant(Request $request){
         $id_product = $request->id_products;
