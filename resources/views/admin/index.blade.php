@@ -7,7 +7,14 @@
   <title>Supplier Florist Surabaya</title>
   <link rel="shortcut icon" type="image/png" href="{{asset('admin/assets/images/logos/favicon.png')}}" />
   <link rel="stylesheet" href="{{asset('admin/assets/css/styles.min.css')}}" />
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* F2D2BD */
+    .sidebar-nav ul .sidebar-item.selected > .sidebar-link, .sidebar-nav ul .sidebar-item.selected > .sidebar-link.active, .sidebar-nav ul .sidebar-item > .sidebar-link.active {
+      background-color: #F2D2BD;
+      color: #131312;
+    }
+  </style>
 </head>
 
 <body>
@@ -19,8 +26,11 @@
       <!-- Sidebar scroll-->
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="{{url('adminsite')}}" class="text-nowrap logo-img">
-            <img src="{{asset('admin/assets/images/logos/dark-logo.svg')}}" width="180" alt="" />
+          <a href="{{url('adminsite')}}" class="text-nowrap logo-img" style = "text-align:center;margin:auto;">
+            <br>
+            <img src="{{asset('images/logo-modified.png')}}" style = "width:100px;height:100px;" alt="" />
+            <br><br>
+            <h3> Admin Site</h3>
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-8"></i>
@@ -44,6 +54,14 @@
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Master</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{url('pagelistcategory')}}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-article"></i>
+                </span>
+                <span class="hide-menu">Category</span>
+              </a>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{url('pagelistproduk')}}" aria-expanded="false">
@@ -120,10 +138,12 @@
       <!--  Header End -->
       <div class="container-fluid">
         <!--  Row 1 -->
+      
         <div class="row" >
           <div class="col-lg-12 d-flex align-items-strech">
             <div class="card w-100">
               <div class="card-body">
+                <h1>Dashboard</h1><br>
                 <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
                   <div class="row w-100" >
                     <div class="col-lg-4" >
@@ -136,11 +156,13 @@
                             <div class="col-12">
                               
                             
-                              <h4 class="fw-semibold mb-3">{{$product->count()}} Item</h4>
-                            
+                              <h4 class="fw-semibold mb-3">{{$product->count()}} <i class="fa fa-cube" aria-hidden="true"></i>
+                              </h4>
+                              <i class="fa fa-external-link" aria-hidden="true" style = "position:absolute; right:20px; top:20px;font-size:20px;color:#d68b2d;"></i>
                               <div class="d-flex align-items-center">
                                 <div class="me-4">
-                             
+                                  
+
                                 </div>
                                 <div>
                        
@@ -162,7 +184,10 @@
                           <div class="row alig n-items-start">
                             <div class="col-12">
                               <h5 class="card-title mb-9 fw-semibold">  User </h5>
-                              <h4 class="fw-semibold">{{$visitor->count()}} User</h4>
+                              <h4 class="fw-semibold">{{$visitor->count()}} <i class="fa fa-user-circle" aria-hidden="true"></i>
+                              </h4>
+                              <i class="fa fa-external-link" aria-hidden="true" style = "position:absolute; right:20px; top:20px;font-size:20px;color:#d68b2d"></i>
+
                               <div class="d-flex align-items-center pb-1">
                                 {{-- <span
                                   class="me-2 rounded-circle bg-light-danger round-20 d-flex align-items-center justify-content-center">
@@ -172,14 +197,7 @@
                                 <p class="fs-3 mb-0">last year</p> --}}
                               </div>
                             </div>
-                            {{-- <div class="col-4">
-                              <div class="d-flex justify-content-end">
-                                <div
-                                  class="text-white bg-secondary rounded-circle p-6 d-flex align-items-center justify-content-center">
-                                  <i class="ti ti-currency-dollar fs-6"></i>
-                                </div>
-                              </div>
-                            </div> --}}
+                         
                           </div>
                         </div>
                       </a>
@@ -194,7 +212,10 @@
                           <div class="row alig n-items-start">
                             <div class="col-12">
                               <h5 class="card-title mb-9 fw-semibold"> Transaksi </h5>
-                              <h4 class="fw-semibold mb-3">{{$transaction->count()}} Transaksi</h4>
+                              <h4 class="fw-semibold mb-3">{{$transaction->count()}} <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                              </h4>
+                              <i class="fa fa-external-link" aria-hidden="true" style = "position:absolute; right:20px; top:20px;font-size:20px;color:#d68b2d"></i>
+
                               
                             </div>
                           

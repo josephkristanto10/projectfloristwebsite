@@ -41,6 +41,14 @@ Route::post('/deletecart', [CartController::class,"deletecart"]);
 Route::post('/checkout', [CartController::class,"checkout"]);
 
 Route::post("/loginadmin", [AdminController::class,"loginadmincheck"]);
+
+Route::get("/getlistkategory", [AdminController::class,"getlistcategory"]);
+Route::get("/pagelistcategory", [AdminController::class,"listcategory"]);
+Route::get("/getdetailcategoryadmin", [AdminController::class,"getdetailcategoryadmin"]);
+Route::POST("/editcategoryadmin", [AdminController::class,"editcategoryadmin"]);
+Route::POST("/changestatuscategory", [AdminController::class,"changestatuscategory"]);
+
+
 Route::get("/getlistproduk", [AdminController::class,"getlistproduk"]);
 Route::get("/pagelistproduk", [AdminController::class,"listproduk"]);
 Route::get("/getlistuser", [AdminController::class,"getlistuser"]);
@@ -55,6 +63,7 @@ Route::get("/pagelistvariant", [AdminController::class,"listvariant"]);
 Route::get("/getdetailvariantproductadmin", [AdminController::class,"getdetailvariantproductadmin"]);
 Route::POST("/editproductvariantadmin", [AdminController::class,"editproductvariantadmin"]);
 Route::POST("/addproductadmin", [AdminController::class,"addproductadmin"]);
+Route::POST("/addcategoryadmin", [AdminController::class,"addcategoryadmin"]);
 Route::POST("/addvariantproductadmin", [AdminController::class,"addvariantproductadmin"]);
 Route::POST("/changestatusvariant", [AdminController::class,"changestatusvariant"]);
 Route::POST("/changestatusproduct", [AdminController::class,"changestatusproduct"]);

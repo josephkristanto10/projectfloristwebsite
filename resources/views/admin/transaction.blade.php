@@ -25,6 +25,14 @@
   width:100%;
   margin-bottom:10px;
 }
+.sidebar-nav ul .sidebar-item.selected > .sidebar-link, .sidebar-nav ul .sidebar-item.selected > .sidebar-link.active, .sidebar-nav ul .sidebar-item > .sidebar-link.active {
+      background-color: #F2D2BD;
+      color: #131312;
+    }
+    #table-transaction button{
+      background-color: #F2D2BD;
+      border:0px;color:#131312;
+    }
   </style>
 </head>
 
@@ -37,8 +45,11 @@
       <!-- Sidebar scroll-->
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="{{url('adminsite')}}" class="text-nowrap logo-img">
-            <img src="{{asset('admin/assets/images/logos/dark-logo.svg')}}" width="180" alt="" />
+          <a href="{{url('adminsite')}}" class="text-nowrap logo-img" style = "text-align:center;margin:auto;">
+            <br>
+            <img src="{{asset('images/logo-modified.png')}}" style = "width:100px;height:100px;" alt="" />
+            <br><br>
+            <h3> Admin Site</h3>
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-8"></i>
@@ -62,6 +73,15 @@
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Master</span>
+            </li>
+            
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{url('pagelistcategory')}}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-article"></i>
+                </span>
+                <span class="hide-menu">Category</span>
+              </a>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{url('pagelistproduk')}}" aria-expanded="false">

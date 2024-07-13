@@ -14,6 +14,10 @@
       width:100%;
       margin-top:10px;
     }
+    .sidebar-nav ul .sidebar-item.selected > .sidebar-link, .sidebar-nav ul .sidebar-item.selected > .sidebar-link.active, .sidebar-nav ul .sidebar-item > .sidebar-link.active {
+      background-color: #F2D2BD;
+      color: #131312;
+    }
   </style>
 </head>
 
@@ -26,8 +30,11 @@
       <!-- Sidebar scroll-->
       <div>
         <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="{{url('adminsite')}}" class="text-nowrap logo-img">
-            <img src="{{asset('admin/assets/images/logos/dark-logo.svg')}}" width="180" alt="" />
+          <a href="{{url('adminsite')}}" class="text-nowrap logo-img" style = "text-align:center;margin:auto;">
+            <br>
+            <img src="{{asset('images/logo-modified.png')}}" style = "width:100px;height:100px;" alt="" />
+            <br><br>
+            <h3> Admin Site</h3>
           </a>
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
             <i class="ti ti-x fs-8"></i>
@@ -51,6 +58,14 @@
             <li class="nav-small-cap">
               <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
               <span class="hide-menu">Master</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="{{url('pagelistcategory')}}" aria-expanded="false">
+                <span>
+                  <i class="ti ti-article"></i>
+                </span>
+                <span class="hide-menu">Category</span>
+              </a>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link" href="{{url('pagelistproduk')}}" aria-expanded="false">
@@ -86,7 +101,17 @@
             </li>
         
           </ul>
-      
+          {{-- <div class="unlimited-access hide-menu bg-light-primary position-relative mb-7 mt-5 rounded">
+            <div class="d-flex">
+              <div class="unlimited-access-title me-3">
+                <h6 class="fw-semibold fs-4 mb-6 text-dark w-85">Upgrade to pro</h6>
+                <a href="https://adminmart.com/product/modernize-bootstrap-5-admin-template/" target="_blank" class="btn btn-primary fs-2 fw-semibold lh-sm">Buy Pro</a>
+              </div>
+              <div class="unlimited-access-img">
+                <img src="{{asset('admin/assets/images/backgrounds/rocket.png')}}" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div> --}}
         </nav>
         <!-- End Sidebar navigation -->
       </div>
@@ -121,13 +146,14 @@
             <div class="card w-100">
           
               <div class="card-body p-4">
-                <span style = "float:right;margin-right:20px;" ><button class = "btn btn-primary" data-toggle = "modal" data-target="#modal_add_product" >Tambah Produk</button></span>
+                <span style = "float:right;margin-right:20px;" ><button class = "btn btn-primary" data-toggle = "modal" data-target="#modal_add_product" style = " background-color: #F2D2BD;color:#131312;border:0px;"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  Tambah Produk</button></span>
                 <h1>Product</h1>
                 <table id="table-product" class="table table-bordered table-hover">
                   <thead>
                     <tr>
                       <th>ID</th>
                       <th>Gambar</th>
+                      <th>Kategori</th>
                       <th>Nama</th>
                       <th>Variant</th>
                       <th>Harga</th>
@@ -164,6 +190,15 @@
               <h4>Detail Produk</h4>
               <form id = "formedit" enctype="multipart/form-data">
                 {!! csrf_field() !!}
+              <div class = "row mt-3 mb-3">
+                  <div class = "col-12">Kategori Produk 
+                    <select id = "edit_kategory_product" name = "edit_kategori_produk" class = "form-control">
+                      @foreach($cat as $c)
+                      <option value = '{{$c->id}}'>{{$c->category_name}}</option>
+                      @endforeach
+                    </select>
+                  </div>
+              </div>
               <div class = "row mt-3 mb-3">
                 <div class = "col-6">Gambar Produk <input id = "edit_gambarproduk" name = "gbr_produk" type = "file" class = "form-control"> </div>
                 <div class = "col-6">Nama Produk <input  id = "edit_namaproduk" name = "nama_produk" type = "text" class = "form-control" required></div>
@@ -214,6 +249,15 @@
               <h4>Tambah Produk</h4>
               <form id = "formtambah" enctype="multipart/form-data">
                 {!! csrf_field() !!}
+              <div class = "row mt-3 mb-3">
+                <div class = "col-12">Kategori Produk 
+                  <select id = "add_kategory_product" name = "add_kategori_produk" class = "form-control">
+                    @foreach($cat as $c)
+                    <option value = '{{$c->id}}'>{{$c->category_name}}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
               <div class = "row mt-3 mb-3">
                 <div class = "col-6">Gambar Produk <input id = "add_gambarproduk" name = "add_gbr_produk" type = "file" class = "form-control"> </div>
                 <div class = "col-6">Nama Produk <input  id = "add_namaproduk" name = "add_nama_produk" type = "text" class = "form-control" required></div>
@@ -282,11 +326,6 @@
       serverSide: true,
       ajax: "{{url('/getlistproduk')}}",
       columns: [
-        // {
-        //    render: function (data, type, row, meta) {
-        //      return meta.row + meta.settings._iDisplayStart + 1;
-        //    },
-        // },
         {
            data: 'id'
         },
@@ -297,10 +336,12 @@
            }
         },
         {
+           data: 'category_name'
+        },
+        {
            data: 'names'
         },
         {
-          //  data: 'has_variants'
           "render": function ( data, type, row ) {
             var status_variants = "Tidak ada";
             if(row.has_variants == 1){
@@ -342,7 +383,8 @@
       success: function (response) {
         $("#isian_variant_produk").html("");
         $("#isian_variant_produk").html(response.output);
-        
+        $("#edit_kategory_product").val(response.output_proudct[0].category_id);
+        // alert(response.output_proudct[0].category_id);
 
 
         $("#edit_namaproduk").val(response.output_proudct[0].names);

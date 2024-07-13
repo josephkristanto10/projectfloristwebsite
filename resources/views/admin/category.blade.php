@@ -7,9 +7,8 @@
   <title>Supplier Florist Surabaya</title>
   <link rel="shortcut icon" type="image/png" href="{{asset('admin/assets/images/logos/favicon.png')}}" />
   <link rel="stylesheet" href="{{asset('admin/assets/css/styles.min.css')}}" />
-  <link rel="stylesheet" type="text/css" href = "{{asset('css/font-awesome-4.7.0/css/font-awesome.css')}}"/>
-
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href = "{{asset('css/font-awesome-4.7.0/css/font-awesome.css')}}"/>
   <style>
     .row{
       width:100%;
@@ -147,22 +146,18 @@
             <div class="card w-100">
           
               <div class="card-body p-4">
-                <span style = "float:right;margin-right:20px;" ><button class = "btn btn-primary" data-toggle = "modal" data-target="#modal_add_variant_product" style = " background-color: #F2D2BD;color:#131312;border:0px;"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Tambah Variant</button></span>
-
-                <h1>Variant Product</h1>
-                <table id="table-variant-product" class="table table-bordered table-hover">
+                <span style = "float:right;margin-right:20px;" ><button class = "btn btn-primary" data-toggle = "modal" data-target="#modal_add_product" style = " background-color: #F2D2BD;color:#131312;border:0px;"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  Tambah Kategori</button></span>
+                <h1>Category</h1>
+                <table id="table-category" class="table table-bordered table-hover">
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Gambar</th>
-                      <th>Nama</th>
-                      <th>Variant</th>
-                      <th>Harga</th>
+                      <th>Image</th>
+                      <th>Category</th>
                       <th>Status</th>
                       <th>Action</th>
                     </tr>
                   </thead>
-                 
                 </table>
               </div>
             </div>
@@ -177,40 +172,58 @@
     </div>
   </div>
 
-
-  <div class="modal fade" id="modal_add_variant_product" tabindex="-1" role="dialog" aria-labelledby="modal_add_productLabel" aria-hidden="true" style = "z-index:100000;" >
+ 
+  <div class="modal fade" id="modal_detail_product" tabindex="-1" role="dialog" aria-labelledby="modal_detail_productLabel" aria-hidden="true" style = "z-index:100000;" >
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
             <div class="modal-header">
-              <h3 class="modal-title" id="judulproduks" ><i class="fa fa-list-alt" aria-hidden="true"></i>
-                Variant Produk</h3>
+              <h3 class="modal-title" id="judulproduk" ><i class="fa fa-list-alt" aria-hidden="true"></i>
+                Category</h3>
+              <button type="button" id = "closeeditproduct" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h4>Detail Category</h4>
+              <form id = "formedit" enctype="multipart/form-data">
+                {!! csrf_field() !!}
+              <div class = "row mt-3 mb-3">
+                <div class = "col-6">Gambar Produk <input id = "edit_gambargategory" name = "gbr_category" type = "file" class = "form-control"> </div>
+                <div class = "col-6">Nama Produk <input  id = "edit_namacategory" name = "nama_category" type = "text" class = "form-control" required></div>
+              </div>
+              <div class = "row mt-3 mb-3">
+                <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success"  value = "Ganti"></div>
+              </div>
+            </form>
+              {{-- <h4>List Variant Produk</h4> --}}
+             
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal_add_product" tabindex="-1" role="dialog" aria-labelledby="modal_add_productLabel" aria-hidden="true" style = "z-index:100000;" >
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="judulproduks" ><i class="fa fa-cube" aria-hidden="true"></i>
+                Category</h3>
               <button type="button" id = "closeaddproduct" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-           
-              <h4>Tambah Variant Produk </h4>
-             
+              <h4>Tambah Category</h4>
               <form id = "formtambah" enctype="multipart/form-data">
                 {!! csrf_field() !!}
               <div class = "row mt-3 mb-3">
-                <div class = "col-12">Pilih Produk <select id = "add_pilihan_produk" name = "add_pil_produk"  class = "form-control">
-                @foreach ($list_product as $lp)
-                <option value = '{{$lp->id}}'>{{$lp->id}} - {{$lp->names}}</option>
-                @endforeach  
-                </select> </div>
+                <div class = "col-6">Gambar Category <input id = "add_gambarcategory" name = "add_gbr_category" type = "file" class = "form-control" required> </div>
+                <div class = "col-6">Nama Category <input  id = "add_namacategory" name = "add_nama_category" type = "text" class = "form-control" required></div>
               </div>
-              <div class = "row mt-3 mb-3">
-                <div class = "col-3">Gambar Produk <input id = "add_gambarproduk" name = "add_gbr_produk[]" type = "file" class = "form-control" required> </div>
-                <div class = "col-3">Nama Produk <input  id = "add_namaproduk" name = "add_nama_produk[]" type = "text" class = "form-control" required></div>
-                <div class = "col-3">Harga Produk <input id = "add_hargaproduk" name = "add_hrg_produk[]" type = "text" class = "form-control" required></div>
-                <div class = "col-3">Discount Produk <input  id = "add_discountproduk" name = "add_dsc_produk[]" type = "text" class = "form-control" required></div>
-
-              </div>
-              <div id = "tambahan_variant">
-                  <div id = "append_tambahan_variant"></div>
-              </div>
+             
               <div class="alert alert-success d-flex align-items-center" role="alert" id = "add_alert_notif_success" style = "display:none !important;">
                 <div>
                   Produk Sukses Ditambah pada <span id = "add_tanggal_alert_success"></span>. Jika tidak tertambah, Hubungi Developer.
@@ -221,11 +234,10 @@
                   Produk gagal Ditambah <span id = "add_tanggal_alert_danger"></span>.. Segera Hubungi Developer.
                 </div>
               </div>
-              <span style = "float:right;margin-right:30px;"><button type = "button" class = "btn btn-primary" onclick = "tambahvariantlain()">Tambah variant lain</button></span>
-              <br><br>
               <div class = "row mt-3 mb-3">
-                <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success "  value = "Upload Variant"></div>
+                <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success"  value = "Tambah"></div>
               </div>
+              
             </form>
              
             
@@ -237,43 +249,11 @@
   </div>
 </div>
 
-  <div class="modal fade" id="modal_detail_product" tabindex="-1" role="dialog" aria-labelledby="modal_detail_productLabel" aria-hidden="true" style = "z-index:100000;" >
-    <div class="modal-dialog modal-xl" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-title" id="judulproduk" ><i class="fa fa-list-alt" aria-hidden="true"></i>
-             Variant Product</h3>
-          <button type="button" id = "closeeditproduct" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <h4>Detail Variant</h4>
-          <form id = "formedit" enctype="multipart/form-data">
-            {!! csrf_field() !!}
-            <div class = "row mt-3 mb-3">
-               <div class = "col-12">Nama Variant <input  id = "edit_descriptionproduk" name = "desc_produk" type = "text" class = "form-control" required></div>
-            </div>
-            <div class = "row mt-3 mb-3">
-              <div class = "col-6">Harga Variant <input id = "edit_hargaproduk" name = "hrg_produk" type = "text" class = "form-control" required></div>
-              <div class = "col-6">Discount Variant <input  id = "edit_discountproduk" name = "dsc_produk" type = "text" class = "form-control" required></div>
-            </div>
-            <div class = "row mt-3 mb-3">
-              <div class = "col-12">Gambar Variant <input id = "edit_gambarproduk" name = "gbr_produk" type = "file" class = "form-control"> </div>
-              {{-- <div class = "col-6">Nama Variant <input  id = "edit_namaproduk" name = "nama_produk" type = "text" class = "form-control" required></div> --}}
-            </div>
-            
-          <div class = "row mt-3 mb-3">
-            <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success "  value = "Ganti"></div>
-          </div>
-        </form>
-         
-        {{-- <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div> --}}
-      </div>
-    </div>
-  </div>
+
+
+
+
+
   <script src="{{asset('admin/assets/libs/jquery/dist/jquery.min.js')}}"></script>
   <script src="{{asset('admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{asset('admin/assets/js/sidebarmenu.js')}}"></script>
@@ -294,47 +274,47 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-  var jumlahaddvariant = 0;
-  var globalselectedproduct = "";
+  var globalselectedcategory = "";
    $(document).ready(function () {
-   var mytable =  $('#table-variant-product').DataTable({
+   var mytable =  $('#table-category').DataTable({
       processing: true,
       serverSide: true,
-      ajax: "{{url('/getlistvariant')}}",
+      ajax: "{{url('/getlistkategory')}}",
       columns: [
-
+        // {
+        //    render: function (data, type, row, meta) {
+        //      return meta.row + meta.settings._iDisplayStart + 1;
+        //    },
+        // },
         {
            data: 'id'
         },
         {
+          name : "image_category",
           "render": function ( data, type, row ) {
-             var url_gambar = "{{asset('/images/')}}/variant/" + row.images_variant;
-             return '<img src = "'+url_gambar+'" style = "width:70px;height:70px;">';
-           }
+            var gambar = '{{url("images/category")}}'+"/"+row.category_image;
+            return '<img  src = "'+gambar+ '" style = "width:50px;height:50px;" alt = "Image Not Found">';
+          }
         },
         {
-           data: 'names',
-           name : 'product.names'
+          data:"category_name"
         },
         {
-            data: 'descriptions'
-        },
-        {
-           data: 'prices'
-        },
-        {
-           
-           "render": function ( data, type, row ) {
-            var status_variantproduk = "<span style = 'color:green;'>aktif</span>";
-            if(row.variant_status == 0){
-              status_variantproduk = "<span style = 'color:red;'>tidak aktif</span>";
+          "render": function ( data, type, row ) {
+            var status_category = row.category_status;
+            var ganti = "";
+            if(status_category == "0"){
+              ganti = "<span style = 'color:red;'>Tidak aktif</span>";
             }
-             return status_variantproduk;
-           }
+            else{
+              ganti ="<span style = 'color:green;'>Aktif</span>";
+            }
+            return ganti;
+          }
         },
         {
            "render": function ( data, type, row ) {
-            return '<button class="btn btn-warning" onclick = "getdetailTransaction(this)" data-id = "'+row.id+'" btn-sm" data-toggle="modal" data-target="#modal_detail_product" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button><br><br><button class="btn btn-danger" onclick = "getStatusChange(this)" data-id = "'+row.id+'" btn-sm"  ><i class="fa fa-exchange" aria-hidden="true"></i></button>';
+            return '<button class="btn btn-warning" onclick = "getdetailTransaction(this)" data-id = "'+row.id+'" btn-sm" data-toggle="modal" data-target="#modal_detail_product" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>&nbsp;<button class="btn btn-danger" onclick = "getStatusChange(this)" data-id = "'+row.id+'" btn-sm"  ><i class="fa fa-exchange" aria-hidden="true"></i></button>';
           }
         }
       ],
@@ -343,27 +323,17 @@
 
 
   function getdetailTransaction(myobj){
-    var idproductvariant = $(myobj).attr("data-id");
-    globalselectedproduct = idproductvariant;
+    var categoryid = $(myobj).attr("data-id");
+    globalselectedcategory = categoryid;
     $.ajax({
       type: "get",
-      url: "{{url('/getdetailvariantproductadmin')}}",
-      data: {"idproductvariant" : idproductvariant},
+      url: "{{url('/getdetailcategoryadmin')}}",
+      data: {"idcategory" : categoryid},
       dataType: "json",
       success: function (response) {
-        $("#isian_variant_produk").html("");
-        $("#isian_variant_produk").html(response.output);
-        
-
-
-        // $("#edit_namaproduk").val(response.output_proudct[0].descriptions);
-        $("#edit_hargaproduk").val(response.output_proudct[0].prices);
-        $("#edit_discountproduk").val(response.output_proudct[0].discounts);
-        $("#edit_descriptionproduk").val(response.output_proudct[0].descriptions);
-        
-        
-        
-        
+        $("#edit_namacategory").val("");
+        $("#edit_namacategory").val(response.output[0].category_name);
+   
       }
     });
 
@@ -376,7 +346,15 @@
       data: {"idproduct" : productid},
       dataType: "json",
       success: function (response) {
-      
+        // $("#isian_variant_produk").html("");
+        // $("#isian_variant_produk").html(response.output);
+        
+
+
+        // $("#edit_namaproduk").val(response.output_proudct[0].names);
+        // $("#edit_hargaproduk").val(response.output_proudct[0].prices);
+        // $("#edit_discountproduk").val(response.output_proudct[0].discounts);
+        
         
         
       }
@@ -386,9 +364,9 @@
   $("#formedit").on('submit',(function(e){
         e.preventDefault();
         var formdata = new FormData(this);
-        formdata.append('id_variant_product', globalselectedproduct);
+        formdata.append('id_category', globalselectedcategory);
         $.ajax({
-          url: "{{url('/editproductvariantadmin')}}",
+          url: "{{url('/editcategoryadmin')}}",
             type: "POST",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data: formdata,
@@ -396,11 +374,12 @@
             cache: false,
             processData:false,
             success: function(data){
-              $('#table-variant-product').DataTable().ajax.reload();
+              $('#table-category').DataTable().ajax.reload();
               // $('#modal_detail_product').modal();
+              $("#formedit").trigger("reset");
               $("#closeeditproduct").click();
               Swal.fire({
-                title: "<strong>Variant Produk sudah diperbarui</strong>",
+                title: "<strong>Category sudah diperbarui</strong>",
                 icon: "success",
                 html: "Jika tidak terupdate, hubungi Developer",
                 showCloseButton: false,
@@ -417,12 +396,11 @@
         });
     }));
 
-
-    $("#formtambah").on('submit',(function(e){
+      $("#formtambah").on('submit',(function(e){
           e.preventDefault();
           var formdata = new FormData(this);
           $.ajax({
-            url: "{{url('/addvariantproductadmin')}}",
+            url: "{{url('/addcategoryadmin')}}",
               type: "POST",
               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
               data: formdata,
@@ -430,8 +408,7 @@
               cache: false,
               processData:false,
               success: function(data){
-                $('#table-variant-product').DataTable().ajax.reload();
-
+                $('#table-category').DataTable().ajax.reload();
                 var currentdate = new Date(); 
                 var tgl =  currentdate.getDate() + "/"
                 + (currentdate.getMonth()+1)  + "/" 
@@ -442,10 +419,8 @@
                 $("#add_alert_notif_danger").attr("style", "display: none !important");
                 $("#add_alert_notif_success").attr("style", "display: block !important");
                 $("#add_tanggal_alert_success").html(tgl);
-                $("#append_tambahan_variant").html("");
-                
                 $("#formtambah").trigger("reset");
-                jumlahaddvariant = 0;
+
 
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) { 
@@ -463,18 +438,17 @@
           });
       }));
 
-
       function getStatusChange(myobj){
-        var idproductvariant = $(myobj).attr("data-id");
+        var idcat = $(myobj).attr("data-id");
    
         $.ajax({
           type: "post",
-          url: "{{url('/changestatusvariant')}}",
-          data: { "_token": "{{ csrf_token() }}","idproductvariant" : idproductvariant},
+          url: "{{url('/changestatuscategory')}}",
+          data: { "_token": "{{ csrf_token() }}","idcategory" : idcat},
           dataType: "json",
           success: function (response) {
             Swal.fire({
-                  title: "<strong>Varian ini dinonaktifkan</strong>",
+                  title: "<strong>Sukses ganti status</strong>",
                   icon: "success",
                   html: "Jika tidak terganti, hubungi Developer",
                   showCloseButton: false,
@@ -486,26 +460,9 @@
                   `,
                   confirmButtonAriaLabel: "Ok",
               });
-              $('#table-variant-product').DataTable().ajax.reload();
+              $('#table-category').DataTable().ajax.reload();
             
           }
         });
       }
-      function tambahvariantlain(){
-        var stringelement = '<div class ="row mt-3 mb-3" id = "row_add_'+jumlahaddvariant+'"><div class = "col-3">Gambar Produk <input  name = "add_gbr_produk[]" type = "file" class = "form-control"> </div><div class = "col-3">Nama Produk <input name = "add_nama_produk[]" type = "text" class = "form-control" required></div><div class = "col-3">Harga Produk <input name = "add_hrg_produk[]" type = "text" class = "form-control" required></div>                <div class = "col-2">Discount Produk <input   name = "add_dsc_produk[]" type = "text" class = "form-control" required></div><div class = "col-1"><br><button class = "btn btn-danger" onclick = "removevariantlain(this)" data-id-jumlah = "'+jumlahaddvariant+'"><i class = "fa fa-trash"></i></button></div></div>';
-        $("#append_tambahan_variant").append(stringelement);
-        jumlahaddvariant +=1;
-      }
-      function removevariantlain(myobj){
-         var idjumlah =  $(myobj).attr("data-id-jumlah");
-         $("#row_add_"+idjumlah).remove();
-      }
-     
-      
 </script>
-
-
-{{-- Unused --}}
-{{-- <div class = "row mt-3 mb-3">
-                <div class = "col-12">Description Produk <input  id = "add_descriptionproduk" name = "add_desc_produk" type = "text" class = "form-control" required></div>
-              </div> --}}

@@ -9,6 +9,8 @@ use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\TransactionHistory;
 use App\Models\ProductVariant;
+use App\Models\Category;
+
 
 
 use DataTables;
@@ -59,7 +61,8 @@ class AdminController extends Controller
     }
     public function listproduk(){
         if(Session::has('id_superadmin')){
-            return view('admin.product');
+            $cat = Category::all();
+            return view('admin.product', compact("cat"));
          }else{
              return view('admin.login');
          }
@@ -68,7 +71,7 @@ class AdminController extends Controller
     public function getlistproduk(){
         
         if(Session::has('id_superadmin')){
-            $data = Product::latest();
+            $data = Product::leftJoin("category", "category.id", "=","product.product_category")->select("product.*", "category.category_name")->latest();
              return DataTables::of($data)->make(true);
          }else{
              return view('admin.login');
@@ -129,7 +132,7 @@ class AdminController extends Controller
         $id_product = $request->idproduct;
         $hasil = "";
         $myproduct = ProductVariant::leftJoin("product",'product.id','=','product_variant.id_product')->where("product_variant.id_product",'=',$id_product)->select("product_variant.*","product.images as gambar_produk", "product.names as nama_produk", "product.prices as harga_produk", "product.discounts as discount_produk")->get();
-        $products = Product::where("id",'=',$id_product)->get();
+        $products = Product::leftJoin("category", "category.id",'=',"product.product_category")->where("product.id",'=',$id_product)->select("product.*","category.category_name", "category.id as category_id")->get();
         foreach($myproduct as $mp){
            $gambar = asset('images/variant/'.$mp->images_variant);
 
@@ -138,6 +141,7 @@ class AdminController extends Controller
         return response()->json(['output' => $hasil, "output_proudct"=>$products]);
     }
     public function editproductadmin(Request $request){
+        $kategori_product = $request->edit_kategori_produk;
         $id_product = $request->id_product;
         $nama_product = $request->nama_produk;
         $harga_product = $request->hrg_produk;
@@ -153,10 +157,10 @@ class AdminController extends Controller
         }
        
         if($status_gbr_product == "ada"){
-            Product::where(['id' => $id_product ])->update(['names' => $nama_product,"prices"=>$harga_product, "discounts" => $discount_product, "descriptions"=>$desc_produk, "images" => $nama_file]);
+            Product::where(['id' => $id_product ])->update(['names' => $nama_product,"prices"=>$harga_product, "discounts" => $discount_product, "descriptions"=>$desc_produk, "images" => $nama_file, "product_category" => $kategori_product]);
 
         }else{
-            Product::where(['id' => $id_product ])->update(['names' => $nama_product,"prices"=>$harga_product, "discounts" => $discount_product, "descriptions"=>$desc_produk]);
+            Product::where(['id' => $id_product ])->update(['names' => $nama_product,"prices"=>$harga_product, "discounts" => $discount_product, "descriptions"=>$desc_produk,"product_category" => $kategori_product]);
 
         }
     }
@@ -219,6 +223,7 @@ class AdminController extends Controller
     }
     public function addproductadmin(Request $request){
         // $id_productvariant = $request->id_variant_product;
+        $pilihan_category = $request->add_kategori_produk;
         $nama_product = $request->add_nama_produk;
         $harga_product = $request->add_hrg_produk;
         $discount_product = $request->add_dsc_produk;
@@ -233,7 +238,7 @@ class AdminController extends Controller
         }
        
         if($status_gbr_product == "ada"){
-            $myproduk = Product::create(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "0", "product_status" => "1","images" => "-", "updated_at" => now(), "created_at" => now()]);
+            $myproduk = Product::create(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "0", "product_status" => "1","images" => "-", "product_category"=>$pilihan_category, "updated_at" => now(), "created_at" => now()]);
             $products_id = $myproduk->id;
             $nama_file = "product".$products_id.".".$file_product->getClientOriginalExtension();
             $file_product->move($tujuan_upload, $nama_file);
@@ -241,7 +246,7 @@ class AdminController extends Controller
 
 
         }else{
-            Product::insert(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "0", "product_status" => "1", "images" => "-", "updated_at" => now(), "created_at"=>now()]);
+            Product::insert(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "0", "product_status" => "1", "images" => "-", "product_category"=>$pilihan_category, "updated_at" => now(), "created_at"=>now()]);
 
 
         }
@@ -313,7 +318,79 @@ class AdminController extends Controller
         return response()->json(['output' => "ok"]);
 
     }
-    
+    public function getlistcategory(){
+        $data = Category::latest("id");
+        // $mydatalast = $data->created_at->format('d M Y');
+         return DataTables::of($data)->make(true);
+    }
+    public function listcategory(){
+        if(Session::has('id_superadmin')){
+            return view('admin.category');
+         }else{
+             return view('admin.login');
+         }
+    }
+    public function addcategoryadmin(Request $request){
+        $nama_category = $request->add_nama_category;
+        
+        $status_gbr_category = "";
+        if($request->hasFile('add_gbr_category')) {
+            $file_product = $request->file('add_gbr_category');
+            $tujuan_upload = public_path('images/category');
+            // $nama_file = "product".$id_productvariant.".".$file_product->getClientOriginalExtension();
+           
+            $status_gbr_category = "ada";
+        }
+       
+        if($status_gbr_category == "ada"){
+            $mycategory = Category::create(["category_name" => $nama_category, "category_image" => "-", "category_status" => "1", "updated_at" => now(), "created_at" => now()]);
+            $category_id = $mycategory->id;
+            $nama_file = "category".$category_id.".".$file_product->getClientOriginalExtension();
+            $file_product->move($tujuan_upload, $nama_file);
+            Category::where(['id' => $category_id ])->update(['category_image' => $nama_file]);
+        }else{
+            $mycategory = Category::create(["category_name" => $nama_category, "category_image" => "-", "category_status" => "1", "updated_at" => now(), "created_at" => now()]);
+        }
+    }
+    public function getdetailcategoryadmin(Request $request){
+        $category_id = $request->idcategory;
+        $search_category = Category::where("id","=",$category_id)->get();
+        return response()->json(['output' => $search_category]);
+    }
+    public function editcategoryadmin(Request $request){
+        $nama_category = $request->nama_category;
+        $id_Category = $request->id_category;
+        
+
+        $status_gbr_category = "";
+        if($request->hasFile('gbr_category')) {
+            $file_product = $request->file('gbr_category');
+            $tujuan_upload = public_path('images/category');
+            $nama_file = "category".$id_Category.".".$file_product->getClientOriginalExtension();
+            $status_gbr_category = "ada";
+        }
+       
+        if($status_gbr_category == "ada"){
+            $file_product->move($tujuan_upload, $nama_file);
+            Category::where(['id' => $id_Category ])->update(['category_name' => $nama_category,'category_image' => $nama_file]);
+        }else{
+            Category::where(['id' => $id_Category ])->update(['category_name' => $nama_category]);
+        }
+    }
+    public function changestatuscategory(Request $request){
+        $id_category = $request->idcategory;
+        $status = Category::where("id",'=',$id_category)->get();
+        $status_category = $status[0]['category_status'];
+        $ganti = "0";
+        if($status_category == "0"){
+            $ganti = "1";
+        }
+        else{
+            $ganti ="0";
+        }
+        Category::where(['id' => $id_category ])->update(['category_status' => $ganti]);
+        return response()->json(['output' => "ok"]);
+    }
 
 
     /**
