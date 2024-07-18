@@ -283,7 +283,7 @@ class AdminController extends Controller
         }
         else{
             $status_gbr_product = "tidak";
-            $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => "1", "name" => $nama_product, "variant_status" => "1","images_variant" => "kesini", "updated_at" => now(), "created_at" => now()]);
+            $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => "1", "name" => $nama_product, "variant_status" => "1","images_variant" => "-", "updated_at" => now(), "created_at" => now()]);
         }      
          }
         return response()->json(['output' => "ok"]);

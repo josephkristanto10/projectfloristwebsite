@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 482,
+            "activePatchIndex": 483,
             "patches": [
                 {
                     "date": 1719492549189,
@@ -1936,6 +1936,10 @@
                 {
                     "date": 1721319805104,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -265,9 +265,9 @@\n         }\n         // $desc_product =  $request->add_desc_produk;\n         $status_gbr_product = \"\";\n         // $images= $request->file('add_gbr_produk')[$myindex];\n-        if(isset($request->file('add_gbr_produk'))){\n+        if(isset($request->file('add_gbr_produk')[$myindex])){\n \n             \n                 $file_product = $request->file('add_gbr_produk')[$myindex];\n                 $tujuan_upload = public_path('images/variant');\n"
+                },
+                {
+                    "date": 1721319992915,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -282,9 +282,9 @@\n             \n         }\n         else{\n             $status_gbr_product = \"tidak\";\n-            $myproduk = ProductVariant::create([\"id_product\" => $pilihan_productvariant,\"stocks\" => \"1\",  \"prices\" => $harga_product, \"discounts\" => $discount_product,\"descriptions\" => $nama_product, \"stocks\" => \"1\", \"name\" => $nama_product, \"variant_status\" => \"1\",\"images_variant\" => \"kesini\", \"updated_at\" => now(), \"created_at\" => now()]);\n+            $myproduk = ProductVariant::create([\"id_product\" => $pilihan_productvariant,\"stocks\" => \"1\",  \"prices\" => $harga_product, \"discounts\" => $discount_product,\"descriptions\" => $nama_product, \"stocks\" => \"1\", \"name\" => $nama_product, \"variant_status\" => \"1\",\"images_variant\" => \"-\", \"updated_at\" => now(), \"created_at\" => now()]);\n         }      \n          }\n         return response()->json(['output' => \"ok\"]);\n     }\n"
                 }
             ],
             "date": 1719492549189,
