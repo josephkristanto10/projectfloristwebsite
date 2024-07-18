@@ -298,7 +298,7 @@ class AdminController extends Controller
 
         }
          }
-        return response()->json(['output' => $myallname]);
+        return response()->json(['output' => "ok"]);
     }
     public function changestatusvariant(Request $request){
         $id_variant = $request->idproductvariant;

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 434,
+            "activePatchIndex": 435,
             "patches": [
                 {
                     "date": 1719492549189,
@@ -1744,6 +1744,10 @@
                 {
                     "date": 1721292146901,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -263,9 +263,9 @@\n         $nama_product = $request->add_nama_produk[$myindex];\n         $harga_product = $request->add_hrg_produk[$myindex];\n         $discount_product = $request->add_dsc_produk[$myindex];\n         if($request->add_dsc_produk[$myindex] == \"\"){\n-            \n+            $discount_product = 0;\n         }\n         // $desc_product =  $request->add_desc_produk;\n         $status_gbr_product = \"\";\n         if(isset($request->file('add_gbr_produk')[$myindex])){\n"
+                },
+                {
+                    "date": 1721297192532,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -297,9 +297,9 @@\n             Product::where(['id' => $pilihan_productvariant ])->update(['has_variants' => 1]);\n \n         }\n          }\n-        return response()->json(['output' => $myallname]);\n+        return response()->json(['output' => \"ok\"]);\n     }\n     public function changestatusvariant(Request $request){\n         $id_variant = $request->idproductvariant;\n         $status = ProductVariant::where(\"id\",'=',$id_variant)->get();\n"
                 }
             ],
             "date": 1719492549189,
