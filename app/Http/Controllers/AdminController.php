@@ -265,6 +265,7 @@ class AdminController extends Controller
         }
         // $desc_product =  $request->add_desc_produk;
         $status_gbr_product = "";
+        // $images= $request->file('add_gbr_produk')[$myindex];
         if(isset($request->file('add_gbr_produk')[$myindex])){
 
             
@@ -273,15 +274,16 @@ class AdminController extends Controller
                 // $nama_file = "product".$id_productvariant.".".$file_product->getClientOriginalExtension();
                
                 $status_gbr_product = "ada";
-                $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => "1", "name" => $nama_product, "variant_status" => "1","images_variant" => "-", "updated_at" => now(), "created_at" => now()]);
+                $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => "1", "name" => $nama_product, "variant_status" => "1","images_variant" => "test", "updated_at" => now(), "created_at" => now()]);
                 $products_id = $myproduk->id;
                 $nama_file = "product_variant".$products_id.".".$file_product->getClientOriginalExtension();
                 $file_product->move($tujuan_upload, $nama_file);
+                ProductVariant::where("id", '=', $products_id)->update(["images_variant" => $nama_file]);
             
         }
         else{
             $status_gbr_product = "tidak";
-            $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => "1", "name" => $nama_product, "variant_status" => "1","images_variant" => "-", "updated_at" => now(), "created_at" => now()]);
+            $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => "1", "name" => $nama_product, "variant_status" => "1","images_variant" => "kesini", "updated_at" => now(), "created_at" => now()]);
         }      
          }
         return response()->json(['output' => "ok"]);
