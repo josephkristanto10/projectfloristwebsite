@@ -223,8 +223,16 @@
               </div>
               <span style = "float:right;margin-right:30px;"><button type = "button" class = "btn btn-primary" onclick = "tambahvariantlain()"  >Tambah variant lain</button></span>
               <br><br>
+              <div class = "row">
+                <div class = "col-12">
+                    {{-- <div class="percent">0%</div> --}}
+                </div>
+              </div>
               <div class = "row mt-3 mb-3">
-                <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success " id = "tambah_variant_button"  value = "Upload Variant"></div>
+             
+              
+              <div id="status"></div>
+                <div class ="col-12" style = "text-align:right;"> <input style = "float:right;" type = "submit" class ="btn btn-success " id = "tambah_variant_button"  value = "Upload Variant"> <span style = "float:right;margin-top:10px;" class="percent">0% &nbsp;</span></div>
               </div>
             </form>
              
@@ -422,6 +430,18 @@
           e.preventDefault();
           var formdata = new FormData(this);
           $.ajax({
+            xhr: function() {
+                var xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener("progress", function(evt) {
+                    if (evt.lengthComputable) {
+                        var percentComplete = (evt.loaded / evt.total) * 100;
+                        //Do something with upload progress here
+                    
+                            $(".percent").text(percentComplete+"%");
+                    }
+              }, false);
+              return xhr;
+            },
             url: "{{url('/addvariantproductadmin')}}",
               type: "POST",
               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -433,6 +453,11 @@
               $('#tambah_variant_button').prop('disabled',true);
               $('#tambah_variant_button').text('Uploading...');
               },
+              // uploadProgress: function(event, position, total, percentComplete) {
+              //     var percentVal = percentComplete + '%';
+              //     bar.width(percentVal);
+              //     percent.html(percentVal);
+              // },
               complete: function() {
               $('#tambah_variant_button').prop('disabled',false);
               $('#tambah_variant_button').text('Upload Variant');
