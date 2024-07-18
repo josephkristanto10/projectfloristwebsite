@@ -205,7 +205,7 @@
                 <div class = "col-3">Gambar Produk <input id = "add_gambarproduk" name = "add_gbr_produk[]" type = "file" class = "form-control" required> </div>
                 <div class = "col-3">Nama Produk <input  id = "add_namaproduk" name = "add_nama_produk[]" type = "text" class = "form-control" required></div>
                 <div class = "col-3">Harga Produk <input id = "add_hargaproduk" name = "add_hrg_produk[]" type = "text" class = "form-control" required></div>
-                <div class = "col-3">Discount Produk <input  id = "add_discountproduk" name = "add_dsc_produk[]" type = "text" class = "form-control" required></div>
+                <div class = "col-3">Discount Produk <input  id = "add_discountproduk" name = "add_dsc_produk[]" type = "text" class = "form-control" ></div>
 
               </div>
               <div id = "tambahan_variant">
@@ -221,10 +221,10 @@
                   Produk gagal Ditambah <span id = "add_tanggal_alert_danger"></span>.. Segera Hubungi Developer.
                 </div>
               </div>
-              <span style = "float:right;margin-right:30px;"><button type = "button" class = "btn btn-primary" onclick = "tambahvariantlain()">Tambah variant lain</button></span>
+              <span style = "float:right;margin-right:30px;"><button type = "button" class = "btn btn-primary" onclick = "tambahvariantlain()"  >Tambah variant lain</button></span>
               <br><br>
               <div class = "row mt-3 mb-3">
-                <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success "  value = "Upload Variant"></div>
+                <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success " id = "tambah_variant_button"  value = "Upload Variant"></div>
               </div>
             </form>
              
@@ -264,7 +264,7 @@
             </div>
             
           <div class = "row mt-3 mb-3">
-            <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success " id = "edit_variant_button"  value = "Ganti"></div>
+            <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success "  value = "Ganti"></div>
           </div>
         </form>
          
@@ -430,16 +430,16 @@
               cache: false,
               processData:false,
               beforeSend: function() {
-              $('#edit_variant_button').prop('disabled',true);
-              $('#edit_variant_button').text('Uploading...');
+              $('#tambah_variant_button').prop('disabled',true);
+              $('#tambah_variant_button').text('Uploading...');
               },
               complete: function() {
-              $('#edit_variant_button').prop('disabled',false);
-              $('#edit_variant_button').text('Ganti');
+              $('#tambah_variant_button').prop('disabled',false);
+              $('#tambah_variant_button').text('Upload Variant');
                 },
               success: function(data){
-                $('#edit_variant_button').prop('disabled',false);
-                $('#edit_variant_button').text('Ganti');
+                $('#tambah_variant_button').prop('disabled',false);
+                $('#tambah_variant_button').text('Ganti');
                 $('#table-variant-product').DataTable().ajax.reload();
 
                 var currentdate = new Date(); 
@@ -502,7 +502,7 @@
         });
       }
       function tambahvariantlain(){
-        var stringelement = '<div class ="row mt-3 mb-3" id = "row_add_'+jumlahaddvariant+'"><div class = "col-3">Gambar Produk <input  name = "add_gbr_produk[]" type = "file" class = "form-control"> </div><div class = "col-3">Nama Produk <input name = "add_nama_produk[]" type = "text" class = "form-control" required></div><div class = "col-3">Harga Produk <input name = "add_hrg_produk[]" type = "text" class = "form-control" required></div>                <div class = "col-2">Discount Produk <input   name = "add_dsc_produk[]" type = "text" class = "form-control" required></div><div class = "col-1"><br><button class = "btn btn-danger" onclick = "removevariantlain(this)" data-id-jumlah = "'+jumlahaddvariant+'"><i class = "fa fa-trash"></i></button></div></div>';
+        var stringelement = '<div class ="row mt-3 mb-3" id = "row_add_'+jumlahaddvariant+'"><div class = "col-3">Gambar Produk <input  name = "add_gbr_produk[]" type = "file" class = "form-control"> </div><div class = "col-3">Nama Produk <input name = "add_nama_produk[]" type = "text" class = "form-control" required></div><div class = "col-3">Harga Produk <input name = "add_hrg_produk[]" type = "text" class = "form-control" required></div>                <div class = "col-2">Discount Produk <input   name = "add_dsc_produk[]" type = "text" class = "form-control" ></div><div class = "col-1"><br><button class = "btn btn-danger" onclick = "removevariantlain(this)" data-id-jumlah = "'+jumlahaddvariant+'"><i class = "fa fa-trash"></i></button></div></div>';
         $("#append_tambahan_variant").append(stringelement);
         jumlahaddvariant +=1;
       }

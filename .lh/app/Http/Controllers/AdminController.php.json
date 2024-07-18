@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 430,
+            "activePatchIndex": 434,
             "patches": [
                 {
                     "date": 1719492549189,
@@ -1728,6 +1728,22 @@
                 {
                     "date": 1721291863519,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -274,8 +274,11 @@\n                \n                 $status_gbr_product = \"ada\";\n             }\n         }\n+        else{\n+            \n+        }\n         $status_gbr_product = \"tidak\";\n        \n        \n         if($status_gbr_product == \"ada\"){\n"
+                },
+                {
+                    "date": 1721292110007,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -261,8 +261,11 @@\n       \n         $nama_product = $request->add_nama_produk[$myindex];\n         $nama_product = $request->add_nama_produk[$myindex];\n         $harga_product = $request->add_hrg_produk[$myindex];\n+        if($request->add_dsc_produk[$myindex]){\n+            \n+        }\n         $discount_product = $request->add_dsc_produk[$myindex];\n         // $desc_product =  $request->add_desc_produk;\n         $status_gbr_product = \"\";\n         if(isset($request->file('add_gbr_produk')[$myindex])){\n@@ -275,11 +278,11 @@\n                 $status_gbr_product = \"ada\";\n             }\n         }\n         else{\n-            \n+            $status_gbr_product = \"tidak\";\n         }\n-        $status_gbr_product = \"tidak\";\n+ \n        \n        \n         if($status_gbr_product == \"ada\"){\n             $myproduk = ProductVariant::create([\"id_product\" => $pilihan_productvariant,\"stocks\" => \"1\",  \"prices\" => $harga_product, \"discounts\" => $discount_product,\"descriptions\" => $nama_product, \"stocks\" => \"1\", \"name\" => $nama_product, \"variant_status\" => \"1\",\"images_variant\" => \"-\", \"updated_at\" => now(), \"created_at\" => now()]);\n"
+                },
+                {
+                    "date": 1721292118371,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -261,12 +261,12 @@\n       \n         $nama_product = $request->add_nama_produk[$myindex];\n         $nama_product = $request->add_nama_produk[$myindex];\n         $harga_product = $request->add_hrg_produk[$myindex];\n+        $discount_product = $request->add_dsc_produk[$myindex];\n         if($request->add_dsc_produk[$myindex]){\n             \n         }\n-        $discount_product = $request->add_dsc_produk[$myindex];\n         // $desc_product =  $request->add_desc_produk;\n         $status_gbr_product = \"\";\n         if(isset($request->file('add_gbr_produk')[$myindex])){\n \n"
+                },
+                {
+                    "date": 1721292129341,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -262,9 +262,9 @@\n         $nama_product = $request->add_nama_produk[$myindex];\n         $nama_product = $request->add_nama_produk[$myindex];\n         $harga_product = $request->add_hrg_produk[$myindex];\n         $discount_product = $request->add_dsc_produk[$myindex];\n-        if($request->add_dsc_produk[$myindex]){\n+        if($request->add_dsc_produk[$myindex] == \"\"){\n             \n         }\n         // $desc_product =  $request->add_desc_produk;\n         $status_gbr_product = \"\";\n"
+                },
+                {
+                    "date": 1721292146901,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -263,9 +263,9 @@\n         $nama_product = $request->add_nama_produk[$myindex];\n         $harga_product = $request->add_hrg_produk[$myindex];\n         $discount_product = $request->add_dsc_produk[$myindex];\n         if($request->add_dsc_produk[$myindex] == \"\"){\n-            \n+            $discount_product = 0;\n         }\n         // $desc_product =  $request->add_desc_produk;\n         $status_gbr_product = \"\";\n         if(isset($request->file('add_gbr_produk')[$myindex])){\n"
                 }
             ],
             "date": 1719492549189,

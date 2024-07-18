@@ -263,6 +263,9 @@ class AdminController extends Controller
         $nama_product = $request->add_nama_produk[$myindex];
         $harga_product = $request->add_hrg_produk[$myindex];
         $discount_product = $request->add_dsc_produk[$myindex];
+        if($request->add_dsc_produk[$myindex] == ""){
+            $discount_product = 0;
+        }
         // $desc_product =  $request->add_desc_produk;
         $status_gbr_product = "";
         if(isset($request->file('add_gbr_produk')[$myindex])){
