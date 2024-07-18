@@ -252,14 +252,11 @@ class AdminController extends Controller
         }
     }
     public function addvariantproductadmin(Request $request){
-        $data = $request->all();
+        // $data = $request->all();
         $myallname = "";
         $pilihan_productvariant = $request->add_pil_produk;
+        Product::where(['id' => $pilihan_productvariant ])->update(['has_variants' => 1]);
         foreach( $request->add_nama_produk as $myindex => $dat){
-            $myallname .= $request->add_nama_produk[$myindex];
-        
-      
-        $nama_product = $request->add_nama_produk[$myindex];
         $nama_product = $request->add_nama_produk[$myindex];
         $harga_product = $request->add_hrg_produk[$myindex];
         $discount_product = $request->add_dsc_produk[$myindex];
@@ -270,33 +267,22 @@ class AdminController extends Controller
         $status_gbr_product = "";
         if(isset($request->file('add_gbr_produk')[$myindex])){
 
-            if($request->hasFile('add_gbr_produk')) {
+            
                 $file_product = $request->file('add_gbr_produk')[$myindex];
                 $tujuan_upload = public_path('images/variant');
                 // $nama_file = "product".$id_productvariant.".".$file_product->getClientOriginalExtension();
                
                 $status_gbr_product = "ada";
-            }
+                $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => "1", "name" => $nama_product, "variant_status" => "1","images_variant" => "-", "updated_at" => now(), "created_at" => now()]);
+                $products_id = $myproduk->id;
+                $nama_file = "product_variant".$products_id.".".$file_product->getClientOriginalExtension();
+                $file_product->move($tujuan_upload, $nama_file);
+            
         }
         else{
             $status_gbr_product = "tidak";
-        }
- 
-       
-       
-        if($status_gbr_product == "ada"){
             $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => "1", "name" => $nama_product, "variant_status" => "1","images_variant" => "-", "updated_at" => now(), "created_at" => now()]);
-            $products_id = $myproduk->id;
-            $nama_file = "product_variant".$products_id.".".$file_product->getClientOriginalExtension();
-            $file_product->move($tujuan_upload, $nama_file);
-            ProductVariant::where(['id' => $products_id ])->update(['images_variant' => $nama_file]);
-            Product::where(['id' => $pilihan_productvariant ])->update(['has_variants' => 1]);
-
-        }else{
-            $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => "1", "name" => $nama_product, "variant_status" => "1","images_variant" => "-", "updated_at" => now(), "created_at" => now()]);
-            Product::where(['id' => $pilihan_productvariant ])->update(['has_variants' => 1]);
-
-        }
+        }      
          }
         return response()->json(['output' => "ok"]);
     }

@@ -150,7 +150,7 @@
                 <span style = "float:right;margin-right:20px;" ><button class = "btn btn-primary" data-toggle = "modal" data-target="#modal_add_variant_product" style = " background-color: #F2D2BD;color:#131312;border:0px;"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Tambah Variant</button></span>
 
                 <h1>Variant Product</h1>
-                <table id="table-variant-product" class="table table-bordered table-hover">
+                <table id="table-variant-product" class="table table-bordered table-hover w-100">
                   <thead>
                     <tr>
                       <th>ID</th>
@@ -308,6 +308,8 @@
    var mytable =  $('#table-variant-product').DataTable({
       processing: true,
       serverSide: true,
+      scrollX:true,
+      autoWidth:true,
       ajax: "{{url('/getlistvariant')}}",
       columns: [
 
@@ -430,18 +432,18 @@
           e.preventDefault();
           var formdata = new FormData(this);
           $.ajax({
-            xhr: function() {
-                var xhr = new window.XMLHttpRequest();
-                xhr.upload.addEventListener("progress", function(evt) {
-                    if (evt.lengthComputable) {
-                        var percentComplete = (evt.loaded / evt.total) * 100;
-                        //Do something with upload progress here
+            // xhr: function() {
+            //     var xhr = new window.XMLHttpRequest();
+            //     xhr.upload.addEventListener("progress", function(evt) {
+            //         if (evt.lengthComputable) {
+            //             var percentComplete = (evt.loaded / evt.total) * 100;
+            //             //Do something with upload progress here
                     
-                            $(".percent").text(percentComplete+"%");
-                    }
-              }, false);
-              return xhr;
-            },
+            //                 $(".percent").text(percentComplete+"%");
+            //         }
+            //   }, false);
+            //   return xhr;
+            // },
             url: "{{url('/addvariantproductadmin')}}",
               type: "POST",
               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -449,10 +451,15 @@
               contentType: false,
               cache: false,
               processData:false,
+              timeout: 120000,
               beforeSend: function() {
               $('#tambah_variant_button').prop('disabled',true);
               $('#tambah_variant_button').text('Uploading...');
-              },
+              }, 
+              uploadProgress: function (event, position, total, percentComplete) {
+                        var percentage = percentComplete;
+                        $(".percent").text(percentComplete+"%");
+                    },
               // uploadProgress: function(event, position, total, percentComplete) {
               //     var percentVal = percentComplete + '%';
               //     bar.width(percentVal);
@@ -464,8 +471,8 @@
                 },
               success: function(data){
                 $('#tambah_variant_button').prop('disabled',false);
-                $('#tambah_variant_button').text('Ganti');
-                $('#table-variant-product').DataTable().ajax.reload();
+                $('#tambah_variant_button').text('Upload Variant');
+                // $('#table-variant-product').DataTable().ajax.reload();
 
                 var currentdate = new Date(); 
                 var tgl =  currentdate.getDate() + "/"
@@ -484,6 +491,8 @@
 
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                $('#tambah_variant_button').prop('disabled',false);
+                $('#tambah_variant_button').text('Upload Variant');
                 var currentdate = new Date(); 
                 var tgl =  currentdate.getDate() + "/"
                 + (currentdate.getMonth()+1)  + "/" 
