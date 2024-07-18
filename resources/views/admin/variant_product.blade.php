@@ -158,6 +158,7 @@
                       <th>Nama</th>
                       <th>Variant</th>
                       <th>Harga</th>
+                      <th>Stok</th>
                       <th>Status</th>
                       <th>Action</th>
                     </tr>
@@ -202,10 +203,12 @@
                 </select> </div>
               </div>
               <div class = "row mt-3 mb-3">
-                <div class = "col-3">Gambar Produk <input id = "add_gambarproduk" name = "add_gbr_produk[]" type = "file" class = "form-control" required> </div>
-                <div class = "col-3">Nama Produk <input  id = "add_namaproduk" name = "add_nama_produk[]" type = "text" class = "form-control" required></div>
-                <div class = "col-3">Harga Produk <input id = "add_hargaproduk" name = "add_hrg_produk[]" type = "text" class = "form-control" required></div>
-                <div class = "col-3">Discount Produk <input  id = "add_discountproduk" name = "add_dsc_produk[]" type = "text" class = "form-control" ></div>
+                <div class = "col-2">Gambar  <input id = "add_gambarproduk" name = "add_gbr_produk[]" type = "file" class = "form-control" required> </div>
+                <div class = "col-3">Nama  <input  id = "add_namaproduk" name = "add_nama_produk[]" type = "text" class = "form-control" required></div>
+                <div class = "col-2">Harga  <input id = "add_hargaproduk" name = "add_hrg_produk[]" type = "text" class = "form-control" required></div>
+                <div class = "col-2">Stok  <input id = "add_stokproduk" name = "add_stock_produk[]" value = "0" type = "text" class = "form-control" required></div>
+
+                <div class = "col-2">Discount  <input  id = "add_discountproduk" name = "add_dsc_produk[]" type = "text" class = "form-control" ></div>
 
               </div>
               <div id = "tambahan_variant">
@@ -232,7 +235,7 @@
              
               
               <div id="status"></div>
-                <div class ="col-12" style = "text-align:right;"> <input style = "float:right;" type = "submit" class ="btn btn-success " id = "tambah_variant_button"  value = "Upload Variant"> <span style = "float:right;margin-top:10px;" class="percent">0% &nbsp;</span></div>
+                <div class ="col-12" style = "text-align:right;"> <input style = "float:right;" type = "submit" class ="btn btn-success " id = "tambah_variant_button"  value = "Upload Variant"> </div>
               </div>
             </form>
              
@@ -331,6 +334,9 @@
         },
         {
            data: 'prices'
+        },
+        {
+           data: 'stocks'
         },
         {
            
@@ -432,18 +438,7 @@
           e.preventDefault();
           var formdata = new FormData(this);
           $.ajax({
-            // xhr: function() {
-            //     var xhr = new window.XMLHttpRequest();
-            //     xhr.upload.addEventListener("progress", function(evt) {
-            //         if (evt.lengthComputable) {
-            //             var percentComplete = (evt.loaded / evt.total) * 100;
-            //             //Do something with upload progress here
-                    
-            //                 $(".percent").text(percentComplete+"%");
-            //         }
-            //   }, false);
-            //   return xhr;
-            // },
+           
             url: "{{url('/addvariantproductadmin')}}",
               type: "POST",
               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -458,13 +453,8 @@
               }, 
               uploadProgress: function (event, position, total, percentComplete) {
                         var percentage = percentComplete;
-                        $(".percent").text(percentComplete+"%");
+                    
                     },
-              // uploadProgress: function(event, position, total, percentComplete) {
-              //     var percentVal = percentComplete + '%';
-              //     bar.width(percentVal);
-              //     percent.html(percentVal);
-              // },
               complete: function() {
               $('#tambah_variant_button').prop('disabled',false);
               $('#tambah_variant_button').text('Upload Variant');
@@ -472,7 +462,7 @@
               success: function(data){
                 $('#tambah_variant_button').prop('disabled',false);
                 $('#tambah_variant_button').text('Upload Variant');
-                // $('#table-variant-product').DataTable().ajax.reload();
+                $('#table-variant-product').DataTable().ajax.reload();
 
                 var currentdate = new Date(); 
                 var tgl =  currentdate.getDate() + "/"
@@ -536,7 +526,7 @@
         });
       }
       function tambahvariantlain(){
-        var stringelement = '<div class ="row mt-3 mb-3" id = "row_add_'+jumlahaddvariant+'"><div class = "col-3">Gambar Produk <input  name = "add_gbr_produk[]" type = "file" class = "form-control"> </div><div class = "col-3">Nama Produk <input name = "add_nama_produk[]" type = "text" class = "form-control" required></div><div class = "col-3">Harga Produk <input name = "add_hrg_produk[]" type = "text" class = "form-control" required></div>                <div class = "col-2">Discount Produk <input   name = "add_dsc_produk[]" type = "text" class = "form-control" ></div><div class = "col-1"><br><button class = "btn btn-danger" onclick = "removevariantlain(this)" data-id-jumlah = "'+jumlahaddvariant+'"><i class = "fa fa-trash"></i></button></div></div>';
+        var stringelement = '<div class ="row mt-3 mb-3" id = "row_add_'+jumlahaddvariant+'"><div class = "col-2">Gambar <input  name = "add_gbr_produk[]" type = "file" class = "form-control"> </div><div class = "col-3">Nama <input name = "add_nama_produk[]" type = "text" class = "form-control" required></div><div class = "col-2">Harga <input name = "add_hrg_produk[]" type = "text" class = "form-control" required></div>   <div class = "col-2">Stok <input id = "add_stokproduk" name = "add_stock_produk[]" value = "0" type = "text" class = "form-control" required></div>                <div class = "col-2">Discount <input   name = "add_dsc_produk[]" type = "text" class = "form-control" ></div><div class = "col-1"><br><button class = "btn btn-danger" onclick = "removevariantlain(this)" data-id-jumlah = "'+jumlahaddvariant+'"><i class = "fa fa-trash"></i></button></div></div>';
         $("#append_tambahan_variant").append(stringelement);
         jumlahaddvariant +=1;
       }

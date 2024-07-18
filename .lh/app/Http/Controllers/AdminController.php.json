@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 483,
+            "activePatchIndex": 486,
             "patches": [
                 {
                     "date": 1719492549189,
@@ -1940,6 +1940,18 @@
                 {
                     "date": 1721319992915,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -282,9 +282,9 @@\n             \n         }\n         else{\n             $status_gbr_product = \"tidak\";\n-            $myproduk = ProductVariant::create([\"id_product\" => $pilihan_productvariant,\"stocks\" => \"1\",  \"prices\" => $harga_product, \"discounts\" => $discount_product,\"descriptions\" => $nama_product, \"stocks\" => \"1\", \"name\" => $nama_product, \"variant_status\" => \"1\",\"images_variant\" => \"kesini\", \"updated_at\" => now(), \"created_at\" => now()]);\n+            $myproduk = ProductVariant::create([\"id_product\" => $pilihan_productvariant,\"stocks\" => \"1\",  \"prices\" => $harga_product, \"discounts\" => $discount_product,\"descriptions\" => $nama_product, \"stocks\" => \"1\", \"name\" => $nama_product, \"variant_status\" => \"1\",\"images_variant\" => \"-\", \"updated_at\" => now(), \"created_at\" => now()]);\n         }      \n          }\n         return response()->json(['output' => \"ok\"]);\n     }\n"
+                },
+                {
+                    "date": 1721320521970,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -258,8 +258,9 @@\n         Product::where(['id' => $pilihan_productvariant ])->update(['has_variants' => 1]);\n         foreach( $request->add_nama_produk as $myindex => $dat){\n         $nama_product = $request->add_nama_produk[$myindex];\n         $harga_product = $request->add_hrg_produk[$myindex];\n+        $stockproduct = $request->add_stock_produk[$myindex];\n         $discount_product = $request->add_dsc_produk[$myindex];\n         if($request->add_dsc_produk[$myindex] == \"\"){\n             $discount_product = 0;\n         }\n"
+                },
+                {
+                    "date": 1721320534844,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -274,9 +274,9 @@\n                 $tujuan_upload = public_path('images/variant');\n                 // $nama_file = \"product\".$id_productvariant.\".\".$file_product->getClientOriginalExtension();\n                \n                 $status_gbr_product = \"ada\";\n-                $myproduk = ProductVariant::create([\"id_product\" => $pilihan_productvariant,\"stocks\" => \"1\",  \"prices\" => $harga_product, \"discounts\" => $discount_product,\"descriptions\" => $nama_product, \"stocks\" => \"1\", \"name\" => $nama_product, \"variant_status\" => \"1\",\"images_variant\" => \"test\", \"updated_at\" => now(), \"created_at\" => now()]);\n+                $myproduk = ProductVariant::create([\"id_product\" => $pilihan_productvariant,\"stocks\" => \"1\",  \"prices\" => $harga_product, \"discounts\" => $discount_product,\"descriptions\" => $nama_product, \"stocks\" => $stockproduct, \"name\" => $nama_product, \"variant_status\" => \"1\",\"images_variant\" => \"test\", \"updated_at\" => now(), \"created_at\" => now()]);\n                 $products_id = $myproduk->id;\n                 $nama_file = \"product_variant\".$products_id.\".\".$file_product->getClientOriginalExtension();\n                 $file_product->move($tujuan_upload, $nama_file);\n                 ProductVariant::where(\"id\", '=', $products_id)->update([\"images_variant\" => $nama_file]);\n"
+                },
+                {
+                    "date": 1721320540515,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -283,9 +283,9 @@\n             \n         }\n         else{\n             $status_gbr_product = \"tidak\";\n-            $myproduk = ProductVariant::create([\"id_product\" => $pilihan_productvariant,\"stocks\" => \"1\",  \"prices\" => $harga_product, \"discounts\" => $discount_product,\"descriptions\" => $nama_product, \"stocks\" => \"1\", \"name\" => $nama_product, \"variant_status\" => \"1\",\"images_variant\" => \"-\", \"updated_at\" => now(), \"created_at\" => now()]);\n+            $myproduk = ProductVariant::create([\"id_product\" => $pilihan_productvariant,\"stocks\" => \"1\",  \"prices\" => $harga_product, \"discounts\" => $discount_product,\"descriptions\" => $nama_product, \"stocks\" => $stockproduct, \"name\" => $nama_product, \"variant_status\" => \"1\",\"images_variant\" => \"-\", \"updated_at\" => now(), \"created_at\" => now()]);\n         }      \n          }\n         return response()->json(['output' => \"ok\"]);\n     }\n"
                 }
             ],
             "date": 1719492549189,

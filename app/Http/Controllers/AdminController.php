@@ -259,6 +259,7 @@ class AdminController extends Controller
         foreach( $request->add_nama_produk as $myindex => $dat){
         $nama_product = $request->add_nama_produk[$myindex];
         $harga_product = $request->add_hrg_produk[$myindex];
+        $stockproduct = $request->add_stock_produk[$myindex];
         $discount_product = $request->add_dsc_produk[$myindex];
         if($request->add_dsc_produk[$myindex] == ""){
             $discount_product = 0;
@@ -274,7 +275,7 @@ class AdminController extends Controller
                 // $nama_file = "product".$id_productvariant.".".$file_product->getClientOriginalExtension();
                
                 $status_gbr_product = "ada";
-                $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => "1", "name" => $nama_product, "variant_status" => "1","images_variant" => "test", "updated_at" => now(), "created_at" => now()]);
+                $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => $stockproduct, "name" => $nama_product, "variant_status" => "1","images_variant" => "test", "updated_at" => now(), "created_at" => now()]);
                 $products_id = $myproduk->id;
                 $nama_file = "product_variant".$products_id.".".$file_product->getClientOriginalExtension();
                 $file_product->move($tujuan_upload, $nama_file);
@@ -283,7 +284,7 @@ class AdminController extends Controller
         }
         else{
             $status_gbr_product = "tidak";
-            $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => "1", "name" => $nama_product, "variant_status" => "1","images_variant" => "-", "updated_at" => now(), "created_at" => now()]);
+            $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => $stockproduct, "name" => $nama_product, "variant_status" => "1","images_variant" => "-", "updated_at" => now(), "created_at" => now()]);
         }      
          }
         return response()->json(['output' => "ok"]);
