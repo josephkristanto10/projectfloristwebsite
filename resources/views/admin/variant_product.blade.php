@@ -264,7 +264,7 @@
             </div>
             
           <div class = "row mt-3 mb-3">
-            <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success "  value = "Ganti"></div>
+            <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success " id = "edit_variant_button"  value = "Ganti"></div>
           </div>
         </form>
          
@@ -429,7 +429,17 @@
               contentType: false,
               cache: false,
               processData:false,
+              beforeSend: function() {
+              $('#edit_variant_button').prop('disabled',true);
+              $('#edit_variant_button').text('Uploading...');
+              },
+              complete: function() {
+              $('#edit_variant_button').prop('disabled',false);
+              $('#edit_variant_button').text('Ganti');
+                },
               success: function(data){
+                $('#edit_variant_button').prop('disabled',false);
+                $('#edit_variant_button').text('Ganti');
                 $('#table-variant-product').DataTable().ajax.reload();
 
                 var currentdate = new Date(); 

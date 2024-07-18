@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 427,
+            "activePatchIndex": 430,
             "patches": [
                 {
                     "date": 1719492549189,
@@ -1716,6 +1716,18 @@
                 {
                     "date": 1720851975282,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,16 +27,16 @@\n      */\n     public function index()\n     {\n \n-        // if(Session::has('id_superadmin')){\n-        //    $visitor = Visitor::all();\n-        //    $product = Product::all();\n-        //    $transaction = Transaction::all();\n-        //     return view('admin.index', compact('visitor','product','transaction'));\n-        // }else{\n+        if(Session::has('id_superadmin')){\n+           $visitor = Visitor::all();\n+           $product = Product::all();\n+           $transaction = Transaction::all();\n+            return view('admin.index', compact('visitor','product','transaction'));\n+        }else{\n             return view('admin.login');\n-        // }\n+        }\n     }\n     public function loginadmincheck(Request $request){\n         $username = $request->user;\n         $password = $request->pass;\n"
+                },
+                {
+                    "date": 1721291739855,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -264,16 +264,20 @@\n         $harga_product = $request->add_hrg_produk[$myindex];\n         $discount_product = $request->add_dsc_produk[$myindex];\n         // $desc_product =  $request->add_desc_produk;\n         $status_gbr_product = \"\";\n-        if($request->hasFile('add_gbr_produk')) {\n-            $file_product = $request->file('add_gbr_produk')[$myindex];\n-            $tujuan_upload = public_path('images/variant');\n-            // $nama_file = \"product\".$id_productvariant.\".\".$file_product->getClientOriginalExtension();\n-           \n-            $status_gbr_product = \"ada\";\n+        if(isset($request->file('add_gbr_produk')[$myindex])){\n+\n+            if($request->hasFile('add_gbr_produk')) {\n+                $file_product = $request->file('add_gbr_produk')[$myindex];\n+                $tujuan_upload = public_path('images/variant');\n+                // $nama_file = \"product\".$id_productvariant.\".\".$file_product->getClientOriginalExtension();\n+               \n+                $status_gbr_product = \"ada\";\n+            }\n         }\n        \n+       \n         if($status_gbr_product == \"ada\"){\n             $myproduk = ProductVariant::create([\"id_product\" => $pilihan_productvariant,\"stocks\" => \"1\",  \"prices\" => $harga_product, \"discounts\" => $discount_product,\"descriptions\" => $nama_product, \"stocks\" => \"1\", \"name\" => $nama_product, \"variant_status\" => \"1\",\"images_variant\" => \"-\", \"updated_at\" => now(), \"created_at\" => now()]);\n             $products_id = $myproduk->id;\n             $nama_file = \"product_variant\".$products_id.\".\".$file_product->getClientOriginalExtension();\n"
+                },
+                {
+                    "date": 1721291747570,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -274,8 +274,9 @@\n                \n                 $status_gbr_product = \"ada\";\n             }\n         }\n+        $status_gbr_product = \"tidak\";\n        \n        \n         if($status_gbr_product == \"ada\"){\n             $myproduk = ProductVariant::create([\"id_product\" => $pilihan_productvariant,\"stocks\" => \"1\",  \"prices\" => $harga_product, \"discounts\" => $discount_product,\"descriptions\" => $nama_product, \"stocks\" => \"1\", \"name\" => $nama_product, \"variant_status\" => \"1\",\"images_variant\" => \"-\", \"updated_at\" => now(), \"created_at\" => now()]);\n"
+                },
+                {
+                    "date": 1721291863519,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -274,8 +274,11 @@\n                \n                 $status_gbr_product = \"ada\";\n             }\n         }\n+        else{\n+            \n+        }\n         $status_gbr_product = \"tidak\";\n        \n        \n         if($status_gbr_product == \"ada\"){\n"
                 }
             ],
             "date": 1719492549189,
