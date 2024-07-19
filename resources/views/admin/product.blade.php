@@ -148,7 +148,7 @@
               <div class="card-body p-4">
                 <span style = "float:right;margin-right:20px;" ><button class = "btn btn-primary" data-toggle = "modal" data-target="#modal_add_product" style = " background-color: #F2D2BD;color:#131312;border:0px;"><i class="fa fa-plus-square-o" aria-hidden="true"></i>  Tambah Produk</button></span>
                 <h1>Product</h1>
-                <table id="table-product" class="table table-bordered table-hover">
+                <table id="table-product" class="table table-bordered table-hover " style = "width:100%;">
                   <thead>
                     <tr>
                       <th>ID</th>
@@ -325,6 +325,9 @@
       processing: true,
       serverSide: true,
       ajax: "{{url('/getlistproduk')}}",
+      scrollX:true,
+      scrollCollapse: false,
+      autoWidth:false,
       columns: [
         {
            data: 'id'
@@ -364,7 +367,7 @@
         },
         {
            "render": function ( data, type, row ) {
-            return '<button class="btn btn-warning" onclick = "getdetailTransaction(this)" data-id = "'+row.id+'" btn-sm" data-toggle="modal" data-target="#modal_detail_product" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button><br><br><button class="btn btn-danger" onclick = "getStatusChange(this)" data-id = "'+row.id+'" btn-sm"  ><i class="fa fa-exchange" aria-hidden="true"></i></button>';
+            return '<button class="btn btn-warning" onclick = "getdetailTransaction(this)" data-id = "'+row.id+'" btn-sm" data-toggle="modal" data-target="#modal_detail_product" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button><button class="btn btn-danger" onclick = "getStatusChange(this)" data-id = "'+row.id+'" btn-sm"  ><i class="fa fa-exchange" aria-hidden="true"></i></button>&nbsp;<button class="btn btn-danger" onclick = "delete_product(this)" data-id = "'+row.id+'" btn-sm"  ><i class="fa fa-trash" aria-hidden="true"></i></button>';
           }
         }
       ],
@@ -521,6 +524,34 @@
                   confirmButtonAriaLabel: "Ok",
               });
               $('#table-product').DataTable().ajax.reload();
+            
+          }
+        });
+      }
+
+      function delete_product(myobj){
+        var id_product = $(myobj).attr("data-id");
+        $.ajax({
+          type: "post",
+          url: "{{url('/changestatusdeleteproduct')}}",
+          data: { "_token": "{{ csrf_token() }}","id_product" : id_product},
+          dataType: "json",
+          success: function (response) {
+            $('#table-product').DataTable().ajax.reload();
+            Swal.fire({
+                  title: "<strong>Produk ini telah dihapus</strong>",
+                  icon: "success",
+                  html: "Jika tidak terganti, hubungi Developer",
+                  showCloseButton: false,
+                  showCancelButton: false,
+                  allowOutsideClick:false,
+                  focusConfirm: false,
+                  confirmButtonText: `
+                    <i class="fa fa-thumbs-up"></i> Ok
+                  `,
+                  confirmButtonAriaLabel: "Ok",
+              });
+          
             
           }
         });

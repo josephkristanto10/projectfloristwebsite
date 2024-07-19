@@ -314,6 +314,7 @@
       scrollX:true,
       autoWidth:true,
       ajax: "{{url('/getlistvariant')}}",
+      order:[0,"Desc"],
       columns: [
 
         {
@@ -350,7 +351,7 @@
         },
         {
            "render": function ( data, type, row ) {
-            return '<button class="btn btn-warning" onclick = "getdetailTransaction(this)" data-id = "'+row.id+'" btn-sm" data-toggle="modal" data-target="#modal_detail_product" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button><br><br><button class="btn btn-danger" onclick = "getStatusChange(this)" data-id = "'+row.id+'" btn-sm"  ><i class="fa fa-exchange" aria-hidden="true"></i></button>';
+            return '<button class="btn btn-warning" onclick = "getdetailTransaction(this)" data-id = "'+row.id+'" btn-sm" data-toggle="modal" data-target="#modal_detail_product" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>&nbsp;<button class="btn btn-danger" onclick = "getStatusChange(this)" data-id = "'+row.id+'" btn-sm"  ><i class="fa fa-exchange" aria-hidden="true"></i></button>&nbsp;<button class="btn btn-danger" onclick = "delete_variant(this)" data-id = "'+row.id+'" btn-sm"  ><i class="fa fa-trash" aria-hidden="true"></i></button>';
           }
         }
       ],
@@ -521,6 +522,33 @@
                   confirmButtonAriaLabel: "Ok",
               });
               $('#table-variant-product').DataTable().ajax.reload();
+            
+          }
+        });
+      }
+      function delete_variant(myobj){
+        var id_variant = $(myobj).attr("data-id");
+        $.ajax({
+          type: "post",
+          url: "{{url('/changestatusdeletevariant')}}",
+          data: { "_token": "{{ csrf_token() }}","id_variant" : id_variant},
+          dataType: "json",
+          success: function (response) {
+            $('#table-variant-product').DataTable().ajax.reload();
+            Swal.fire({
+                  title: "<strong>Varian ini telah dihapus</strong>",
+                  icon: "success",
+                  html: "Jika tidak terganti, hubungi Developer",
+                  showCloseButton: false,
+                  showCancelButton: false,
+                  allowOutsideClick:false,
+                  focusConfirm: false,
+                  confirmButtonText: `
+                    <i class="fa fa-thumbs-up"></i> Ok
+                  `,
+                  confirmButtonAriaLabel: "Ok",
+              });
+          
             
           }
         });

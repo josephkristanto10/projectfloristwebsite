@@ -12,7 +12,7 @@ use App\Models\ProductVariant;
 use App\Models\Category;
 
 
-
+use File;
 use DataTables;
 use Hash;
 use Session;
@@ -71,7 +71,7 @@ class AdminController extends Controller
     public function getlistproduk(){
         
         if(Session::has('id_superadmin')){
-            $data = Product::leftJoin("category", "category.id", "=","product.product_category")->select("product.*", "category.category_name")->latest();
+            $data = Product::leftJoin("category", "category.id", "=","product.product_category")->where("status_product_delete", '=', '0')->select("product.*", "category.category_name")->get();
              return DataTables::of($data)->make(true);
          }else{
              return view('admin.login');
@@ -214,7 +214,7 @@ class AdminController extends Controller
     public function getlistvariant(){
         
         if(Session::has('id_superadmin')){
-            $data = ProductVariant::join("product","product.id",'=','product_variant.id_product')->select("product_variant.*","product.names", "product.images")->latest();
+            $data = ProductVariant::join("product","product.id",'=','product_variant.id_product')->where("status_variant_delete", '=', 0)->select("product_variant.*","product.names", "product.images")->get();
             // $mydatalast = $data->created_at->format('d M Y');
              return DataTables::of($data)->make(true);
          }else{
@@ -301,6 +301,47 @@ class AdminController extends Controller
             $ganti ="0";
         }
         ProductVariant::where(['id' => $id_variant ])->update(['variant_status' => $ganti]);
+        return response()->json(['output' => "ok"]);
+    }
+    public function changestatusdeletevariants(Request $request){
+        $id_variant = $request->id_variant;
+        $status = ProductVariant::where("id",'=',$id_variant)->get();
+        $status_variant = $status[0]['status_variant_delete'];
+        $ganti = "0";
+        if($status_variant == "0"){
+            $ganti = "1";
+        }
+        else{
+            $ganti ="0";
+        }
+        $images = $status[0]['images_variant'];
+        $image_path = public_path().'/images/variant/'.$images;
+        if(file_exists($image_path)){
+            unlink($image_path);
+        }
+   
+
+        ProductVariant::where(['id' => $id_variant ])->update(['status_variant_delete' => $ganti]);
+        return response()->json(['output' => "ok"]);
+    }
+    public function changestatusdeleteproducts(Request $request){
+        $id_product = $request->id_product;
+        $status = Product::where("id",'=',$id_product)->get();
+        $status_product = $status[0]['status_product_delete'];
+        $ganti = "0";
+        if($status_product == "0"){
+            $ganti = "1";
+        }
+        else{
+            $ganti ="0";
+        }
+        $images = $status[0]['images'];
+        $image_path = public_path().'/images/product/'.$images;
+        if(file_exists($image_path)){
+            unlink($image_path);
+        }
+   
+        Product::where(['id' => $id_product])->update(['status_product_delete' => $ganti]);
         return response()->json(['output' => "ok"]);
     }
     public function changestatusproduct(Request $request){

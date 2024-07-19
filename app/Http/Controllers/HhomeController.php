@@ -17,9 +17,8 @@ class HhomeController extends Controller
      */
     public function index()
     {
-        Session::flush();
         $mycategory = Category::latest("id")->get();
-        $myproduct = Product::latest('id')->paginate(6);
+        $myproduct = Product::leftJoin("category", "category.id",'=',"product.product_category")->where("product_status", "=","1")->where("status_product_delete", "=","0")->latest('id')->select("product.*","category.category_name", "category.id as category_id")->paginate(6);
         return view('index', compact("mycategory"))->withProducts($myproduct);
     }
     function fetch_data(Request $request)
@@ -27,11 +26,11 @@ class HhomeController extends Controller
         if($request->ajax())
         {
             if(isset($request->id_category) && $request->id_category != "0"){
-                $products =  Product::leftJoin("category", "category.id",'=',"product.product_category")->where("category.id","=", $request->id_category)->latest('id')->select("product.*","category.category_name", "category.id as category_id")->paginate(6);
+                $products =  Product::leftJoin("category", "category.id",'=',"product.product_category")->where("category.id","=", $request->id_category)->where("product_status", "=","1")->where("status_product_delete", "=","0")->latest('id')->select("product.*","category.category_name", "category.id as category_id")->paginate(6);
 
             }
             else{
-                $products =  Product::leftJoin("category", "category.id",'=',"product.product_category")->latest('id')->select("product.*","category.category_name", "category.id as category_id")->paginate(6);
+                $products =  Product::leftJoin("category", "category.id",'=',"product.product_category")->where("product_status", "=","1")->where("status_product_delete", "=","0")->latest('id')->select("product.*","category.category_name", "category.id as category_id")->paginate(6);
 
             }
             return view('product_cart', compact('products'))->render();
@@ -39,7 +38,7 @@ class HhomeController extends Controller
     }
     public function detail_variant(Request $request){
         $id_product = $request->id_products;
-        $variants = ProductVariant::where('id_product','=',$id_product)->join("product", "product.id","=","product_variant.id_product")->where('variant_status','=','1')->select("product_variant.*","product.images")->get();
+        $variants = ProductVariant::where('id_product','=',$id_product)->join("product", "product.id","=","product_variant.id_product")->where('variant_status','=','1')->where('status_variant_delete','=','0')->select("product_variant.*","product.images")->get();
         return response()->json(['variant' => $variants]);
     }
     public function addtocart(Request $request){
