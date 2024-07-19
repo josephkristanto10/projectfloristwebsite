@@ -298,6 +298,7 @@
               <div id = "tambahan_variant">
                   <div id = "append_tambahan_variant"></div>
               </div>
+              <p style = "color:red" id = "peringatan"></p>
               <span style = "float:right;margin-right:30px;"><button type = "button" class = "btn btn-primary" onclick = "tambahvariantlain()"  >Tambah variant lain</button></span>
               <div id="status"></div>
               <div class ="col-12" style = "text-align:right;"> <input style = "float:right;" type = "submit" class ="btn btn-success " id = "tambah_variant_button"  value = "Upload Variant"> </div>
@@ -591,21 +592,19 @@
           dataType: "json",
           success: function (response) {
             $(myobj).append("<input type = 'hidden' name='id[]' value = "+response.output+">");
-          
+            $("#peringatan").text("");
           
             
-          }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                $("#peringatan").text("Ada error dibaris terakhir, HAPUS BARIS !");
+              },
         });
+        
       }
       $("#add_variant").on('submit',(function(e){
           e.preventDefault();
           var formdata = new FormData(this);
-          
-
-
-
-          
-          // formdata.append($("#formtambah")[0]);
           formdata.append('gbr_product', $("#add_gambarproduk")[0].files[0]);
           formdata.append('kategori', $("#add_kategory_product").val());
           formdata.append('nama_product', $("#add_namaproduk").val());
@@ -620,6 +619,14 @@
               contentType: false,
               cache: false,
               processData:false,
+              beforeSend: function() {
+              $('#tambah_variant_button').prop('disabled',true);
+              $('#tambah_variant_button').text('Uploading...');
+              }, 
+              complete: function() {
+              $('#tambah_variant_button').prop('disabled',false);
+              $('#tambah_variant_button').text('Upload Variant');
+              },
               success: function(data){
                 $("#add_gambarproduk").val("");
                 $("#add_namaproduk").val("");
