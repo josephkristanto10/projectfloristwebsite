@@ -264,6 +264,8 @@
             {!! csrf_field() !!}
             <div class = "row mt-3 mb-3">
                <div class = "col-12">Nama Variant <input  id = "edit_descriptionproduk" name = "desc_produk" type = "text" class = "form-control" required></div>
+               <div class = "col-6">Stok Variant <input  id = "edit_stokproduk" name = "edit_stock_produk" type = "text" class = "form-control" required></div>
+
             </div>
             <div class = "row mt-3 mb-3">
               <div class = "col-6">Harga Variant <input id = "edit_hargaproduk" name = "hrg_produk" type = "text" class = "form-control" required></div>
@@ -378,6 +380,7 @@
         $("#edit_hargaproduk").val(response.output_proudct[0].prices);
         $("#edit_discountproduk").val(response.output_proudct[0].discounts);
         $("#edit_descriptionproduk").val(response.output_proudct[0].descriptions);
+        $("#edit_stokproduk").val(response.output_proudct[0].stocks);
         
         
         
