@@ -281,13 +281,11 @@
                   Produk gagal Ditambah <span id = "add_tanggal_alert_danger"></span>.. Segera Hubungi Developer.
                 </div>
               </div>
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-dark" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
-            </div>
+             
               
-              <div class = "row mt-3 mb-3">
+              {{-- <div class = "row mt-3 mb-3">
                 <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success "  value = "Tambah"></div>
-              </div>
+              </div> --}}
               
             </form>
             <form id = "add_variant">
@@ -302,6 +300,9 @@
               <div id = "tambahan_variant">
                   <div id = "append_tambahan_variant"></div>
               </div>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+            </div>
               <p style = "color:red" id = "peringatan"></p>
               <span style = "float:right;margin-right:30px;"><button type = "button" class = "btn btn-primary" onclick = "tambahvariantlain()"  >Tambah variant lain</button></span>
               <div id="status"></div>
