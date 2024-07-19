@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Supplier Florist Surabaya</title>
@@ -279,10 +280,28 @@
                   Produk gagal Ditambah <span id = "add_tanggal_alert_danger"></span>.. Segera Hubungi Developer.
                 </div>
               </div>
+              
               <div class = "row mt-3 mb-3">
                 <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success "  value = "Tambah"></div>
               </div>
               
+            </form>
+            <form id = "add_variant">
+              <h4>Tambah Variant</h4>
+              <div class = "row mt-3 mb-3">
+                <div class = "col-2">Gambar  <input id = "add_gambarvariant0" name = "add_gbr_produks[]" onchange="uploadgbrvariant(this)" type = "file" class = "form-control" required> </div>
+                <div class = "col-3">Nama  <input  id = "add_namavariant0" name = "add_nama_produks[]" type = "text" class = "form-control" required></div>
+                <div class = "col-2">Harga  <input id = "add_hargavariant0" name = "add_hrg_produks[]" type = "text" class = "form-control" required></div>
+                <div class = "col-2">Stok  <input id = "add_stokvariant0" name = "add_stock_produks[]" value = "0" type = "text" class = "form-control" required></div>
+                <div class = "col-2">Discount  <input  id = "add_discountvariant0" name = "add_dsc_produks[]" type = "text" class = "form-control" ></div>
+              </div>
+              <div id = "tambahan_variant">
+                  <div id = "append_tambahan_variant"></div>
+              </div>
+              <span style = "float:right;margin-right:30px;"><button type = "button" class = "btn btn-primary" onclick = "tambahvariantlain()"  >Tambah variant lain</button></span>
+              <div id="status"></div>
+              <div class ="col-12" style = "text-align:right;"> <input style = "float:right;" type = "submit" class ="btn btn-success " id = "tambah_variant_button"  value = "Upload Variant"> </div>
+            </div>
             </form>
              
             
@@ -319,6 +338,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+    var jumlahaddvariant = 0;
   var globalselectedproduct = "";
    $(document).ready(function () {
    var mytable =  $('#table-product').DataTable({
@@ -327,6 +347,7 @@
       ajax: "{{url('/getlistproduk')}}",
       scrollX:true,
       scrollCollapse: false,
+      order:[0,"desc"],
       autoWidth:false,
       columns: [
         {
@@ -387,17 +408,12 @@
         $("#isian_variant_produk").html("");
         $("#isian_variant_produk").html(response.output);
         $("#edit_kategory_product").val(response.output_proudct[0].category_id);
-        // alert(response.output_proudct[0].category_id);
-
 
         $("#edit_namaproduk").val(response.output_proudct[0].names);
         $("#edit_hargaproduk").val(response.output_proudct[0].prices);
         $("#edit_discountproduk").val(response.output_proudct[0].discounts);
         $("#edit_descriptionproduk").val(response.output_proudct[0].descriptions);
-        
-        
-        
-        
+
       }
     });
 
@@ -410,17 +426,7 @@
       data: {"idproduct" : productid},
       dataType: "json",
       success: function (response) {
-        // $("#isian_variant_produk").html("");
-        // $("#isian_variant_produk").html(response.output);
-        
 
-
-        // $("#edit_namaproduk").val(response.output_proudct[0].names);
-        // $("#edit_hargaproduk").val(response.output_proudct[0].prices);
-        // $("#edit_discountproduk").val(response.output_proudct[0].discounts);
-        
-        
-        
       }
     });
   }
@@ -556,4 +562,98 @@
           }
         });
       }
+
+      function tambahvariantlain(){
+        var stringelement = '<div class ="row mt-3 mb-3" id = "row_add_'+jumlahaddvariant+'"><div class = "col-2">Gambar <input  name = "add_gbr_produks[]" type = "file" class = "form-control" onchange="uploadgbrvariant(this)"> </div><div class = "col-3">Nama <input name = "add_nama_produks[]" type = "text" class = "form-control" required></div><div class = "col-2">Harga <input name = "add_hrg_produks[]" type = "text" class = "form-control" required></div>   <div class = "col-2">Stok <input id = "add_stokproduk" name = "add_stock_produks[]" value = "0" type = "text" class = "form-control" required></div>                <div class = "col-2">Discount <input   name = "add_dsc_produks[]" type = "text" class = "form-control" ></div><div class = "col-1"><br><button class = "btn btn-danger" onclick = "removevariantlain(this)" data-id-jumlah = "'+jumlahaddvariant+'"><i class = "fa fa-trash"></i></button></div></div>';
+        $("#append_tambahan_variant").append(stringelement);
+        jumlahaddvariant +=1;
+      }
+      function removevariantlain(myobj){
+         var idjumlah =  $(myobj).attr("data-id-jumlah");
+         $("#row_add_"+idjumlah).remove();
+      }
+
+      function uploadgbrvariant(myobj){
+        var id_product = $("#add_kategory_product").val();
+        var gambar = $(myobj);
+        var formdata = new FormData();
+        formdata.append('gbr', $(myobj)[0].files[0]);
+ 
+        formdata.append('id_products', id_product);
+        $.ajax({
+          type: "post",
+          url: "{{url('/tambahgambarvariant')}}",
+          headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+          data: formdata,
+              contentType: false,
+              cache: false,
+              processData:false,
+          dataType: "json",
+          success: function (response) {
+            $(myobj).append("<input type = 'hidden' name='id[]' value = "+response.output+">");
+          
+          
+            
+          }
+        });
+      }
+      $("#add_variant").on('submit',(function(e){
+          e.preventDefault();
+          var formdata = new FormData(this);
+          
+
+
+
+          
+          // formdata.append($("#formtambah")[0]);
+          formdata.append('gbr_product', $("#add_gambarproduk")[0].files[0]);
+          formdata.append('kategori', $("#add_kategory_product").val());
+          formdata.append('nama_product', $("#add_namaproduk").val());
+          formdata.append('harga_product', $("#add_hargaproduk").val());
+          formdata.append('discount_product', $("#add_discountproduk").val());
+          formdata.append('desc_product', $("#add_descriptionproduk").val());
+          $.ajax({
+            url: "{{url('/addproductwithvariantadmin')}}",
+              type: "POST",
+              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+              data: formdata,
+              contentType: false,
+              cache: false,
+              processData:false,
+              success: function(data){
+                $("#add_gambarproduk").val("");
+                $("#add_namaproduk").val("");
+                $("#add_hargaproduk").val("");
+                $("#add_discountproduk").val("");
+                $("#add_descriptionproduk").val("");
+                $('#table-product').DataTable().ajax.reload();
+                var currentdate = new Date(); 
+                var tgl =  currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+                $("#add_alert_notif_danger").attr("style", "display: none !important");
+                $("#add_alert_notif_success").attr("style", "display: block !important");
+                $("#add_tanggal_alert_success").html(tgl);
+                $("#add_variant").trigger("reset");
+                $("#append_tambahan_variant").html("");
+
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                var currentdate = new Date(); 
+                var tgl =  currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+                $("#add_alert_notif_success").attr("style", "display: none !important");
+                $("#add_alert_notif_danger").attr("style", "display: block !important");
+                $("#add_tanggal_alert_danger").html(tgl);
+              },
+          });
+      }));
+      
 </script>

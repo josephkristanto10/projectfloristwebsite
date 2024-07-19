@@ -211,12 +211,14 @@ class AdminController extends Controller
              return view('admin.login');
          }
     }
-    public function getlistvariant(){
+    public function getlistvariant(Request $request){
         
         if(Session::has('id_superadmin')){
             $data = ProductVariant::join("product","product.id",'=','product_variant.id_product')->where("status_variant_delete", '=', 0)->select("product_variant.*","product.names", "product.images")->get();
             // $mydatalast = $data->created_at->format('d M Y');
-             return DataTables::of($data)->make(true);
+            $datatables = DataTables::of($data);
+     
+            return $datatables->make(true);
          }else{
              return view('admin.login');
          }
@@ -256,7 +258,9 @@ class AdminController extends Controller
         $myallname = "";
         $pilihan_productvariant = $request->add_pil_produk;
         Product::where(['id' => $pilihan_productvariant ])->update(['has_variants' => 1]);
+        $test = "";
         foreach( $request->add_nama_produk as $myindex => $dat){
+        
         $nama_product = $request->add_nama_produk[$myindex];
         $harga_product = $request->add_hrg_produk[$myindex];
         $stockproduct = $request->add_stock_produk[$myindex];
@@ -430,6 +434,48 @@ class AdminController extends Controller
             $ganti ="0";
         }
         Category::where(['id' => $id_category ])->update(['category_status' => $ganti]);
+        return response()->json(['output' => "ok"]);
+    }
+    public function tambahgambarvariant(Request $request){
+        $id_product  = $request->id_products;
+        $file_product = $request->file("gbr");
+        $tujuan_upload = public_path('images/variant');
+        $mystr = "variant".base64_encode(date("Y:m:d H:i:s")).".".$file_product->getClientOriginalExtension();
+      
+        $file_product->move($tujuan_upload, $mystr);
+        
+        $myproduk = ProductVariant::create(["id_product" => 0,"stocks" => "1",  "prices" => 0, "discounts" => 0,"descriptions" => " ", "stocks" => "0", "name" => " ", "variant_status" => "1" , "status_variant_delete" => "1","images_variant" => $mystr, "updated_at" => now(), "created_at" => now()]);
+        return response()->json(['output' => $myproduk->id]);
+    }
+    public function addproductwithvariantadmin( Request $request){
+        $pilihan_category = $request->kategori;
+        $nama_product = $request->nama_product;
+        $harga_product = $request->harga_product;
+        $desc_product =  $request->desc_product;
+        $discount_product = $request->discount_product;
+        if($request->discount_product == ""){
+            $discount_product = 0;
+        }
+        $file_product = $request->file('gbr_product');
+        $tujuan_upload = public_path('images/product');
+
+        $mystr = "product".base64_encode(date("Y:m:d H:i:s")).".".$file_product->getClientOriginalExtension();
+        $myproduk = Product::create(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "1", "product_status" => "1", "status_product_delete" => "0","images" => $mystr, "product_category"=>$pilihan_category, "updated_at" => now(), "created_at" => now()]);
+        $products_id = $myproduk->id;
+        $file_product->move($tujuan_upload, $mystr);
+
+        foreach( $request->add_nama_produks as $myindex => $dat){
+            $hideen_id = $request->id[$myindex];
+            $nama_products = $request->add_nama_produks[$myindex];
+            $harga_products = $request->add_hrg_produks[$myindex];
+            $stockproducts = $request->add_stock_produks[$myindex];
+            $discount_products = $request->add_dsc_produks[$myindex];
+            if($request->add_dsc_produks[$myindex] == ""){
+                $discount_products = 0;
+            }
+            ProductVariant::where(['id' => $hideen_id ])->update(['id_product' => $products_id,'name'=>$nama_products,'descriptions'=>$nama_products, "prices"=>$harga_products, "discounts" => $discount_products, "stocks"=>$stockproducts, "status_variant_delete" => "0"]);
+         
+        }
         return response()->json(['output' => "ok"]);
     }
 

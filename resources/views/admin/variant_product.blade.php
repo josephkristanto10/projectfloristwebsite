@@ -328,7 +328,8 @@
         },
         {
            data: 'names',
-           name : 'product.names'
+           name : 'names',
+           searchable: true
         },
         {
             data: 'descriptions'

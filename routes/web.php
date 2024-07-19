@@ -70,6 +70,9 @@ Route::POST("/changestatusproduct", [AdminController::class,"changestatusproduct
 Route::POST("/changestatusdeletevariant", [AdminController::class,"changestatusdeletevariants"]);
 Route::POST("/changestatusdeleteproduct", [AdminController::class,"changestatusdeleteproducts"]);
 
+Route::POST("/tambahgambarvariant", [AdminController::class,"tambahgambarvariant"]);
+Route::POST("/addproductwithvariantadmin", [AdminController::class,"addproductwithvariantadmin"]);
+
 
 
 

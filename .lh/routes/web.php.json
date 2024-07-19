@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 111,
+            "activePatchIndex": 114,
             "patches": [
                 {
                     "date": 1718595212827,
@@ -452,6 +452,18 @@
                 {
                     "date": 1721363979352,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -67,9 +67,9 @@\n Route::POST(\"/addvariantproductadmin\", [AdminController::class,\"addvariantproductadmin\"]);\n Route::POST(\"/changestatusvariant\", [AdminController::class,\"changestatusvariant\"]);\n Route::POST(\"/changestatusproduct\", [AdminController::class,\"changestatusproduct\"]);\n Route::POST(\"/changestatusdeletevariant\", [AdminController::class,\"changestatusdeletevariants\"]);\n-Route::POST(\"/changestatusdeleteproduct\", [AdminController::class,\"changestatusdeleteproduct\"]);\n+Route::POST(\"/changestatusdeleteproduct\", [AdminController::class,\"changestatusdeleteproducts\"]);\n \n \n \n \n"
+                },
+                {
+                    "date": 1721384522407,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,12 +69,14 @@\n Route::POST(\"/changestatusproduct\", [AdminController::class,\"changestatusproduct\"]);\n Route::POST(\"/changestatusdeletevariant\", [AdminController::class,\"changestatusdeletevariants\"]);\n Route::POST(\"/changestatusdeleteproduct\", [AdminController::class,\"changestatusdeleteproducts\"]);\n \n+Route::POST(\"/tambahgambarvariant\", [AdminController::class,\"changestatusdeleteproducts\"])\n \n \n \n \n+\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1721388055399,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,14 +69,15 @@\n Route::POST(\"/changestatusproduct\", [AdminController::class,\"changestatusproduct\"]);\n Route::POST(\"/changestatusdeletevariant\", [AdminController::class,\"changestatusdeletevariants\"]);\n Route::POST(\"/changestatusdeleteproduct\", [AdminController::class,\"changestatusdeleteproducts\"]);\n \n-Route::POST(\"/tambahgambarvariant\", [AdminController::class,\"changestatusdeleteproducts\"])\n+Route::POST(\"/tambahgambarvariant\", [AdminController::class,\"tambahgambarvariant\"]);\n+Route::POST(\"/tambahgambarvariant\", [AdminController::class,\"tambahgambarvariant\"]);\n+addproductwithvariantadmin\n \n \n \n \n-\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
+                },
+                {
+                    "date": 1721389157058,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,14 +70,14 @@\n Route::POST(\"/changestatusdeletevariant\", [AdminController::class,\"changestatusdeletevariants\"]);\n Route::POST(\"/changestatusdeleteproduct\", [AdminController::class,\"changestatusdeleteproducts\"]);\n \n Route::POST(\"/tambahgambarvariant\", [AdminController::class,\"tambahgambarvariant\"]);\n-Route::POST(\"/tambahgambarvariant\", [AdminController::class,\"tambahgambarvariant\"]);\n-addproductwithvariantadmin\n+Route::POST(\"/addproductwithvariantadmin\", [AdminController::class,\"addproductwithvariantadmin\"]);\n \n \n \n \n+\n Route::get('/product', function () {\n     return view('product');\n });\n Route::get('/howtoorder', function () {\n"
                 }
             ],
             "date": 1718595212827,
