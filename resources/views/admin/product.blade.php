@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="{{asset('admin/assets/css/styles.min.css')}}" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
   <link rel="stylesheet" type="text/css" href = "{{asset('css/font-awesome-4.7.0/css/font-awesome.css')}}"/>
+  
   <style>
     .row{
       width:100%;
@@ -280,6 +281,9 @@
                   Produk gagal Ditambah <span id = "add_tanggal_alert_danger"></span>.. Segera Hubungi Developer.
                 </div>
               </div>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-dark" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+            </div>
               
               <div class = "row mt-3 mb-3">
                 <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success "  value = "Tambah"></div>
@@ -337,6 +341,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script> --}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script> --}}
 
 <script>
     var jumlahaddvariant = 0;
@@ -612,6 +617,26 @@
           formdata.append('discount_product', $("#add_discountproduk").val());
           formdata.append('desc_product', $("#add_descriptionproduk").val());
           $.ajax({
+            xhr: function () {
+                        var xhr = new window. XMLHttpRequest();
+                                            xhr.upload.addEventListener("progress", function (evt) {
+                                                if (evt.lengthComputable) {
+                                                    var percentComplete = evt.loaded / evt.total;
+                                                    percentComplete = parseInt(percentComplete * 100);
+                                                    console.log(percentComplete);
+                                                    $('.progress-bar').css('width', percentComplete + '%');
+                                                    if (percentComplete === 100) {
+                                                        console.log('completed 100%')
+                                                        var imageUrl = window.URL.createObjectURL(photo)
+                                                        // $('.imgPreview').attr('src', imageUrl);
+                                                        setTimeout(function () {
+                                                            $('.progress-bar').css('width', '0%');
+                                                        }, 2000)
+                                                    }
+                                                }
+                                            }, false);
+                                            return xhr;
+                    },
             url: "{{url('/addproductwithvariantadmin')}}",
               type: "POST",
               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -622,7 +647,15 @@
               beforeSend: function() {
               $('#tambah_variant_button').prop('disabled',true);
               $('#tambah_variant_button').text('Uploading...');
+              var percentage = '0';
               }, 
+              uploadProgress: function (event, position, total, percentComplete) {
+          
+                        var percentage = percentComplete;
+                        $('.progress .progress-bar').css("width", percentage+'%', function() {
+                            return $(this).attr("aria-valuenow", percentage) + "%";
+                        })
+              },
               complete: function() {
               $('#tambah_variant_button').prop('disabled',false);
               $('#tambah_variant_button').text('Upload Variant');
