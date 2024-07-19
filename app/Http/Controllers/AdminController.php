@@ -238,7 +238,7 @@ class AdminController extends Controller
         }
        
         if($status_gbr_product == "ada"){
-            $myproduk = Product::create(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "0", "product_status" => "1","images" => "-", "product_category"=>$pilihan_category, "updated_at" => now(), "created_at" => now()]);
+            $myproduk = Product::create(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "0", "product_status" => "1", "status_product_delete" => "0","images" => "-", "product_category"=>$pilihan_category, "updated_at" => now(), "created_at" => now()]);
             $products_id = $myproduk->id;
             $nama_file = "product".$products_id.".".$file_product->getClientOriginalExtension();
             $file_product->move($tujuan_upload, $nama_file);
@@ -246,7 +246,7 @@ class AdminController extends Controller
 
 
         }else{
-            Product::insert(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "0", "product_status" => "1", "images" => "-", "product_category"=>$pilihan_category, "updated_at" => now(), "created_at"=>now()]);
+            Product::insert(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "0", "product_status" => "1" , "status_product_delete" => "0", "images" => "-", "product_category"=>$pilihan_category, "updated_at" => now(), "created_at"=>now()]);
 
 
         }
@@ -275,7 +275,7 @@ class AdminController extends Controller
                 // $nama_file = "product".$id_productvariant.".".$file_product->getClientOriginalExtension();
                
                 $status_gbr_product = "ada";
-                $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => $stockproduct, "name" => $nama_product, "variant_status" => "1","images_variant" => "test", "updated_at" => now(), "created_at" => now()]);
+                $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => $stockproduct, "name" => $nama_product, "variant_status" => "1", "status_variant_delete" => "0","images_variant" => "test", "updated_at" => now(), "created_at" => now()]);
                 $products_id = $myproduk->id;
                 $nama_file = "product_variant".$products_id.".".$file_product->getClientOriginalExtension();
                 $file_product->move($tujuan_upload, $nama_file);
@@ -284,7 +284,7 @@ class AdminController extends Controller
         }
         else{
             $status_gbr_product = "tidak";
-            $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => $stockproduct, "name" => $nama_product, "variant_status" => "1","images_variant" => "-", "updated_at" => now(), "created_at" => now()]);
+            $myproduk = ProductVariant::create(["id_product" => $pilihan_productvariant,"stocks" => "1",  "prices" => $harga_product, "discounts" => $discount_product,"descriptions" => $nama_product, "stocks" => $stockproduct, "name" => $nama_product, "variant_status" => "1" , "status_variant_delete" => "0","images_variant" => "-", "updated_at" => now(), "created_at" => now()]);
         }      
          }
         return response()->json(['output' => "ok"]);

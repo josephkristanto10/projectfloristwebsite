@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $created_at
  * @property int $product_status
  * @property int|null $product_category
+ * @property int $status_product_delete
  *
  * @package App\Models
  */
@@ -37,7 +38,8 @@ class Product extends Model
 		'stocks' => 'int',
 		'has_variants' => 'int',
 		'product_status' => 'int',
-		'product_category' => 'int'
+		'product_category' => 'int',
+		'status_product_delete' => 'int'
 	];
 
 	protected $fillable = [
@@ -49,6 +51,7 @@ class Product extends Model
 		'images',
 		'has_variants',
 		'product_status',
-		'product_category'
+		'product_category',
+		'status_product_delete'
 	];
 }

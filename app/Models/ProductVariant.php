@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $descriptions
  * @property int $variant_status
  * @property string $images_variant
+ * @property int $status_variant_delete
  *
  * @package App\Models
  */
@@ -35,7 +36,8 @@ class ProductVariant extends Model
 		'stocks' => 'int',
 		'prices' => 'int',
 		'discounts' => 'int',
-		'variant_status' => 'int'
+		'variant_status' => 'int',
+		'status_variant_delete' => 'int'
 	];
 
 	protected $fillable = [
@@ -46,6 +48,7 @@ class ProductVariant extends Model
 		'name',
 		'descriptions',
 		'variant_status',
-		'images_variant'
+		'images_variant',
+		'status_variant_delete'
 	];
 }
