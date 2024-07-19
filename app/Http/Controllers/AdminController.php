@@ -455,16 +455,16 @@ class AdminController extends Controller
         $harga_product = $request->harga_product;
         $desc_product =  $request->desc_product;
         $discount_product = $request->discount_product;
-        if($request->discount_product == ""){
-            $discount_product = 0;
-        }
-        $file_product = $request->file('gbr_product');
-        $tujuan_upload = public_path('images/product');
+        // if($request->discount_product == ""){
+        //     $discount_product = 0;
+        // }
+        // $file_product = $request->file('gbr_product');
+        // $tujuan_upload = public_path('images/product');
 
-        $mystr = "product".base64_encode(date("Y:m:d H:i:s")).".".$file_product->getClientOriginalExtension();
-        $myproduk = Product::create(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "1", "product_status" => "1", "status_product_delete" => "0","images" => $mystr, "product_category"=>$pilihan_category, "updated_at" => now(), "created_at" => now()]);
-        $products_id = $myproduk->id;
-        $file_product->move($tujuan_upload, $mystr);
+        // $mystr = "product".base64_encode(date("Y:m:d H:i:s")).".".$file_product->getClientOriginalExtension();
+        // $myproduk = Product::create(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "1", "product_status" => "1", "status_product_delete" => "0","images" => $mystr, "product_category"=>$pilihan_category, "updated_at" => now(), "created_at" => now()]);
+        // $products_id = $myproduk->id;
+        // $file_product->move($tujuan_upload, $mystr);
 
         // foreach( $request->add_nama_produks as $myindex => $dat){
         //     $hideen_id = $request->id[$myindex];
