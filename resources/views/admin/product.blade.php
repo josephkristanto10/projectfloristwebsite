@@ -627,8 +627,8 @@
                                                     console.log(percentComplete);
                                                     $('.progress-bar').css('width', percentComplete + '%');
                                                     if (percentComplete === 100) {
-                                                        console.log('completed 100%')
-                                                        var imageUrl = window.URL.createObjectURL(photo)
+                                                        // console.log('completed 100%')
+                                                        // var imageUrl = window.URL.createObjectURL(photo)
                                                         // $('.imgPreview').attr('src', imageUrl);
                                                         setTimeout(function () {
                                                             $('.progress-bar').css('width', '0%');
