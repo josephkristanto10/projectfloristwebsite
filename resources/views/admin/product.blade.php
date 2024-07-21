@@ -288,7 +288,7 @@
               </div> --}}
               
             </form>
-            <form id = "add_variant">
+            <form id = "add_variant" enctype="multipart/form-data">
               <h4>Tambah Variant</h4>
               <div class = "row mt-3 mb-3">
                 <div class = "col-2">Gambar  <input id = "add_gambarvariant0" name = "add_gbr_produks[]" onchange="uploadgbrvariant(this)" type = "file" class = "form-control" required> </div>
