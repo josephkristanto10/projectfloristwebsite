@@ -642,9 +642,9 @@
               type: "POST",
               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
               data: formdata,
-              // contentType: false,
+              contentType: false,
               // cache: false,
-              // processData:false,
+              processData:false,
               beforeSend: function() {
               $('#tambah_variant_button').prop('disabled',true);
               $('#tambah_variant_button').text('Uploading...');
