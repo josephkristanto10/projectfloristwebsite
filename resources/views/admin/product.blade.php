@@ -610,7 +610,7 @@
       }
       $("#add_variant").on('submit',(function(e){
           e.preventDefault();
-          var formdata = new FormData(this);
+          // var formdata = new FormData(this);
           // formdata.append('gbr_product', $("#add_gambarproduk")[0].files[0]);
           // formdata.append('kategori', $("#add_kategory_product").val());
           // formdata.append('nama_product', $("#add_namaproduk").val());
@@ -641,10 +641,10 @@
             url: "{{url('/addproductwithvariantadmin')}}",
               type: "POST",
               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-              data: formdata,
-              contentType: false,
-              cache: false,
-              processData:false,
+              data: {"Test":"test" },
+              // contentType: false,
+              // cache: false,
+              // processData:false,
               beforeSend: function() {
               $('#tambah_variant_button').prop('disabled',true);
               $('#tambah_variant_button').text('Uploading...');
