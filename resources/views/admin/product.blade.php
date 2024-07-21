@@ -619,7 +619,7 @@
           formdata.append('harga_product', $("#add_hargaproduk").val());
           formdata.append('discount_product', $("#add_discountproduk").val());
           formdata.append('desc_product', $("#add_descriptionproduk").val());
-          
+
           $.ajax({
             xhr: function () {
                         var xhr = new window. XMLHttpRequest();
@@ -665,11 +665,11 @@
               $('#tambah_variant_button').text('Upload Variant');
               },
               success: function(data){
-                // $("#add_gambarproduk").val("");
-                // $("#add_namaproduk").val("");
-                // $("#add_hargaproduk").val("");
-                // $("#add_discountproduk").val("");
-                // $("#add_descriptionproduk").val("");
+                $("#add_gambarproduk").val("");
+                $("#add_namaproduk").val("");
+                $("#add_hargaproduk").val("");
+                $("#add_discountproduk").val("");
+                $("#add_descriptionproduk").val("");
                 $('#table-product').DataTable().ajax.reload();
                 var currentdate = new Date(); 
                 var tgl =  currentdate.getDate() + "/"
@@ -681,7 +681,7 @@
                 $("#add_alert_notif_danger").attr("style", "display: none !important");
                 $("#add_alert_notif_success").attr("style", "display: block !important");
                 $("#add_tanggal_alert_success").html(tgl);
-                // $("#add_variant").trigger("reset");
+                $("#add_variant").trigger("reset");
                 $("#append_tambahan_variant").html("");
 
               },
