@@ -611,12 +611,12 @@
       $("#add_variant").on('submit',(function(e){
           e.preventDefault();
           var formdata = new FormData(this);
-          formdata.append('gbr_product', $("#add_gambarproduk")[0].files[0]);
-          formdata.append('kategori', $("#add_kategory_product").val());
-          formdata.append('nama_product', $("#add_namaproduk").val());
-          formdata.append('harga_product', $("#add_hargaproduk").val());
-          formdata.append('discount_product', $("#add_discountproduk").val());
-          formdata.append('desc_product', $("#add_descriptionproduk").val());
+          // formdata.append('gbr_product', $("#add_gambarproduk")[0].files[0]);
+          // formdata.append('kategori', $("#add_kategory_product").val());
+          // formdata.append('nama_product', $("#add_namaproduk").val());
+          // formdata.append('harga_product', $("#add_hargaproduk").val());
+          // formdata.append('discount_product', $("#add_discountproduk").val());
+          // formdata.append('desc_product', $("#add_descriptionproduk").val());
           $.ajax({
             xhr: function () {
                         var xhr = new window. XMLHttpRequest();
