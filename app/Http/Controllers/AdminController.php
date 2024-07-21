@@ -450,35 +450,36 @@ class AdminController extends Controller
         return response()->json(['output' => $myproduk->id]);
     }
     public function addproductwithvariantadmin( Request $request){
-        // $pilihan_category = $request->kategori;
-        // $nama_product = $request->nama_product;
-        // $harga_product = $request->harga_product;
-        // $desc_product =  $request->desc_product;
-        // $discount_product = $request->discount_product;
-        // if($request->discount_product == ""){
-        //     $discount_product = 0;
-        // }
-        // $file_product = $request->file('gbr_product');
-        // $tujuan_upload = public_path('images/product');
 
-        // $mystr = "product".base64_encode(date("Y:m:d H:i:s")).".".$file_product->getClientOriginalExtension();
-        // $myproduk = Product::create(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "1", "product_status" => "1", "status_product_delete" => "0","images" => $mystr, "product_category"=>$pilihan_category, "updated_at" => now(), "created_at" => now()]);
-        // $products_id = $myproduk->id;
-        // $file_product->move($tujuan_upload, $mystr);
+        $pilihan_category = $request->kategori;
+        $nama_product = $request->nama_product;
+        $harga_product = $request->harga_product;
+        $desc_product =  $request->desc_product;
+        $discount_product = $request->discount_product;
+        if($request->discount_product == ""){
+            $discount_product = 0;
+        }
+        $file_product = $request->file('gbr_product');
+        $tujuan_upload = public_path('images/product');
 
-        // foreach( $request->add_nama_produks as $myindex => $dat){
-        //     $hideen_id = $request->id[$myindex];
-        //     $nama_products = $request->add_nama_produks[$myindex];
-        //     $harga_products = $request->add_hrg_produks[$myindex];
-        //     $stockproducts = $request->add_stock_produks[$myindex];
-        //     $discount_products = $request->add_dsc_produks[$myindex];
-        //     if($request->add_dsc_produks[$myindex] == ""){
-        //         $discount_products = 0;
-        //     }
-        //     ProductVariant::where(['id' => $hideen_id ])->update(['id_product' => $products_id,'name'=>$nama_products,'descriptions'=>$nama_products, "prices"=>$harga_products, "discounts" => $discount_products, "stocks"=>$stockproducts, "status_variant_delete" => "0"]);
+        $mystr = "product".base64_encode(date("Y:m:d H:i:s")).".".$file_product->getClientOriginalExtension();
+        $myproduk = Product::create(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "1", "product_status" => "1", "status_product_delete" => "0","images" => $mystr, "product_category"=>$pilihan_category, "updated_at" => now(), "created_at" => now()]);
+        $products_id = $myproduk->id;
+        $file_product->move($tujuan_upload, $mystr);
+
+        foreach( $request->add_nama_produks as $myindex => $dat){
+            $hideen_id = $request->id[$myindex];
+            $nama_products = $request->add_nama_produks[$myindex];
+            $harga_products = $request->add_hrg_produks[$myindex];
+            $stockproducts = $request->add_stock_produks[$myindex];
+            $discount_products = $request->add_dsc_produks[$myindex];
+            if($request->add_dsc_produks[$myindex] == ""){
+                $discount_products = 0;
+            }
+            ProductVariant::where(['id' => $hideen_id ])->update(['id_product' => $products_id,'name'=>$nama_products,'descriptions'=>$nama_products, "prices"=>$harga_products, "discounts" => $discount_products, "stocks"=>$stockproducts, "status_variant_delete" => "0"]);
          
-        // }
-        return response()->json(['output' => "ok"]);
+        }
+        return response()->json(['output' => $file_product]);
     }
 
 

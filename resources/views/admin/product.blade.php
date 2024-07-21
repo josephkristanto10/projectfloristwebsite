@@ -288,7 +288,7 @@
               </div> --}}
               
             </form>
-            <form id = "add_variant" enctype="multipart/form-data">
+            <form id = "add_variant">
               <h4>Tambah Variant</h4>
               <div class = "row mt-3 mb-3">
                 <div class = "col-2">Gambar  <input id = "add_gambarvariant0" name = "add_gbr_produks[]" onchange="uploadgbrvariant(this)" type = "file" class = "form-control" required> </div>
@@ -610,13 +610,16 @@
       }
       $("#add_variant").on('submit',(function(e){
           e.preventDefault();
-          var formdata = new FormData(this).serializeArray();
-          // formdata.append('gbr_product', $("#add_gambarproduk")[0].files[0]);
-          // formdata.append('kategori', $("#add_kategory_product").val());
-          // formdata.append('nama_product', $("#add_namaproduk").val());
-          // formdata.append('harga_product', $("#add_hargaproduk").val());
-          // formdata.append('discount_product', $("#add_discountproduk").val());
-          // formdata.append('desc_product', $("#add_descriptionproduk").val());
+          var img=$('#add_gambarproduk').serialize();
+          // var stringparam = '&gbr_product='+img+'&kategori='+$("#add_kategory_product").val()+'&nama_product='+$("#add_namaproduk").val()+'&harga_product='+$("#add_hargaproduk").val()+'&discount_product='+$("#add_discountproduk").val()+'&desc_product='+$("#add_descriptionproduk").val();
+          var formdata = new FormData($(this)[0]);
+          formdata.append('gbr_product', $("#add_gambarproduk")[0].files[0]);
+          formdata.append('kategori', $("#add_kategory_product").val());
+          formdata.append('nama_product', $("#add_namaproduk").val());
+          formdata.append('harga_product', $("#add_hargaproduk").val());
+          formdata.append('discount_product', $("#add_discountproduk").val());
+          formdata.append('desc_product', $("#add_descriptionproduk").val());
+          
           $.ajax({
             xhr: function () {
                         var xhr = new window. XMLHttpRequest();
@@ -662,11 +665,11 @@
               $('#tambah_variant_button').text('Upload Variant');
               },
               success: function(data){
-                $("#add_gambarproduk").val("");
-                $("#add_namaproduk").val("");
-                $("#add_hargaproduk").val("");
-                $("#add_discountproduk").val("");
-                $("#add_descriptionproduk").val("");
+                // $("#add_gambarproduk").val("");
+                // $("#add_namaproduk").val("");
+                // $("#add_hargaproduk").val("");
+                // $("#add_discountproduk").val("");
+                // $("#add_descriptionproduk").val("");
                 $('#table-product').DataTable().ajax.reload();
                 var currentdate = new Date(); 
                 var tgl =  currentdate.getDate() + "/"
@@ -678,7 +681,7 @@
                 $("#add_alert_notif_danger").attr("style", "display: none !important");
                 $("#add_alert_notif_success").attr("style", "display: block !important");
                 $("#add_tanggal_alert_success").html(tgl);
-                $("#add_variant").trigger("reset");
+                // $("#add_variant").trigger("reset");
                 $("#append_tambahan_variant").html("");
 
               },
