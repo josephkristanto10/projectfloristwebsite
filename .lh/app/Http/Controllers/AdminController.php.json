@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 673,
+            "activePatchIndex": 674,
             "patches": [
                 {
                     "date": 1719492549189,
@@ -2700,6 +2700,10 @@
                 {
                     "date": 1721633268705,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -459,9 +459,9 @@\n         if($request->discount_product == \"\"){\n             $discount_product = 0;\n         }\n         // $file_product = $request->file('gbr_product');\n-        $tujuan_upload = public_path('images/product');\n+        // $tujuan_upload = public_path('images/product');\n \n         // $mystr = \"product\".base64_encode(date(\"Y:m:d H:i:s\")).\".\".$file_product->getClientOriginalExtension();\n         // $myproduk = Product::create([\"names\" => $nama_product, \"descriptions\" => $desc_product, \"prices\" => $harga_product, \"discounts\" => $discount_product, \"stocks\" => \"1\", \"has_variants\" => \"1\", \"product_status\" => \"1\", \"status_product_delete\" => \"0\",\"images\" => \"-\", \"product_category\"=>$pilihan_category, \"updated_at\" => now(), \"created_at\" => now()]);\n         $products_id = $myproduk->id;\n"
+                },
+                {
+                    "date": 1721633333759,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -463,9 +463,9 @@\n         // $tujuan_upload = public_path('images/product');\n \n         // $mystr = \"product\".base64_encode(date(\"Y:m:d H:i:s\")).\".\".$file_product->getClientOriginalExtension();\n         // $myproduk = Product::create([\"names\" => $nama_product, \"descriptions\" => $desc_product, \"prices\" => $harga_product, \"discounts\" => $discount_product, \"stocks\" => \"1\", \"has_variants\" => \"1\", \"product_status\" => \"1\", \"status_product_delete\" => \"0\",\"images\" => \"-\", \"product_category\"=>$pilihan_category, \"updated_at\" => now(), \"created_at\" => now()]);\n-        $products_id = $myproduk->id;\n+        // $products_id = $myproduk->id;\n         // foreach( $request->add_nama_produks as $myindex => $dat){\n         //     $hideen_id = $request->id[$myindex];\n         //     $nama_products = $request->add_nama_produks[$myindex];\n         //     $harga_products = $request->add_hrg_produks[$myindex];\n@@ -477,9 +477,9 @@\n         //     ProductVariant::where(['id' => $hideen_id ])->update(['id_product' => $products_id,'name'=>$nama_products,'descriptions'=>$nama_products, \"prices\"=>$harga_products, \"discounts\" => $discount_products, \"stocks\"=>$stockproducts, \"status_variant_delete\" => \"0\"]);\n          \n         // }\n         // $file_product->move($tujuan_upload, $mystr);\n-        return response()->json(['output' => $file_product]);\n+        return response()->json(['output' => \"ok\"]);\n     }\n \n \n     /**\n"
                 }
             ],
             "date": 1719492549189,
