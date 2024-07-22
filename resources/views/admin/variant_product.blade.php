@@ -449,7 +449,7 @@
               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
               data: formdata,
               contentType: false,
-              cache: false,
+              // cache: false,
               processData:false,
               timeout: 120000,
               beforeSend: function() {
