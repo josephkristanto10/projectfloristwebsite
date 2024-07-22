@@ -478,7 +478,7 @@ class AdminController extends Controller
          
         // }
         // $file_product->move($tujuan_upload, $mystr);
-        return response()->json(['output' => "ok"]);
+        return response()->json(['output' => count($request->add_gbr_produks)]);
     }
 
 

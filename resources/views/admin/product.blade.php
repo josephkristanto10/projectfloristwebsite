@@ -648,6 +648,7 @@
               contentType: false,
               // cache: false,
               processData:false,
+              dataType: "json",
               beforeSend: function() {
               $('#tambah_variant_button').prop('disabled',true);
               $('#tambah_variant_button').text('Uploading...');
