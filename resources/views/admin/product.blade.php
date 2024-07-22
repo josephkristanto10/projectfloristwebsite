@@ -610,10 +610,10 @@
       }
       $("#add_variant").on('submit',(function(e){
           e.preventDefault();
-          var img=$('#add_gambarproduk').serialize();
+          // var img=$('#add_gambarproduk').serialize();
           // var stringparam = '&gbr_product='+img+'&kategori='+$("#add_kategory_product").val()+'&nama_product='+$("#add_namaproduk").val()+'&harga_product='+$("#add_hargaproduk").val()+'&discount_product='+$("#add_discountproduk").val()+'&desc_product='+$("#add_descriptionproduk").val();
           var formdata = new FormData($(this)[0]);
-          formdata.append('gbr_product', $("#add_gambarproduk")[0].files[0]);
+          // formdata.append('gbr_product', $("#add_gambarproduk")[0].files[0]);
           formdata.append('kategori', $("#add_kategory_product").val());
           formdata.append('nama_product', $("#add_namaproduk").val());
           formdata.append('harga_product', $("#add_hargaproduk").val());
