@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 676,
+            "activePatchIndex": 677,
             "patches": [
                 {
                     "date": 1719492549189,
@@ -2712,6 +2712,10 @@
                 {
                     "date": 1721656736503,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -477,9 +477,9 @@\n         //     ProductVariant::where(['id' => $hideen_id ])->update(['id_product' => $products_id,'name'=>$nama_products,'descriptions'=>$nama_products, \"prices\"=>$harga_products, \"discounts\" => $discount_products, \"stocks\"=>$stockproducts, \"status_variant_delete\" => \"0\"]);\n          \n         // }\n         // $file_product->move($tujuan_upload, $mystr);\n-        return response()->json(['output' => count($add_gbr_produks)]);\n+        return response()->json(['output' => count($request->$add_gbr_produks)]);\n     }\n \n \n     /**\n"
+                },
+                {
+                    "date": 1721660629712,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -477,9 +477,9 @@\n         //     ProductVariant::where(['id' => $hideen_id ])->update(['id_product' => $products_id,'name'=>$nama_products,'descriptions'=>$nama_products, \"prices\"=>$harga_products, \"discounts\" => $discount_products, \"stocks\"=>$stockproducts, \"status_variant_delete\" => \"0\"]);\n          \n         // }\n         // $file_product->move($tujuan_upload, $mystr);\n-        return response()->json(['output' => count($request->$add_gbr_produks)]);\n+        return response()->json(['output' => \"ok\"]);\n     }\n \n \n     /**\n"
                 }
             ],
             "date": 1719492549189,
