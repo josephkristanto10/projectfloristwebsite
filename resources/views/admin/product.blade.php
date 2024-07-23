@@ -612,7 +612,9 @@
                 path.attr("src", URL.createObjectURL(isifile));
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                    $("#peringatan").text("Ada error dibaris terakhir, Update Gambar !");
+                var path=$(myobj).closest('.image_upload_container').find('img');
+                path.attr("src", "{{asset('images/fail.png')}}");
+                $("#peringatan").text("Ada error, cek gambar fail, upload gambar ulang !");
                   },
             });
         }
@@ -645,8 +647,10 @@
             
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                $("#peringatan").text("Ada error dibaris terakhir, HAPUS BARIS !");
-              },
+            var path=$(myobj).closest('.image_upload_container').find('img');
+            path.attr("src", "{{asset('images/fail.png')}}");
+                $("#peringatan").text("Ada error, cek gambar fail, upload ulang !");
+            },
         });
         }
       
