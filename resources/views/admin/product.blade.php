@@ -20,6 +20,9 @@
       background-color: #F2D2BD;
       color: #131312;
     }
+    .image_upload_container>input {
+  display: none;
+}
   </style>
 </head>
 
@@ -291,7 +294,10 @@
             <form id = "add_variant">
               <h4>Tambah Variant</h4>
               <div class = "row mt-3 mb-3">
-                <div class = "col-2">Gambar  <input id = "add_gambarvariant0" name = "add_gbr_produks[]" onchange="uploadgbrvariant(this)" type = "file" class = "form-control" required> </div>
+                <div class = "col-1 image_upload_container">Gambar  <br><label for="add_gambarvariant0">
+                  <img style = "width:50px;height:50px;" src="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png"/>
+                </label>  <input id = "add_gambarvariant0" name = "add_gbr_produks[]" onchange="uploadgbrvariant(this)" type = "file" class = "form-control" required> 
+                </div>
                 <div class = "col-3">Nama  <input  id = "add_namavariant0" name = "add_nama_produks[]" type = "text" class = "form-control" required></div>
                 <div class = "col-2">Harga  <input id = "add_hargavariant0" name = "add_hrg_produks[]" type = "text" class = "form-control" required></div>
                 <div class = "col-2">Stok  <input id = "add_stokvariant0" name = "add_stock_produks[]" value = "0" type = "text" class = "form-control" required></div>
@@ -571,7 +577,7 @@
       }
 
       function tambahvariantlain(){
-        var stringelement = '<div class ="row mt-3 mb-3" id = "row_add_'+jumlahaddvariant+'"><div class = "col-2">Gambar <input  name = "add_gbr_produks[]" type = "file" class = "form-control" onchange="uploadgbrvariant(this)"> </div><div class = "col-3">Nama <input name = "add_nama_produks[]" type = "text" class = "form-control" required></div><div class = "col-2">Harga <input name = "add_hrg_produks[]" type = "text" class = "form-control" required></div>   <div class = "col-2">Stok <input id = "add_stokproduk" name = "add_stock_produks[]" value = "0" type = "text" class = "form-control" required></div>                <div class = "col-2">Discount <input   name = "add_dsc_produks[]" type = "text" class = "form-control" ></div><div class = "col-1"><br><button class = "btn btn-danger" onclick = "removevariantlain(this)" data-id-jumlah = "'+jumlahaddvariant+'"><i class = "fa fa-trash"></i></button></div></div>';
+        var stringelement = '<div class ="row mt-3 mb-3" id = "row_add_'+(jumlahaddvariant+1)+'"><div class = "col-1 image_upload_container" >Gambar<label for="add_gambarvariant'+(jumlahaddvariant+1)+'"><img style = "width:50px;height:50px;" src="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png"/></label> <input id = "add_gambarvariant'+(jumlahaddvariant+1)+'"  name = "add_gbr_produks[]" type = "file" class = "form-control" onchange="uploadgbrvariant(this)"> </div><div class = "col-3">Nama <input name = "add_nama_produks[]" type = "text" class = "form-control" required></div><div class = "col-2">Harga <input name = "add_hrg_produks[]" type = "text" class = "form-control" required></div>   <div class = "col-2">Stok <input id = "add_stokproduk" name = "add_stock_produks[]" value = "0" type = "text" class = "form-control" required></div>                <div class = "col-2">Discount <input   name = "add_dsc_produks[]" type = "text" class = "form-control" ></div><div class = "col-1"><br><button class = "btn btn-danger" onclick = "removevariantlain(this)" data-id-jumlah = "'+(jumlahaddvariant+1)+'"><i class = "fa fa-trash"></i></button></div></div>';
         $("#append_tambahan_variant").append(stringelement);
         jumlahaddvariant +=1;
       }
@@ -581,11 +587,41 @@
       }
 
       function uploadgbrvariant(myobj){
-        var id_product = $("#add_kategory_product").val();
+        var data_id_check = $(myobj).attr("data-id");
+        if(data_id_check){
+          
+        
+            var formdata = new FormData();
+            formdata.append('gbr', $(myobj)[0].files[0]);
+
+            // formdata.append('id_products', id_product);
+            formdata.append('id_gambar_variant', data_id_check);
+            $.ajax({
+              type: "post",
+              url: "{{url('/updategambarvariant')}}",
+              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+              data: formdata,
+                  contentType: false,
+                  cache: false,
+                  processData:false,
+              dataType: "json",
+              success: function (response) {
+                $("#peringatan").text("");
+                var isifile = $(myobj)[0].files[0];
+                var path=$(myobj).closest('.image_upload_container').find('img');
+                path.attr("src", URL.createObjectURL(isifile));
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    $("#peringatan").text("Ada error dibaris terakhir, Update Gambar !");
+                  },
+            });
+        }
+        else{
+          var id_product = $("#add_kategory_product").val();
         var gambar = $(myobj);
         var formdata = new FormData();
         formdata.append('gbr', $(myobj)[0].files[0]);
- 
+
         formdata.append('id_products', id_product);
         $.ajax({
           type: "post",
@@ -597,7 +633,13 @@
               processData:false,
           dataType: "json",
           success: function (response) {
+            var myfiles = $(myobj).files;
+            // alert($(myobj).prev().find('img').attr("id"));
             $(myobj).append("<input type = 'hidden' name='id[]' value = "+response.output+">");
+            $(myobj).attr("data-id", response.output);
+            var isifile = $(myobj)[0].files[0];
+            var path=$(myobj).closest('.image_upload_container').find('img');
+            path.attr("src", URL.createObjectURL(isifile));
             $("#peringatan").text("");
           
             
@@ -606,6 +648,8 @@
                 $("#peringatan").text("Ada error dibaris terakhir, HAPUS BARIS !");
               },
         });
+        }
+      
         
       }
       $("#add_variant").on('submit',(function(e){

@@ -480,6 +480,18 @@ class AdminController extends Controller
         $file_product->move($tujuan_upload, $mystr);
         return response()->json(['output' => "ok"]);
     }
+    public function updategambarvariants(Request $request){
+        $id_variant  = $request->id_gambar_variant;
+        $file_product = $request->file("gbr");
+        $tujuan_upload = public_path('images/variant');
+        $get_gambar = ProductVariant::where("id", "=", $id_variant)->select("images_variant")->get();
+        $mystr = $get_gambar[0]['images_variant'];
+      
+        $file_product->move($tujuan_upload, $mystr);
+        
+        // $myproduk = ProductVariant::create(["id_product" => 0,"stocks" => "1",  "prices" => 0, "discounts" => 0,"descriptions" => " ", "stocks" => "0", "name" => " ", "variant_status" => "1" , "status_variant_delete" => "1","images_variant" => $mystr, "updated_at" => now(), "created_at" => now()]);
+        return response()->json(['output' => "ok"]);
+    }
 
 
     /**
