@@ -38,7 +38,7 @@ class HhomeController extends Controller
     }
     public function detail_variant(Request $request){
         $id_product = $request->id_products;
-        $variants = ProductVariant::where('id_product','=',$id_product)->join("product", "product.id","=","product_variant.id_product")->where('variant_status','=','1')->where('status_variant_delete','=','0')->where('stocks','>','0')->select("product_variant.*","product.images")->get();
+        $variants = ProductVariant::where('id_product','=',$id_product)->join("product", "product.id","=","product_variant.id_product")->where('variant_status','=','1')->where('status_variant_delete','=','0')->where('product_variant.stocks','>','0')->select("product_variant.*","product.images")->get();
         return response()->json(['variant' => $variants]);
     }
     public function addtocart(Request $request){
