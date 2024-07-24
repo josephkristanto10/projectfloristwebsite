@@ -23,6 +23,9 @@
     .image_upload_container>input {
   display: none;
 }
+.edit_image_upload_container>input {
+  display: none;
+}
   </style>
 </head>
 
@@ -225,6 +228,7 @@
                   <tr>
                     <th>Gambar</th>
                     <th>Variant Name</th>
+                    <th>Stok</th>
                     <th>Discount</th>
                     <th>Price</th>
                 
@@ -232,8 +236,42 @@
                 </thead>
                 <tbody id = "isian_variant_produk"></tbody>
               </table>
+              <h4>Tambah Variant Produk</h4>
+              <form id = "add_edit_tambah_variant">
+                  <div class = "row mt-3 mb-3">
+                    <div class = "col-1 edit_image_upload_container">Gambar  <br><label for="edit_add_gambarvariant0">
+                      <img id = "edit_gambar0" style = "width:50px;height:50px;" src="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png"/>
+                    </label>  <input id = "edit_add_gambarvariant0" name = "edit_add_gbr_produks[]" onchange="editadduploadgbrvariant(this)" type = "file" class = "form-control" required> 
+                    </div>
+                    <div class = "col-3">Nama  <input  id = "edit_add_namavariant0" name = "edit_add_nama_produks[]" type = "text" class = "form-control" required></div>
+                    <div class = "col-2">Harga  <input id = "edit_add_hargavariant0" name = "edit_add_hrg_produks[]" type = "text" class = "form-control" required></div>
+                    <div class = "col-2">Stok  <input id = "edit_add_stokvariant0" name = "edit_add_stock_produks[]" value = "0" type = "text" class = "form-control" required></div>
+                    <div class = "col-2">Discount  <input  id = "edit_add_discountvariant0" name = "edit_add_dsc_produks[]" type = "text" class = "form-control" ></div>
+                  </div>
+                    <div id = "edit_tambahan_variant">
+                      <div id = "edit_append_tambahan_variant"></div>
+                  </div>
+                  <div class="alert alert-success d-flex align-items-center" role="alert" id = "edit_add_alert_notif_success" style = "display:none !important;">
+                    <div>
+                      Produk Sukses Ditambah pada <span id = "add_tanggal_alert_success"></span>. Jika tidak tertambah, Hubungi Developer.
+                    </div>
+                  </div>
+                  <div class="alert alert-danger d-flex align-items-center" role="alert" id = "edit_add_alert_notif_danger" style = "display:none !important;">
+                    <div>
+                      Produk gagal Ditambah <span id = "add_tanggal_alert_danger"></span>.. Segera Hubungi Developer.
+                    </div>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                  </div>
+                  <div class ="col-12" style = "text-align:right;"> <input style = "float:right;" type = "submit" class ="btn btn-success " id = "edit_tambah_variant_button"  value = "Upload Variant"> </div>
+                  <span style = "float:right;margin-right:30px;"><button type = "button" class = "btn btn-primary" onclick = "edittambahvariantlain()"  >Tambah variant lain</button></span>
+              </form>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+              {{-- <button type="button" class="btn btn-primary" >Close</button> --}}
+              {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
             </div>
       </div>
     </div>
@@ -295,7 +333,7 @@
               <h4>Tambah Variant</h4>
               <div class = "row mt-3 mb-3">
                 <div class = "col-1 image_upload_container">Gambar  <br><label for="add_gambarvariant0">
-                  <img style = "width:50px;height:50px;" src="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png"/>
+                  <img id = "gambar0" style = "width:50px;height:50px;" src="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png"/>
                 </label>  <input id = "add_gambarvariant0" name = "add_gbr_produks[]" onchange="uploadgbrvariant(this)" type = "file" class = "form-control" required> 
                 </div>
                 <div class = "col-3">Nama  <input  id = "add_namavariant0" name = "add_nama_produks[]" type = "text" class = "form-control" required></div>
@@ -412,6 +450,28 @@
   function getdetailTransaction(myobj){
     var productid = $(myobj).attr("data-id");
     globalselectedproduct = productid;
+    $.ajax({
+      type: "get",
+      url: "{{url('/getdetailproductadmin')}}",
+      data: {"idproduct" : productid},
+      dataType: "json",
+      success: function (response) {
+        $("#isian_variant_produk").html("");
+        $("#isian_variant_produk").html(response.output);
+        $("#edit_kategory_product").val(response.output_proudct[0].category_id);
+
+        $("#edit_namaproduk").val(response.output_proudct[0].names);
+        $("#edit_hargaproduk").val(response.output_proudct[0].prices);
+        $("#edit_discountproduk").val(response.output_proudct[0].discounts);
+        $("#edit_descriptionproduk").val(response.output_proudct[0].descriptions);
+
+      }
+    });
+
+  }
+  
+  function getdetailEditTransaction(id){
+    var productid = id;
     $.ajax({
       type: "get",
       url: "{{url('/getdetailproductadmin')}}",
@@ -575,17 +635,96 @@
           }
         });
       }
-
+      var jumlahedit_addvariant = 0;
+      function edittambahvariantlain(){
+      
+        var stringelement = '<div class ="row mt-3 mb-3" id = "row_edit_'+(jumlahedit_addvariant+1)+'"><div class = "col-1 edit_image_upload_container" >Gambar<label for="edit_add_gambarvariant'+(jumlahedit_addvariant+1)+'"><img style = "width:50px;height:50px;" src="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png"/></label> <input id = "edit_add_gambarvariant'+(jumlahedit_addvariant+1)+'"  name = "edit_add_gbr_produks[]" type = "file" class = "form-control" onchange="editadduploadgbrvariant(this)"> </div><div class = "col-3">Nama <input name = "edit_add_nama_produks[]" type = "text" class = "form-control" required></div><div class = "col-2">Harga <input name = "edit_add_hrg_produks[]" type = "text" class = "form-control" required></div>   <div class = "col-2">Stok <input id = "edit_add_stokproduk" name = "edit_add_stock_produks[]" value = "0" type = "text" class = "form-control" required></div>                <div class = "col-2">Discount <input   name = "edit_add_dsc_produks[]" type = "text" class = "form-control" ></div><div class = "col-1"><br><button class = "btn btn-danger" onclick = "edit_removevariantlain(this)" data-id-jumlah = "'+(jumlahedit_addvariant+1)+'"><i class = "fa fa-trash"></i></button></div></div>';
+        $("#edit_append_tambahan_variant").append(stringelement);
+        jumlahedit_addvariant +=1;
+      }
       function tambahvariantlain(){
         var stringelement = '<div class ="row mt-3 mb-3" id = "row_add_'+(jumlahaddvariant+1)+'"><div class = "col-1 image_upload_container" >Gambar<label for="add_gambarvariant'+(jumlahaddvariant+1)+'"><img style = "width:50px;height:50px;" src="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png"/></label> <input id = "add_gambarvariant'+(jumlahaddvariant+1)+'"  name = "add_gbr_produks[]" type = "file" class = "form-control" onchange="uploadgbrvariant(this)"> </div><div class = "col-3">Nama <input name = "add_nama_produks[]" type = "text" class = "form-control" required></div><div class = "col-2">Harga <input name = "add_hrg_produks[]" type = "text" class = "form-control" required></div>   <div class = "col-2">Stok <input id = "add_stokproduk" name = "add_stock_produks[]" value = "0" type = "text" class = "form-control" required></div>                <div class = "col-2">Discount <input   name = "add_dsc_produks[]" type = "text" class = "form-control" ></div><div class = "col-1"><br><button class = "btn btn-danger" onclick = "removevariantlain(this)" data-id-jumlah = "'+(jumlahaddvariant+1)+'"><i class = "fa fa-trash"></i></button></div></div>';
         $("#append_tambahan_variant").append(stringelement);
         jumlahaddvariant +=1;
       }
+      function edit_removevariantlain(myobj){
+        var idjumlah =  $(myobj).attr("data-id-jumlah");
+        $("#row_edit_"+idjumlah).remove();
+      }
       function removevariantlain(myobj){
          var idjumlah =  $(myobj).attr("data-id-jumlah");
          $("#row_add_"+idjumlah).remove();
       }
-
+      function editadduploadgbrvariant(myobj){
+        // edit_add_alert_notif_success
+// edit_add_alert_notif_danger
+        var data_id_check = $(myobj).attr("data-id");
+        if(data_id_check){
+            var formdata = new FormData();
+            formdata.append('gbr', $(myobj)[0].files[0]);
+            // formdata.append("id_products", globalselectedproduct);
+            // formdata.append('id_products', id_product);
+            formdata.append('id_gambar_variant', data_id_check);
+            $.ajax({
+              type: "post",
+              url: "{{url('/edit_updategambarvariants')}}",
+              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+              data: formdata,
+                  contentType: false,
+                  cache: false,
+                  processData:false,
+              dataType: "json",
+              success: function (response) {
+                $("#peringatan").text("");
+                var isifile = $(myobj)[0].files[0];
+                var path=$(myobj).closest('.edit_image_upload_container').find('img');
+                path.attr("src", URL.createObjectURL(isifile));
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                var path=$(myobj).closest('.edit_image_upload_container').find('img');
+                path.attr("src", "{{asset('images/fail.png')}}");
+                $("#peringatan").text("Ada error, cek gambar fail, upload gambar ulang !");
+                  },
+            });
+        }
+        else{
+          // var id_product = $("#add_kategory_product").val();
+          var gambar = $(myobj);
+          var formdata = new FormData();
+          formdata.append('gbr', $(myobj)[0].files[0]);
+          formdata.append("id_for_products", globalselectedproduct);
+          // formdata.append('id_products', id_product);
+          $.ajax({
+            type: "post",
+            url: "{{url('/edit_tambahgambarvariant')}}",
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data: formdata,
+                contentType: false,
+                cache: false,
+                processData:false,
+            dataType: "json",
+            success: function (response) {
+              var myfiles = $(myobj).files;
+              // alert($(myobj).prev().find('img').attr("id"));
+              $(myobj).append("<input type = 'hidden' name='id[]' value = "+response.output+">");
+              $(myobj).attr("data-id", response.output);
+              var isifile = $(myobj)[0].files[0];
+              var path=$(myobj).closest('.edit_image_upload_container').find('img');
+              path.attr("src", URL.createObjectURL(isifile));
+              $("#peringatan").text("");
+            
+              
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+              var path=$(myobj).closest('.edit_image_upload_container').find('img');
+              path.attr("src", "{{asset('images/fail.png')}}");
+                  $("#peringatan").text("Ada error, cek gambar fail, upload ulang !");
+              },
+          });
+        }
+      
+        
+      }
       function uploadgbrvariant(myobj){
         var data_id_check = $(myobj).attr("data-id");
         if(data_id_check){
@@ -713,8 +852,12 @@
               complete: function() {
               $('#tambah_variant_button').prop('disabled',false);
               $('#tambah_variant_button').text('Upload Variant');
+              $("#gambar0").attr("src","https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png");
+              $("#add_gambarvariant0").removeAttr("data-id");
+              $(".image_upload_container input[type='hidden']").remove();
               },
               success: function(data){
+                $("#gambar0").attr("src","https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png");
                 $("#add_gambarproduk").val("");
                 $("#add_namaproduk").val("");
                 $("#add_hargaproduk").val("");
@@ -749,5 +892,90 @@
               },
           });
       }));
+      $("#add_edit_tambah_variant").on("submit", function(e){
+        e.preventDefault();
+        var formdata = new FormData($(this)[0]);
+        formdata.delete('edit_add_gbr_produks[]');
+        // formdata.append('id_products', $("#add_kategory_product").val());
+        $.ajax({
+            xhr: function () {
+                        var xhr = new window. XMLHttpRequest();
+                                            xhr.upload.addEventListener("progress", function (evt) {
+                                                if (evt.lengthComputable) {
+                                                    var percentComplete = evt.loaded / evt.total;
+                                                    percentComplete = parseInt(percentComplete * 100);
+                                                    console.log(percentComplete);
+                                                    $('.progress-bar').css('width', percentComplete + '%');
+                                                    if (percentComplete === 100) {
+                                                        // console.log('completed 100%')
+                                                        // var imageUrl = window.URL.createObjectURL(photo)
+                                                        // $('.imgPreview').attr('src', imageUrl);
+                                                        setTimeout(function () {
+                                                            $('.progress-bar').css('width', '0%');
+                                                        }, 2000)
+                                                    }
+                                                }
+                                            }, false);
+                                            return xhr;
+                    },
+            url: "{{url('/edit_addproductwithvariantadmin')}}",
+              type: "POST",
+              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+              data: formdata,
+              contentType: false,
+              // cache: false,
+              processData:false,
+              dataType: "json",
+              beforeSend: function() {
+              $('#edit_tambah_variant_button').prop('disabled',true);
+              $('#edit_tambah_variant_button').text('Uploading...');
+              var percentage = '0';
+              }, 
+              uploadProgress: function (event, position, total, percentComplete) {
+          
+                        var percentage = percentComplete;
+                        $('.progress-bar').css("width", percentage+'%', function() {
+                            return $(this).attr("aria-valuenow", percentage) + "%";
+                        })
+              },
+              complete: function() {
+                getdetailEditTransaction(globalselectedproduct);
+              $('#edit_tambah_variant_button').prop('disabled',false);
+              $('#edit_tambah_variant_button').text('Upload Variant');
+              $("#edit_gambar0").attr("src","https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png");
+              $("#edit_add_gambarvariant0").removeAttr("data-id");
+              $(".edit_image_upload_container input[type='hidden']").remove();
+              },
+              success: function(data){
+                $("#edit_gambar0").attr("src","https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png");
+                $('#table-product').DataTable().ajax.reload();
+                var currentdate = new Date(); 
+                var tgl =  currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+                $("#edit_add_alert_notif_danger").attr("style", "display: none !important");
+                $("#edit_add_alert_notif_success").attr("style", "display: block !important");
+                $("#add_tanggal_alert_success").html(tgl);
+                $("#add_edit_tambah_variant").trigger("reset");
+                $("#edit_append_tambahan_variant").html("");
+
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                var currentdate = new Date(); 
+                var tgl =  currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+                $("#edit_add_alert_notif_success").attr("style", "display: none !important");
+                $("#edit_add_alert_notif_danger").attr("style", "display: block !important");
+                $("#edit_add_tanggal_alert_danger").html(tgl);
+              },
+          });
+      })
       
 </script>

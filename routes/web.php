@@ -71,8 +71,12 @@ Route::POST("/changestatusdeletevariant", [AdminController::class,"changestatusd
 Route::POST("/changestatusdeleteproduct", [AdminController::class,"changestatusdeleteproducts"]);
 
 Route::POST("/tambahgambarvariant", [AdminController::class,"tambahgambarvariant"]);
+Route::POST("/edit_tambahgambarvariant", [AdminController::class,"edit_tambahgambarvariant"]);
+
 Route::POST("/addproductwithvariantadmin", [AdminController::class,"addproductwithvariantadmin"]);
+Route::POST("/edit_addproductwithvariantadmin", [AdminController::class,"edit_addproductwithvariantadmin"]);
 Route::POST("/updategambarvariant", [AdminController::class,"updategambarvariants"]);
+Route::POST("/edit_updategambarvariants", [AdminController::class,"edit_updategambarvariants"]);
 
 
 

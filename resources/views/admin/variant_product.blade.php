@@ -147,7 +147,7 @@
             <div class="card w-100">
           
               <div class="card-body p-4">
-                <span style = "float:right;margin-right:20px;" ><button class = "btn btn-primary" data-toggle = "modal" data-target="#modal_add_variant_product" style = " background-color: #F2D2BD;color:#131312;border:0px;"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Tambah Variant</button></span>
+                {{-- <span style = "float:right;margin-right:20px;" ><button class = "btn btn-primary" data-toggle = "modal" data-target="#modal_add_variant_product" style = " background-color: #F2D2BD;color:#131312;border:0px;"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Tambah Variant</button></span> --}}
 
                 <h1>Variant Product</h1>
                 <table id="table-variant-product" class="table table-bordered table-hover w-100">
