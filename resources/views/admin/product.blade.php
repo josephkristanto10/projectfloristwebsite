@@ -163,7 +163,6 @@
                       <th>Gambar</th>
                       <th>Kategori</th>
                       <th>Nama</th>
-                      <th>Variant</th>
                       <th>Harga</th>
                       <th>Status</th>
                       <th>Action</th>
@@ -264,8 +263,9 @@
                   <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
                   </div>
+                  <br>
+                  <span style = "float:right;margin-right:30px;"><button type = "button" class = "btn btn-primary" onclick = "edittambahvariantlain()"  >Tambah variant lain&nbsp;<i class = "fa fa-plus"></i></button></span>
                   <div class ="col-12" style = "text-align:right;"> <input style = "float:right;" type = "submit" class ="btn btn-success " id = "edit_tambah_variant_button"  value = "Upload Variant"> </div>
-                  <span style = "float:right;margin-right:30px;"><button type = "button" class = "btn btn-primary" onclick = "edittambahvariantlain()"  >Tambah variant lain</button></span>
               </form>
             <div class="modal-footer">
 
@@ -348,7 +348,7 @@
                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
             </div>
               <p style = "color:red" id = "peringatan"></p>
-              <span style = "float:right;margin-right:30px;"><button type = "button" class = "btn btn-primary" onclick = "tambahvariantlain()"  >Tambah variant lain</button></span>
+              <span style = "float:right;margin-right:30px;"><button type = "button" class = "btn btn-primary" onclick = "tambahvariantlain()"  >Tambah variant lain &nbsp;<i class = "fa fa-plus"></i></button></span>
               <div id="status"></div>
               <div class ="col-12" style = "text-align:right;"> <input style = "float:right;" type = "submit" class ="btn btn-success " id = "tambah_variant_button"  value = "Upload Variant"> </div>
             </div>
@@ -396,8 +396,11 @@
       processing: true,
       serverSide: true,
       ajax: "{{url('/getlistproduk')}}",
-      scrollX:true,
-      scrollCollapse: false,
+      scrollY: "500px",
+        scrollX: false,
+        scrollCollapse: true,
+      // scrollCollapse: false,
+      autoWidth: false,
       order:[0,"desc"],
       autoWidth:false,
       columns: [
@@ -415,15 +418,6 @@
         },
         {
            data: 'names'
-        },
-        {
-          "render": function ( data, type, row ) {
-            var status_variants = "Tidak ada";
-            if(row.has_variants == 1){
-              status_variants = "Ada Variant";
-            }
-             return status_variants;
-           }
         },
         {
            data: 'prices'
@@ -958,7 +952,7 @@
                 + currentdate.getSeconds();
                 $("#edit_add_alert_notif_danger").attr("style", "display: none !important");
                 $("#edit_add_alert_notif_success").attr("style", "display: block !important");
-                $("#add_tanggal_alert_success").html(tgl);
+                $("#edit_add_tanggal_alert_success").html(tgl);
                 $("#add_edit_tambah_variant").trigger("reset");
                 $("#edit_append_tambahan_variant").html("");
 
