@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Supplier Florist Surabaya</title>
-  <link rel="shortcut icon" type="image/png" href="{{asset('images/logo.png')}}" />
+  <link rel="shortcut icon" href="{{ asset('images/logo-modified.png')}}">
   <link rel="stylesheet" href="{{asset('admin/assets/css/styles.min.css')}}" />
   <style>
     body{

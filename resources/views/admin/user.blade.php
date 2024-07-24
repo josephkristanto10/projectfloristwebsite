@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Supplier Florist Surabaya</title>
-  <link rel="shortcut icon" type="image/png" href="{{asset('admin/assets/images/logos/favicon.png')}}" />
+  <link rel="shortcut icon" href="{{ asset('images/logo-modified.png')}}">
   <link rel="stylesheet" href="{{asset('admin/assets/css/styles.min.css')}}" />
   <style>
     .sidebar-nav ul .sidebar-item.selected > .sidebar-link, .sidebar-nav ul .sidebar-item.selected > .sidebar-link.active, .sidebar-nav ul .sidebar-item > .sidebar-link.active {

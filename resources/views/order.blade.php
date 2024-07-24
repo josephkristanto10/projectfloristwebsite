@@ -11,7 +11,7 @@
   <meta name="keywords" content="florist surabaya" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-
+  <link rel="shortcut icon" href="{{ asset('images/logo-modified.png')}}">
   <title>Supplier Florist Surabaya</title>
 
   <!-- slider stylesheet -->
