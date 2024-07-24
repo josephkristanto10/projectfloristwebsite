@@ -4,7 +4,11 @@
 <div class="col-md-3">
   <div class="wsk-cp-product">
     <div class="wsk-cp-img">
+      @if(file_exists(public_path()."/images/product/".$mp->images))
       <img src="{{asset('images/product/'.$mp->images)}}" alt="Product" class="img-responsive" />
+      @else
+      <img src="{{asset('images/logo-modified.png')}}" alt="Product" class="img-responsive" />
+      @endif
     </div>
     <div class="wsk-cp-text">
       <div class="category" style = "">
