@@ -252,12 +252,12 @@
                   </div>
                   <div class="alert alert-success d-flex align-items-center" role="alert" id = "edit_add_alert_notif_success" style = "display:none !important;">
                     <div>
-                      Produk Sukses Ditambah pada <span id = "add_tanggal_alert_success"></span>. Jika tidak tertambah, Hubungi Developer.
+                      Produk Sukses Ditambah pada <span id = "edit_add_tanggal_alert_success"></span>. Jika tidak tertambah, Hubungi Developer.
                     </div>
                   </div>
                   <div class="alert alert-danger d-flex align-items-center" role="alert" id = "edit_add_alert_notif_danger" style = "display:none !important;">
                     <div>
-                      Produk gagal Ditambah <span id = "add_tanggal_alert_danger"></span>.. Segera Hubungi Developer.
+                      Produk gagal Ditambah <span id = "edit_add_tanggal_alert_danger"></span>.. Segera Hubungi Developer.
                     </div>
                   </div>
                   <div class="progress">
@@ -306,11 +306,11 @@
                 <div class = "col-6">Nama Produk <input  id = "add_namaproduk" name = "add_nama_produk" type = "text" class = "form-control" required></div>
               </div>
               <div class = "row mt-3 mb-3">
-                <div class = "col-6">Harga Produk <input id = "add_hargaproduk" name = "add_hrg_produk" type = "text" class = "form-control" required></div>
+                <div class = "col-6">Harga Produk <input id = "add_hargaproduk" name = "add_hrg_produk" type = "text" class = "form-control" ></div>
                 <div class = "col-6">Discount Produk <input  id = "add_discountproduk" name = "add_dsc_produk" type = "text" class = "form-control" required></div>
               </div>
               <div class = "row mt-3 mb-3">
-                <div class = "col-12">Description Produk <input  id = "add_descriptionproduk" name = "add_desc_produk" type = "text" class = "form-control" required></div>
+                <div class = "col-12">Description Produk <input  id = "add_descriptionproduk" name = "add_desc_produk" type = "text" class = "form-control" ></div>
               </div>
               <div class="alert alert-success d-flex align-items-center" role="alert" id = "add_alert_notif_success" style = "display:none !important;">
                 <div>
@@ -334,11 +334,11 @@
               <div class = "row mt-3 mb-3">
                 <div class = "col-1 image_upload_container">Gambar  <br><label for="add_gambarvariant0">
                   <img id = "gambar0" style = "width:50px;height:50px;" src="https://icons.iconarchive.com/icons/dtafalonso/android-lollipop/128/Downloads-icon.png"/>
-                </label>  <input id = "add_gambarvariant0" name = "add_gbr_produks[]" onchange="uploadgbrvariant(this)" type = "file" class = "form-control" required> 
+                </label>  <input id = "add_gambarvariant0" name = "add_gbr_produks[]" onchange="uploadgbrvariant(this)" type = "file" class = "form-control" > 
                 </div>
-                <div class = "col-3">Nama  <input  id = "add_namavariant0" name = "add_nama_produks[]" type = "text" class = "form-control" required></div>
-                <div class = "col-2">Harga  <input id = "add_hargavariant0" name = "add_hrg_produks[]" type = "text" class = "form-control" required></div>
-                <div class = "col-2">Stok  <input id = "add_stokvariant0" name = "add_stock_produks[]" value = "0" type = "text" class = "form-control" required></div>
+                <div class = "col-3">Nama  <input  id = "add_namavariant0" name = "add_nama_produks[]" type = "text" class = "form-control" ></div>
+                <div class = "col-2">Harga  <input id = "add_hargavariant0" name = "add_hrg_produks[]" type = "text" class = "form-control" ></div>
+                <div class = "col-2">Stok  <input id = "add_stokvariant0" name = "add_stock_produks[]" value = "0" type = "text" class = "form-control" ></div>
                 <div class = "col-2">Discount  <input  id = "add_discountvariant0" name = "add_dsc_produks[]" type = "text" class = "form-control" ></div>
               </div>
               <div id = "tambahan_variant">
@@ -650,8 +650,7 @@
          $("#row_add_"+idjumlah).remove();
       }
       function editadduploadgbrvariant(myobj){
-        // edit_add_alert_notif_success
-// edit_add_alert_notif_danger
+        
         var data_id_check = $(myobj).attr("data-id");
         if(data_id_check){
             var formdata = new FormData();
@@ -867,7 +866,19 @@
                 + currentdate.getSeconds();
                 $("#add_alert_notif_danger").attr("style", "display: none !important");
                 $("#add_alert_notif_success").attr("style", "display: block !important");
-                $("#add_tanggal_alert_success").html(tgl);
+                var string_kembar = "";
+                if(data.output_same.length>0){
+                  string_kembar =" tetapi ada nama variant kembar : ";
+                  data.output_same.forEach(function(element, index, array) {
+                      if(index > 0){
+                        string_kembar += ",";
+                      }
+                      string_kembar += element;
+                  });
+                  string_kembar+= ". ";
+                }
+                // alert(string_kembar);
+                $("#add_tanggal_alert_success").html("Sukses " + string_kembar + tgl);
                 $("#add_variant").trigger("reset");
                 $("#append_tambahan_variant").html("");
 
