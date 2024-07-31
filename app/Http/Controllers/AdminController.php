@@ -131,12 +131,12 @@ class AdminController extends Controller
     public function getdetailproductadmin(Request $request){
         $id_product = $request->idproduct;
         $hasil = "";
-        $myproduct = ProductVariant::leftJoin("product",'product.id','=','product_variant.id_product')->where("product_variant.id_product",'=',$id_product)->select("product_variant.*","product.images as gambar_produk", "product.names as nama_produk", "product.prices as harga_produk", "product.discounts as discount_produk")->get();
+        $myproduct = ProductVariant::leftJoin("product",'product.id','=','product_variant.id_product')->where("product_variant.id_product",'=',$id_product)->where("product_variant.status_variant_delete",'=',"0")->select("product_variant.*","product.images as gambar_produk", "product.names as nama_produk", "product.prices as harga_produk", "product.discounts as discount_produk")->get();
         $products = Product::leftJoin("category", "category.id",'=',"product.product_category")->where("product.id",'=',$id_product)->select("product.*","category.category_name", "category.id as category_id")->get();
         foreach($myproduct as $mp){
            $gambar = asset('images/variant/'.$mp->images_variant);
 
-            $hasil .= '<tr><td><img src = "'.$gambar.'" style = "width:50px;height:50px;"></td>'.'<td>'.$mp->descriptions.'</td><td>'.$mp->stocks.'</td>'.'<td>'.$mp->discounts.'</td>'.'<td>'.$mp->prices.'</td></tr>';
+            $hasil .= '<tr><td><img src = "'.$gambar.'" style = "width:50px;height:50px;"></td>'.'<td>'.$mp->descriptions.'</td><td>'.$mp->stocks.'</td>'.'<td>'.$mp->discounts.'</td>'.'<td>'.$mp->prices.'</td><td><button class = "btn btn-danger" data-id = "'.$mp->id.'" onclick = "delete_Variant(this)"><i class = "fa fa-trash"></button></td></tr>';
         }
         return response()->json(['output' => $hasil, "output_proudct"=>$products]);
     }

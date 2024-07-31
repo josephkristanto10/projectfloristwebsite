@@ -230,6 +230,7 @@
                     <th>Stok</th>
                     <th>Discount</th>
                     <th>Price</th>
+                    <th>Action</th>
                 
                   </tr>
                 </thead>
@@ -626,6 +627,20 @@
               });
           
             
+          }
+        });
+      }
+      function delete_Variant(myobj){
+        var id_variants = $(myobj).attr("data-id");
+        $.ajax({
+          type: "post",
+          url: "{{url('/changestatusdeletevariant')}}",
+          data: { "_token": "{{ csrf_token() }}","id_variant" : id_variants},
+          dataType: "json",
+          success: function (response) {
+            // $('#table-product').DataTable().ajax.reload();
+            var table_row = $(myobj).closest("tr");
+            table_row.remove(); 
           }
         });
       }
