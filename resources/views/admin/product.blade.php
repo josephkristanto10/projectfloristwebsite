@@ -211,16 +211,29 @@
                 <div class = "col-6">Nama Produk <input  id = "edit_namaproduk" name = "nama_produk" type = "text" class = "form-control" required></div>
               </div>
               <div class = "row mt-3 mb-3">
-                <div class = "col-6">Harga Produk <input id = "edit_hargaproduk" name = "hrg_produk" type = "text" class = "form-control" required></div>
-                <div class = "col-6">Discount Produk <input  id = "edit_discountproduk" name = "dsc_produk" type = "text" class = "form-control" required></div>
+                <div class = "col-6">Harga Produk <input id = "edit_hargaproduk" name = "hrg_produk" type = "text" class = "form-control" ></div>
+                <div class = "col-3">Stock Produk <input  id = "edit_stocksproduk" name = "stocks_produk" type = "text" class = "form-control" ></div>
+
+                <div class = "col-3">Discount Produk <input  id = "edit_discountproduk" name = "dsc_produk" type = "text" class = "form-control" ></div>
               </div>
               <div class = "row mt-3 mb-3">
-                <div class = "col-12">Description Produk <input  id = "edit_descriptionproduk" name = "desc_produk" type = "text" class = "form-control" required></div>
+                <div class = "col-12">Description Produk <input  id = "edit_descriptionproduk" name = "desc_produk" type = "text" class = "form-control" ></div>
               </div>
               <div class = "row mt-3 mb-3">
                 <div class ="col-12" style = "text-align:right;"><input type = "submit" class ="btn btn-success "  value = "Ganti"></div>
               </div>
             </form>
+              <h4>Update Stock all Variant </h4>
+              <form id = "form_update_all_stock">
+            
+                <div class = "row mt-3 mb-3">
+                  <div class = "col-10">Update Stock ( Semua Variant ) <input id = "edit_all_stock" name = "edit_all_stock_variant" placeholder="masukan jumlah stock yang diinginkan" type = "text" class = "form-control" required></div>
+                  <div class ="col-2" style = ""><input type = "submit" class ="btn btn-success mt-4 w-100"  value = "Update Stock"></div>
+
+                </div>
+                <p  id = "peringatan_update_all"> <span id = "hasil_peringatan_update_all"></span></p>
+              </form>
+
               <h4>List Variant Produk</h4>
               <table id="table-product" class="table table-bordered table-hover">
                 <thead>
@@ -308,7 +321,8 @@
               </div>
               <div class = "row mt-3 mb-3">
                 <div class = "col-6">Harga Produk <input id = "add_hargaproduk" name = "add_hrg_produk" type = "text" class = "form-control" ></div>
-                <div class = "col-6">Discount Produk <input  id = "add_discountproduk" name = "add_dsc_produk" type = "text" class = "form-control" required></div>
+                <div class = "col-3">Stock Produk <input  id = "add_stocksproduk" name = "add_stocks_produk" value = "0" type = "text" class = "form-control" required></div>
+                <div class = "col-3">Discount Produk <input  id = "add_discountproduk" name = "add_dsc_produk" value = "0" type = "text" class = "form-control" required></div>
               </div>
               <div class = "row mt-3 mb-3">
                 <div class = "col-12">Description Produk <input  id = "add_descriptionproduk" name = "add_desc_produk" type = "text" class = "form-control" ></div>
@@ -364,6 +378,24 @@
   </div>
 </div>
 
+<div id = "alert_success" style = "position:fixed; right:50px; top:30px; z-index:1111555;display:none;" class="alert alert-success alert-dismissible fade show" role="alert">
+  <button type="button" class="close" id = "close_success"  aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+  {{-- <div> --}}
+    <span id = "isi_pesan"></span>
+  {{-- </div> --}}
+</div>
+<div id = "alert_danger" style = "position:fixed; right:50px; top:30px; z-index:1111555;display:none;" class="alert alert-danger alert-dismissible" role="alert">
+  <button type="button" class="close" id = "close_danger"  data-hide="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+  {{-- <div> --}}
+    <span id = "isi_pesan_danger"></span>
+  {{-- </div> --}}
+</div>
 
 
 
@@ -390,9 +422,18 @@
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script> --}}
 
 <script>
+  
+  $("#close_success").on("click", function(){
+       $("#alert_success").hide();
+    });
+    $("#close_danger").on("click", function(){
+      $("#alert_danger").hide();
+    });
     var jumlahaddvariant = 0;
   var globalselectedproduct = "";
+  // const alert = bootstrap.Alert.getOrCreateInstance('#alert_success');
    $(document).ready(function () {
+    // alert.close();
    var mytable =  $('#table-product').DataTable({
       processing: true,
       serverSide: true,
@@ -445,6 +486,8 @@
   function getdetailTransaction(myobj){
     var productid = $(myobj).attr("data-id");
     globalselectedproduct = productid;
+    $("#hasil_peringatan_update_all").text("");
+    $("#form_update_all_stock").trigger("reset");
     $.ajax({
       type: "get",
       url: "{{url('/getdetailproductadmin')}}",
@@ -455,6 +498,8 @@
         $("#isian_variant_produk").html(response.output);
         $("#edit_kategory_product").val(response.output_proudct[0].category_id);
 
+     
+        $("#edit_stocksproduk").val(response.output_proudct[0].stocks);
         $("#edit_namaproduk").val(response.output_proudct[0].names);
         $("#edit_hargaproduk").val(response.output_proudct[0].prices);
         $("#edit_discountproduk").val(response.output_proudct[0].discounts);
@@ -466,6 +511,7 @@
   }
   
   function getdetailEditTransaction(id){
+  
     var productid = id;
     $.ajax({
       type: "get",
@@ -476,7 +522,7 @@
         $("#isian_variant_produk").html("");
         $("#isian_variant_produk").html(response.output);
         $("#edit_kategory_product").val(response.output_proudct[0].category_id);
-
+      
         $("#edit_namaproduk").val(response.output_proudct[0].names);
         $("#edit_hargaproduk").val(response.output_proudct[0].prices);
         $("#edit_discountproduk").val(response.output_proudct[0].discounts);
@@ -498,7 +544,48 @@
       }
     });
   }
+  function fire_alert(isipesan) {
+    $("#isi_pesan").text(isipesan);
 
+    $('#alert_success').fadeIn(1000);
+    setTimeout(function() { 
+        $('#alert_success').fadeOut(2000); 
+    }, 5000);
+  }
+  function fire_alert_danger(isipesan) {
+    $("#isi_pesan_danger").text(isipesan);
+ 
+    $('#alert_danger').fadeIn(1000);
+    setTimeout(function() { 
+        $('#alert_danger').fadeOut(2000); 
+    }, 5000);
+  }
+  $("#form_update_all_stock").on('submit',(function(e){
+        e.preventDefault();
+        var formdata = new FormData(this);
+        formdata.append('id_product', globalselectedproduct);
+        $.ajax({
+          url: "{{route('edit_stock_variant_massal_admin')}}",
+            type: "POST",
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data: formdata,
+            contentType: false,
+            cache: false,
+            processData:false,
+            complete: function() { 
+           
+              
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+              fire_alert_danger("Update Stock Semua Variant Gagal");
+            },
+            success: function(data){
+              getdetailEditTransaction(globalselectedproduct);
+              fire_alert("Update Stock Semua Variant Berhasil");
+              $("#form_update_all_stock").trigger("reset");
+            },
+        });
+    }));
   $("#formedit").on('submit',(function(e){
         e.preventDefault();
         var formdata = new FormData(this);
@@ -511,24 +598,16 @@
             contentType: false,
             cache: false,
             processData:false,
+
             success: function(data){
               $('#table-product').DataTable().ajax.reload();
               // $('#modal_detail_product').modal();
-              $("#closeeditproduct").click();
-              Swal.fire({
-                title: "<strong>Produk sudah diperbarui</strong>",
-                icon: "success",
-                html: "Jika tidak terupdate, hubungi Developer",
-                showCloseButton: false,
-                showCancelButton: false,
-                allowOutsideClick:false,
-                focusConfirm: false,
-                confirmButtonText: `
-                  <i class="fa fa-thumbs-up"></i> Ok
-                `,
-                confirmButtonAriaLabel: "Ok",
-            });
+              // $("#closeeditproduct").click();
+              fire_alert("Edit Product Berhasil");
 
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+              fire_alert_danger("Edit Product Gagal");
             },
         });
     }));
@@ -574,7 +653,37 @@
               },
           });
       }));
+      function editforvariant(myobj){
+        // fire_alert("Edit Variant Ini Berhasil");
+        // new bootstrap.Alert($("alert_success"));
+        var idvariant = $(myobj).attr("data-id");
+        var names_baru = $("#variant_names_edit"+idvariant).val();
+        var stock_baru = $("#variant_stock_edit"+idvariant).val();
+        var disctount_baru = $("#variant_discount_edit"+idvariant).val();
+        var price_baru = $("#variant_price_edit"+idvariant).val();
 
+        var formdata = new FormData();
+        formdata.append('id_variant', idvariant);
+        formdata.append('nama_baru', names_baru);
+        formdata.append('stock_baru', stock_baru);
+        formdata.append('discount_baru', disctount_baru);
+        formdata.append('price_baru', price_baru);
+        $.ajax({
+          url: "{{url('/editproductpervariantsadmin')}}",
+            type: "POST",
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data: formdata,
+            dataType:"json",
+            contentType: false,
+            cache: false,
+            processData:false,
+            success: function(data){
+              fire_alert("Edit Variant Ini Berhasil");
+           
+            },
+        });
+
+      }
       function getStatusChange(myobj){
         var idproduct = $(myobj).attr("data-id");
    
@@ -663,6 +772,30 @@
       function removevariantlain(myobj){
          var idjumlah =  $(myobj).attr("data-id-jumlah");
          $("#row_add_"+idjumlah).remove();
+      }
+      function gantigambarvariant(myobj){
+        var id_variant = $(myobj).attr("data-id");
+        var value_gambar = $("#change_image"+id_variant)[0].files[0];
+        $('#preview_image_'+id_variant).html('<img src = "'+URL.createObjectURL(value_gambar) + '"  id = "edit_buat_gambar_'+id_variant+'" style = "width:50px;height:50px;">');
+        var formdata = new FormData();
+            formdata.append('gbr', value_gambar);
+            formdata.append('id_gambar_variant', id_variant);
+            $.ajax({
+              type: "post",
+              url: "{{url('/edit_gambarvariant')}}",
+              headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+              data: formdata,
+                  contentType: false,
+                  cache: false,
+                  processData:false,
+              dataType: "json",
+              success: function (response) {
+                fire_alert("Ganti Gambar Variant Gagal Berhasil");
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                fire_alert_danger("Ganti Gambar Variant Gagal");
+                  },
+            });
       }
       function editadduploadgbrvariant(myobj){
         

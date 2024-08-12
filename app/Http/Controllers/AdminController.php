@@ -136,18 +136,41 @@ class AdminController extends Controller
         foreach($myproduct as $mp){
            $gambar = asset('images/variant/'.$mp->images_variant);
 
-            $hasil .= '<tr><td><img src = "'.$gambar.'" style = "width:50px;height:50px;"></td>'.'<td>'.$mp->descriptions.'</td><td>'.$mp->stocks.'</td>'.'<td>'.$mp->discounts.'</td>'.'<td>'.$mp->prices.'</td><td><button class = "btn btn-danger" data-id = "'.$mp->id.'" onclick = "delete_Variant(this)"><i class = "fa fa-trash"></button></td></tr>';
+            $hasil .= '<tr><td><label for="change_image'.$mp->id.'"><span id = "preview_image_'.$mp->id.'"><img id = "edit_buat_gambar_'.$mp->id.'"  src = "'.$gambar.'" style = "width:50px;height:50px;"></span></label> <input type = "file" style = "display:none;" data-id = "'.$mp->id.'" onchange = "gantigambarvariant(this)" class = "edit_image_variants" id= "change_image'.$mp->id.'"></td>'.'<td><input  class = "form-control" id = "variant_names_edit'.$mp->id.'" value = "'.$mp->descriptions.'" /></td><td style = "width:100px;"><input class = "form-control w-100" id = "variant_stock_edit'.$mp->id.'" value = "'.$mp->stocks.'" /></td>'.'<td><input class = "form-control w-100" id = "variant_discount_edit'.$mp->id.'" value = "'.$mp->discounts.'" /></td>'.'<td><input class = "form-control w-100" id = "variant_price_edit'.$mp->id.'" value = "'.$mp->prices.'" /></td><td><button onclick = "editforvariant(this)" class = "btn btn-warning" data-id = "'.$mp->id.'"><i class="fa fa-pencil" aria-hidden="true"></i></button> &nbsp;<button class = "btn btn-danger" data-id = "'.$mp->id.'" onclick = "delete_Variant(this)"><i class = "fa fa-trash"></button></td></tr>';
         }
         return response()->json(['output' => $hasil, "output_proudct"=>$products]);
+    }
+    public function edit_gambarvariant(Request $request){
+        $id_variants = $request->id_gambar_variant;
+        $file_product = $request->file('gbr');
+        $tujuan_upload = public_path('images/variant');
+        $nama_file = "variant".base64_encode(date("Y:m:d H:i:s")).".".$file_product->getClientOriginalExtension();
+        $file_product->move($tujuan_upload, $nama_file);
+        ProductVariant::where(['id' => $id_variants ])->update(["images_variant" => $nama_file]);
+        return response()->json(['output' => "ok"]);
     }
     public function editproductadmin(Request $request){
         $kategori_product = $request->edit_kategori_produk;
         $id_product = $request->id_product;
         $nama_product = $request->nama_produk;
-        $harga_product = $request->hrg_produk;
-        $discount_product = $request->dsc_produk;
-        $desc_produk = $request->desc_produk;
+ 
+        $desc_produk = "";
         $status_gbr_product = "";
+        $discount_product = 0;
+        $harga_product = 0;
+        $stock_product = 0;
+        if($request->desc_produk != ""){
+            $desc_produk = $request->desc_produk;
+        }
+        if($request->dsc_produk != ""){
+            $discount_product = $request->dsc_produk;
+        }
+        if($request->hrg_produk != ""){
+            $harga_product = $request->hrg_produk;
+        }
+        if($request->stocks_produk != ""){
+            $stock_product = $request->stocks_produk;
+        }
         if($request->hasFile('gbr_produk')) {
             $file_product = $request->file('gbr_produk');
             $tujuan_upload = public_path('images/product');
@@ -157,12 +180,28 @@ class AdminController extends Controller
         }
        
         if($status_gbr_product == "ada"){
-            Product::where(['id' => $id_product ])->update(['names' => $nama_product,"prices"=>$harga_product, "discounts" => $discount_product, "descriptions"=>$desc_produk, "images" => $nama_file, "product_category" => $kategori_product]);
+            Product::where(['id' => $id_product ])->update(['stocks'=>$stock_product,'names' => $nama_product,"prices"=>$harga_product, "discounts" => $discount_product, "descriptions"=>$desc_produk, "images" => $nama_file, "product_category" => $kategori_product]);
 
         }else{
-            Product::where(['id' => $id_product ])->update(['names' => $nama_product,"prices"=>$harga_product, "discounts" => $discount_product, "descriptions"=>$desc_produk,"product_category" => $kategori_product]);
+            Product::where(['id' => $id_product ])->update(['stocks'=>$stock_product,'names' => $nama_product,"prices"=>$harga_product, "discounts" => $discount_product, "descriptions"=>$desc_produk,"product_category" => $kategori_product]);
 
         }
+    }
+    public function editproductvariantsadmin(Request $request){
+        $id_variant = $request->id_variant;
+        $nama_baru = $request->nama_baru;
+        $stock_baru = $request->stock_baru;
+        $discount_baru = $request->discount_baru;
+        $price_baru = $request->price_baru;
+        ProductVariant::where(['id' => $id_variant ])->update(['name'=>$nama_baru, 'descriptions'=>$nama_baru, "stocks"=> $stock_baru, "discounts" => $discount_baru, "prices" => $price_baru]);
+        return response()->json(['output' => "ok"]);
+    }
+    public function editstockallvariantsadmin(Request $request){
+        
+        $id_product_global = $request->id_product;
+        $jumlah_stock = $request->edit_all_stock_variant;
+        ProductVariant::where(['id_product' => $id_product_global ])->update(['stocks'=>$jumlah_stock]);
+        return response()->json(['output' => "ok"]);
     }
 
     public function editproductvariantadmin(Request $request){
@@ -232,7 +271,11 @@ class AdminController extends Controller
         $harga_product = $request->add_hrg_produk;
         $discount_product = $request->add_dsc_produk;
         $desc_product =  $request->add_desc_produk;
+        $stock_product = 0;
         $status_gbr_product = "";
+        if($request->add_stocks_produk != ""){
+            $stock_product = $request->add_stocks_produk;
+        }
         if($request->hasFile('add_gbr_produk')) {
             $file_product = $request->file('add_gbr_produk');
             $tujuan_upload = public_path('images/product');
@@ -242,7 +285,7 @@ class AdminController extends Controller
         }
        
         if($status_gbr_product == "ada"){
-            $myproduk = Product::create(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "0", "product_status" => "1", "status_product_delete" => "0","images" => "-", "product_category"=>$pilihan_category, "updated_at" => now(), "created_at" => now()]);
+            $myproduk = Product::create(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => $stock_product, "has_variants" => "0", "product_status" => "1", "status_product_delete" => "0","images" => "-", "product_category"=>$pilihan_category, "updated_at" => now(), "created_at" => now()]);
             $products_id = $myproduk->id;
             $nama_file = "product".$products_id.".".$file_product->getClientOriginalExtension();
             $file_product->move($tujuan_upload, $nama_file);
@@ -250,7 +293,7 @@ class AdminController extends Controller
 
 
         }else{
-            Product::insert(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "0", "product_status" => "1" , "status_product_delete" => "0", "images" => "-", "product_category"=>$pilihan_category, "updated_at" => now(), "created_at"=>now()]);
+            Product::insert(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => $stock_product, "has_variants" => "0", "product_status" => "1" , "status_product_delete" => "0", "images" => "-", "product_category"=>$pilihan_category, "updated_at" => now(), "created_at"=>now()]);
 
 
         }
@@ -270,6 +313,7 @@ class AdminController extends Controller
         if($request->add_dsc_produk[$myindex] == ""){
             $discount_product = 0;
         }
+        
         // $desc_product =  $request->add_desc_produk;
         $status_gbr_product = "";
         // $images= $request->file('add_gbr_produk')[$myindex];
@@ -468,6 +512,7 @@ class AdminController extends Controller
         $harga_product = $request->harga_product;
         $desc_product =  $request->desc_product;
         $discount_product = $request->discount_product;
+        $stock_product = 0;
         if($request->desc_product == ""){
             $desc_product = "";
         }
@@ -477,13 +522,16 @@ class AdminController extends Controller
         if($request->harga_product == ""){
             $harga_product = "0";
         }
+        if($request->add_stocks_produk != ""){
+            $stock_product = $request->add_stocks_produk;
+        }
         $file_product = $request->file('gbr_product');
         $tujuan_upload = public_path('images/product');
 
         $mystr = "product".base64_encode(date("Y:m:d H:i:s")).".".$file_product->getClientOriginalExtension();
        
         if($request->add_nama_produks[0]){
-            $myproduk = Product::create(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "1", "product_status" => "1", "status_product_delete" => "0","images" => $mystr, "product_category"=>$pilihan_category, "updated_at" => now(), "created_at" => now()]);
+            $myproduk = Product::create(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => $stock_product, "has_variants" => "1", "product_status" => "1", "status_product_delete" => "0","images" => $mystr, "product_category"=>$pilihan_category, "updated_at" => now(), "created_at" => now()]);
             $products_id = $myproduk->id;
             $array_nama_product_sama = [];
             foreach( $request->add_nama_produks as $myindex => $dat){
@@ -508,7 +556,7 @@ class AdminController extends Controller
 
         }
         else{
-            $myproduk = Product::create(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => "1", "has_variants" => "0", "product_status" => "1", "status_product_delete" => "0","images" => $mystr, "product_category"=>$pilihan_category, "updated_at" => now(), "created_at" => now()]);
+            $myproduk = Product::create(["names" => $nama_product, "descriptions" => $desc_product, "prices" => $harga_product, "discounts" => $discount_product, "stocks" => $stock_product, "has_variants" => "0", "product_status" => "1", "status_product_delete" => "0","images" => $mystr, "product_category"=>$pilihan_category, "updated_at" => now(), "created_at" => now()]);
             $products_id = $myproduk->id;
             $array_nama_product_sama = [];
         }

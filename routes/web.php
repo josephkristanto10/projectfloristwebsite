@@ -58,6 +58,10 @@ Route::get("/pagelisttrx", [AdminController::class,"listtrx"]);
 Route::get("/getdetailtrx", [AdminController::class,"getInvoiceDetailAdmin"]);
 Route::get("/getdetailproductadmin", [AdminController::class,"getdetailproductadmin"]);
 Route::POST("/editproductadmin", [AdminController::class,"editproductadmin"]);
+Route::POST("/editstockallvariantsadmin", [AdminController::class,"editstockallvariantsadmin"])->name("edit_stock_variant_massal_admin");
+Route::POST("/editproductpervariantsadmin", [AdminController::class,"editproductvariantsadmin"]);
+Route::POST("/edit_gambarvariant", [AdminController::class,"edit_gambarvariant"]);
+
 Route::get("/getlistvariant", [AdminController::class,"getlistvariant"]);
 Route::get("/pagelistvariant", [AdminController::class,"listvariant"]);
 Route::get("/getdetailvariantproductadmin", [AdminController::class,"getdetailvariantproductadmin"]);
