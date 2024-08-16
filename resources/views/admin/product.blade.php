@@ -452,7 +452,7 @@
         {
           "render": function ( data, type, row ) {
              var url_gambar = "{{asset('/images/')}}/product/" + row.images;
-             return '<img src = "'+url_gambar+'" style = "width:70px;height:70px;">';
+             return '<div id = "image_product_'+row.id+'"><img src = "'+url_gambar+'" style = "width:70px;height:70px;"></div>';
            }
         },
         {
@@ -601,8 +601,12 @@
 
             success: function(data){
               $('#table-product').DataTable().ajax.reload();
+              var value_gambar = $("#edit_gambarproduk")[0].files[0];
+              var hasil_gambar = URL.createObjectURL(value_gambar);
+              $("#image_product_"+globalselectedproduct).html('<img src = "'+hasil_gambar+'" style = "width:70px;height:70px;">');
               // $('#modal_detail_product').modal();
               // $("#closeeditproduct").click();
+              $("#edit_gambarproduk").val("");
               fire_alert("Edit Product Berhasil");
 
             },
@@ -790,7 +794,7 @@
                   processData:false,
               dataType: "json",
               success: function (response) {
-                fire_alert("Ganti Gambar Variant Gagal Berhasil");
+                fire_alert("Ganti Gambar Variant Berhasil");
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 fire_alert_danger("Ganti Gambar Variant Gagal");
