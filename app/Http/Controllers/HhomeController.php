@@ -26,11 +26,22 @@ class HhomeController extends Controller
         if($request->ajax())
         {
             if(isset($request->id_category) && $request->id_category != "0"){
+                if($request->filter_items == ""){
                 $products =  Product::leftJoin("category", "category.id",'=',"product.product_category")->where("category.id","=", $request->id_category)->where("product_status", "=","1")->where("status_product_delete", "=","0")->latest('id')->select("product.*","category.category_name", "category.id as category_id")->paginate(20);
+                }
+                else{
+                    $products =  Product::leftJoin("category", "category.id",'=',"product.product_category")->where("category.id","=", $request->id_category)->where("product_status", "=","1")->where("status_product_delete", "=","0")->where("product.names",'like',"%".$request->filter_items."%")->latest('id')->select("product.*","category.category_name", "category.id as category_id")->paginate(20);
+
+                }
 
             }
             else{
-                $products =  Product::leftJoin("category", "category.id",'=',"product.product_category")->where("product_status", "=","1")->where("status_product_delete", "=","0")->latest('id')->select("product.*","category.category_name", "category.id as category_id")->paginate(20);
+                if($request->filter_items == ""){
+                    $products =  Product::leftJoin("category", "category.id",'=',"product.product_category")->where("product_status", "=","1")->where("status_product_delete", "=","0")->latest('id')->select("product.*","category.category_name", "category.id as category_id")->paginate(20);
+                }
+                else{
+                    $products =  Product::leftJoin("category", "category.id",'=',"product.product_category")->where("product_status", "=","1")->where("status_product_delete", "=","0")->where("product.names",'like',"%".$request->filter_items."%")->latest('id')->select("product.*","category.category_name", "category.id as category_id")->paginate(20);
+                }
 
             }
             return view('product_cart', compact('products'))->render();

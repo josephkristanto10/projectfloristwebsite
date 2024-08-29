@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 84,
+            "activePatchIndex": 87,
             "patches": [
                 {
                     "date": 1719334159845,
@@ -344,6 +344,18 @@
                 {
                     "date": 1721834766419,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,46 +39,4 @@\n \r\n \r\n   \r\n \r\n-<div class=\"row\">\r\n-    \r\n-@foreach($products as $mp)\r\n-<div class=\"col-md-3\">\r\n-  <div class=\"wsk-cp-product\">\r\n-    <div class=\"wsk-cp-img\">\r\n-      @if(file_exists(public_path().$mp->images)))\r\n-      <img src=\"{{asset('images/product/'.$mp->images)}}\" alt=\"Product\" class=\"img-responsive\" />\r\n-      @else\r\n-      <img src=\"{{asset('images/logo-modified.png')}}\" alt=\"Product\" class=\"img-responsive\" />\r\n-      @endif\r\n-    </div>\r\n-    <div class=\"wsk-cp-text\">\r\n-      <div class=\"category\" style = \"\">\r\n-        <span>@if($mp->category_name){{$mp->category_name}}@else All @endif</span>\r\n-      </div>\r\n-      <div class=\"title-product\">\r\n-        <h3>{{$mp->names}}</h3>\r\n-      </div>\r\n-      <div class=\"description-prod\">\r\n-        <p>{{$mp->descriptions}}</p>\r\n-      </div>\r\n-      <div class=\"card-footer\">\r\n-        <div class=\"wcf-left\"><span class=\"price\">Rp{{number_format($mp->prices-(($mp->prices*$mp->discounts)/100)) }}</span></div>\r\n-        <div class=\"wcf-right\">@if($mp->has_variants == 1)<a href=\"javascript:;\" class=\"buy-btn\" data-toggle=\"modal\" data-target=\"#exampleModal\"  onclick = \"showdetail({{$mp->id}})\">@else <a href=\"javascript:;\" class=\"buy-btn\"  onclick = \"orderwithoutvariant({{$mp->id}})\"> @endif<i class=\"fa fa-shopping-cart\" aria-hidden=\"true\"></i>\r\n-        </a></div>\r\n-      </div>\r\n-    </div>\r\n-  </div>\r\n-</div>\r\n-@endforeach\r\n-      \r\n-\r\n-</div>\r\n-<div class = \"mylinks\" >\r\n-    {!! $products->links() !!}\r\n-  </div>\r\n-</div>\r\n-\r\n-\r\n-  \r\n-\r\n"
+                },
+                {
+                    "date": 1724954986178,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n         <p>{{$mp->descriptions}}</p>\r\n       </div>\r\n       <div class=\"card-footer\">\r\n         <div class=\"wcf-left\"><span class=\"price\">Rp{{number_format($mp->prices-(($mp->prices*$mp->discounts)/100)) }}</span></div>\r\n-        <div class=\"wcf-right\">@if($mp->has_variants == 1)<a href=\"javascript:;\" class=\"buy-btn\" data-toggle=\"modal\" data-target=\"#exampleModal\"  onclick = \"showdetail({{$mp->id}})\">@else <a href=\"javascript:;\" class=\"buy-btn\"  onclick = \"orderwithoutvariant({{$mp->id}})\"> @endif<i class=\"fa fa-shopping-cart\" aria-hidden=\"true\"></i>\r\n+        <div class=\"wcf-right\">@if($mp->has_variants == 1)<a href=\"javascript:;\" class=\"buy-btn\" data-toggle=\"modal\" data-target=\"#exampleModal\"  onclick = \"showdetail({{$mp->id}}, '{{$mp->names}}')\">@else <a href=\"javascript:;\" class=\"buy-btn\"  onclick = \"orderwithoutvariant({{$mp->id}})\"> @endif<i class=\"fa fa-shopping-cart\" aria-hidden=\"true\"></i>\r\n         </a></div>\r\n       </div>\r\n     </div>\r\n   </div>\r\n"
+                },
+                {
+                    "date": 1724956174305,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n @endforeach\r\n       \r\n \r\n </div>\r\n-<div class = \"mylinks\" >\r\n+<div class = \"mylinks\" style = \"margin:auto;\" >\r\n     {!! $products->links() !!}\r\n   </div>\r\n </div>\r\n \r\n"
+                },
+                {
+                    "date": 1724956282227,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,12 +31,14 @@\n @endforeach\r\n       \r\n \r\n </div>\r\n+<div class = \"row\">\r\n <div class = \"mylinks\" style = \"margin:auto;\" >\r\n     {!! $products->links() !!}\r\n   </div>\r\n </div>\r\n+</div>\r\n \r\n \r\n   \r\n \r\n"
                 }
             ],
             "date": 1719334159845,

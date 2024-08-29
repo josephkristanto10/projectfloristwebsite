@@ -22,7 +22,7 @@
       </div>
       <div class="card-footer">
         <div class="wcf-left"><span class="price">Rp{{number_format($mp->prices-(($mp->prices*$mp->discounts)/100)) }}</span></div>
-        <div class="wcf-right">@if($mp->has_variants == 1)<a href="javascript:;" class="buy-btn" data-toggle="modal" data-target="#exampleModal"  onclick = "showdetail({{$mp->id}})">@else <a href="javascript:;" class="buy-btn"  onclick = "orderwithoutvariant({{$mp->id}})"> @endif<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+        <div class="wcf-right">@if($mp->has_variants == 1)<a href="javascript:;" class="buy-btn" data-toggle="modal" data-target="#exampleModal"  onclick = "showdetail({{$mp->id}}, '{{$mp->names}}')">@else <a href="javascript:;" class="buy-btn"  onclick = "orderwithoutvariant({{$mp->id}})"> @endif<i class="fa fa-shopping-cart" aria-hidden="true"></i>
         </a></div>
       </div>
     </div>
@@ -32,9 +32,11 @@
       
 
 </div>
-<div class = "mylinks" >
+<div class = "row w-100">
+<div class = "mylinks" style = "margin:auto;" >
     {!! $products->links() !!}
   </div>
+</div>
 </div>
 
 

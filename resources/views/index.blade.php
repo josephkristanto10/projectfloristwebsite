@@ -28,6 +28,87 @@
     <!-- responsive style -->
     <link href="{{ asset('css/responsive.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('owl/dist/assets/owl.carousel.min.css')}} " />
+    <style>
+.search-box{
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+}
+.input-search{
+  height: 50px;
+  width: 50px;
+  border-style: none;
+  padding: 10px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  outline: none;
+  border-radius: 25px;
+  transition: all .5s ease-in-out;
+  background-color: #FF9800;
+  padding-right: 40px;
+  color:#fff;
+}
+.input-search::placeholder{
+  color:#131312;
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-weight: 100;
+}
+.btn-search{
+  width: 50px;
+  height: 50px;
+  border-style: none;
+  font-size: 20px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+  position: absolute;
+  right: 0px;
+  color:#131312 ;
+  background-color: #FF9800;
+  background-color:transparent;
+  pointer-events: painted;  
+}
+.btn-search:focus{
+  background-color: #FF9800;
+
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+  position: absolute;
+  right: 0px;
+  color:#131312 ;
+  /* background-color:transparent; */
+  pointer-events: painted;  
+}
+.btn-search:focus ~ .input-search{
+  width: 300px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom:1px solid rgba(255,255,255,.5);
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+.input-search:focus{
+  width: 300px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom:1px solid rgba(255,255,255,.5);
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+@font-face {
+  font-family: Metro;
+  src: url("{{asset('fonts/metropolitano/Metropolitano-Regular.ttf')}}");
+}
+.page-item.active .page-link {
+  background-color:#FF9800 !important;
+  border:0px;
+}
+    </style>
 </head>
 
 <body>
@@ -167,12 +248,24 @@
       
       
         <div class = "row" style = "">
-          <div class="owl-carousel owl-theme" style = "width:100%;margin-top:50px;text-align:center;">
+          <div class="owl-carousel owl-theme" style = "width:100%;margin-top:30px;text-align:center;">
             <div class = "owl_category_card category_active"  data-id = "0"> All </div>
             @foreach($mycategory as $mc)
             <div class = "owl_category_card"  data-id = "{{$mc->id}}"> {{$mc->category_name}} </div>
             @endforeach
           </div>
+        </div>
+        <div class = "row">
+        
+
+          <div class="search-box" style = "margin:auto;">
+            <span style = "font-size:20px; font-family: Metro;" >Filter Items : </span>
+            <button class="btn-search"> <i class="fa fa-search"></i></button>
+            <input type="text" id = "filter_search_item" class="input-search" style = "box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;color:black;font-size:14px;" placeholder="Type to Search...">
+          </div>
+
+
+
         </div>
         {{-- {{dd(session()->get("product"))}} --}}
         <div class="shell">
@@ -310,12 +403,15 @@
           </button>
         </div>
         <div class="modal-body">
+          <div>
+            <h6><b>Nama Item </b> : <span id = "value_nama_dari_db">-</span></h6>
+          </div>
           <div id = "data_variant" >
             
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick = "inputtocart()" >Save changes</button>
+          {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+          <button type="button" class="btn btn-primary" onclick = "inputtocart()" style = " background-color: #FF9800;color:#131312;border:0px;">Add to Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
         </div>
       </div>
     </div>
@@ -338,6 +434,8 @@
 
 
 <script>
+var id_category_global = 0;
+var filter_global = "";
 $(document).ready(function(){
   $('.owl-carousel').owlCarousel({
     margin:10,
@@ -347,13 +445,17 @@ $(document).ready(function(){
   })
 });
 $(".owl_category_card").on("click", function(){
+
   $(".owl_category_card").removeClass("category_active");
    $(this).addClass("category_active");
+   $("#filter_search_item").val("");
     var id_category = $(this).attr("data-id");
+    id_category_global = id_category;
     $.ajax({
      url:"/pagination/fetch_data_index?page="+1,
      data:{
-      "id_category" : id_category
+      "id_category" : id_category,
+      "filter_items" : filter_global
      },
      success:function(data)
      {
@@ -397,10 +499,12 @@ function orderwithoutvariant(idproduct){
       showCancelButton: true,
       allowOutsideClick:false,
       focusConfirm: false,
-      confirmButtonText: `
-        <i class="fa fa-thumbs-up"></i> Tambah
-      `,
+      confirmButtonText: `<i class="fa fa-thumbs-up"></i> Tambah`,
+      confirmButtonColor:"#FF9800",
       confirmButtonAriaLabel: "Tambah",
+      cancelButtonText:"<span style='color:#131312'> Tidak jadi </span>",
+      cancelButtonColor:"#f1f1f1",
+  
     }).then((result) => {
                        arrayofproduct.push(idproduct+"_1");
                        $.ajax({
@@ -419,6 +523,7 @@ function orderwithoutvariant(idproduct){
                               title: 'Success!',
                               text: 'Produk telah ditambahkan di keranjang',
                               icon: 'success',
+                              confirmButtonColor:"#FF9800",
                               confirmButtonText: 'OK'
                             })
                           } 
@@ -469,9 +574,10 @@ function inserttocart(){
     }
   });
 }
-function showdetail(id_product){
+function showdetail(id_product, nama_product){
   var value = $("#namaproduk_"+id_product).text();
-  $("#judulproduk").text("Variant " + value);
+  $("#judulproduk").text("Detail Product");
+  $("#value_nama_dari_db").text(nama_product);
   globalproduct = id_product;
   getDetailVariant(id_product);
 }
@@ -484,7 +590,7 @@ function getDetailVariant(id_product_for_variant){
     },
     dataType: "json",
     success: function (response) {
-      $("#data_variant").html("");
+      $("#data_variant").html("<b>Variant : </b>");
       var stringelement = "";
       if(response.variant.length >0){
        stringelement += '<div class = "row">';
@@ -502,7 +608,7 @@ function getDetailVariant(id_product_for_variant){
         $("#data_variant").append(stringelement);
        }
       else{
-       $("#data_variant").html("<h2>Tidak ada variant</h2>");
+       $("#data_variant").html("<h6><b>Variant</b> : No Variant</h6>");
       }
     }
   });
@@ -541,4 +647,21 @@ function logout(){
     }
   });
 }
+$(".btn-search").click(function (e) { 
+  e.preventDefault();
+  var filteritems = $("#filter_search_item").val();
+  
+  filter_global = filteritems;
+  $.ajax({
+     url:"/pagination/fetch_data_index?page="+1,
+     data:{
+      "id_category" : id_category_global,
+      "filter_items" : filter_global
+     },
+     success:function(data)
+     {
+      $('#replace_product').html(data);
+     }
+    });
+});
 </script>
