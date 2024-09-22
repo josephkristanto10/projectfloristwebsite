@@ -29,77 +29,90 @@
     <link href="{{ asset('css/responsive.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('owl/dist/assets/owl.carousel.min.css')}} " />
     <style>
-.search-box{
-  width: fit-content;
-  height: fit-content;
-  position: relative;
-}
-.input-search{
-  height: 50px;
-  width: 50px;
-  border-style: none;
-  padding: 10px;
-  font-size: 18px;
-  letter-spacing: 2px;
-  outline: none;
-  border-radius: 25px;
-  transition: all .5s ease-in-out;
-  background-color: #FF9800;
-  padding-right: 40px;
-  color:#fff;
-}
-.input-search::placeholder{
-  color:#131312;
-  font-size: 14px;
-  letter-spacing: 2px;
-  font-weight: 100;
-}
-.btn-search{
-  width: 50px;
-  height: 50px;
-  border-style: none;
-  font-size: 20px;
-  font-weight: bold;
-  outline: none;
-  cursor: pointer;
-  border-radius: 50%;
-  position: absolute;
-  right: 0px;
-  color:#131312 ;
-  background-color: #FF9800;
-  background-color:transparent;
-  pointer-events: painted;  
-}
-.btn-search:focus{
-  background-color: #FF9800;
 
-  width: 50px;
-  height: 50px;
-  font-size: 20px;
-  font-weight: bold;
-  outline: none;
-  cursor: pointer;
-  border-radius: 50%;
-  position: absolute;
-  right: 0px;
-  color:#131312 ;
-  /* background-color:transparent; */
-  pointer-events: painted;  
+
+.search_box {
+  /* padding-top : 200px; */
 }
-.btn-search:focus ~ .input-search{
-  width: 300px;
-  border-radius: 0px;
-  background-color: transparent;
-  border-bottom:1px solid rgba(255,255,255,.5);
-  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+
+.search {
+  padding-left: 35px;
+  display: flex;
+  align-items: center;
+  margin : auto;
+  width : 100%;
+  height: 54px;
+  background-color : white;
+  border-radius: 25px;
+  -webkit-box-shadow: 0px 10px 38px 0px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0px 10px 38px 0px rgba(0,0,0,0.1);
+  box-shadow: 0px 10px 38px 0px rgba(0,0,0,0.1);
 }
-.input-search:focus{
-  width: 300px;
-  border-radius: 0px;
-  background-color: transparent;
-  border-bottom:1px solid rgba(255,255,255,.5);
-  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+
+.select_area {
+  color : #FF9800;
+  font-weight:bold;
+  display : flex;
+  align-items: center;
+  font-family: 'Roboto', sans-serif; line-height:24px;
+  font-weight : medium ;
 }
+
+.text {
+  padding-left:15px;
+}
+
+.line {
+  margin-left: 15px;
+  border-left: 1px solid #D8D8D8;
+  height: 40px;
+}
+
+.search_text {
+  width: 100%;
+  border: none;
+  margin-left : 15px;
+  font-size : 16px;
+  font-family: 'Roboto', sans-serif; line-height:24px;
+  font-weight : Regular ;
+  place
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #ADB1B8;
+}
+
+
+.text_and-icon {
+  width: 410px;
+  display: flex;
+  align-items: center;
+}
+.search_icon {
+  color : #5E6573;
+    transition: all .6s ease-in-out;
+    -webkit-transition: all .6s ease-in-out; /** Chrome & Safari **/
+    -moz-transition: all .6s ease-in-out; /** Firefox **/
+    -o-transition: all .6s ease-in-out; /** Opera **/
+}
+
+.search_text:focus {
+  outline: none !important;
+}
+
+.search_text:focus + .search_icon{
+  color : #4451FE;
+  transform: translate(55px,0);
+    -webkit-transform: translate(55px,0); 
+    -o-transform: translate(55px,0); 
+    -moz-transform: translate(55px);
+}
+
+.select_area:hover i{
+  color:#FF9800 !important;
+}
+
+
 @font-face {
   font-family: Metro;
   src: url("{{asset('fonts/metropolitano/Metropolitano-Regular.ttf')}}");
@@ -247,28 +260,63 @@
         {{-- as $mp --}}
       
       
-        <div class = "row" style = "">
+        {{-- <div class = "row" style = "">
           <div class="owl-carousel owl-theme" style = "width:100%;margin-top:30px;text-align:center;">
             <div class = "owl_category_card category_active"  data-id = "0"> All </div>
             @foreach($mycategory as $mc)
             <div class = "owl_category_card"  data-id = "{{$mc->id}}"> {{$mc->category_name}} </div>
             @endforeach
           </div>
-        </div>
-        <div class = "row">
+        </div> --}}
+        <div class = "row mt-5">
         
 
-          <div class="search-box" style = "margin:auto;">
+          {{-- <div class="search-box" style = "margin:auto;">
             <span style = "font-size:20px; font-family: Metro;" >Filter Items : </span>
             <button class="btn-search"> <i class="fa fa-search"></i></button>
             <input type="text" id = "filter_search_item" class="input-search" style = "box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;color:black;font-size:14px;" placeholder="Type to Search...">
-          </div>
+          </div> --}}
+        
+            <div class = "col-xl-6 col-lg-6 col-md-6 col-sm-6">
+              <div class="search_box">
+                <div class="search">
+                  <div class= "select_area">
+                    <i class="fa fa-filter"></i>
+                    <div class="text">Find</div>
+                  </div>
+                  
+                  <div class="line"></div>
+                  
+                  <div class = "text_and-icon">
+                    <input type="text" class="search_text" id="search_text" placeholder="Search our product">
+                         {{-- <i class="fa fa-search search_icon"></i> --}}
+                  </div>
+                  <div class= "select_area" id = "searchthis" style = "padding-right:10px;padding-left:10px;cursor:pointer;">
+                    <i class="fa fa-search search_icon" ></i>
+                  </div>
+
+                  
+               </div>  
+              </div>
+            </div>
+       
+            <div class = "col-xl-6 col-lg-6 col-md-6 col-sm-6">
+              <div style = "float:left !important;width:2.5px;height:40px;background-color:grey;margin-top:8px;"></div>
+              <div class="owl-carousel owl-theme" style = "width:100%;margin-top:5px;text-align:center;padding-left:30px;">
+                <div class = "owl_category_card category_active"  data-id = "0"> All </div>
+                @foreach($mycategory as $mc)
+                <div class = "owl_category_card"  data-id = "{{$mc->id}}"> {{$mc->category_name}} </div>
+                @endforeach
+              </div>
+      
+            </div>
+       
 
 
 
         </div>
         {{-- {{dd(session()->get("product"))}} --}}
-        <div class="shell">
+        <div class="shell" style = "padding:10px;">
         
           <div class="containers" id = "replace_product">
             @include('product_cart')
@@ -647,9 +695,9 @@ function logout(){
     }
   });
 }
-$(".btn-search").click(function (e) { 
+$("#searchthis").click(function (e) { 
   e.preventDefault();
-  var filteritems = $("#filter_search_item").val();
+  var filteritems = $("#search_text").val();
   
   filter_global = filteritems;
   $.ajax({
