@@ -32,7 +32,7 @@
       
 
 </div>
-<div class = "row w-100">
+<div class = "row" style = "overflow-x: auto;">
 <div class = "mylinks" style = "margin:auto;" >
     {!! $products->links() !!}
   </div>

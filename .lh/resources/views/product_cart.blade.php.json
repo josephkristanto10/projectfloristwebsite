@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 87,
+            "activePatchIndex": 89,
             "patches": [
                 {
                     "date": 1719334159845,
@@ -356,6 +356,14 @@
                 {
                     "date": 1724956282227,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,12 +31,14 @@\n @endforeach\r\n       \r\n \r\n </div>\r\n+<div class = \"row\">\r\n <div class = \"mylinks\" style = \"margin:auto;\" >\r\n     {!! $products->links() !!}\r\n   </div>\r\n </div>\r\n+</div>\r\n \r\n \r\n   \r\n \r\n"
+                },
+                {
+                    "date": 1727022937640,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n @endforeach\r\n       \r\n \r\n </div>\r\n-<div class = \"row\">\r\n+<div class = \"row w-100\" style = \"overflow-x: auto;\">\r\n <div class = \"mylinks\" style = \"margin:auto;\" >\r\n     {!! $products->links() !!}\r\n   </div>\r\n </div>\r\n"
+                },
+                {
+                    "date": 1727022955745,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n @endforeach\r\n       \r\n \r\n </div>\r\n-<div class = \"row w-100\" style = \"overflow-x: auto;\">\r\n+<div class = \"row\" style = \"overflow-x: auto;\">\r\n <div class = \"mylinks\" style = \"margin:auto;\" >\r\n     {!! $products->links() !!}\r\n   </div>\r\n </div>\r\n"
                 }
             ],
             "date": 1719334159845,
