@@ -301,8 +301,8 @@
             </div>
        
             <div class = "col-xl-6 col-lg-6 col-md-6 col-sm-6">
-              <div style = "float:left !important;width:2.5px;height:40px;background-color:grey;margin-top:8px;"></div>
-              <div class="owl-carousel owl-theme" style = "width:100%;margin-top:5px;text-align:center;padding-left:30px;">
+              <div id= "line_mobile" style = "float:left !important;width:2.5px;height:40px;background-color:grey;margin-top:8px;"></div>
+              <div class="owl-carousel owl-theme" id = "carousel_category" style = "width:100%;margin-top:5px;text-align:center;padding-left:30px;">
                 <div class = "owl_category_card category_active"  data-id = "0"> All </div>
                 @foreach($mycategory as $mc)
                 <div class = "owl_category_card"  data-id = "{{$mc->id}}"> {{$mc->category_name}} </div>
