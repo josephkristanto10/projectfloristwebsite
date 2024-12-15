@@ -211,7 +211,7 @@
       </div>
     </header>
     <section class=" slider_section position-relative">
- 
+      {{-- <div style = "position:absolute;top:0;left:0;width:30%;height:100%;background-color:#131312;opacity:0.4">asdsadsa</div> --}}
       <div class="container">
         <div class="row">
           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

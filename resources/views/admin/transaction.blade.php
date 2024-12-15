@@ -33,10 +33,58 @@
       background-color: #F2D2BD;
       border:0px;color:#131312;
     }
+
+
+@media print {
+
+  body {
+    /* visibility: none; */
+    /* -webkit-print-color-adjust:exact !important;
+  print-color-adjust:exact !important;   */
+  }
+  #myprint{
+    /* display:block; */
+    /* position:absolute; */
+  }
+  #modal_detail_transaction, .mytablesprint, #table-transaction_filter, #table-transaction_length, #table-transaction_info, #table-transaction_paginate, .modal {
+    display:none !important;
+
+  }
+  /* #myprint tr {
+    width:100% !important;
+  } */
+  #myprint th{
+    color:#131312 !important;
+    font-size:21px;
+  }
+  #myprint td{
+    color:#131312 !important;
+    font-size:21px;
+  }
+  .hide_data_print{
+
+display:block !important;
+width:100% !important;
+}
+  #table-transactions tr {
+    width:100%;
+    color:#131312 !important;
+  }
+  #table-transactions td {
+    color:#131312 !important;
+  }
+ 
+
+  /* .modal { 
+    display: none !important; 
+    z-index: -1 !important;
+   }  */
+
+}
   </style>
 </head>
 
-<body>
+<body >
   <!--  Body Wrapper -->
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
     data-sidebar-position="fixed" data-header-position="fixed">
@@ -135,7 +183,7 @@
     </aside>
     <!--  Sidebar End -->
     <!--  Main wrapper -->
-    <div class="body-wrapper">
+    <div class="body-wrapper" >
       <!--  Header Start -->
       <header class="app-header">
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -154,16 +202,16 @@
         </nav>
       </header>
       <!--  Header End -->
-      <div class="container-fluid">
+      <div class="container-fluid" >
         <!--  Row 1 -->
      
         <div class="row">
           <div class="col-lg-12 d-flex align-items-stretch">
-            <div class="card w-100">
+            <div class="card w-100" >
           
               <div class="card-body p-4">
-                <h1>Transaction</h1>
-                <table id="table-transaction" class="table table-bordered table-hover">
+                <h1 >Transaction</h1>
+                <table id="table-transaction" class="table table-bordered table-hover mytablesprint" >
                   <thead>
                     <tr>
                       <th>ID</th>
@@ -176,6 +224,20 @@
                     </tr>
                   </thead>
                 </table>
+                
+                    <div class = "hide_data_print" style = "display:none;">
+                    <table id="table-transactions"  class="table table-bordered  mytableprint" style = "width:100% !important;">
+                      <thead>
+                        <tr >
+                          <th>Product Name</th>
+                          <th >Variant Name</th>
+                          <th>Qty</th>
+                          <th>Subtotal</th>
+                        </tr>
+                      </thead>
+                      <tbody id = "myprint" style = "color:#131312 !important;width:100% !important;"></tbody>
+                    </table>
+                  </div>
               </div>
             </div>
           </div>
@@ -183,13 +245,13 @@
         </div>
      
         <div class="py-6 px-6 text-center">
-          <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank" class="pe-1 text-primary text-decoration-underline">AdminMart.com</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a></p>
+          {{-- <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank" class="pe-1 text-primary text-decoration-underline">AdminMart.com</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a></p> --}}
         </div>
       </div>
     </div>
   </div>
 {{-- Modal Transaction --}}
-  <div class="modal fade" id="modal_detail_transaction" tabindex="-1" role="dialog" aria-labelledby="modal_detail_transactionLabel" aria-hidden="true" style = "z-index:100000;" >
+  <div class="modal fade"  id="modal_detail_transaction" tabindex="-1" role="dialog" aria-labelledby="modal_detail_transactionLabel" aria-hidden="true" style = "z-index:100000;" >
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -201,7 +263,7 @@
         </div>
         <div class="modal-body">
 
-          <table id="table-transaction" class="table table-bordered table-hover">
+          <table id="table-transaction"  class="table table-bordered table-hover mytableprint">
             <thead>
               <tr>
                 <th>Product Name</th>
@@ -213,7 +275,8 @@
             <tbody id = "isian_variant"></tbody>
           </table>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-info" id = "printbutton" ><i class="ti ti-printer"></i>Print</button>
+          <button type="button" class="btn btn-secondary" id = "tutup_modal_print" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -301,8 +364,20 @@
       success: function (response) {
         $("#isian_variant").html("");
         $("#isian_variant").html(response.output);
+        $("#myprint").html(response.output);
       }
     });
 
-  }
+  };
+
+  $('#printbutton').click(function(){
+    //  $("#modal_detail_transaction").print();
+    $('#tutup_modal_print').click();
+    setTimeout(function() {
+      window.print();
+   }, 500);
+    // 
+});
+
+
 </script>
